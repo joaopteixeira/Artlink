@@ -42,30 +42,7 @@ public class FUser {                   //Funcoes pro USER
 		return null;
 		
 	}
-	/*
-	public String Registry(	String firstname,
-			String lastname,
-			String email,
-			String birthdate,
-			String gender,
-			String city,
-			String country,
-			String type,
-			String phonenumber) {
-	
-	
-	
-	
-		
-		
-	u.setTokkensquantity(10);  //Quantidade Inicial de Tokkens
-	
-	
-	userRep.save(u);
 
-	}
-	*/
-	
 	public String Registry(User u,String password) {
 		
 		Optional<Login> userOp = loginRep.findByEmail(u.getEmail());
@@ -75,15 +52,21 @@ public class FUser {                   //Funcoes pro USER
 		}else {
 			
 			loginRep.save(new Login(u.getEmail(),password));
-			u.setTokkensquantity(10);  //Quantidade Inicial de Tokkens
+			u.setTokkensquantity(10);												  //Quantidade Inicial de Tokkens
+			u.setAccactivated(false);
 			userRep.save(u);
 			
 			
 		}
 		
-		return "Regisytado";
+	
+		
+		return "Registado";
 		
 	}
+	
+	
+	
 	
 	
 }

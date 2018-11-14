@@ -28,7 +28,7 @@ public class WebLogin {
 		
 		new FUser().Registry(u,password);
 		
-		page.addAttribute("User",u);
+	
 		
 		return "redirect:/qualquercoisa.html";
 	}
