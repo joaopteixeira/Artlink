@@ -9,5 +9,6 @@ import thalia.atec.thaliaPrototipo.model.Login;
 public interface LoginRepository extends MongoRepository<Login, String>{
 	
 	Optional<Login> findByEmailAndPassword(String email,String password);
+	Optional<Login> findByEmail(String email);
 
 }

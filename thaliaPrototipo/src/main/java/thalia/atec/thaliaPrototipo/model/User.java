@@ -9,15 +9,23 @@ public class User {
 	@Autowired
 	String id;
 	
-	String firstname,
-		lastname,
-		email,
-		birthdate,
-		gender,
-		city,
-		country,
-		type,
-		phonenumber;
+	 String firstname;
+
+	 String lastname;
+	 
+	 String email;
+
+	 String birthdate;
+
+	 String gender;
+
+	 String city;
+
+	 String country;
+
+	 String type;
+
+	 String phonenumber;
 
 	int tokkensquantity;
 	
@@ -243,7 +251,6 @@ public class User {
 		
 		ArrayList<Tag> aux = new ArrayList<>();
 		aux.add(new Tag("Musica",false));
-		
 		return aux;
 		
 	}

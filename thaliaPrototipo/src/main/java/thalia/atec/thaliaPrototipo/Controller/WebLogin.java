@@ -1,11 +1,6 @@
 package thalia.atec.thaliaPrototipo.Controller;
 
-import java.util.Optional;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,31 +14,38 @@ import thalia.atec.thaliaPrototipo.model.User;
 
 @RestController
 @RequestMapping("mlogin")
-public class RestLogin {
-
+public class WebLogin {
+	
+	
 	
 	@Autowired
-	UserRepository userRep;
-	
-	
-	
-	@RequestMapping(value="/validate", method=RequestMethod.POST)
-	public ResponseEntity<String> getUser(@RequestParam("email") String email,@RequestParam("password") String password){
-		
-		String hash = new FUser().login(email, password);
-		
-		if(hash!=null) {
-			return new ResponseEntity<String>(hash,HttpStatus.OK);
-		}
-		
-		return null;
-		
-	}
-	
-	
+	UserRepository userRepo;
 
 	
+	@RequestMapping(value="/registry", method=RequestMethod.POST)
+	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page){
+		
+		
+		new FUser().Registry(u,password);
+		
+		page.addAttribute("User",u);
+		
+		return "redirect:/qualquercoisa.html";
+	}
 	
+	@RequestMapping(value="/edit", method=RequestMethod.POST)
+	public String UserEdit(@ModelAttribute("User") User u, Model page){
+		
+		u.setTokkensquantity(10);  //Quantidade Inicial de Tokkens
 	
+		
+		userRepo.save(u);
+
+
+		page.addAttribute("User",u);
+		
+		return "redirect:/qualquercoisa.html";
+	}
 	
+
 }
