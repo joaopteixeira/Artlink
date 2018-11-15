@@ -403,9 +403,7 @@ textarea{
 /*Transparent Background Header for Landing Page-2*/
 
 #header-inverse nav.menu{
-  background: transparent;
-  margin-top: 15px;
-  30;
+  background: rgba(0,0,0,0.9);
 }
 
 #header-inverse .menu ul.main-menu li ul.dropdown-menu{
@@ -2046,7 +2044,7 @@ ul.contact li i{
 
   .menu ul.main-menu li.dropdown ul.dropdown-menu li{background: #282425;}
 
-  #header-inverse nav.menu .navbar-collapse{background: rgba(0,0,0, 0.9);}
+  #header-inverse nav.menu .navbar-collapse{background: rgba(0,0,0, 1);}
 
   .sign-up-form{left: 0; right: 0; margin: auto;}
 
