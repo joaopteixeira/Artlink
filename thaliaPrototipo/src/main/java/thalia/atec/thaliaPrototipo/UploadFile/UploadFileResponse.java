@@ -1,4 +1,5 @@
 package thalia.atec.thaliaPrototipo.UploadFile;
+import thalia.atec.thaliaPrototipo.UploadFile.*;
 
 
 public class UploadFileResponse {

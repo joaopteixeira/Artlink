@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class User {
 	
+	public static final int FEMALE = 1; 
+	public static final int MALE = 2; 
+
+	public static final int WATCHED = 1,WATCHING =2; 
+	
 	@Autowired
 	String id;
 	
@@ -17,17 +22,17 @@ public class User {
 
 	 String birthdate;
 
-	 String gender;
-
 	 String city;
 
 	 String country;
 
-	 String type;
+	 int type;
 
 	 String phonenumber;
+	 
+	 String pathimage;
 
-	int tokkensquantity;
+	int tokkensquantity,gender;
 	
 	Boolean status, accactivated;
 	Category category;
@@ -43,12 +48,22 @@ public class User {
 
 	
 	
-	public User(String firstname, String lastname, String email, String birthdate, String gender,
-			String city, String country, String type, String phonenumber, int tokkensquantity, Boolean status,
+	
+	public User() {
+		super();
+	}
+
+
+
+
+
+	public User(String firstname, String lastname, String email, String pathimage, String birthdate, int gender,
+			String city, String country, int type, String phonenumber, int tokkensquantity, Boolean status,
 			Boolean accactivated, Category category) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.pathimage = pathimage;
 		this.email = email;
 		this.birthdate = birthdate;
 		this.gender = gender;
@@ -69,6 +84,23 @@ public class User {
 
 
 	
+	
+
+	public String getPathimage() {
+		return pathimage;
+	}
+
+
+
+
+
+	public void setPathimage(String pathimage) {
+		this.pathimage = pathimage;
+	}
+
+
+
+
 
 	public String getFirstname() {
 		return firstname;
@@ -186,11 +218,11 @@ public class User {
 	}
 
 
-	public String getGender() {
+	public int getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
 
@@ -210,11 +242,11 @@ public class User {
 		this.country = country;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

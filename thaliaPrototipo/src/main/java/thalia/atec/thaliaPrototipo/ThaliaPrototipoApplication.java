@@ -8,13 +8,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import thalia.atec.thaliaPrototipo.UploadFile.FileStorageProperties;
-
+@SpringBootApplication
 @EnableAutoConfiguration
 @EnableConfigurationProperties({
 	FileStorageProperties.class
 })
 
-@SpringBootApplication
+
 public class ThaliaPrototipoApplication {
 
 	public static void main(String[] args) {

@@ -13,7 +13,7 @@ import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.User;
 
 @RestController
-@RequestMapping("mlogin")
+@RequestMapping("webhome")
 public class WebLogin {
 	
 	
@@ -29,6 +29,19 @@ public class WebLogin {
 		new FUser().Registry(u,password);
 		
 	
+		
+		return "redirect:/qualquercoisa.html";
+	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String UserLogin(@ModelAttribute("User") User u, Model page, @RequestParam("password") String password){
+		
+
+		
+
+
+
+		page.addAttribute("User",u);
 		
 		return "redirect:/qualquercoisa.html";
 	}
