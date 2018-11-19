@@ -20,7 +20,7 @@ public class ThaliaPrototipoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ThaliaPrototipoApplication.class, args);
 		
-		System.out.println("Sucesso");
+		System.out.println("Thalia online ");
 		
 		
 		

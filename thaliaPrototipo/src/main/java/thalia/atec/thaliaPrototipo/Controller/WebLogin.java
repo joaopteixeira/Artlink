@@ -26,7 +26,7 @@ public class WebLogin {
 	@Autowired
 	FUser fuser;
 
-	
+
 	
 	@RequestMapping(value="/registry", method=RequestMethod.POST)
 	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page){
@@ -36,34 +36,26 @@ public class WebLogin {
 		
 	
 		
-		return "redirect:/qualquercoisa.html";
+		return "redirect:/qualquercoisa.html";     // vai para feed 
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String UserLogin(@ModelAttribute("User") User u, Model page, @RequestParam("password") String password){
 		
+		
+		fuser.login(u.getEmail(), password);
 
 		
 		page.addAttribute("User",u);
 		
-		return "redirect:/qualquercoisa.html";
-	}
-	
-	
-	
-	@RequestMapping(value="/edit", method=RequestMethod.POST)
-	public String UserEdit(@ModelAttribute("User") User u, Model page){
+		return "redirect:/qualquercoisa.html";   // rvai para feed
+
 		
-		u.setTokkensquantity(10);  //Quantidade Inicial de Tokkens
-	
-		
-		userRepo.save(u);
 
 
-		page.addAttribute("User",u);
 		
-		return "redirect:/qualquercoisa.html";
 	}
 	
+
 
 }

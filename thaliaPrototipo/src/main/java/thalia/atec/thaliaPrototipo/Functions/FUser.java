@@ -43,6 +43,8 @@ public class FUser {                   //Funcoes pro USER
 			return hash;
 		}
 		
+		
+		
 		return null;
 		
 	}
