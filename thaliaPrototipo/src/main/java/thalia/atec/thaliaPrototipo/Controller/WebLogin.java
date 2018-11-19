@@ -17,24 +17,22 @@ import thalia.atec.thaliaPrototipo.model.User;
 public class WebLogin {
 	
 	
-	
-	@Autowired
-	UserRepository userRepo;
+
 
 	
 	@RequestMapping(value="/registry", method=RequestMethod.POST)
-	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page){
+	public String UserRegistry(@ModelAttribute("User") User u, @RequestParam("password") String password){
 		
 		
 		new FUser().Registry(u,password);
 		
 	
 		
-		return "redirect:/qualquercoisa.html";
+		return "qualquercoisa.html";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String UserLogin(@ModelAttribute("User") User u, Model page, @RequestParam("password") String password){
+	public String UserLogin(@ModelAttribute("User") User u, @RequestParam("password") String password, Model page){
 		
 
 		
@@ -43,7 +41,7 @@ public class WebLogin {
 
 		page.addAttribute("User",u);
 		
-		return "redirect:/qualquercoisa.html";
+		return "qualquercoisa.html";
 	}
 	
 	@RequestMapping(value="/edit", method=RequestMethod.POST)
@@ -53,7 +51,7 @@ public class WebLogin {
 		
 	
 		
-		userRepo.save(u);
+	
 
 
 		page.addAttribute("User",u);

@@ -45,11 +45,11 @@ public class FUser {                   //Funcoes pro USER
 
 	public String Registry(User u,String password) {
 		
-		Optional<Login> userOp = loginRep.findByEmail(u.getEmail());
+		//Optional<Login> userOp = loginRep.findByEmail(u.getEmail());
 		
-		if(userOp.get()!=null) {
+	/*	if(userOp.get()!=null) {
 			return "ja existe o email";
-		}else {
+		}else {           */
 			
 			loginRep.save(new Login(u.getEmail(),password));
 			u.setTokkensquantity(10);												  //Quantidade Inicial de Tokkens
@@ -57,7 +57,7 @@ public class FUser {                   //Funcoes pro USER
 			userRep.save(u);
 			
 			
-		}
+	//	}
 		
 	
 		
