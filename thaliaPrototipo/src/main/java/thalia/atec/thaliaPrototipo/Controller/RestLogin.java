@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,18 +26,19 @@ public class RestLogin {
 	@Autowired
 	UserRepository userRep;
 	
+	@Autowired
+	FUser fuser;
 	
-	
-	@RequestMapping(value="/validate", method=RequestMethod.POST)
+	@RequestMapping(value="/validate", method=RequestMethod.GET)
 	public ResponseEntity<String> getUser(@RequestParam("email") String email,@RequestParam("password") String password){
 		
-		String hash = new FUser().login(email, password);
+		String hash = fuser.login(email, password);
 		
 		if(hash!=null) {
 			return new ResponseEntity<String>(hash,HttpStatus.OK);
 		}
 		
-		return null;
+		return new ResponseEntity<String>("null",HttpStatus.ACCEPTED);
 		
 	}
 	

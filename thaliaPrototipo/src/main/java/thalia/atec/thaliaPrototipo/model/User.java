@@ -3,6 +3,7 @@ package thalia.atec.thaliaPrototipo.model;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 
 public class User {
 	
@@ -11,7 +12,7 @@ public class User {
 
 	public static final int WATCHED = 1,WATCHING =2; 
 	
-	@Autowired
+	@Id
 	String id;
 	
 	 String firstname;
@@ -51,16 +52,21 @@ public class User {
 	
 	public User() {
 		super();
+		this.preferences = new ArrayList<>();
+		this.hashes = new ArrayList<>();
+		this.watched = new ArrayList<>();
+		this.watching = new ArrayList<>();
 	}
 
 
 
 
 
-	public User(String firstname, String lastname, String email, String pathimage, String birthdate, int gender,
+	public User(String id,String firstname, String lastname, String email, String pathimage, String birthdate, int gender,
 			String city, String country, int type, String phonenumber, int tokkensquantity, Boolean status,
 			Boolean accactivated, Category category) {
 		super();
+		this.id=id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.pathimage = pathimage;
@@ -85,6 +91,14 @@ public class User {
 
 	
 	
+
+	public void setHashes() {
+		this.hashes = new ArrayList<>();
+	}
+
+
+
+
 
 	public String getPathimage() {
 		return pathimage;
@@ -200,7 +214,7 @@ public class User {
 
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(String id) {

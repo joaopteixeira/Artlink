@@ -1,12 +1,20 @@
 package thalia.atec.thaliaPrototipo.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import thalia.atec.thaliaPrototipo.Functions.FUser;
 import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.Media;
@@ -25,6 +33,44 @@ public class RestUser {
 	@Autowired
 	PostRepository prep;
 	
+	@Autowired
+	FUser fuser;
+	
+	
+	@GetMapping("/registry")
+	public ResponseEntity<String> registry(@ModelAttribute User user,@RequestParam(name="password",defaultValue="") String password){
+		
+		
+		String status = fuser.Registry(user, password);
+		
+		if(status.compareTo("Registado")==0) {
+			
+			return new ResponseEntity<String>("Registado",HttpStatus.ACCEPTED);
+			
+		}
+		
+		return new ResponseEntity<String>("nRegistado",HttpStatus.ACCEPTED);
+		
+		
+		
+	}
+	@GetMapping("/getuser")
+	public ResponseEntity<?> getuser(@RequestParam(name="hash",defaultValue="") String hash){
+		
+		
+		Optional<User> user = urep.findByHashes(hash);
+		
+		if(user.isPresent()) {
+			
+			return new ResponseEntity<User>(user.get(),HttpStatus.ACCEPTED);
+		}
+		
+		
+		return new ResponseEntity<String>("null",HttpStatus.ACCEPTED);
+		
+		
+		
+	}
 	
 	
 	
@@ -58,13 +104,16 @@ public class RestUser {
         urep.save(u1);
         urep.save(u2);
         
-        Post p = new Post("123", "16-11-218", "O bitcoin esta cada vez mais na moda!!!!", 2, 0, u, m);
+        Post p = new Post("123", "16-11-218", "O bitcoin esta cada vez mais na moda!!!!", 2, 0, u);
+        p.setMedia(m);
         prep.save(p);
         
-        Post p1 = new Post("123", "16-11-218", "Qu lindo por do sol!!!!", 10, 0, u1, m1);
+        Post p1 = new Post("123", "16-11-218", "Qu lindo por do sol!!!!", 10, 0, u1);
+        p1.setMedia(m1);
         prep.save(p1);
         
-        Post p2 = new Post("123", "16-11-218", "Adprp mar!!!!", 2, 0, u2, m2);
+        Post p2 = new Post("123", "16-11-218", "Adprp mar!!!!", 2, 0, u2);
+        p2.setMedia(m2);
         prep.save(p2);
         
         

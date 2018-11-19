@@ -4,12 +4,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import thalia.atec.thaliaPrototipo.Service.LoginRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.Login;
 import thalia.atec.thaliaPrototipo.model.User;
  
+@Service("fuser")
 public class FUser {                   //Funcoes pro USER  
 
 	@Autowired
@@ -32,8 +34,10 @@ public class FUser {                   //Funcoes pro USER
 		
 		String hash = UUID.randomUUID().toString();
 		Optional<Login> login = loginRep.findByEmailAndPassword(email, password);
-		if(login.get()!=null) {
+		if(login.isPresent()) {
 			Optional<User> u = userRep.findByEmail(login.get().getEmail());
+			
+			//u.get().setHashes();
 			u.get().getHashes().add(hash);
 			userRep.save(u.get());
 			return hash;
@@ -45,11 +49,13 @@ public class FUser {                   //Funcoes pro USER
 
 	public String Registry(User u,String password) {
 		
-		//Optional<Login> userOp = loginRep.findByEmail(u.getEmail());
+		Optional<Login> userOp = loginRep.findByEmail(u.getEmail());
 		
-	/*	if(userOp.get()!=null) {
+		
+		
+		if(userOp.isPresent()) {
 			return "ja existe o email";
-		}else {           */
+		}else {
 			
 			loginRep.save(new Login(u.getEmail(),password));
 			u.setTokkensquantity(10);												  //Quantidade Inicial de Tokkens
@@ -57,11 +63,11 @@ public class FUser {                   //Funcoes pro USER
 			userRep.save(u);
 			
 			
-	//	}
+		}
 		
 	
 		
-		return "index.html";
+		return "Registado";
 		
 	}
 	

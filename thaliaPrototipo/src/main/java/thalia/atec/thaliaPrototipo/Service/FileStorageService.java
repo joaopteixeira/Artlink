@@ -1,6 +1,8 @@
 package thalia.atec.thaliaPrototipo.Service;
 
 import thalia.atec.thaliaPrototipo.UploadFile.*;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -37,9 +39,10 @@ public class FileStorageService {
         // Normalize file name
     	String rand = UUID.randomUUID().toString();
     	
-    	String extensao = file.getOriginalFilename().toString(); //Apanhar o nome original e á frente meter lo no fim
+    	//String extensao = file.getOriginalFilename().toString(); //Apanhar o nome original e á frente meter lo no fim
+    	String ext = FilenameUtils.getExtension(file.getOriginalFilename());
     	
-        String fileName = StringUtils.cleanPath(rand.replace("-", "")) + extensao;   //Para ter-mos a extensao do ficheiro (.png.jpec etc)
+        String fileName = StringUtils.cleanPath(rand.replace("-", "")) +"."+ ext;   //Para ter-mos a extensao do ficheiro (.png.jpec etc)
 
         try {
             // Check if the file's name contains invalid characters

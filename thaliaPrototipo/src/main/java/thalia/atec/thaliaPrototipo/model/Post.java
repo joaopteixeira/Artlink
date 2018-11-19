@@ -3,35 +3,47 @@ package thalia.atec.thaliaPrototipo.model;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 
 public class Post {
 
-	@Autowired
+	@Id
 	String id;
 	
 	String title,
 	date,
 	content;
 	
-	int likes,dislikes;
+	Integer likes,dislikes;
 	
 	User creator;
 	
 	ArrayList<Comment> comments;
 	
 	Media media;
+	
+	
 
-	public Post(String title, String date, String content, int likes, int dislikes, User creator, Media media) {
+	
+
+	public Post(String title, String date, String content,Integer likes,Integer dislikes, User creator) {
 		super();
 		this.title = title;
 		this.date = date;
-		this.content = content;
 		this.likes = likes;
 		this.dislikes = dislikes;
+		this.content = content;
 		this.creator = creator;
-		this.media = media;
 		this.comments = new ArrayList<>();
 	}
+	
+	
+
+	public Post() {
+		super();
+	}
+
+
 
 	public String getId() {
 		return id;
@@ -65,19 +77,21 @@ public class Post {
 		this.content = content;
 	}
 
-	public int getLikes() {
+	
+
+	public Integer getLikes() {
 		return likes;
 	}
 
-	public void setLikes(int likes) {
+	public void setLikes(Integer likes) {
 		this.likes = likes;
 	}
 
-	public int getDislikes() {
+	public Integer getDislikes() {
 		return dislikes;
 	}
 
-	public void setDislikes(int dislikes) {
+	public void setDislikes(Integer dislikes) {
 		this.dislikes = dislikes;
 	}
 
