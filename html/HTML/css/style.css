@@ -22,7 +22,7 @@
       - Live Feed
     - Landing Page | Register
     - Newsfeed
-      - Left Sidebar
+      - greft Sidebar
       - Right Sidebar
       - Create Post Box
       - Post Contents
@@ -243,9 +243,6 @@ ul{
   padding-left: 15px;
 }
 
-ul li{
-  list-style-image: url("../images/bullet.png");
-}
 
 .line{
   background: #f1f2f2;
@@ -403,9 +400,7 @@ textarea{
 /*Transparent Background Header for Landing Page-2*/
 
 #header-inverse nav.menu{
-  background: transparent;
-  margin-top: 15px;
-  30;
+  background: rgba(0,0,0,0.9);
 }
 
 #header-inverse .menu ul.main-menu li ul.dropdown-menu{
@@ -1103,6 +1098,27 @@ ul.online-users li span.online-dot{
   color: #27aae1;
 }
 
+
+.media-upload i{
+  font-size: 20px;
+  cursor:pointer;
+}
+
+.media-upload input
+{
+    visibility: hidden;
+}
+.media-upload img{
+}
+
+.media-upload ul{
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.media-upload ul li {
+  float: left;
+  }
 
 /*==================================================
   Post Contents CSS
@@ -2046,7 +2062,7 @@ ul.contact li i{
 
   .menu ul.main-menu li.dropdown ul.dropdown-menu li{background: #282425;}
 
-  #header-inverse nav.menu .navbar-collapse{background: rgba(0,0,0, 0.9);}
+  #header-inverse nav.menu .navbar-collapse{background: rgba(0,0,0, 1);}
 
   .sign-up-form{left: 0; right: 0; margin: auto;}
 
@@ -2324,4 +2340,10 @@ ul.contact li i{
 }
 .tabview .active a{
   color: green;
+}
+
+audio{
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
