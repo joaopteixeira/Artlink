@@ -61,7 +61,7 @@ public class FUser {                   //Funcoes pro USER
 		
 	
 		
-		return "Registado";
+		return "index.html";
 		
 	}
 	

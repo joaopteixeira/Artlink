@@ -49,7 +49,8 @@ public class WebLogin {
 	@RequestMapping(value="/edit", method=RequestMethod.POST)
 	public String UserEdit(@ModelAttribute("User") User u, Model page){
 		
-		u.setTokkensquantity(10);  //Quantidade Inicial de Tokkens
+
+		
 	
 		
 		userRepo.save(u);
