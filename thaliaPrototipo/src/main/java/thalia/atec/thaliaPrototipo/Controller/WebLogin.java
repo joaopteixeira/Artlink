@@ -21,13 +21,18 @@ public class WebLogin {
 	
 	@Autowired
 	UserRepository userRepo;
+	
+	
+	@Autowired
+	FUser fuser;
 
+	
 	
 	@RequestMapping(value="/registry", method=RequestMethod.POST)
 	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page){
 		
 		
-		new FUser().Registry(u,password);
+		fuser.Registry(u,password);
 		
 	
 		
@@ -39,13 +44,12 @@ public class WebLogin {
 		
 
 		
-
-
-
 		page.addAttribute("User",u);
 		
 		return "redirect:/qualquercoisa.html";
 	}
+	
+	
 	
 	@RequestMapping(value="/edit", method=RequestMethod.POST)
 	public String UserEdit(@ModelAttribute("User") User u, Model page){
