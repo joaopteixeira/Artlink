@@ -48,7 +48,7 @@ public class WebLogin {
 		
 		page.addAttribute("User",u);
 		
-		return "redirect:/qualquercoisa.html";   // rvai para feed
+		return "redirect:/qualquercoisa.html";   // vai para feed
 
 		
 
