@@ -78,69 +78,8 @@ public class FUser {                   //Funcoes pro USER
 	public String sendEmailReset(String usermail) {
 		
 	
-		
-		Optional<Login> userOp = loginRep.findByEmail(usermail);
-
 	
 	
-
-		
-		
-		if(userOp.isPresent()) {
-
-			
-			Email email = new SimpleEmail();
-			email.setHostName("smtp.googlemail.com");
-			email.setSmtpPort(465);
-			email.setAuthentication("artlinkrecovery@gmail.com", "thalia2018");
-			//email.setAuthentication("admin@artlink.pt","thaliapt18");
-			//email.setHostName("webdomain02.dnscpanel.com");
-			//email.setHostName("pop.sapo.pt ");
-			//email.setSmtpPort(110);
-			//email.setAuthentication("apoio.artlink@sapo.pt", "Thalia2018");
-			email.setSSL(true);
-		
-			
-			
-		try {
-				
-			String newPassword = UUID.randomUUID().toString();	
-			
-			
-
-			
-				email.setFrom("artlinkrecovery@gmail.com");
-				email.setSubject("Recuperação de Password da sua conta Artlink");
-				email.setMsg("A sua nova password: "
-						+ newPassword + "Se não efectuou este pedido por favor contacte a administração da Artlink");
-				email.addTo(usermail);
-				email.send();
-				
-				
-				
-						userOp.get().setPassword(newPassword);
-				
-						
-				System.out.println("email enviado para"+ usermail +"");
-			
-				
-			
-		
-			}catch(EmailException e) {
-				e.printStackTrace();
-			 }
-			
-
-		
-		
-			
-		}else {
-			
-			return "Conta nao existe o email";		
-				}
-		
-	return "enviado pedido";
-	}
 	
 	
 	
