@@ -80,6 +80,7 @@ public class FUser {                   //Funcoes pro USER
 	
 		
 		Optional<Login> userOp = loginRep.findByEmail(usermail);
+		System.out.println(userOp.get().getId());
 
 	
 	
@@ -91,7 +92,6 @@ public class FUser {                   //Funcoes pro USER
 			
 			Email email = new SimpleEmail();
 			email.setHostName("smtp.googlemail.com");
-			email.setSmtpPort(465);
 			email.setAuthentication("artlinkrecovery@gmail.com", "thalia2018");
 			//email.setAuthentication("admin@artlink.pt","thaliapt18");
 			//email.setHostName("webdomain02.dnscpanel.com");
