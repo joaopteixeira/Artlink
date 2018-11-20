@@ -14,7 +14,7 @@ import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.User;
 
 @Controller
-@RequestMapping("webhome")
+@RequestMapping("/webhome")
 public class WebLogin {
 	
 	
@@ -30,13 +30,13 @@ public class WebLogin {
 	
 	@RequestMapping(value="/registry", method=RequestMethod.POST)
 	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page){
-		
+
 		
 		fuser.Registry(u,password);
 		
 	
 		
-		return "redirect:/qualquercoisa.html";     // vai para feed 
+		return "redirect:/index.html";     // vai para feed 
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -48,7 +48,22 @@ public class WebLogin {
 		
 		page.addAttribute("User",u);
 		
-		return "redirect:/qualquercoisa.html";   // vai para feed
+		return "redirect:/newsfeed-main.html";   // vai para feed
+		
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/resetPassword", method=RequestMethod.GET)
+	public String resetPassword(@RequestParam("usermail") String usermail){
+		
+		
+		fuser.sendEmailReset(usermail);
+		
+		
+		
+		return "redirect:/index.html";      // vai para feed
 
 		
 
@@ -56,6 +71,5 @@ public class WebLogin {
 		
 	}
 	
-
 
 }
