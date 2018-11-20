@@ -55,7 +55,7 @@ public class WebLogin {
 	
 	
 	
-	@RequestMapping(value="/resetPassword", method=RequestMethod.GET)
+	@RequestMapping(value="/resetPassword", method=RequestMethod.POST)
 	public String resetPassword(@RequestParam("usermail") String usermail){
 		
 		
