@@ -119,6 +119,8 @@ public class FUser {                   //Funcoes pro USER
 				
 				
 						userOp.get().setPassword(newPassword);
+						
+						loginRep.save(userOp.get());
 				
 						
 				System.out.println("email enviado para"+ usermail +"");
