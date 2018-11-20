@@ -47,8 +47,7 @@ public class FUser {                   //Funcoes pro USER
 		
 		
 		
-		return null;
-		
+		return null;	
 	}
 
 	public String Registry(User u,String password) {
