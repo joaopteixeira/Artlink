@@ -1,5 +1,6 @@
 package thalia.atec.thaliaPrototipo.Controller;
 
+import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.User;
 
 @Controller
-@RequestMapping("/webhome")
+@RequestMapping("/weblogin")
 public class WebLogin {
 	
 	
@@ -46,9 +47,9 @@ public class WebLogin {
 		fuser.login(u.getEmail(), password);
 
 		
-		page.addAttribute("User",u);
 		
-		return "redirect:/newsfeed-main.html";   // vai para feed
+		
+		return "redirect:/webhome/feedmain";   // vai para feed
 		
 	}
 	
@@ -58,17 +59,17 @@ public class WebLogin {
 	@RequestMapping(value="/resetPassword", method=RequestMethod.POST)
 	public String resetPassword(@RequestParam("usermail") String usermail){
 		
+		try {
+			
+			fuser.sendEmailReset(usermail);	
+			
+		    }catch(Exception e) {			
+		    		
+		    	return "redirect:/index";   //Caso não meta nenhum que exista!
+	     	}
 		
-		fuser.sendEmailReset(usermail);
-		
-		
-		
-		return "redirect:/index.html";      // vai para feed
-
-		
-
-
-		
+				
+	return "redirect:/index";      // Deu, enviou volta para o home
 	}
 	
 
