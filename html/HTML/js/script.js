@@ -122,7 +122,10 @@ function attachSticky() {
         parent: '#page-contents',
         offset_top: 70
     });
-
+    $('#sticky-menu').stick_in_parent({
+        parent: '#page-contents',
+        offset_top: 70
+    });
 }
 
 // Disable Sticky Feature in Mobile
@@ -133,7 +136,7 @@ $(window).on("resize", function() {
         if ($(this).width() <= 992) {
             $('#chat-block').trigger('sticky_kit:detach');
             $('#sticky-sidebar').trigger('sticky_kit:detach');
-
+            $('#sticky-menu').trigger('sticky_kit:detach');
             return;
         } else {
 
@@ -159,7 +162,7 @@ function initMap() {
     scrollwheel: false,
     disableDoubleClickZoom: true
   });
-  
+
   var marker = new google.maps.Marker({
     position: uluru,
     map: map
