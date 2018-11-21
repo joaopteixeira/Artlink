@@ -30,6 +30,8 @@ public class FUser {                   //Funcoes pro USER
 	}
 
 
+	
+	
 
 
 	public String login(String email,String password) {
