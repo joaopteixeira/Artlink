@@ -33,7 +33,7 @@ public class WebHome {
 	@GetMapping("/feedmain")
 	public String feedMain(@ModelAttribute("User") User u, Model page){
 		
-		List<Post> p = fpost.getPost();		
+		List<Post> p = fpost.getPost("asdasd",2);		
 		
 
 		page.addAttribute("User",u);

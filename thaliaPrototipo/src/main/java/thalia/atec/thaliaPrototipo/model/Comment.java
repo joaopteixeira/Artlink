@@ -2,47 +2,38 @@ package thalia.atec.thaliaPrototipo.model;
 
 public class Comment {
 	
-	User user;
-	String content,
-	date;
+	//User user;
+	
+	String iduser;
+	String content;
+	String date;
 	
 	
-	public Comment(User user, String content, String date) {
+	public Comment(String iduser, String content, String date) {
 		super();
-		this.user = user;
+		this.iduser = iduser;
 		this.content = content;
 		this.date = date;
 	}
-
-
-	public User getUser() {
-		return user;
+	public String getIduser() {
+		return iduser;
 	}
-
-
-	public void setUser(User user) {
-		this.user = user;
+	public void setIduser(String iduser) {
+		this.iduser = iduser;
 	}
-
-
 	public String getContent() {
 		return content;
 	}
-
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-
 	public String getDate() {
 		return date;
 	}
-
-
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
 	
 	
 	

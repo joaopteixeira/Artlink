@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html >
 	<head>
+
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="This is social network html5 template available in themeforest......" />
 		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
 		<meta name="robots" content="index, follow" />
-		<title>Feed Recente | Explora o Mundo da arte</title>
+		<title>Feed Recente | Artlink</title>
 
     <!-- Stylesheets opa
     ================================================= -->
@@ -29,7 +30,7 @@
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
     <!--Font Awsome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.5.0/css/all.css}" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
 	</head>
@@ -62,6 +63,13 @@
 			 $("#output2").attr("src","");
 			 document.getElementById("image-input").value = "";
 			 document.getElementById("video-input").value = "";
+<<<<<<< HEAD
+		 });
+			$(document).ready(function(){
+				$('.media').hide();
+
+				$(document).on("change", "#image-input", function(evt) {
+=======
 		 });*/
 		 $(document).ready(function(){
 			 $('.media').hide();
@@ -85,6 +93,7 @@
 					 $source[0].src = URL.createObjectURL(this.files[0]);
 					 $source.parent()[0].load();
 					 document.getElementById("image-input").value = "";
+
 					 document.getElementById("audio-input").value = "";
 					 $("#tipo_media").attr("value","1");
 					 $(".media").hide();
@@ -106,7 +115,23 @@
 						$(".media").hide();
 						$("#natc3").show();
 					});
-			});
+
+
+					$(document).on("change", "#audio-input", function(evt) {
+						 var $source = $('#output3');
+						 var $source2 = $('#output4');
+						 $source[0].src = URL.createObjectURL(this.files[0]);
+						 $source2[0].src = URL.createObjectURL(this.files[0]);
+						 $source.parent()[0].load();
+						 $source2.parent()[0].load();
+						 document.getElementById("image-input").value = "";
+						 document.getElementById("video-input").value = "";
+						 $("#tipo_media").attr("value","2");
+						 $(".media").hide();
+						 $("#natc3").show();
+					 });
+			 });
+
 		</script>
 
     <!-- Header
@@ -123,7 +148,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index-register.html"><img src="images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -131,7 +156,7 @@
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
-                  <span><img src="images/down-arrow.png" alt="" /></span></a>
+                  <span><img src="" alt="" /></span></a>
                 <ul class="dropdown-menu newsfeed-home">
                   <li><a href="index.html">Landing Page 1</a></li>
                   <li><a href="index-register.html">Landing Page 2</a></li>
@@ -139,7 +164,7 @@
 							</li>
 
 
-							<li><a href="timeline.html" class="profile-link text-legreen">Sophia Lee</a></li>
+							<li><a href="timeline.html" class="profile-link text-legreen" ></a></li>
 
 							<li>
                 <div class="imgnavbarcont">
@@ -183,10 +208,18 @@
           </div>
 
     			<div class="col-md-7">
-						<!-- AQUI FICA OS Fragmentos -->
+						<!---Frags- -->
+         
+					
+
+
+
+
+
+
 					</div>
 
-          <!-- END POST MODELO -->
+         
 
           <!-- LIST CONTACTS
           ================================================= -->
@@ -231,15 +264,15 @@
             <div class="col-md-3 col-sm-3" style="float: right;">
               <h5>Como nos contactar</h5>
               <ul class="contact">
-                <li><i class="icon ion-ios-email-outline"></i>email@here</li>
-                <li><i class="icon ion-ios-location-outline"></i>ATEC Palmela, PRT</li>
+                <li><i class="icon ion-ios-email-outline"></i>admin@artlink.pt</li>
+                <li><i class="icon ion-ios-location-outline"></i>ATEC Palmela</li>
               </ul>
             </div>
           </div>
       	</div>
       </div>
       <div class="copyright">
-        <p>Group Thalia © 2018. ATEC</p>
+        <p>Grupo Thalia © 2018. ATEC</p>
       </div>
 		</footer>
 

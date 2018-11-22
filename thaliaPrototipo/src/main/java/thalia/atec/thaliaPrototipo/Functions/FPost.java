@@ -70,16 +70,16 @@ public class FPost {
 		 
 		 if(watching.isPresent()) {
 			 
-			 for(Watch w:watching.get().getCreator().getWatching()) {
+		/*	 for(Watch w:watching.get().getIduser().getClas) {
 				 
 				 if(aux.size()>20) {
 					 break;
 				 }
-				 for(Post p:prep.findByCreatorId(w.getUser().getId(),PageRequest.of(1, 1))) {
+				 for(Post p:prep.findByCreatorId(w.getIduser().getIduser().PageRequest.of(1, 1))) {
 					 aux.add(p);
 				 }
 				 
-			 }
+			 } */
 			 
 		 }
 		 
