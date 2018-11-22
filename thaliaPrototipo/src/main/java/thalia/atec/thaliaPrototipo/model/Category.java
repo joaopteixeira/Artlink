@@ -16,6 +16,13 @@ public class Category {
 	private ArrayList<Category> subCategory;
 	
 	
+	
+	
+	public Category() {
+		super();
+	}
+
+
 	public Category(String description) {
 		super();
 		this.description = description;

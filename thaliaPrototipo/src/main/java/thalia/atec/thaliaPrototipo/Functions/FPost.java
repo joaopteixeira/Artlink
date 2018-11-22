@@ -2,12 +2,15 @@ package thalia.atec.thaliaPrototipo.Functions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,7 @@ import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.Post;
 import thalia.atec.thaliaPrototipo.model.User;
+import thalia.atec.thaliaPrototipo.model.Watch;
 @Service("fpost")
 public class FPost {
 	
@@ -32,7 +36,7 @@ public class FPost {
 	
 	 public String newPost(Post post){
 		 
-		 Optional<User> u = urep.findById(post.getCreator().getId());
+		 Optional<User> u = urep.findById(post.getIduser());
 			boolean check=false;
 			if(u.isPresent()) {
 				
@@ -58,9 +62,26 @@ public class FPost {
 	}
 	 
 	 
-	 public List<Post> getPost(){
+	 public List<Post> getPost(String iduser,int page){
 		 
 		 
+		 Optional<Post> watching = prep.findById(iduser);
+		 ArrayList<Post> aux = new ArrayList<>();
+		 
+		 if(watching.isPresent()) {
+			 
+			 for(Watch w:watching.get().getCreator().getWatching()) {
+				 
+				 if(aux.size()>20) {
+					 break;
+				 }
+				 for(Post p:prep.findByCreatorId(w.getUser().getId(),PageRequest.of(1, 1))) {
+					 aux.add(p);
+				 }
+				 
+			 }
+			 
+		 }
 		 
 		 
 		 
