@@ -8,9 +8,9 @@ import thalia.atec.thaliaPrototipo.model.Post;
 
 public interface PostRepository extends MongoRepository<Post, String> {
 	
-	List<Post> findByCreatorId(String id);
-	List<Post> findByCreatorDistrict(String district);
-	List<Post> findByCreatorCategoryDescriptionAndCreatorCategorySubCategoryDescription(String discription,String subCategoryDiscription);
-	List<Post> findByCreatorCategoryDescription(String discription);
+	List<Post> findByIduser(String id);
+	//List<Post> findByCreatorDistrict(String district);
+	//List<Post> findByCreatorCategoryDescriptionAndCreatorCategorySubCategoryDescription(String discription,String subCategoryDiscription);
+	//List<Post> findByCreatorCategoryDescription(String discription);
 
 }

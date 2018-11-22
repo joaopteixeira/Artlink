@@ -16,7 +16,9 @@ public class Post {
 	
 	ArrayList<String> likes;
 	
-	User creator;
+	//User creator;
+	
+	String iduser;
 	
 	ArrayList<Comment> comments;
 	
@@ -26,13 +28,13 @@ public class Post {
 
 	
 
-	public Post(String title, String date, String content, User creator) {
+	public Post(String title, String date, String content, String iduser) {
 		super();
 		this.title = title;
 		this.date = date;
 		this.likes = new ArrayList<>();
 		this.content = content;
-		this.creator = creator;
+		this.iduser = iduser;
 		this.comments = new ArrayList<>();
 	}
 	
@@ -96,13 +98,19 @@ public class Post {
 
 
 
-	public User getCreator() {
-		return creator;
+
+
+	public String getIduser() {
+		return iduser;
 	}
 
-	public void setCreator(User creator) {
-		this.creator = creator;
+
+
+	public void setIduser(String iduser) {
+		this.iduser = iduser;
 	}
+
+
 
 	public Media getMedia() {
 		return media;

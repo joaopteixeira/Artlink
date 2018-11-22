@@ -32,7 +32,7 @@ public class FPost {
 	
 	 public String newPost(Post post){
 		 
-		 Optional<User> u = urep.findById(post.getCreator().getId());
+		 Optional<User> u = urep.findById(post.getIduser());
 			boolean check=false;
 			if(u.isPresent()) {
 				

@@ -35,7 +35,7 @@ public class WebHome {
 		
 		List<Post> p = fpost.getPost();		
 		
-	//	p.getClass().getName();
+
 		page.addAttribute("User",u);
 		page.addAttribute("Post",p);
 
