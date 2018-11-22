@@ -37,6 +37,8 @@ public class FUser {                   //Funcoes pro USER
 	}
 
 
+	
+	
 
 
 	public String login(String email,String password) {
@@ -54,8 +56,7 @@ public class FUser {                   //Funcoes pro USER
 		
 		
 		
-		return null;
-		
+		return null;	
 	}
 
 	public String Registry(User u,String password) {
@@ -87,11 +88,10 @@ public class FUser {                   //Funcoes pro USER
 	
 		
 		Optional<Login> userOp = loginRep.findByEmail(usermail);
-		System.out.println(userOp.get().getId());
 
 	
-	
-
+		System.out.println("User id: "+userOp.get().getId() + " reseted pass ");
+		
 		
 		
 		if(userOp.isPresent()) {
@@ -99,6 +99,7 @@ public class FUser {                   //Funcoes pro USER
 			
 			Email email = new SimpleEmail();
 			email.setHostName("smtp.googlemail.com");
+			email.setSmtpPort(465);
 			email.setAuthentication("artlinkrecovery@gmail.com", "thalia2018");
 			//email.setAuthentication("admin@artlink.pt","thaliapt18");
 			//email.setHostName("webdomain02.dnscpanel.com");
@@ -125,12 +126,11 @@ public class FUser {                   //Funcoes pro USER
 				
 				
 				
-						userOp.get().setPassword(newPassword);
-						
-						loginRep.save(userOp.get());
+				userOp.get().setPassword(newPassword);
+				loginRep.save(userOp.get());
 				
 						
-				System.out.println("email enviado para"+ usermail +"");
+				System.out.println("email enviado para: "+ usermail +"");
 			
 				
 			

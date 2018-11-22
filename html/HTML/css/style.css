@@ -373,7 +373,8 @@ textarea{
 }
 
 .menu ul.main-menu li ul.dropdown-menu li a:hover, .menu ul.main-menu li.open ul.dropdown-menu li a:hover{
-  color: #e6e6e6;
+  color: #ccc4c4;
+  background: none;
 }
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form{
@@ -1059,9 +1060,8 @@ ul.online-users li span.online-dot{
 .create-post{
   width: 100%;
   min-height: 90px;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #f1f2f2;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .create-post .form-group{
@@ -1212,21 +1212,26 @@ ul.online-users li span.online-dot{
   Friend List CSS = Newsfeed and Timeline
   ==================================================*/
 
-.friend-list .friend-card{
+.list-people .friend-card{
   border-radius: 4px;
-  border-bottom: 1px solid #f1f2f2;
+  height: 120px;
+  border: 1px solid #f1f2f2;
+  display: table;
   overflow: hidden;
   margin-bottom: 20px;
 }
 
-.friend-list .friend-card .card-info{
-  padding: 0 20px 10px;
+.list-people .friend-card .friend-info{
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
 }
 
-.friend-list .friend-card .card-info img.profile-photo-lg{
+.list-people .friend-card .card-info img.profile-photo-lg{
   margin-top: -60px;
   border: 7px solid #fff;
 }
+
 
 
 /*==================================================
@@ -2346,4 +2351,33 @@ audio{
   width: 90%;
   margin-left: 5%;
   margin-right: 5%;
+}
+
+hr.separate{
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.imgnavbarcont{
+  min-height: 56px;
+  display: table;
+  line-height: 52px;
+}
+
+img.imgnavbar{
+  height: 40px;
+  width: 40px;
+  vertical-align: middle;
+}
+
+.text-header{
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #40CC9B;
+}
+
+a.link{
+  text-decoration: none !important;
+  background-color: rgba(0,0,0,0) !important;
 }

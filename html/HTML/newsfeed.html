@@ -20,6 +20,10 @@
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
 
+    <!--Font Awsome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
 	</head>
@@ -112,18 +116,27 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="images/down-arrow.png" alt="" /></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
+                  <span><img src="images/down-arrow.png" alt="" /></span></a>
                 <ul class="dropdown-menu newsfeed-home">
                   <li><a href="index.html">Landing Page 1</a></li>
                   <li><a href="index-register.html">Landing Page 2</a></li>
                 </ul>
-              </li>
 
 
-							<li><a href="timeline.html" class="profile-link text-legreen">Sophia Lee</a></h5></li>
+
+							<li><a href="timeline.html" class="profile-link text-legreen">Sophia Lee</a></li>
 
 							<li>
-								<img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
+                <div class="imgnavbarcont">
+                  <a class="dropdown-toggle link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md imgnavbar" />
+                  </a>
+                  <ul class="dropdown-menu newsfeed-home">
+                  <li><a href="timeline.html">Perfil</a></li>
+                  <li><a href="index.html">Logout</a></li>
+                </ul>
+                </div>
 							</li>
             </ul>
             <form class="navbar-form hidden-sm">
@@ -144,14 +157,14 @@
 
           <!-- Newsfeed Common Side Bar Left
           ================================================= -->
-    			<div class="col-md-3 static">
+    			<div id="sticky-menu" class="col-md-3 static">
             <ul class="nav-news-feed">
-              <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>
-              <li><i class="icon ion-ios-people"></i><div><a href="newsfeed-people-nearby.html">People Nearby</a></div></li>
-              <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.html">Friends</a></div></li>
-              <li><i class="icon ion-chatboxes"></i><div><a href="newsfeed-messages.html">Messages</a></div></li>
-              <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Images</a></div></li>
-              <li><i class="icon ion-ios-videocam"></i><div><a href="newsfeed-videos.html">Videos</a></div></li>
+              <li><i class="fas fa-newspaper"></i><div><a href="newsfeed.html">Meu feed</a></div></li>
+              <li><i class="fas fa-users"></i><div><a href="newsfeed-people-nearby.html">Encontra Pessoas</a></div></li>
+              <li><i class="fas fa-address-book"></i><div><a href="newsfeed-friends.html">Lista de Contactos</a></div></li>
+              <li><i class="fas fa-comments"></i><div><a href="newsfeed-messages.html">Messagens</a></div></li>
+              <li><i class="fas fa-images"></i><div><a href="newsfeed-images.html">Imagens</a></div></li>
+              <li><i class="fas fa-video"></i><div><a href="newsfeed-videos.html">Videos</a></div></li>
             </ul><!--news-feed links ends-->
           </div>
 
@@ -160,6 +173,7 @@
             <!-- Post Create Box
             ================================================= -->
             <div class="create-post">
+              <div class="text-header">Fazer Post</div>
             	<div class="row">
             		<div class="col-md-12">
 									<form class="" action="" method="post">
@@ -176,35 +190,35 @@
 	                  </div>
 	                </div>
 	            	</div>
-									 <div class="media-upload" style="margin-top:2%;">
-										 <div class="row">
-											 <ul class="file col-md-12">
-											 	<li id="natzc1" class="col-md-2">
-													<a>
-														<label for="image-input">
-												 			<i class="ion-images"></i>
-												 		</label>
-												 		<input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)"/>
-													</a>
-											 	</li>
-											 	<li id="natzc2" class="col-md-2">
-													<!-- <a> -->
-														<label for="video-input">
-												 			<i class="ion-ios-videocam"></i>
-												 		</label>
-												 		<input id="video-input" name="video" type="file" accept="video/*"/>
-													<!-- </a> -->
-											 	</li>
-											 	<li id="natzc3" class="col-md-2">
-													<!-- <a> -->
-														<label for="audio-input">
-												 			<i  class="ion-compose"></i>
-												 		</label>
-												 		<input id="audio-input" type="file" name="audio" value="" accept="audio/*">
-													<!-- </a> -->
-											 	</li>
-											 </ul>
-										 </div>
+  							 <div class="media-upload" style="margin-top:2%;">
+  								 <div class="row">
+  									 <ul class="file col-md-12">
+  									 	<li id="natzc1" class="col-md-2">
+  											<a>
+  												<label for="image-input">
+  										 			<i class="ion-images"></i>
+  										 		</label>
+  										 		<input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)"/>
+  											</a>
+  									 	</li>
+  									 	<li id="natzc2" class="col-md-2">
+  											<a>
+  												<label for="video-input">
+  										 			<i class="ion-ios-videocam"></i>
+  										 		</label>
+  										 		<input id="video-input" name="video" type="file" accept="video/*"/>
+  											</a>
+  									 	</li>
+  									 	<li id="natzc3" class="col-md-2">
+  											<a>
+  												<label for="audio-input">
+  										 			<i  class="ion-compose"></i>
+  										 		</label>
+  										 		<input id="audio-input" type="file" name="audio" value="" accept="audio/*">
+  											</a>
+  									 	</li>
+  									 </ul>
+  								 </div>
 									</div>
 									</form>
 									 <script>
@@ -217,27 +231,23 @@
 											 reader.readAsDataURL(event.target.files[0]);
 										 };
 									 </script>
-								 <div class="" style="float:right;">
-								 <button class="btn btn-primary pull-right" id="submit" type="submit">Publish</button>
-								</div>
-            </div><!-- Post Create Box End-->
 
-            <!-- Post Content
+                   <!-- Preview Post
             ================================================= -->
             <div class="post-content">
-							<div id="natc1" class="media">
-								<img id="output" src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
-							</div>
-							<div id="natc2" class="media">
-								<video class="post-video" controls> <source id="output2" src="videos/1.mp4" type="video/mp4"> </video>
-							</div>
-							<div id="natc3" class="media">
-								<audio controls>
-								  <source id="output3" src="horse.ogg" type="audio/ogg">
-								  <source id="output4" src="horse.mp3" type="audio/mpeg">
-								Your browser does not support the audio element.
-								</audio>
-							</div>
+              <div id="natc1" class="media">
+                <img id="output" src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
+              </div>
+              <div id="natc2" class="media">
+                <video class="post-video" controls> <source id="output2" src="videos/1.mp4" type="video/mp4"> </video>
+              </div>
+              <div id="natc3" class="media">
+                <audio controls>
+                  <source id="output3" src="horse.ogg" type="audio/ogg">
+                  <source id="output4" src="horse.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+                </audio>
+              </div>
               <div class="post-container">
                 <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
                 <div class="post-detail">
@@ -250,13 +260,21 @@
                   <div class="line-divider"></div>
                   <div class="post-text">
                     <div id="puthere"></div>
-										<!-- <p id="puthere">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p> -->
+                    <!-- <p id="puthere">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p> -->
                   </div>
                   <div class="line-divider"></div>
                 </div>
               </div>
             </div>
 
+								 <div class="" style="float:right; margin-bottom: 10px;">
+								 <button class="btn btn-primary pull-right" id="submit" type="submit">Publish</button>
+								</div>
+            </div><!-- Post Create Box End-->
+            <br>
+            <hr class="separate text-legreen"></hr>
+
+              <!-- POST MODELO -->
 						<div class="post-content">
                <video class="post-video" controls> <source src="videos/1.mp4" type="video/mp4"> </video>
               <div class="post-container">
@@ -288,54 +306,43 @@
                     <p><a href="timeline.html" class="profile-link">Linda</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                   </div>
                   <div class="post-comment">
-                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                    <input type="text" class="form-control" placeholder="Post a comment">
+
+                    <!-- FORM COMENTARIO -->
+
+                     <form style="width: 100%;" >
+                      <div class="form-group" style="width: 100% !important;">
+                        <div style="width: 10%;float: left;"><img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" /></div>
+                        <div style="width: 90%;float: right;"><input type="text" class="form-control" name='description' placeholder="Post a comment"></div>
+                      </div>
+                      <div class="form-group" style="width:100%;float: right;">  <button class="btn btn-primary pull-right" id="submit" type="submit">Publish</button></div>
+
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
 					</div>
 
+          <!-- END POST MODELO -->
 
-          <!-- Newsfeed Common Side Bar Right
+          <!-- LIST CONTACTS
           ================================================= -->
     			<div class="col-md-2 static">
             <div class="suggestions" id="sticky-sidebar">
-              <h4 class="grey">Who to Follow</h4>
+              <h4 class="grey">Contactos Online</h4>
+
+              <!-- MODEL CONTACT ONLINE -->
+
               <div class="follow-user">
                 <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
                 <div>
                   <h5><a href="timeline.html">Diana Amber</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
+                  <p class="text-green"> 15.000 watchers</p>
                 </div>
               </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Cris Haris</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Brian Walton</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Olivia Steward</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
-              </div>
-              <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html">Sophia Page</a></h5>
-                  <a href="#" class="text-green">Add friend</a>
-                </div>
+
+
+
               </div>
             </div>
           </div>
@@ -359,51 +366,19 @@
               	<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
               </ul>
             </div>
-            <div class="col-md-2 col-sm-2">
-              <h5>For individuals</h5>
-              <ul class="footer-links">
-                <li><a href="">Signup</a></li>
-                <li><a href="">login</a></li>
-                <li><a href="">Explore</a></li>
-                <li><a href="">Finder app</a></li>
-                <li><a href="">Features</a></li>
-                <li><a href="">Language settings</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h5>For businesses</h5>
-              <ul class="footer-links">
-                <li><a href="">Business signup</a></li>
-                <li><a href="">Business login</a></li>
-                <li><a href="">Benefits</a></li>
-                <li><a href="">Resources</a></li>
-                <li><a href="">Advertise</a></li>
-                <li><a href="">Setup</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h5>About</h5>
-              <ul class="footer-links">
-                <li><a href="">About us</a></li>
-                <li><a href="">Contact us</a></li>
-                <li><a href="">Privacy Policy</a></li>
-                <li><a href="">Terms</a></li>
-                <li><a href="">Help</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3 col-sm-3">
-              <h5>Contact Us</h5>
+            <div class="col-md-3 col-sm-3" style="float: right;">
+              <h5>Como nos contactar</h5>
               <ul class="contact">
                 <li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
-                <li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
-                <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
+                <li><i class="icon ion-ios-email-outline"></i>email@here</li>
+                <li><i class="icon ion-ios-location-outline"></i>ATEC Palmela, PRT</li>
               </ul>
             </div>
           </div>
       	</div>
       </div>
       <div class="copyright">
-        <p>Thunder Team © 2016. All rights reserved</p>
+        <p>Group Thalia © 2018. ATEC</p>
       </div>
 		</footer>
 
