@@ -45,7 +45,7 @@ public class RestUser {
 		
 		String status = fuser.Registry(user, password);
 		
-		System.out.println(user.getCategory().getDescription());
+		
 		
 		if(status.compareTo("Registado")==0) {
 			

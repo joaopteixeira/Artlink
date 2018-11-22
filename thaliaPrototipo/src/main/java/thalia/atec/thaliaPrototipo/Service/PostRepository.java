@@ -2,6 +2,8 @@ package thalia.atec.thaliaPrototipo.Service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import thalia.atec.thaliaPrototipo.model.Post;

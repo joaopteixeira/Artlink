@@ -36,7 +36,10 @@ public class User {
 	int tokkensquantity,gender;
 	
 	Boolean status, accactivated;
-	Category category;
+	
+	String category;
+	String subcategory;
+	
 
 	ArrayList <Tag> preferences;
 	
@@ -64,7 +67,7 @@ public class User {
 
 	public User(String id,String firstname, String lastname, String email, String pathimage, String birthdate, int gender,
 			String district, String country, int type, String phonenumber, int tokkensquantity, Boolean status,
-			Boolean accactivated, Category category) {
+			Boolean accactivated,String category,String subcategory) {
 		super();
 		this.id=id;
 		this.firstname = firstname;
@@ -81,6 +84,7 @@ public class User {
 		this.status = status;
 		this.accactivated = accactivated;
 		this.category = category;
+		this.subcategory = subcategory;
 		this.preferences = new ArrayList<>();
 		this.hashes = new ArrayList<>();
 		this.watched = new ArrayList<>();
@@ -200,16 +204,35 @@ public class User {
 
 
 
-	public Category getCategory() {
-		return category;
+
+
+
+
+
+
+
+	public String getSubcategory() {
+		return subcategory;
 	}
 
 
 
 
-	public void setCategory(Category category) {
+
+	public void setSubcategory(String subcategory) {
+		this.subcategory = subcategory;
+	}
+
+
+
+
+
+	public void setCategory(String category) {
 		this.category = category;
 	}
+
+
+
 
 
 
