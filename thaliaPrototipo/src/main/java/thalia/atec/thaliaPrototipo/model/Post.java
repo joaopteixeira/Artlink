@@ -20,6 +20,8 @@ public class Post {
 	
 	String iduser;
 	
+	String userimage;
+	
 	ArrayList<Comment> comments;
 	
 	Media media;
@@ -28,13 +30,14 @@ public class Post {
 
 	
 
-	public Post(String title, String date, String content, String iduser) {
+	public Post(String title, String date, String content, String iduser, String username,int userwatched,String userimage) {
 		super();
 		this.title = title;
 		this.date = date;
 		this.likes = new ArrayList<>();
 		this.content = content;
 		this.iduser = iduser;
+		this.userimage = userimage;
 		this.comments = new ArrayList<>();
 	}
 	

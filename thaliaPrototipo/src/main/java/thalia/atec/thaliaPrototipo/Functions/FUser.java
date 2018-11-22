@@ -8,6 +8,8 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import Utils.WebServices;
+
 import org.apache.commons.mail.*;
 
 import thalia.atec.thaliaPrototipo.Service.CountryRepository;
@@ -70,14 +72,13 @@ public class FUser {                   //Funcoes pro USER
 		}else {
 			
 			loginRep.save(new Login(u.getEmail(),password));
-			u.setTokkensquantity(10);												  //Quantidade Inicial de Tokkens
+			u.setTokkensquantity(10);	
+			u.setPathimage(WebServices.SERVER+"/upload/downloadFile/userdefault.png");//Quantidade Inicial de Tokkens
 			u.setAccactivated(false);
-			userRep.save(u);
-			
+			userRep.save(u);		
 			
 		}
 		
-	
 		
 		return "Registado";
 		

@@ -55,7 +55,12 @@ public class RestPost {
 	public ResponseEntity<List<Post>> getPosts123(@RequestParam("id") String id) {
 		
 		
+<<<<<<< Updated upstream
 		return new ResponseEntity<List<Post>>(fpost.getPost("asdda",3),HttpStatus.OK);
+=======
+		String iduser = "asd";
+		return new ResponseEntity<List<Post>>(fpost.getPost(iduser, 2),HttpStatus.OK);
+>>>>>>> Stashed changes
 		
 	}
 	

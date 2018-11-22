@@ -70,7 +70,11 @@ public class FPost {
 		 
 		 if(watching.isPresent()) {
 			 
+<<<<<<< Updated upstream
 		/*	 for(Watch w:watching.get().getIduser().getClas) {
+=======
+			/* for(Watch w:watching.get().getId()) {
+>>>>>>> Stashed changes
 				 
 				 if(aux.size()>20) {
 					 break;
@@ -78,7 +82,11 @@ public class FPost {
 				 for(Post p:prep.findByCreatorId(w.getIduser().getIduser().PageRequest.of(1, 1))) {
 					 aux.add(p);
 				 }
+<<<<<<< Updated upstream
 				 
+=======
+				
+>>>>>>> Stashed changes
 			 } */
 			 
 		 }
