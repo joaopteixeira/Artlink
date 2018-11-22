@@ -1233,6 +1233,16 @@ ul.online-users li span.online-dot{
 }
 
 
+.friend-list .friend-card .card-info img.profile-photo-lg{
+  margin-top: -60px;
+  border: 7px solid #fff;
+}
+
+.friend-list .friend-card .card-info{
+  padding: 0 20px 10px;
+}
+
+
 
 /*==================================================
   Chat Room CSS
@@ -1445,10 +1455,10 @@ ul.online-users li span.online-dot{
   ==================================================*/
 
 .timeline-cover{
-  background: url("http://placehold.it/1030x360") no-repeat;
+  /*background: url("http://placehold.it/1030x360") no-repeat;
   background-position: center;
-  background-size: cover;
-  min-height: 360px;
+  background-size: cover;*/
+  min-height: 220px;
   border-radius: 0 0 4px 4px;
   position: relative;
 }

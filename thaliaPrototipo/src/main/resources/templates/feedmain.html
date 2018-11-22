@@ -3,39 +3,35 @@
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="" />
+		<meta name="description" content="This is social network html5 template available in themeforest......" />
 		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
 		<meta name="robots" content="index, follow" />
-
-
 		<title>Feed Recente | Explora o Mundo da arte</title>
 
     <!-- Stylesheets
     ================================================= -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<!-- <link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/ionicons.min.css" />
     <link rel="stylesheet" href="css/font-awesome.min.css" />
     <link href="css/emoji.css" rel="stylesheet">
-
-      <link rel="stylesheet" th:href=@{/css/bootstrap.min.css} media="screen">
-      <link rel="stylesheet" th:href=@{/css/style.css}>
-      <link rel="stylesheet" th:href=@{/css/font-awesome.css}>
-      <link rel="stylesheet" th:href=@{/css/ionicons.min.css}>
-      <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
-            <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
-
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="images/fav.png"/> -->
+    <link rel="stylesheet" th:href=@{/css/bootstrap.min.css} media="screen">
+    <link rel="stylesheet" th:href=@{/css/style.css}>
+    <link rel="stylesheet" th:href=@{/css/font-awesome.css}>
+    <link rel="stylesheet" th:href=@{/css/ionicons.min.css}>
+    <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
+    <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-
     <!--Font Awsome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
-    <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
 	</head>
   <body>
 		<script>
@@ -107,7 +103,6 @@
 
     <!-- Header
     ================================================= -->
-    <form th:object="${User}">
 		<header id="header">
       <nav class="navbar navbar-default navbar-fixed-top menu">
         <div class="container">
@@ -115,7 +110,7 @@
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only"></span>
+              <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -133,10 +128,10 @@
                   <li><a href="index.html">Landing Page 1</a></li>
                   <li><a href="index-register.html">Landing Page 2</a></li>
                 </ul>
+							</li>
 
 
-
-							<li><a href="webhome/perfil" class="profile-link text-legreen"><div name="nome" th:text="${User.firstname}"></div></a></li>
+							<li><a href="timeline.html" class="profile-link text-legreen">Sophia Lee</a></li>
 
 							<li>
                 <div class="imgnavbarcont">
@@ -168,7 +163,7 @@
 
           <!-- Newsfeed Common Side Bar Left
           ================================================= -->
-    			<div class="col-md-3 static">
+    			<div id="sticky-menu" class="col-md-3 static">
             <ul class="nav-news-feed">
               <li><i class="fas fa-newspaper"></i><div><a href="newsfeed.html">Meu feed</a></div></li>
               <li><i class="fas fa-users"></i><div><a href="newsfeed-people-nearby.html">Encontra Pessoas</a></div></li>
@@ -242,7 +237,10 @@
 											 reader.readAsDataURL(event.target.files[0]);
 										 };
 									 </script>
-                   <div class="post-content">
+
+                   <!-- Preview Post
+            ================================================= -->
+            <div class="post-content">
               <div id="natc1" class="media">
                 <img id="output" src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
               </div>
@@ -260,7 +258,7 @@
                 <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
                 <div class="post-detail">
                   <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link" th:value="${User.firstname}"></a> <span class="following">following</span></h5>
+                    <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
                   </div>
                   <div class="reaction">
                     <a class="btn text-green"><i class="icon ion-thumbsup"></i> 0 </a>
@@ -274,39 +272,66 @@
                 </div>
               </div>
             </div>
-            <div class="" style="float:right; margin-bottom: 10px;">
-              <button class="btn btn-primary pull-right" id="submit" type="submit">Publicar</button>
-            </div>
+
+								 <div class="" style="float:right; margin-bottom: 10px;">
+								 <button class="btn btn-primary pull-right" id="submit" type="submit">Publish</button>
+								</div>
+            </div><!-- Post Create Box End-->
             <br>
             <hr class="separate text-legreen"></hr>
-        </div>
-			 </form> <!--         Fim da form que abriu o th:object USER                -->
-		 </div>
 
+              <!-- POST MODELO -->
+						<div class="post-content">
+               <video class="post-video" controls> <source src="videos/1.mp4" type="video/mp4"> </video>
+              <div class="post-container">
+                <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
+                <div class="post-detail">
+                  <div class="user-info">
+                    <h5><a href="timeline.html" class="profile-link">Sophia Lee</a> <span class="following">following</span></h5>
+                    <p class="text-muted">Updated her status about 33 mins ago</p>
+                  </div>
+                  <div class="reaction">
+                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 75</a>
+                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 8</a>
+                  </div>
+                  <div class="line-divider"></div>
+                  <div class="post-text">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                  </div>
+                  <div class="line-divider"></div>
+                   <div class="post-comment">
+                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
+                    <p><a href="timeline.html" class="profile-link">Olivia </a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <i class="em em-anguished"></i> Ut enim ad minim veniam, quis nostrud </p>
+                  </div>
+                  <div class="post-comment">
+                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
+                    <p><a href="timeline.html" class="profile-link">Sarah</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                  </div>
+                  <div class="post-comment">
+                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
+                    <p><a href="timeline.html" class="profile-link">Linda</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                  </div>
+                  <div class="post-comment">
 
+                    <!-- FORM COMENTARIO -->
 
- <!--
+                     <form style="width: 100%;" >
+                      <div class="form-group" style="width: 100% !important;">
+                        <div style="width: 10%;float: left;"><img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" /></div>
+                        <div style="width: 90%;float: right;"><input type="text" class="form-control" name='description' placeholder="Post a comment"></div>
+                      </div>
+                      <div class="form-group" style="width:100%;float: right;">  <button class="btn btn-primary pull-right" id="submit" type="submit">Publish</button></div>
 
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+					</div>
 
-         Frag Meio
-          ================================================= -->
+          <!-- END POST MODELO -->
 
- <!--
-      <th:block th:switch="${frag}">
-
-      <div th:case="*"> <span th:include="fragpost"></span> </div>
-
-      </th:block>
-
--->
-      <!-- ----- --- --- --- --- --- --- --- --- --- ---
-       ================================================= -->
-
-
-
-
-
-                    <!-- LIST CONTACTS
+          <!-- LIST CONTACTS
           ================================================= -->
     			<div class="col-md-2 static">
             <div class="suggestions" id="sticky-sidebar">
@@ -326,9 +351,9 @@
 
               </div>
             </div>
-          <!---================================================= -->
-
-
+          </div>
+    		</div>
+    	</div>
 
     <!-- Footer
     ================================================= -->
@@ -337,28 +362,27 @@
       	<div class="row">
           <div class="footer-wrapper">
             <div class="col-md-3 col-sm-3">
-                    <h5>Segue os Programadores</h5>
-              <a href=""><img src="images/logo-black.png" alt="" class="footer-logo" /></a>
+              <h5>Segue os Programadores</h5>
               <ul class="list-inline social-icons">
-              	<li><a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-teixeira-vilares-1886a8167/"><i class=""></i></a></li>
-              	<li><a href="https://www.linkedin.com/in/jo%C3%A3o-mirante-ba6334168/"><i class=""></i></a></li>
-              	<li><a href="https://www.linkedin.com/in/nilton-fontes-868974162/"><i class=""></i></a></li>
-              	<li><a href="https://www.linkedin.com/in/gonçalo-lavrador"><i class=""></i></a></li>
-
+              	<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+              	<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
               </ul>
             </div>
             <div class="col-md-3 col-sm-3" style="float: right;">
               <h5>Como nos contactar</h5>
               <ul class="contact">
-                <li><i class="icon ion-ios-email-outline"></i>admin@artlink.pt</li>
-                <li><i class="icon ion-ios-location-outline"></i>ATEC Palmela</li>
+                <li><i class="icon ion-ios-email-outline"></i>email@here</li>
+                <li><i class="icon ion-ios-location-outline"></i>ATEC Palmela, PRT</li>
               </ul>
             </div>
           </div>
       	</div>
       </div>
       <div class="copyright">
-        <p>Grupo Thalia © 2018. ATEC</p>
+        <p>Group Thalia © 2018. ATEC</p>
       </div>
 		</footer>
 
@@ -368,7 +392,7 @@
     </div> -->
     <!-- Scripts
 		================================================= -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script> -->
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.sticky-kit.min.js"></script>
