@@ -55,7 +55,7 @@ public class RestPost {
 	public ResponseEntity<List<Post>> getPosts123(@RequestParam("id") String id) {
 		
 		
-		return new ResponseEntity<List<Post>>(fpost.getPost(id),HttpStatus.OK);
+		return new ResponseEntity<List<Post>>(fpost.getPost(),HttpStatus.OK);
 		
 	}
 	

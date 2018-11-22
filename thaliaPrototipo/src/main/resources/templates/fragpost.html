@@ -1,56 +1,23 @@
 
          <!-- Preview Post fragpost.html
 		================================================= -->
- <div th:fragment="fragpost" >
- 		<div class="post-content">
-              <div id="natc1" class="media">
-                <img id="output" src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
-              </div>
-              <div id="natc2" class="media">
-                <video class="post-video" controls> <source id="output2" src="videos/1.mp4" type="video/mp4"> </video>
-              </div>
-              <div id="natc3" class="media">
-                <audio controls>
-                  <source id="output3" src="horse.ogg" type="audio/ogg">
-                  <source id="output4" src="horse.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-                </audio>
-              </div>
-              <div class="post-container">
-                <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-                <div class="post-detail">
-                  <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
-                  </div>
-                  <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 0 </a>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <div id="puthere"></div>
-                    <!-- <p id="puthere">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p> -->
-                  </div>
-                  <div class="line-divider"></div>
-                </div>
-              </div>
-            </div>
 
-								 <div class="" style="float:right; margin-bottom: 10px;">
-								 <button class="btn btn-primary pull-right" id="submit" type="submit">Publicar</button>
-								</div>
-            
-            <br>
-            <hr class="separate text-legreen"></hr>
+<form th:object="${Post}">
+<div th:each="post : ${Post}">
+
+
+ <div th:fragment="fragpost" >
+ 		
 
               <!-- POST MODELO -->
-              
+
 				<div class="post-content">
                <video class="post-video" controls> <source src="videos/1.mp4" type="video/mp4"> </video>
               <div class="post-container">
                 <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
                 <div class="post-detail">
                   <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link"> username </a> <span class="following">following</span></h5>
+                    <h5><a href="timeline.html" class="profile-link" th:value="${post.user.name}"> username </a> <span class="following">following</span></h5>
                     <p class="text-muted">D Postado dia </p>
                   </div>
                   <div class="reaction">
@@ -60,21 +27,18 @@
                   <div class="post-text">
                     <p> String Conteudo  </p>
                   </div>
+
+                  <form th:each="comments : ${Comment}">
+                 
+
                   <div class="line-divider"></div>
                    <div class="post-comment">
                     <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Olivia </a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <i class="em em-anguished"></i> Ut enim ad minim veniam, quis nostrud </p>
+                    <p><a href="timeline.html" class="profile-link"> Olivia </a>  </p>
                   </div>
-                  <div class="post-comment">
-                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Sarah</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                  </div>
-                  <div class="post-comment">
-                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                    <p><a href="timeline.html" class="profile-link">Linda</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                  </div>
-                  <div class="post-comment">
-                   
+
+
+                  </form>
                     <!-- FORM COMENTARIO -->
                     
                      <form style="width: 100%;" >
@@ -91,3 +55,5 @@
             </div>
 </div>
           <!-- END POST MODELO -->
+
+</form>

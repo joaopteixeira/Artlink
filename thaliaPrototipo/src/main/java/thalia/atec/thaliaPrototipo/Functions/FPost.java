@@ -58,14 +58,14 @@ public class FPost {
 	}
 	 
 	 
-	 public List<Post> getPost(String id){
+	 public List<Post> getPost(){
 		 
 		 
 		 
 		 
 		 
 		 
-		 return prep.findByCreatorCategoryDescriptionAndCreatorCategorySubCategoryDescription("Teatro", "Ator");
+		 return prep.findAll();
 	 }
 	 
 	 
