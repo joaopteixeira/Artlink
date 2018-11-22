@@ -20,24 +20,24 @@ public class WebHome {
 		
 		Country country = new Country("Portugal");
 		
-		country.getCitys().add(new District("Aveiro"));
-		country.getCitys().add(new District("Beja"));
-		country.getCitys().add(new District("Beja"));
-		country.getCitys().add(new District("Bragança"));
-		country.getCitys().add(new District("Castelo Branco"));
-		country.getCitys().add(new District("Coimbra"));
-		country.getCitys().add(new District("Évora"));
-		country.getCitys().add(new District("Faro"));
-		country.getCitys().add(new District("Guarda"));
-		country.getCitys().add(new District("Leiria"));
-		country.getCitys().add(new District("Lisboa"));
-		country.getCitys().add(new District("Portalegre"));
-		country.getCitys().add(new District("Porto"));
-		country.getCitys().add(new District("Santarém"));
-		country.getCitys().add(new District("Setúbal"));
-		country.getCitys().add(new District("Viana do Castelo"));
-		country.getCitys().add(new District("Vila Real"));
-		country.getCitys().add(new District("Viseu"));
+		country.getDistricts().add(new District("Aveiro"));
+		country.getDistricts().add(new District("Beja"));
+		country.getDistricts().add(new District("Braga"));
+		country.getDistricts().add(new District("Bragança"));
+		country.getDistricts().add(new District("Castelo Branco"));
+		country.getDistricts().add(new District("Coimbra"));
+		country.getDistricts().add(new District("Évora"));
+		country.getDistricts().add(new District("Faro"));
+		country.getDistricts().add(new District("Guarda"));
+		country.getDistricts().add(new District("Leiria"));
+		country.getDistricts().add(new District("Lisboa"));
+		country.getDistricts().add(new District("Portalegre"));
+		country.getDistricts().add(new District("Porto"));
+		country.getDistricts().add(new District("Santarém"));
+		country.getDistricts().add(new District("Setúbal"));
+		country.getDistricts().add(new District("Viana do Castelo"));
+		country.getDistricts().add(new District("Vila Real"));
+		country.getDistricts().add(new District("Viseu"));
 		
 		
 		

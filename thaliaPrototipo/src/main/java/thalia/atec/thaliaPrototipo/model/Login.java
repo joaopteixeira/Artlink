@@ -1,10 +1,11 @@
 package thalia.atec.thaliaPrototipo.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 
 public class Login {
 	
-	@Autowired
+	@Id
 	String id;
 	
 	String email,password;

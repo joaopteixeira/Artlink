@@ -4,6 +4,7 @@ public class District {
 
 	private String id;
 	private String name;
+	
 	public District( String name) {
 		super();
 		this.name = name;
@@ -13,6 +14,12 @@ public class District {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	
