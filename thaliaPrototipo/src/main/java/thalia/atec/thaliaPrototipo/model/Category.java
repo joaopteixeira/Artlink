@@ -3,12 +3,13 @@ package thalia.atec.thaliaPrototipo.model;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 
 public class Category {
 	
 	
 	
-	@Autowired
+	@Id
 	private String id;
 	
 	private String description;
@@ -18,6 +19,7 @@ public class Category {
 	public Category(String description) {
 		super();
 		this.description = description;
+		this.subCategory = new ArrayList<>();
 	}
 
 

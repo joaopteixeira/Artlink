@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import thalia.atec.thaliaPrototipo.Functions.FUser;
 import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
+import thalia.atec.thaliaPrototipo.model.Country;
+import thalia.atec.thaliaPrototipo.model.District;
 import thalia.atec.thaliaPrototipo.model.Media;
 import thalia.atec.thaliaPrototipo.model.Post;
 import thalia.atec.thaliaPrototipo.model.User;
@@ -42,6 +44,8 @@ public class RestUser {
 		
 		
 		String status = fuser.Registry(user, password);
+		
+		System.out.println(user.getCategory().getDescription());
 		
 		if(status.compareTo("Registado")==0) {
 			
@@ -70,6 +74,13 @@ public class RestUser {
 		
 		
 		
+	}
+	
+	@GetMapping("/getcountry")
+	public ResponseEntity<List<Country>> getcountry(){
+		
+		
+		return new ResponseEntity<List<Country>>(fuser.getCountry(),HttpStatus.OK);
 	}
 	
 	
@@ -104,17 +115,6 @@ public class RestUser {
         urep.save(u1);
         urep.save(u2);
         
-        Post p = new Post("123", "16-11-218", "O bitcoin esta cada vez mais na moda!!!!", 2, 0, u);
-        p.setMedia(m);
-        prep.save(p);
-        
-        Post p1 = new Post("123", "16-11-218", "Qu lindo por do sol!!!!", 10, 0, u1);
-        p1.setMedia(m1);
-        prep.save(p1);
-        
-        Post p2 = new Post("123", "16-11-218", "Adprp mar!!!!", 2, 0, u2);
-        p2.setMedia(m2);
-        prep.save(p2);
         
         
 	}

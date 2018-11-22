@@ -8,6 +8,7 @@ import javax.servlet.annotation.MultipartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import thalia.atec.thaliaPrototipo.Functions.FPost;
 import thalia.atec.thaliaPrototipo.Service.FileStorageService;
 import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
@@ -38,6 +40,9 @@ public class RestPost {
 	@Autowired
 	UserRepository urep;
 	
+	@Autowired
+	FPost fpost;
+	
 	@RequestMapping("/get")
 	public ResponseEntity<List<Post>> getPosts() {
 		
@@ -46,24 +51,29 @@ public class RestPost {
 		
 	}
 	
+	@RequestMapping("/getuser")
+	public ResponseEntity<List<Post>> getPosts123(@RequestParam("id") String id) {
+		
+		
+		return new ResponseEntity<List<Post>>(fpost.getPost(id),HttpStatus.OK);
+		
+	}
+	
 	
 	@PostMapping("/addpost")
 	public ResponseEntity<String> addPost(@RequestBody Post post){
 		
-		Optional<User> u = urep.findById(post.getCreator().getId());
-		boolean check=false;
-		if(u.isPresent()) {
-			
-					check=true;
-		}
+		return new ResponseEntity<>(fpost.newPost(post),HttpStatus.ACCEPTED);
 		
-		if(check) {
-			prep.save(post);
-			return new ResponseEntity<>("adicionado",HttpStatus.ACCEPTED);
-		}
+	}
+	
+	
+	@GetMapping("/like")
+	public ResponseEntity<String> like(@RequestParam("id_post") String id_post, @RequestParam("id_user") String id_user){
 		
+		fpost.like(id_user, id_post);
 		
-		return new ResponseEntity<>("nadicionado",HttpStatus.ACCEPTED);
+		return new ResponseEntity<String>("",HttpStatus.OK);
 	}
 	
 	

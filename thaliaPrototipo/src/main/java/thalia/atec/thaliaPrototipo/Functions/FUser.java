@@ -1,5 +1,7 @@
 package thalia.atec.thaliaPrototipo.Functions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -8,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import org.apache.commons.mail.*;
 
+import thalia.atec.thaliaPrototipo.Service.CountryRepository;
 import thalia.atec.thaliaPrototipo.Service.LoginRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
+import thalia.atec.thaliaPrototipo.model.Country;
 import thalia.atec.thaliaPrototipo.model.Login;
 import thalia.atec.thaliaPrototipo.model.User;
  
@@ -21,6 +25,9 @@ public class FUser {                   //Funcoes pro USER
 	
 	@Autowired
 	LoginRepository loginRep;
+	
+	@Autowired
+	CountryRepository countryrep;
 	
 	
 	
@@ -142,6 +149,12 @@ public class FUser {                   //Funcoes pro USER
 				}
 		
 	return "enviado pedido";
+	}
+	
+	public ArrayList<Country> getCountry() {
+		
+		return (ArrayList<Country>) countryrep.findAll();
+		
 	}
 	
 	

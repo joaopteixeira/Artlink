@@ -23,7 +23,7 @@ public class User {
 
 	 String birthdate;
 
-	 String city;
+	 String district;
 
 	 String country;
 
@@ -63,7 +63,7 @@ public class User {
 
 
 	public User(String id,String firstname, String lastname, String email, String pathimage, String birthdate, int gender,
-			String city, String country, int type, String phonenumber, int tokkensquantity, Boolean status,
+			String district, String country, int type, String phonenumber, int tokkensquantity, Boolean status,
 			Boolean accactivated, Category category) {
 		super();
 		this.id=id;
@@ -73,7 +73,7 @@ public class User {
 		this.email = email;
 		this.birthdate = birthdate;
 		this.gender = gender;
-		this.city = city;
+		this.district = district;
 		this.country = country;
 		this.type = type;
 		this.phonenumber = phonenumber;
@@ -240,13 +240,23 @@ public class User {
 		this.gender = gender;
 	}
 
-	public String getCity() {
-		return city;
+	
+
+	public String getDistrict() {
+		return district;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+
+
+
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
+
+
+
+
 
 	public String getCountry() {
 		return country;

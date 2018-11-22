@@ -14,7 +14,7 @@ public class Post {
 	date,
 	content;
 	
-	Integer likes,dislikes;
+	ArrayList<String> likes;
 	
 	User creator;
 	
@@ -26,12 +26,11 @@ public class Post {
 
 	
 
-	public Post(String title, String date, String content,Integer likes,Integer dislikes, User creator) {
+	public Post(String title, String date, String content, User creator) {
 		super();
 		this.title = title;
 		this.date = date;
-		this.likes = likes;
-		this.dislikes = dislikes;
+		this.likes = new ArrayList<>();
 		this.content = content;
 		this.creator = creator;
 		this.comments = new ArrayList<>();
@@ -78,22 +77,24 @@ public class Post {
 	}
 
 	
+	
+	
 
-	public Integer getLikes() {
+	
+
+
+
+	public ArrayList<String> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(Integer likes) {
+
+
+	public void setLikes(ArrayList<String> likes) {
 		this.likes = likes;
 	}
 
-	public Integer getDislikes() {
-		return dislikes;
-	}
 
-	public void setDislikes(Integer dislikes) {
-		this.dislikes = dislikes;
-	}
 
 	public User getCreator() {
 		return creator;

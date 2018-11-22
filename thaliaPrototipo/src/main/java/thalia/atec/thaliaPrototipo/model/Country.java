@@ -12,12 +12,12 @@ public class Country {
 	
 	private String name;
 	
-	private ArrayList<District> citys;
+	private ArrayList<District> districts;
 
 	public Country(String name) {
 		super();
 		this.name = name;
-		this.citys = new ArrayList<>();
+		this.districts = new ArrayList<>();
 	}
 	
 
@@ -39,8 +39,8 @@ public class Country {
 		this.name = name;
 	}
 
-	public ArrayList<District> getCitys() {
-		return citys;
+	public ArrayList<District> getDistricts() {
+		return districts;
 	}
 	
 	

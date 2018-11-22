@@ -14,10 +14,10 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<link rel="stylesheet" href="css/ionicons.min.css" />
     <link rel="stylesheet" href="css/font-awesome.min.css" />
-    
+
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-    
+
     <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
 	</head>
@@ -143,28 +143,40 @@
               </ul>
             </div><!--chat block ends-->
           </div>
-          
+
     			<div class="col-md-7">
 
             <!-- Post Create Box
             ================================================= -->
             <div class="create-post">
             	<div class="row">
-            		<div class="col-md-7 col-sm-7">
-                  <div class="form-group">
-                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
-                    <textarea name="texts" id="exampleTextarea" cols="30" rows="1" class="form-control" placeholder="Write what you wish"></textarea>
-                  </div>
+            		<div class="col-md-9 col-sm-9">
+									<form class="" action="" method="post">
+										<div class="form-group" style="margin-bottom:2%;">
+	                    <input class="form-control" type="text" name="person" value="" placeholder="Name">
+	                  </div>
+										<br>
+										<div class="form-group">
+	                    <select class="form-control" name="categoria">
+	                    	<option value="">Categorias</option>
+	                    </select>
+	                  </div>
+										<div class="form-group">
+	                    <select class="form-control" name="pais">
+	                    	<option value="">País</option>
+	                    </select>
+	                  </div>
+										<div class="form-group">
+	                    <select class="form-control" name="cidade">
+	                    	<option value="">Cidade</option>
+	                    </select>
+	                  </div>
+									</form>
+
                 </div>
-            		<div class="col-md-5 col-sm-5">
+            		<div class="col-md-3 col-sm-3">
                   <div class="tools">
-                    <ul class="publishing-tools list-inline">
-                      <li><a href="#"><i class="ion-compose"></i></a></li>
-                      <li><a href="#"><i class="ion-images"></i></a></li>
-                      <li><a href="#"><i class="ion-ios-videocam"></i></a></li>
-                      <li><a href="#"><i class="ion-map"></i></a></li>
-                    </ul>
-                    <button class="btn btn-primary pull-right">Publish</button>
+                    <button class="btn btn-primary pull-right btn-block">Pesquisar</button>
                   </div>
                 </div>
             	</div>
@@ -176,156 +188,41 @@
               <div class="google-maps">
                 <div id="map" class="map"></div>
               </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Sophia Page</a></h5>
-                    <p>Software Engineer</p>
-                    <p class="text-muted">500m away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Emma Johnson</a></h5>
-                    <p>Model at Fashion</p>
-                    <p class="text-muted">800m away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Nora Wilson</a></h5>
-                    <p>Writer at Newspaper</p>
-                    <p class="text-muted">2.5km away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Diana Amber</a></h5>
-                    <p>Student</p>
-                    <p class="text-muted">700m away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Addison Thomas</a></h5>
-                    <p>Barber at Fashion</p>
-                    <p class="text-muted">1.5km away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Jonathon Thompson</a></h5>
-                    <p>Fashion Designer</p>
-                    <p class="text-muted">2km away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Olivia Steward</a></h5>
-                    <p>Creative Director</p>
-                    <p class="text-muted">2km away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Elena Foster</a></h5>
-                    <p>Executive Officer</p>
-                    <p class="text-muted">4km away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Brian Walton</a></h5>
-                    <p>Designer at Designer</p>
-                    <p class="text-muted">3km away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
-              <div class="nearby-user">
-                <div class="row">
-                  <div class="col-md-2 col-sm-2">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
-                  </div>
-                  <div class="col-md-7 col-sm-7">
-                    <h5><a href="#" class="profile-link">Cris Haris</a></h5>
-                    <p>General Manager at Manager</p>
-                    <p class="text-muted">1km away</p>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <button class="btn btn-primary pull-right">Add Friend</button>
-                  </div>
-                </div>
-              </div>
+
+							<!-- CONTACT MODEL -->
+							<div class="list-people">
+	            	<div class="row">
+
+
+	            		<div class="col-md-12 col-sm-12">
+										<!-- CONTACT MODEL -->
+	                  <div class="friend-card col-md-12 col-sm-12">
+											<div class="friend-info">
+											<div class="col-md-3 col-sm-3">
+												<img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
+											</div>
+											<div class="col-md-3 col-sm-3" style="margin-top:2px;">
+	                      	<h5><a href="timeline.html" class="profile-link">Nome Perfil </a></h5>
+	                      	<p>Nº Watchers</p>
+											</div>
+											<div class="col-md-3 col-sm-3" style="margin-top:2px;">
+	                      	<h5><a href="timeline.html" class="profile-link">Categoria</a></h5>
+	                      	<p>Sub-Categoria</p>
+											</div>
+											<div class="col-md-3 col-sm-3" style="margin-top:20px;">
+												<button class="btn btn-primary" style="vertical-align:center" type="button" name="button" value="">Consultar</button>
+											</div>
+											</div>
+	                  </div>
+
+										<!-- END CONTACT MODEL -->
+	                </div>
+
+
+	            	</div>
+	            </div>
+							<!-- END CONTACT MODEL -->
+
             </div>
           </div>
 
@@ -438,7 +335,7 @@
         <p>Thunder Team © 2016. All rights reserved</p>
       </div>
 		</footer>
-    
+
     <!--preloader-->
     <div id="spinner-wrapper">
       <div class="spinner"></div>
