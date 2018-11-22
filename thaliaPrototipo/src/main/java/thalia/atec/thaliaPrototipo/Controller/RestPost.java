@@ -50,18 +50,14 @@ public class RestPost {
 		return new ResponseEntity<List<Post>>(prep.findAll(),HttpStatus.OK);
 		
 	}
-	
+	/*
 	@RequestMapping("/getuser")
 	public ResponseEntity<List<Post>> getPosts123(@RequestParam("id") String id) {
 		
 		
-<<<<<<< Updated upstream
+
 		return new ResponseEntity<List<Post>>(fpost.getPost("asdda",3),HttpStatus.OK);
-=======
-		String iduser = "asd";
-		return new ResponseEntity<List<Post>>(fpost.getPost(iduser, 2),HttpStatus.OK);
->>>>>>> Stashed changes
-		
+
 	}
 	
 	
@@ -71,7 +67,7 @@ public class RestPost {
 		return new ResponseEntity<>(fpost.newPost(post),HttpStatus.ACCEPTED);
 		
 	}
-	
+	*/
 	
 	@GetMapping("/like")
 	public ResponseEntity<String> like(@RequestParam("id_post") String id_post, @RequestParam("id_user") String id_user){

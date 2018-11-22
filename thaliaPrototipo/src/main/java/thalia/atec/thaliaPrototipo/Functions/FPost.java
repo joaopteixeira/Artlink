@@ -69,8 +69,7 @@ public class FPost {
 		 ArrayList<Post> aux = new ArrayList<>();
 		 
 		 if(watching.isPresent()) {
-			 
-<<<<<<< Updated upstream
+
 		/*	 for(Watch w:watching.get().getIduser().getClas) {
 =======
 			/* for(Watch w:watching.get().getId()) {
