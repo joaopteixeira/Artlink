@@ -56,9 +56,9 @@ public class WebLogin {
 		if(us.isPresent()) {
 			
 
-			page.addAttribute("User",us.get());
+			//page.addAttribute("User",us.get());
 
-			return "feedmain.html";
+			return "redirect:/webhome/feedmain?iduser="+us.get().getId();
 			
 		}
 		

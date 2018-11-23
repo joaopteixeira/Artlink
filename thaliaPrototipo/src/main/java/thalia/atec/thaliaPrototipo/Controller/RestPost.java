@@ -82,7 +82,7 @@ public class RestPost {
 		return new ResponseEntity<>(fpost.newPost(post),HttpStatus.ACCEPTED);
 		
 	}
-	*/
+
 	
 	@GetMapping("/like")
 	public ResponseEntity<String> like(@RequestParam("id_post") String id_post, @RequestParam("id_user") String id_user){

@@ -24,7 +24,7 @@ public class Post {
 	
 	String iduser;
 	
-	String userimage;
+	//String userimage;
 	
 	ArrayList<Comment> comments;
 	
