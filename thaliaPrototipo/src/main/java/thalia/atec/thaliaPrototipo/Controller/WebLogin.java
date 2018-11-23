@@ -1,5 +1,7 @@
 package thalia.atec.thaliaPrototipo.Controller;
 
+import java.util.Optional;
+
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +35,8 @@ public class WebLogin {
 	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page){
 
 		
+		System.out.println("");
+		
 		fuser.Registry(u,password);
 		
 	
@@ -44,13 +48,21 @@ public class WebLogin {
 	public String UserLogin(@ModelAttribute("User") User u, Model page, @RequestParam("password") String password){
 		
 		
-		fuser.login(u.getEmail(), password);
+	//	fuser.login(u.getEmail(), password);
 
 		
+		Optional<User> us = userRepo.findByHashes(fuser.login(u.getEmail(), password));
 		
+		if(us.isPresent()) {
+			
+
+			//page.addAttribute("User",us.get());
+
+			return "redirect:/webhome/feedmain?iduser="+us.get().getId();
+			
+		}
 		
-		return "redirect:/webhome/feedmain";   // vai para feed
-		
+		return "redirect:/index";
 	}
 	
 	

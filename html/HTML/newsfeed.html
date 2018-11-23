@@ -61,6 +61,9 @@
 				$('.media').hide();
 
 				$(document).on("change", "#image-input", function(evt) {
+					$("#output2").attr('src','');
+					$("#output3").attr('src','');
+					$("#output4").attr('src','');
 					 document.getElementById("audio-input").value = "";
 					 document.getElementById("video-input").value = "";
 					 $("#tipo_media").attr("value","0");
@@ -69,6 +72,9 @@
 				 });
 
 				 $(document).on("change", "#video-input", function(evt) {
+					 $("#output").attr('src','');
+					 $("#output3").attr('src','');
+					 $("#output4").attr('src','');
 					  var $source = $('#output2');
 					  $source[0].src = URL.createObjectURL(this.files[0]);
 					  $source.parent()[0].load();
@@ -80,6 +86,8 @@
 					});
 
 					$(document).on("change", "#audio-input", function(evt) {
+						$("#output").attr('src','');
+						$("#output2").attr('src','');
 						 var $source = $('#output3');
 						 var $source2 = $('#output4');
 						 $source[0].src = URL.createObjectURL(this.files[0]);

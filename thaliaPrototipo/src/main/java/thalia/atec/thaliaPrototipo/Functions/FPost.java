@@ -1,14 +1,18 @@
 package thalia.atec.thaliaPrototipo.Functions;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -60,31 +64,147 @@ public class FPost {
 		
 		return "nadicionado";		 
 	}
+	 /*
+	 public Page<Post> getPostWatching(User user){
+		 int cont=0;
+		 
+		 
+		 for(Post p:prep.findAll()) {
+			 
+			 for(Watch w:user.getWatching()) {
+				 if(p.getIduser().compareTo(w.getIduser())==0) {
+					 aux.add(p);
+					 
+				 }
+			 }
+		 }
+		 
+		 return aux;
+		 
+	 }*/
+	 
+	 public User getuserbyid(String id) {
+		 return urep.findById(id).get();
+	 }
 	 
 	 
-	 public List<Post> getPost(String iduser,int page){
+	 public List<Post> getPost(String iduser,int page,int size){
 		 
 		 
 		 Optional<Post> watching = prep.findById(iduser);
+		 Optional<User> user = urep.findById(iduser);
 		 ArrayList<Post> aux = new ArrayList<>();
+		 boolean check=false;
+		 int range=20;
 		 
-		 if(watching.isPresent()) {
+		 
+		 
+		 
+		 
+		 for(Post p:prep.findAll()) {
+			 check=false;
 			 
-			 for(Watch w:watching.get().getCreator().getWatching()) {
-				 
-				 if(aux.size()>20) {
-					 break;
-				 }
-				 for(Post p:prep.findByCreatorId(w.getUser().getId(),PageRequest.of(1, 1))) {
+			 for(Watch w:user.get().getWatching()) {
+				 if(p.getIduser().compareTo(w.getIduser())==0) {
+					 Optional<User> u1 = urep.findById(w.getIduser());
+					 p.setUserwatched(u1.get().getWatched().size());
+					 p.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
+					 p.setUserimage(u1.get().getPathimage());
 					 aux.add(p);
+					 check=true;
 				 }
+			 }
+			 
+			 
+			 if(!check) {
+				 List<User> userofmydistrict = urep.findByDistrict(user.get().getDistrict());
+				 for(User u:userofmydistrict) {
+					 if(p.getIduser().compareTo(u.getId())==0) {
+						
+						 p.setUserwatched(u.getWatched().size());
+						 p.setUsername(u.getFirstname()+" "+u.getLastname());
+						 p.setUserimage(u.getPathimage());
+						 aux.add(p);
+					 }
+				 }
+				 
 				 
 			 }
+			 
+			 
+			 
 			 
 		 }
 		 
 		 
+			 ArrayList<Post> aux2 = (ArrayList<Post>) prep.findAll();
+			 boolean jata=false;
+			 
+			 for(Post p1:aux2) {
+				 jata=false;
+				 for(Post p2:aux) {
+					 if(p1.getId().compareTo(p2.getId())==0) {
+						 jata=true;
+						 break;
+					 }
+				 }
+				 if(!jata) {
+					 Optional<User> u1 = urep.findById(p1.getIduser());
+					 p1.setUserwatched(u1.get().getWatched().size());
+					 p1.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
+					 p1.setUserimage(u1.get().getPathimage());
+					 aux.add(p1);
+				 }
+				 
+				 
+			 }
+			 
+			 
+			 //sort
+			 
+			 Collections.sort(aux, new Comparator<Post>() {
+                 @Override
+                 public int compare(Post o1, Post o2) {
+
+                     Date d1 = null;
+                     Date d2 = null;
+                     DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                     try {
+                         d1 = df.parse(o1.getDate());
+                         d2 = df.parse(o2.getDate());
+
+                     } catch (ParseException e) {
+                         e.printStackTrace();
+                     }
+
+                     return d2.compareTo(d1);
+                 }
+             });
+			 
+			 
+			 
 		 
+		 
+			 int qtd = aux.size()-size;
+			 if(qtd==aux.size())
+				 qtd=0;
+		 
+		 
+		
+		 
+		 
+		 if(aux.size()==0) {
+			 return aux;
+		 }else {
+			 aux.get(((range*page+qtd)>(aux.size()-1))?(aux.size()-1):(range*page+qtd)).setTitle(String.valueOf(aux.size()));
+			 return aux.subList(((range*page+qtd)>(aux.size()-1))?(aux.size()-1):(range*page+qtd), ((page*range+range)>(aux.size()-1))?(aux.size()-1):(page*range+range));
+		 }
+		 
+		 
+	 }
+	 
+	 
+	 public List<Post> findAllposts() {
 		 
 		 return prep.findAll();
 	 }

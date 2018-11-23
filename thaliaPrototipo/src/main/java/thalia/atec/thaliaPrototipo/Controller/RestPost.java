@@ -1,5 +1,6 @@
 package thalia.atec.thaliaPrototipo.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,21 +45,36 @@ public class RestPost {
 	FPost fpost;
 	
 	@RequestMapping("/get")
-	public ResponseEntity<List<Post>> getPosts() {
+	public ResponseEntity<?> getPosts(@RequestParam("iduser") String iduser,@RequestParam("page") String page,@RequestParam("size") String size) {
 		
+		Optional<User> user = urep.findById(iduser);
 		
-		return new ResponseEntity<List<Post>>(prep.findAll(),HttpStatus.OK);
+		try {
+			
+			if(user.isPresent()) {
+				List<Post> aux = fpost.getPost(iduser, Integer.valueOf(page),Integer.valueOf(size));
+				
+				return new ResponseEntity<>((aux.size()==0?"null":aux),HttpStatus.OK);
+			}
+			
+		}catch(NumberFormatException e) {
+			return new ResponseEntity<String>("null",HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<String>("null",HttpStatus.OK);
+		
 		
 	}
-	
+	/*
 	@RequestMapping("/getuser")
 	public ResponseEntity<List<Post>> getPosts123(@RequestParam("id") String id) {
 		
 		
-		return new ResponseEntity<List<Post>>(fpost.getPost(),HttpStatus.OK);
-		
+
+		return new ResponseEntity<List<Post>>(fpost.getPost("asdda",3),HttpStatus.OK);
+
 	}
-	
+	*/
 	
 	@PostMapping("/addpost")
 	public ResponseEntity<String> addPost(@RequestBody Post post){
@@ -66,7 +82,7 @@ public class RestPost {
 		return new ResponseEntity<>(fpost.newPost(post),HttpStatus.ACCEPTED);
 		
 	}
-	
+
 	
 	@GetMapping("/like")
 	public ResponseEntity<String> like(@RequestParam("id_post") String id_post, @RequestParam("id_user") String id_user){

@@ -2,6 +2,7 @@ package thalia.atec.thaliaPrototipo.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import thalia.atec.thaliaPrototipo.Functions.FPost;
 import thalia.atec.thaliaPrototipo.Functions.FUser;
+import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.Post;
 import thalia.atec.thaliaPrototipo.model.User;
 
@@ -23,6 +25,9 @@ public class WebHome {
 	@Autowired
 	FPost  fpost;
 	
+	@Autowired
+	UserRepository userrep;;
+	
 	@GetMapping("/index")
 	public String index() {
 		
@@ -31,15 +36,30 @@ public class WebHome {
 	}
 	
 	@GetMapping("/feedmain")
-	public String feedMain(@ModelAttribute("User") User u, Model page){
-		
-		List<Post> p = fpost.getPost();		
+	public String feedMain(@RequestParam("iduser") String iduser,Model page){
 		
 
-		page.addAttribute("User",u);
-		page.addAttribute("Post",p);
+		//List<Post> p = fpost.getPost("asdasd",2);		
 
-		return "feedmain.html";
+		//String iduser = u.getId();
+		//List<Post> p = fpost.getPost(iduser, 2);		
+		
+		Optional<User> user = userrep.findById(iduser);
+		
+		if(user.isPresent()) {
+			
+			page.addAttribute("User",user.get());
+			page.addAttribute("posts",fpost.getPost(iduser, 0, 0));
+			
+			return "feedmain.html";
+			
+		}
+
+		
+		
+		//page.addAttribute("Post",p);
+
+		return "redirect:/index";
 	}
 	
 	

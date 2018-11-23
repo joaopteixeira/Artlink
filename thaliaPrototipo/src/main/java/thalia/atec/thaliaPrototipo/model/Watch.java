@@ -2,19 +2,22 @@ package thalia.atec.thaliaPrototipo.model;
 
 public class Watch {
 	
-	User user;
+	String iduser;
 	String data;
-	public Watch(User user, String data) {
+	public Watch(String iduser, String data) {
 		super();
-		this.user = user;
+		this.iduser = iduser;
 		this.data = data;
 	}
-	public User getUser() {
-		return user;
+	
+	public String getIduser() {
+		return iduser;
 	}
-	public void setUser(User user) {
-		this.user = user;
+
+	public void setIduser(String iduser) {
+		this.iduser = iduser;
 	}
+
 	public String getData() {
 		return data;
 	}
