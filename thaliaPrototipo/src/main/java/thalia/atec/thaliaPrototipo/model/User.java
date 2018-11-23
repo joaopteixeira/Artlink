@@ -47,7 +47,9 @@ public class User {
 	
 	ArrayList<String> hashes;
 
+	String username;
 	
+	int userwatched;   //Size do arraylist que está dentro dele depois, quando o gajo pedir os posts, vou fazer um set ás variaveis 
 
 
 	
@@ -85,6 +87,8 @@ public class User {
 		this.accactivated = accactivated;
 		this.category = category;
 		this.subcategory = subcategory;
+		this.username = "";
+		this.userwatched = 0;
 		this.preferences = new ArrayList<>();
 		this.hashes = new ArrayList<>();
 		this.watched = new ArrayList<>();
@@ -99,6 +103,38 @@ public class User {
 
 	public String getCategory() {
 		return category;
+	}
+
+
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+
+
+	public int getUserwatched() {
+		return userwatched;
+	}
+
+
+
+
+
+	public void setUserwatched(int userwatched) {
+		this.userwatched = userwatched;
 	}
 
 

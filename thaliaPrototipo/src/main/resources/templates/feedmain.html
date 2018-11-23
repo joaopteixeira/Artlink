@@ -1,126 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
+<html >
+  <head>
+
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="" />
-		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
-		<meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This is social network html5 template available in themeforest......" />
+    <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
+    <meta name="robots" content="index, follow" />
+    <title>Feed Recente | Artlink</title>
 
-
-		<title>Feed Recente | Explora o Mundo da arte</title>
-
-    <!-- Stylesheets
+    <!-- Stylesheets opa
     ================================================= -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/style.css" />
+    <!-- <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/ionicons.min.css" />
     <link rel="stylesheet" href="css/font-awesome.min.css" />
     <link href="css/emoji.css" rel="stylesheet">
-
-      <link rel="stylesheet" th:href=@{/css/bootstrap.min.css} media="screen">
-      <link rel="stylesheet" th:href=@{/css/style.css}>
-      <link rel="stylesheet" th:href=@{/css/font-awesome.css}>
-      <link rel="stylesheet" th:href=@{/css/ionicons.min.css}>
-      <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
-            <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
-
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="images/fav.png"/> -->
+    <link rel="stylesheet" th:href=@{/css/bootstrap.min.css} media="screen">
+    <link rel="stylesheet" th:href=@{/css/style.css}>
+    <link rel="stylesheet" th:href=@{/css/font-awesome.css}>
+    <link rel="stylesheet" th:href=@{/css/ionicons.min.css}>
+    <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
+    <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-
     <!--Font Awsome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.5.0/css/all.css}" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
-    <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
-	</head>
+  </head>
   <body>
-		<script>
-		/*$('.media').hide();
-		 $("#natzc1").click(function(){
-			 $(".media").hide();
-			 $("#natc1").show();
-			 $("#output2").attr("src","");
-			 $("#output3").attr("src","");
-			 $("#output4").attr("src","");
-			 document.getElementById("video-input").value = "";
-			 document.getElementById("audio-input").value = "";
-		 });
+    <script>
+    /*$('.media').hide();
+     $("#natzc1").click(function(){
+       $(".media").hide();
+       $("#natc1").show();
+       $("#output2").attr("src","");
+       $("#output3").attr("src","");
+       $("#output4").attr("src","");
+       document.getElementById("video-input").value = "";
+       document.getElementById("audio-input").value = "";
+     });
 
-		 $("#natzc2").click(function(){
-			 $(".media").hide();
-			 $("#natc2").show();
-			 $("#output").attr("src","");
-			 $("#output3").attr("src","");
-			 $("#output4").attr("src","");
-			 document.getElementById("image-input").value = "";
-			 document.getElementById("audio-input").value = "";
-		 });
-		 $("#natzc3").click(function(){
-			 $(".media").hide();
-			 $("#natc3").show();
-			 $("#output").attr("src","");
-			 $("#output2").attr("src","");
-			 document.getElementById("image-input").value = "";
-			 document.getElementById("video-input").value = "";
-		 });*/
-			$(document).ready(function(){
-				$('.media').hide();
+     $("#natzc2").click(function(){
+       $(".media").hide();
+       $("#natc2").show();
+       $("#output").attr("src","");
+       $("#output3").attr("src","");
+       $("#output4").attr("src","");
+       document.getElementById("image-input").value = "";
+       document.getElementById("audio-input").value = "";
+     });
+     $("#natzc3").click(function(){
+       $(".media").hide();
+       $("#natc3").show();
+       $("#output").attr("src","");
+       $("#output2").attr("src","");
+       document.getElementById("image-input").value = "";
+       document.getElementById("video-input").value = "";
+<<<<<<< HEAD
+     });
+      $(document).ready(function(){
+        $('.media').hide();
 
-				$(document).on("change", "#image-input", function(evt) {
-					 document.getElementById("audio-input").value = "";
-					 document.getElementById("video-input").value = "";
-					 $("#tipo_media").attr("value","0");
-					 $(".media").hide();
-					 $("#natc1").show();
-				 });
+        $(document).on("change", "#image-input", function(evt) {
+=======
+     });*/
+     $(document).ready(function(){
+       $('.media').hide();
 
-				 $(document).on("change", "#video-input", function(evt) {
-					  var $source = $('#output2');
-					  $source[0].src = URL.createObjectURL(this.files[0]);
-					  $source.parent()[0].load();
-						document.getElementById("image-input").value = "";
-			 			document.getElementById("audio-input").value = "";
-						$("#tipo_media").attr("value","1");
-						$(".media").hide();
-						$("#natc2").show();
-					});
+       $(document).on("change", "#image-input", function(evt) {
+         $("#output2").attr('src','');
+         $("#output3").attr('src','');
+         $("#output4").attr('src','');
+          document.getElementById("audio-input").value = "";
+          document.getElementById("video-input").value = "";
+          $("#tipo_media").attr("value","0");
+          $(".media").hide();
+          $("#natc1").show();
+        });
 
-					$(document).on("change", "#audio-input", function(evt) {
-						 var $source = $('#output3');
-						 var $source2 = $('#output4');
-						 $source[0].src = URL.createObjectURL(this.files[0]);
-						 $source2[0].src = URL.createObjectURL(this.files[0]);
-						 $source.parent()[0].load();
-						 $source2.parent()[0].load();
-						 document.getElementById("image-input").value = "";
-						 document.getElementById("video-input").value = "";
-						 $("#tipo_media").attr("value","2");
-						 $(".media").hide();
-						 $("#natc3").show();
-					 });
-			 });
-		</script>
+        $(document).on("change", "#video-input", function(evt) {
+          $("#output").attr('src','');
+          $("#output3").attr('src','');
+          $("#output4").attr('src','');
+           var $source = $('#output2');
+           $source[0].src = URL.createObjectURL(this.files[0]);
+           $source.parent()[0].load();
+           document.getElementById("image-input").value = "";
+
+           document.getElementById("audio-input").value = "";
+           $("#tipo_media").attr("value","1");
+           $(".media").hide();
+           $("#natc2").show();
+         });
+
+         $(document).on("change", "#audio-input", function(evt) {
+           $("#output").attr('src','');
+           $("#output2").attr('src','');
+            var $source = $('#output3');
+            var $source2 = $('#output4');
+            $source[0].src = URL.createObjectURL(this.files[0]);
+            $source2[0].src = URL.createObjectURL(this.files[0]);
+            $source.parent()[0].load();
+            $source2.parent()[0].load();
+            document.getElementById("image-input").value = "";
+            document.getElementById("video-input").value = "";
+            $("#tipo_media").attr("value","2");
+            $(".media").hide();
+            $("#natc3").show();
+          });
+
+
+          $(document).on("change", "#audio-input", function(evt) {
+             var $source = $('#output3');
+             var $source2 = $('#output4');
+             $source[0].src = URL.createObjectURL(this.files[0]);
+             $source2[0].src = URL.createObjectURL(this.files[0]);
+             $source.parent()[0].load();
+             $source2.parent()[0].load();
+             document.getElementById("image-input").value = "";
+             document.getElementById("video-input").value = "";
+             $("#tipo_media").attr("value","2");
+             $(".media").hide();
+             $("#natc3").show();
+           });
+       });
+
+    </script>
 
     <!-- Header
     ================================================= -->
-    <form th:object="${User}">
-		<header id="header">
+    <header id="header">
       <nav class="navbar navbar-default navbar-fixed-top menu">
         <div class="container">
 
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only"></span>
+              <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index-register.html"><img src="images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -128,17 +156,17 @@
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
-                  <span><img src="images/down-arrow.png" alt="" /></span></a>
+                  <span><img src="" alt="" /></span></a>
                 <ul class="dropdown-menu newsfeed-home">
                   <li><a href="index.html">Landing Page 1</a></li>
                   <li><a href="index-register.html">Landing Page 2</a></li>
                 </ul>
+              </li>
 
 
+              <li><a href="timeline.html" class="profile-link text-legreen" ></a></li>
 
-							<li><a href="webhome/perfil" class="profile-link text-legreen"><div name="nome" th:text="${User.firstname}"></div></a></li>
-
-							<li>
+              <li>
                 <div class="imgnavbarcont">
                   <a class="dropdown-toggle link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md imgnavbar" />
@@ -148,7 +176,7 @@
                   <li><a href="index.html">Logout</a></li>
                 </ul>
                 </div>
-							</li>
+              </li>
             </ul>
             <form class="navbar-form hidden-sm">
               <div class="form-group">
@@ -156,19 +184,19 @@
                 <input type="text" class="form-control" placeholder="Search friends, photos, videos">
               </div>
             </form>
-          </div><!-- /.navbar-collapse -->
-        </div><!-- /.container -->
+          </div>
+        </div>
       </nav>
     </header>
     <!--Header End-->
 
     <div id="page-contents">
-    	<div class="container">
-    		<div class="row">
+      <div class="container">
+        <div class="row">
 
           <!-- Newsfeed Common Side Bar Left
           ================================================= -->
-    			<div class="col-md-3 static">
+          <div id="sticky-menu" class="col-md-3 static">
             <ul class="nav-news-feed">
               <li><i class="fas fa-newspaper"></i><div><a href="newsfeed.html">Meu feed</a></div></li>
               <li><i class="fas fa-users"></i><div><a href="newsfeed-people-nearby.html">Encontra Pessoas</a></div></li>
@@ -179,136 +207,23 @@
             </ul><!--news-feed links ends-->
           </div>
 
-    			<div class="col-md-7">
-
-            <!-- Post Create Box
-            ================================================= -->
-            <div class="create-post">
-              <div class="text-header">Fazer Post</div>
-            	<div class="row">
-            		<div class="col-md-12">
-									<form class="" action="" method="post">
-										<div class="form-group col-md-12">
-	                    <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
-	                    <textarea name="texts" id="start" rows="3" class="form-control" placeholder="Dercription" style="resize:none;" maxlength="150" oninput="myFunction()"></textarea>
-											<input type="hidden" name="tipo_media" value="3" id="tipo_media">
-											<script>
-											function myFunction() {
-											    var x = document.getElementById("start").value;
-											    document.getElementById("puthere").innerHTML = "" + x;
-											}
-											</script>
-	                  </div>
-	                </div>
-	            	</div>
-  							 <div class="media-upload" style="margin-top:2%;">
-  								 <div class="row">
-  									 <ul class="file col-md-12">
-  									 	<li id="natzc1" class="col-md-2">
-  											<a>
-  												<label for="image-input">
-  										 			<i class="ion-images"></i>
-  										 		</label>
-  										 		<input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)"/>
-  											</a>
-  									 	</li>
-  									 	<li id="natzc2" class="col-md-2">
-  											<a>
-  												<label for="video-input">
-  										 			<i class="ion-ios-videocam"></i>
-  										 		</label>
-  										 		<input id="video-input" name="video" type="file" accept="video/*"/>
-  											</a>
-  									 	</li>
-  									 	<li id="natzc3" class="col-md-2">
-  											<a>
-  												<label for="audio-input">
-  										 			<i  class="ion-compose"></i>
-  										 		</label>
-  										 		<input id="audio-input" type="file" name="audio" value="" accept="audio/*">
-  											</a>
-  									 	</li>
-  									 </ul>
-  								 </div>
-									</div>
-									</form>
-									 <script>
-										 var loadFile = function(event) {
-											 var reader = new FileReader();
-											 reader.onload = function(){
-													 var output = document.getElementById("output");
-												 output.src = reader.result;
-											 };
-											 reader.readAsDataURL(event.target.files[0]);
-										 };
-									 </script>
-                   <div class="post-content">
-              <div id="natc1" class="media">
-                <img id="output" src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
-              </div>
-              <div id="natc2" class="media">
-                <video class="post-video" controls> <source id="output2" src="videos/1.mp4" type="video/mp4"> </video>
-              </div>
-              <div id="natc3" class="media">
-                <audio controls>
-                  <source id="output3" src="horse.ogg" type="audio/ogg">
-                  <source id="output4" src="horse.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-                </audio>
-              </div>
-              <div class="post-container">
-                <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-                <div class="post-detail">
-                  <div class="user-info">
-                    <h5><a href="timeline.html" class="profile-link" th:value="${User.firstname}"></a> <span class="following">following</span></h5>
-                  </div>
-                  <div class="reaction">
-                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 0 </a>
-                  </div>
-                  <div class="line-divider"></div>
-                  <div class="post-text">
-                    <div id="puthere"></div>
-                    <!-- <p id="puthere">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p> -->
-                  </div>
-                  <div class="line-divider"></div>
-                </div>
-              </div>
-            </div>
-            <div class="" style="float:right; margin-bottom: 10px;">
-              <button class="btn btn-primary pull-right" id="submit" type="submit">Publicar</button>
-            </div>
-            <br>
-            <hr class="separate text-legreen"></hr>
-        </div>
-			 </form> <!--         Fim da form que abriu o th:object USER                -->
-		 </div>
+          <div class="col-md-7">
+            <!---Frags- -->
+         
+          
 
 
 
- <!--
 
 
-         Frag Meio
+
+          </div>
+
+         
+
+          <!-- LIST CONTACTS
           ================================================= -->
-
- <!--
-      <th:block th:switch="${frag}">
-
-      <div th:case="*"> <span th:include="fragpost"></span> </div>
-
-      </th:block>
-
--->
-      <!-- ----- --- --- --- --- --- --- --- --- --- ---
-       ================================================= -->
-
-
-
-
-
-                    <!-- LIST CONTACTS
-          ================================================= -->
-    			<div class="col-md-2 static">
+          <div class="col-md-2 static">
             <div class="suggestions" id="sticky-sidebar">
               <h4 class="grey">Contactos Online</h4>
 
@@ -326,25 +241,24 @@
 
               </div>
             </div>
-          <!---================================================= -->
-
-
+          </div>
+        </div>
+      </div>
 
     <!-- Footer
     ================================================= -->
     <footer id="footer">
       <div class="container">
-      	<div class="row">
+        <div class="row">
           <div class="footer-wrapper">
             <div class="col-md-3 col-sm-3">
-                    <h5>Segue os Programadores</h5>
-              <a href=""><img src="images/logo-black.png" alt="" class="footer-logo" /></a>
+              <h5>Segue os Programadores</h5>
               <ul class="list-inline social-icons">
-              	<li><a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-teixeira-vilares-1886a8167/"><i class=""></i></a></li>
-              	<li><a href="https://www.linkedin.com/in/jo%C3%A3o-mirante-ba6334168/"><i class=""></i></a></li>
-              	<li><a href="https://www.linkedin.com/in/nilton-fontes-868974162/"><i class=""></i></a></li>
-              	<li><a href="https://www.linkedin.com/in/gonçalo-lavrador"><i class=""></i></a></li>
-
+                <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
               </ul>
             </div>
             <div class="col-md-3 col-sm-3" style="float: right;">
@@ -355,20 +269,20 @@
               </ul>
             </div>
           </div>
-      	</div>
+        </div>
       </div>
       <div class="copyright">
         <p>Grupo Thalia © 2018. ATEC</p>
       </div>
-		</footer>
+    </footer>
 
     <!--preloader-->
     <!-- <div id="spinner-wrapper">
       <div class="spinner"></div>
     </div> -->
     <!-- Scripts
-		================================================= -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
+    ================================================= -->
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script> -->
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.sticky-kit.min.js"></script>

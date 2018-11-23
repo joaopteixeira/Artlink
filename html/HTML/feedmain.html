@@ -6,9 +6,9 @@
 		<meta name="description" content="This is social network html5 template available in themeforest......" />
 		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
 		<meta name="robots" content="index, follow" />
-		<title>News Feed | Check what your friends are doing</title>
+		<title>Feed Recente | Explora o Mundo da arte</title>
 
-    <!-- Stylesheets
+    <!-- Stylesheets opa
     ================================================= -->
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/style.css" />
@@ -16,16 +16,20 @@
     <link rel="stylesheet" href="css/font-awesome.min.css" />
     <link href="css/emoji.css" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
-
-    <!--Font Awsome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
-
-    <!--Favicon-->
     <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
+    <!-- <link rel="stylesheet" th:href=@{/css/bootstrap.min.css} media="screen">
+    <link rel="stylesheet" th:href=@{/css/style.css}>
+    <link rel="stylesheet" th:href=@{/css/font-awesome.css}>
+    <link rel="stylesheet" th:href=@{/css/ionicons.min.css}>
+    <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
+    <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+
+
 	</head>
   <body>
 		<script>
@@ -61,9 +65,6 @@
 				$('.media').hide();
 
 				$(document).on("change", "#image-input", function(evt) {
-					$("#output2").attr('src','');
-					$("#output3").attr('src','');
-					$("#output4").attr('src','');
 					 document.getElementById("audio-input").value = "";
 					 document.getElementById("video-input").value = "";
 					 $("#tipo_media").attr("value","0");
@@ -72,9 +73,6 @@
 				 });
 
 				 $(document).on("change", "#video-input", function(evt) {
-					 $("#output").attr('src','');
-					 $("#output3").attr('src','');
-					 $("#output4").attr('src','');
 					  var $source = $('#output2');
 					  $source[0].src = URL.createObjectURL(this.files[0]);
 					  $source.parent()[0].load();
@@ -86,8 +84,6 @@
 					});
 
 					$(document).on("change", "#audio-input", function(evt) {
-						$("#output").attr('src','');
-						$("#output2").attr('src','');
 						 var $source = $('#output3');
 						 var $source2 = $('#output4');
 						 $source[0].src = URL.createObjectURL(this.files[0]);
@@ -130,7 +126,7 @@
                   <li><a href="index.html">Landing Page 1</a></li>
                   <li><a href="index-register.html">Landing Page 2</a></li>
                 </ul>
-
+							</li>
 
 
 							<li><a href="timeline.html" class="profile-link text-legreen">Sophia Lee</a></li>
@@ -364,7 +360,7 @@
       	<div class="row">
           <div class="footer-wrapper">
             <div class="col-md-3 col-sm-3">
-              <a href=""><img src="images/logo-black.png" alt="" class="footer-logo" /></a>
+              <h5>Segue os Programadores</h5>
               <ul class="list-inline social-icons">
               	<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
               	<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
@@ -376,7 +372,6 @@
             <div class="col-md-3 col-sm-3" style="float: right;">
               <h5>Como nos contactar</h5>
               <ul class="contact">
-                <li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
                 <li><i class="icon ion-ios-email-outline"></i>email@here</li>
                 <li><i class="icon ion-ios-location-outline"></i>ATEC Palmela, PRT</li>
               </ul>
@@ -395,7 +390,7 @@
     </div> -->
     <!-- Scripts
 		================================================= -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script> -->
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.sticky-kit.min.js"></script>

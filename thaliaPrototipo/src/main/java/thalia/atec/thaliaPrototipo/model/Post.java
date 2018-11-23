@@ -24,6 +24,8 @@ public class Post {
 	
 	String iduser;
 	
+	String userimage;
+	
 	ArrayList<Comment> comments;
 	
 	Media media;
@@ -32,7 +34,7 @@ public class Post {
 
 	
 
-	public Post(String title, String date, String content, String iduser,String username,int userwatched,String userimage) {
+	public Post(String title, String date, String content, String iduser, String username,int userwatched,String userimage) {
 		super();
 		this.title = title;
 		this.date = date;

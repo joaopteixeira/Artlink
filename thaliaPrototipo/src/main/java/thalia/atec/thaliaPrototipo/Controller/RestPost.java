@@ -70,8 +70,9 @@ public class RestPost {
 	public ResponseEntity<List<Post>> getPosts123(@RequestParam("id") String id) {
 		
 		
-		return new ResponseEntity<List<Post>>(fpost.getPost(),HttpStatus.OK);
-		
+
+		return new ResponseEntity<List<Post>>(fpost.getPost("asdda",3),HttpStatus.OK);
+
 	}
 	*/
 	
@@ -81,7 +82,7 @@ public class RestPost {
 		return new ResponseEntity<>(fpost.newPost(post),HttpStatus.ACCEPTED);
 		
 	}
-	
+	*/
 	
 	@GetMapping("/like")
 	public ResponseEntity<String> like(@RequestParam("id_post") String id_post, @RequestParam("id_user") String id_user){
