@@ -204,6 +204,12 @@ public class FPost {
 	 }
 	 
 	 
+	 public List<Post> findAllposts() {
+		 
+		 return prep.findAll();
+	 }
+	 
+	 
 	 
 	 
 	 

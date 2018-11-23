@@ -4,31 +4,33 @@ public class Media {
 	
 	public static final int IMAGE=0,VIDEO=1,SOUND=2;
 	
-	int type_media;
+	int typemedia;
 	
-	String path_file;
+	String pathfile;
 
-	public Media(int type_media, String path_file) {
+	public Media(int typemedia, String pathfile) {
 		super();
-		this.type_media = type_media;
-		this.path_file = path_file;
+		this.typemedia = typemedia;
+		this.pathfile = pathfile;
 	}
 
-	public int getType_media() {
-		return type_media;
+	public int getTypemedia() {
+		return typemedia;
 	}
 
-	public void setType_media(int type_media) {
-		this.type_media = type_media;
+	public void setTypemedia(int typemedia) {
+		this.typemedia = typemedia;
 	}
 
-	public String getPath_file() {
-		return path_file;
+	public String getPathfile() {
+		return pathfile;
 	}
 
-	public void setPath_file(String path_file) {
-		this.path_file = path_file;
+	public void setPathfile(String pathfile) {
+		this.pathfile = pathfile;
 	}
+
+	
 	
 	
 

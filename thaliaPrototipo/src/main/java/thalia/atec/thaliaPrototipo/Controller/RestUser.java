@@ -75,16 +75,17 @@ public class RestUser {
 		
 		
 	}
-	/*
+	
 	@GetMapping("/getuserbyid")
 	public ResponseEntity<?> getuserbyid(@RequestParam(name="hash",defaultValue="") String hash,@RequestParam("iduser") String iduser){
 		
 		
 		Optional<User> user = urep.findByHashes(hash);
+		Optional<User> u = urep.findById(iduser);
 		
-		if(user.isPresent()) {
+		if(user.isPresent() && u.isPresent()) {
 			
-			return new ResponseEntity<User>(user.get(),HttpStatus.ACCEPTED);
+			return new ResponseEntity<User>(u.get(),HttpStatus.ACCEPTED);
 		}
 		
 		
@@ -92,7 +93,7 @@ public class RestUser {
 		
 		
 		
-	}*/
+	}
 	
 	@GetMapping("/getcountry")
 	public ResponseEntity<List<Country>> getcountry(){
