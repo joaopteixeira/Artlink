@@ -39,6 +39,8 @@ public class RestUser {
 	FUser fuser;
 	
 	
+	
+	
 	@GetMapping("/registry")
 	public ResponseEntity<String> registry(@ModelAttribute User user,@RequestParam(name="password",defaultValue="") String password){
 		
@@ -76,51 +78,11 @@ public class RestUser {
 		
 	}
 	
-	@GetMapping("/getuserbyid")
-	public ResponseEntity<?> getuserbyid(@RequestParam(name="hash",defaultValue="") String hash,@RequestParam("iduser") String iduser){
-		
-		
-		Optional<User> user = urep.findByHashes(hash);
-		Optional<User> u = urep.findById(iduser);
-		
-		if(user.isPresent() && u.isPresent()) {
-			
-			return new ResponseEntity<User>(u.get(),HttpStatus.ACCEPTED);
-		}
-		
-		
-		return new ResponseEntity<String>("null",HttpStatus.ACCEPTED);
-		
-		
-		
-	}
-	
 	@GetMapping("/getcountry")
 	public ResponseEntity<List<Country>> getcountry(){
 		
 		
 		return new ResponseEntity<List<Country>>(fuser.getCountry(),HttpStatus.OK);
-	}
-	
-	@GetMapping("/getcategory")
-	public ResponseEntity<List<Country>> getcategory(){
-		
-		
-		return new ResponseEntity<List<Country>>(fuser.getCountry(),HttpStatus.OK);
-	}
-	
-	@GetMapping("/pesquser")
-	public ResponseEntity<?> pesqUser(@RequestParam(name="hash",defaultValue="") String hash,@RequestParam("name") String name){
-		
-		Optional<User> user = urep.findByHashes(hash);
-		
-		if(user.isPresent()) {
-			
-			return new ResponseEntity<List<User>>(fuser.getUserContainig(name),HttpStatus.OK);
-		}
-
-		return new ResponseEntity<>("null",HttpStatus.OK);
-		
 	}
 	
 	

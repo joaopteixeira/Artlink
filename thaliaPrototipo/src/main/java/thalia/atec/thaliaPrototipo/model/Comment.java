@@ -8,7 +8,6 @@ public class Comment {
 	String content;
 	String date;
 	
-	
 	public Comment(String iduser, String content, String date) {
 		super();
 		this.iduser = iduser;

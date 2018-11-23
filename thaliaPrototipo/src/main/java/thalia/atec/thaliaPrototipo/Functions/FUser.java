@@ -7,14 +7,12 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import Utils.WebServices;
-
 import org.apache.commons.mail.*;
 
 import thalia.atec.thaliaPrototipo.Service.CountryRepository;
 import thalia.atec.thaliaPrototipo.Service.LoginRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
+import thalia.atec.thaliaPrototipo.Util.WebServices;
 import thalia.atec.thaliaPrototipo.model.Country;
 import thalia.atec.thaliaPrototipo.model.Login;
 import thalia.atec.thaliaPrototipo.model.User;
@@ -81,30 +79,6 @@ public class FUser {                   //Funcoes pro USER
 		
 		
 		return "Registado";
-		
-	}
-	
-	
-	
-	
-	public List<User> getUserContainig(String name){
-		
-		String firstname = "";
-		String lastname = "";
-		
-		if(name.contains(" ")) {
-			firstname = name.substring(0, name.indexOf(" "));
-			lastname = name.substring(name.indexOf(" "),name.length()-1);
-		}else {
-			firstname = name;
-			lastname = name;
-		}
-		
-		System.out.println(firstname);
-		System.out.println(lastname);
-		
-		
-		return userRep.findByFirstnameContainingOrLastnameContaining(firstname,lastname);
 		
 	}
 	

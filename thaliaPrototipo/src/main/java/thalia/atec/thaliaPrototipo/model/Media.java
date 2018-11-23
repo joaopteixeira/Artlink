@@ -29,9 +29,6 @@ public class Media {
 	public void setPathfile(String pathfile) {
 		this.pathfile = pathfile;
 	}
-
-	
-	
-	
+		
 
 }

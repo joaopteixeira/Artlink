@@ -20,7 +20,7 @@ public class RestCategory {
 	
 	
 	
-	@GetMapping("/getcategory")
+	@GetMapping("/get")
 	public List<Category> getCategorys(){
 		
 		return fcategory.getCategorys();

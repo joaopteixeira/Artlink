@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import thalia.atec.thaliaPrototipo.Functions.FPost;
 import thalia.atec.thaliaPrototipo.Functions.FUser;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
+import thalia.atec.thaliaPrototipo.Util.DateUtil;
 import thalia.atec.thaliaPrototipo.model.Post;
 import thalia.atec.thaliaPrototipo.model.User;
 
@@ -52,6 +53,8 @@ public class WebHome {
 			page.addAttribute("posts",fpost.getPost(iduser, 0, 0));
 			
 			return "feedmain.html";
+	
+			
 			
 		}
 

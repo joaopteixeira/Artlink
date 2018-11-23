@@ -55,6 +55,7 @@ public class User {
 	
 	
 	
+	
 	public User() {
 		super();
 		this.preferences = new ArrayList<>();
@@ -99,15 +100,6 @@ public class User {
 
 	
 	
-	
-
-	public String getCategory() {
-		return category;
-	}
-
-
-
-
 
 	public String getUsername() {
 		return username;

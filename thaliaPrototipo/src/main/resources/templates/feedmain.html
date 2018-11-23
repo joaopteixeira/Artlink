@@ -34,7 +34,7 @@
 
 
   </head>
-  <body>
+  <body th:object="${User}">
     <script>
     /*$('.media').hide();
      $("#natzc1").click(function(){
@@ -148,7 +148,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" /></span></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -156,7 +156,7 @@
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
-                  <span><img src="" alt="" /></span></a>
+                  <span></a>
                 <ul class="dropdown-menu newsfeed-home">
                   <li><a href="index.html">Landing Page 1</a></li>
                   <li><a href="index-register.html">Landing Page 2</a></li>
@@ -164,12 +164,12 @@
               </li>
 
 
-              <li><a href="timeline.html" class="profile-link text-legreen" ></a></li>
+              <li><a href="timeline.html" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
 
               <li>
                 <div class="imgnavbarcont">
                   <a class="dropdown-toggle link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md imgnavbar" />
+                    <img th:src="${User.pathimage}" alt="user" class="profile-photo-md imgnavbar" />
                   </a>
                   <ul class="dropdown-menu newsfeed-home">
                   <li><a href="timeline.html">Perfil</a></li>
@@ -199,7 +199,7 @@
           <div id="sticky-menu" class="col-md-3 static">
             <ul class="nav-news-feed">
               <li><i class="fas fa-newspaper"></i><div><a href="newsfeed.html">Meu feed</a></div></li>
-              <li><i class="fas fa-users"></i><div><a href="newsfeed-people-nearby.html">Encontra Pessoas</a></div></li>
+              <li><i class="fas fa-users"></i><div><a href="newsfeed-people-nearby.html">Procurar Pessoas</a></div></li>
               <li><i class="fas fa-address-book"></i><div><a href="newsfeed-friends.html">Lista de Contactos</a></div></li>
               <li><i class="fas fa-comments"></i><div><a href="newsfeed-messages.html">Messagens</a></div></li>
               <li><i class="fas fa-images"></i><div><a href="newsfeed-images.html">Imagens</a></div></li>
@@ -213,7 +213,11 @@
           
 
 
+            <th:block th:switch="${frag}">
 
+            <div th:case="*"><span th:include="fragpost :: fragpost"></span></div>    <!-- case "*" é o DEFAULT CASE -->
+
+          </th:block>
 
 
 
@@ -283,10 +287,13 @@
     <!-- Scripts
     ================================================= -->
     <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script> -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.sticky-kit.min.js"></script>
-    <script src="js/jquery.scrollbar.min.js"></script>
-    <script src="js/script.js"></script>
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.sticky-kit.min.js}"></script>
+    <script th:src="@{/js/jquery.scrollbar.min.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
   </body>
 </html>
+
+
+       <!--  -->

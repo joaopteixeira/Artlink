@@ -20,20 +20,14 @@ public class Post {
 	
 	ArrayList<String> likes;
 	
-	//User creator;
 	
 	String iduser;
-	
-	//String userimage;
-	
+		
 	ArrayList<Comment> comments;
 	
 	Media media;
 	
 	
-
-	
-
 	public Post(String title, String date, String content, String iduser, String username,int userwatched,String userimage) {
 		super();
 		this.title = title;
@@ -128,11 +122,6 @@ public class Post {
 	
 	
 	
-
-	
-
-
-
 	public ArrayList<String> getLikes() {
 		return likes;
 	}
@@ -166,6 +155,19 @@ public class Post {
 	public void setMedia(Media media) {
 		this.media = media;
 	}
+
+
+
+	public ArrayList<Comment> getComments() {
+		return comments;
+	}
+
+
+
+	public void setComments(ArrayList<Comment> comments) {
+		this.comments = comments;
+	}
+	
 	
 	
 	

@@ -213,6 +213,8 @@ public class FPost {
 	 
 	 
 	 
+	 
+	 
 	public void like(String id_user,String  id_post) {
 		
 		System.out.println(id_user+"         ::   "+id_post);

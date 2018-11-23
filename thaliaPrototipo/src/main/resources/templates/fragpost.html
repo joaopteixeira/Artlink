@@ -1,12 +1,15 @@
+<div th:fragment="fragpost">
+
+
 <div class="create-post">
   <div class="text-header">Fazer Post</div>
-  <form class="" action="" method="post">
+  <form th:action="${upload/uploadFile}" method="POST">
   <div class="row">
     <div class="col-md-12">
         <div class="form-group col-md-12">
           <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
           <textarea name="texts" id="start" rows="3" class="form-control" placeholder="Dercription" style="resize:none;" maxlength="150" oninput="myFunction()"></textarea>
-          <input type="hidden" name="tipo_media" value="3" id="tipo_media">
+          <input type="hidden" name="tipomedia" value="3" id="tipo_media">
           <script>
           function myFunction() {
               var x = document.getElementById("start").value;
@@ -24,7 +27,7 @@
               <label for="image-input">
                 <i class="ion-images"></i>
               </label>
-              <input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)"/>
+           <input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)" />
             </a>
           </li>
           <li id="natzc2" class="col-md-2">
@@ -46,7 +49,16 @@
          </ul>
        </div>
       </div>
+      <div class="" style="float:right; margin-bottom: 10px;">
+     	<button class="btn btn-primary pull-right" type="submit">Publish</button>
+      </div>
       </form>
+    <!--
+    	form id="singleUploadForm" name="singleUploadForm">
+           <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />
+       	</form>
+    -->
+
        <script>
          var loadFile = function(event) {
            var reader = new FileReader();
@@ -78,7 +90,7 @@
     <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
     <div class="post-detail">
       <div class="user-info">
-        <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
+        <h5><a href="timeline.html" class="profile-link"><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></span></a> <span class="following"><span th:utext="${User.userwatched}" ></span></span></h5>
       </div>
       <div class="reaction">
         <a class="btn text-green"><i class="icon ion-thumbsup"></i> 0 </a>
@@ -93,47 +105,88 @@
   </div>
 </div>
 
-     <div class="" style="float:right; margin-bottom: 10px;">
-     <button class="btn btn-primary pull-right" id="submit" type="submit">Publish</button>
-    </div>
+    
 </div><!-- Post Create Box End-->
 <br>
 <hr class="separate text-legreen"></hr>
 
+
+
+
+  <th:block th:each="post : ${posts}">
+
   <!-- POST MODELO -->
 <div class="post-content">
-   <video class="post-video" controls> <source src="videos/1.mp4" type="video/mp4"> </video>
+
+
+
+  <!-- th:if  post.mediatype = 0 IMAGEM <> 
+  	<center>
+  	<img th:src="${post.media.pathfile}" class="img-responsive post-image" style="height: 500px; object-fit: contain;">
+  </center>
   <div class="post-container">
-    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
+    <img th:src="${post.userimage}" alt="user" class="profile-photo-md pull-left" />
+
+
+th:if VIDEO
+  <div id="natc2" class="media">
+    <video class="post-video" controls> <source src="videos/1.mp4" type="video/mp4"> </video>
+  </div>
+
+th:if AUDIO
+  <div  class="media">
+    <audio controls>
+      <source id="output3" src="horse.ogg" type="audio/ogg">
+      <source id="output4" src="horse.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+    </audio>
+  </div>
+
+th:if VAZIO
+
+<div  class="media">
+	</div>
+
+-->
+
+
+
     <div class="post-detail">
       <div class="user-info">
-        <h5><a href="timeline.html" class="profile-link">Sophia Lee</a> <span class="following">following</span></h5>
-        <p class="text-muted">Updated her status about 33 mins ago</p>
+        <h5><a href="timeline.html" class="profile-link"> <span th:utext="${post.username}"> </span></a> <span class="following"> <span th:utext="${post.userwatched}"> </span></h5>
+        <p class="text-muted"><span th:utext="${T(thalia.atec.thaliaPrototipo.Util.DateUtil).timeago(post.date)}"></span> </p>
       </div>
       <div class="reaction">
-        <a class="btn text-green"><i class="icon ion-thumbsup"></i> 75</a>
-        <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 8</a>
+        <a class="btn text-green"><i class="icon ion-thumbsup"></i> <span th:utext="${#lists.size(post.likes)}" ></span> </a>
+    
       </div>
       <div class="line-divider"></div>
       <div class="post-text">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p> <span th:utext="${post.content}" ></p>
       </div>
-      <div class="line-divider"></div>
+
+
+ s
+  <th:block th:each="Comment : ${post.comments}">
+
+      <div class="line-divider" ></div>
        <div class="post-comment">
-        <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-        <p><a href="timeline.html" class="profile-link">Olivia </a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <i class="em em-anguished"></i> Ut enim ad minim veniam, quis nostrud </p>
+        <img th:src="${Comment.userimage}" alt="" class="profile-photo-sm" style="background-color:white;"/>
+        <p><a href="timeline.html" class="profile-link"><span th:utext="${Comment.iduser}" ></span> <span th:utext="${Comment.content}" ></span>  </p>
       </div>
-      <div class="post-comment">
-        <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-        <p><a href="timeline.html" class="profile-link">Sarah</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-      </div>
-      <div class="post-comment">
-        <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-        <p><a href="timeline.html" class="profile-link">Linda</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </div>
+
+
+  </th:block>   
+
+
+  	 <!-- Fim dos Comentários de cada post -->
+    
+
+
+
       <div class="post-comment">
 
-        <!-- FORM COMENTARIO -->
+        <!------- FORM COMENTARIO----- -->
 
          <form style="width: 100%;" >
           <div class="form-group" style="width: 100% !important;">
@@ -147,3 +200,6 @@
     </div>
   </div>
 </div>
+</div>
+
+  </th:block>
