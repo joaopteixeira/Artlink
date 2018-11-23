@@ -95,6 +95,15 @@ public class User {
 
 	
 	
+	
+
+	public String getCategory() {
+		return category;
+	}
+
+
+
+
 
 	public void setHashes() {
 		this.hashes = new ArrayList<>();
