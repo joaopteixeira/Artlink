@@ -3,7 +3,7 @@
 
 <div class="create-post">
   <div class="text-header">Fazer Post</div>
-  <form th:action="${upload/uploadFile}" method="POST">
+  <!--<form th:action="${upload/uploadFile}" method="POST">-->s
   <div class="row">
     <div class="col-md-12">
         <div class="form-group col-md-12">
@@ -74,7 +74,7 @@
 ================================================= -->
 <div class="post-content">
   <div id="natc1" class="media">
-    <img id="output" src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
+    <img  th:src="${User.imagepath}" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
   </div>
   <div id="natc2" class="media">
     <video class="post-video" controls> <source id="output2" src="videos/1.mp4" type="video/mp4"> </video>
@@ -120,14 +120,14 @@
 
 
 
-  <!-- th:if  post.mediatype = 0 IMAGEM <> 
+  <!-- th:if  post.mediatype = 0 IMAGEM <> -->
   	<center>
   	<img th:src="${post.media.pathfile}" class="img-responsive post-image" style="height: 500px; object-fit: contain;">
   </center>
   <div class="post-container">
     <img th:src="${post.userimage}" alt="user" class="profile-photo-md pull-left" />
 
-
+<!--
 th:if VIDEO
   <div id="natc2" class="media">
     <video class="post-video" controls> <source src="videos/1.mp4" type="video/mp4"> </video>

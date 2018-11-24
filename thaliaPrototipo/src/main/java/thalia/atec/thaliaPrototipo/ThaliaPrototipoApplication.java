@@ -15,12 +15,14 @@ import thalia.atec.thaliaPrototipo.UploadFile.FileStorageProperties;
 })
 
 
+
 public class ThaliaPrototipoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ThaliaPrototipoApplication.class, args);
-		
+		SpringApplication.run(ThaliaPrototipoApplication.class, args);	
 		System.out.println("Thalia online ");
+		
+		
 		
 		
 		
