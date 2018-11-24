@@ -31,7 +31,7 @@ public class User {
 
 	 String phonenumber;
 	 
-	 String pathimage;
+	 String pathimage;   
 
 	int tokkensquantity,gender;
 	

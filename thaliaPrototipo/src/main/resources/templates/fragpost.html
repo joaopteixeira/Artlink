@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-md-12">
         <div class="form-group col-md-12">
-          <img src="http://placehold.it/300x300" alt="" class="profile-photo-md" />
+          <img th:src="${User.pathimage}" alt="" class="profile-photo-md" />
           <textarea name="texts" id="start" rows="3" class="form-control" placeholder="Dercription" style="resize:none;" maxlength="150" oninput="myFunction()"></textarea>
           <input type="hidden" name="tipomedia" value="3" id="tipo_media">
           <script>
@@ -74,7 +74,7 @@
 ================================================= -->
 <div class="post-content">
   <div id="natc1" class="media">
-    <img  th:src="${User.imagepath}" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
+    <img  th:src="${User.pathimage}" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
   </div>
   <div id="natc2" class="media">
     <video class="post-video" controls> <source id="output2" src="videos/1.mp4" type="video/mp4"> </video>
@@ -87,7 +87,7 @@
     </audio>
   </div>
   <div class="post-container">
-    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
+    <img th:src="${User.pathimage}" alt="user" class="profile-photo-md pull-left" />
     <div class="post-detail">
       <div class="user-info">
         <h5><a href="timeline.html" class="profile-link"><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></span></a> <span class="following"><span th:utext="${User.userwatched}" ></span></span></h5>
@@ -120,37 +120,39 @@
 
 
 
-  <!-- th:if  post.mediatype = 0 IMAGEM <> -->
-  	<center>
-  	<img th:src="${post.media.pathfile}" class="img-responsive post-image" style="height: 500px; object-fit: contain;">
-  </center>
-  <div class="post-container">
-    <img th:src="${post.userimage}" alt="user" class="profile-photo-md pull-left" />
-
-<!--
-th:if VIDEO
-  <div id="natc2" class="media">
-    <video class="post-video" controls> <source src="videos/1.mp4" type="video/mp4"> </video>
+  <div th:if="${post.media.typemedia.equals(0)}">
+  	<img th:src="${post.media.pathfile}"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">
+    </center> 0 img
   </div>
 
-th:if AUDIO
-  <div  class="media">
-    <audio controls>
+
+  <div th:if="${post.media.typemedia.equals(1)}"><span>1 video</span>
+  <div id="natc2" class="media">  
+    <video class="post-video" controls> <source src="videos/1.mp4" type="video/mp4"> </video> 
+  </div>
+</div>
+
+
+  <div th:if="${post.media.typemedia.equals(2)}"> <span>2 som</span>
+  <div  class="media"> 
+    <audio controls> 
       <source id="output3" src="horse.ogg" type="audio/ogg">
       <source id="output4" src="horse.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
     </audio>
   </div>
-
-th:if VAZIO
-
-<div  class="media">
-	</div>
-
--->
+</div>
 
 
+ <div th:if="${post.media.typemedia.equals(3)}"> <span> 3 nd </span>
+<div  class="media"> </div>
+</div>
 
+
+
+	  <div class="post-container">
+    <img th:src="${post.userimage}" alt="user" class="profile-photo-md pull-left" />
+  </div>
     <div class="post-detail">
       <div class="user-info">
         <h5><a href="timeline.html" class="profile-link"> <span th:utext="${post.username}"> </span></a> <span class="following"> <span th:utext="${post.userwatched}"> </span></h5>
@@ -166,7 +168,7 @@ th:if VAZIO
       </div>
 
 
- s
+ 
   <th:block th:each="Comment : ${post.comments}">
 
       <div class="line-divider" ></div>

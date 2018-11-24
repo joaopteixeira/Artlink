@@ -22,10 +22,14 @@ public class Media {
 		this.typemedia = typemedia;
 	}
 
+	
 	public String getPathfile() {
 		return pathfile;
 	}
+	
 
+	
+	
 	public void setPathfile(String pathfile) {
 		this.pathfile = pathfile;
 	}

@@ -53,7 +53,6 @@ public class WebHome {
 			page.addAttribute("posts",fpost.getPost(iduser, 0, 0));
 			
 			return "feedmain.html";
-	
 			
 			
 		}
