@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,6 @@ import thalia.atec.thaliaPrototipo.model.Post;
 import thalia.atec.thaliaPrototipo.model.User;
 
 @Controller
-@RequestMapping("/webhome")
 public class WebHome {
 	
 	@Autowired
@@ -36,34 +37,56 @@ public class WebHome {
 		return "index.html";
 	}
 	
-	@GetMapping("/feedmain")
-	public String feedMain(@RequestParam("iduser") String iduser,Model page){
+	@GetMapping("/feed")
+	public String feedMain(Model page,@RequestParam("frag") String frag,HttpSession session){
 		
 
-		//List<Post> p = fpost.getPost("asdasd",2);		
+		
+		User u = (User)session.getAttribute("User");
+		
+		Optional<User> user = userrep.findById(u.getId());
+		
+		
 
-		//String iduser = u.getId();
-		//List<Post> p = fpost.getPost(iduser, 2);		
-		
-		Optional<User> user = userrep.findById(iduser);
-		
+
 		if(user.isPresent()) {
 			
+				
+			session.setAttribute("User", user.get());
+			
+			
+			
+		if(frag.compareTo("feed")==0) {
+			
 			page.addAttribute("User",user.get());
-			page.addAttribute("posts",fpost.getPost(iduser, 0, 0));
+			page.addAttribute("posts",fpost.getPost(u.getId(), 0, 0));
+		
+			}
 			
+		  if(frag.compareTo("chat")==0) {
+
+				page.addAttribute("User",(User)session.getAttribute("User"));
+				
+				
+			}
+			
+		  
+		  if(frag.compareTo("friends")==0) {
+
+				page.addAttribute("User",(User)session.getAttribute("User"));
+		  }
+			
+		  
+
 			return "feedmain.html";
-			
-			
-		}
-
-		
-		
-		//page.addAttribute("Post",p);
-
-		return "redirect:/index";
-	}
 	
+		}
+		
+		return "redirect:/index";
+		
+	}
+		
+		
 	
 	
 }

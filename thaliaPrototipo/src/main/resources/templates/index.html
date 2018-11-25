@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title> Artlink | Explora o Mundo da arte </title>
+		<title>Artlink</title>
 
     <!-- Stylesheets
     ================================================= -->
@@ -97,7 +97,7 @@
 								<p class="text-muted">Be cool and join today. Meet millions</p>
 
 								<!--Register Form-->
-								<form name="registration_form" class="form-inline" th:action="@{/weblogin/registry}" method="POST">
+								<form name="registration_form" class="form-inline" th:action="@{/registry}" method="POST">
 									<div class="row">
 										<div class="form-group col-xs-6">
 											<label class="sr-only">First Name</label>
@@ -207,7 +207,7 @@
 								<p class="text-muted">Log into your account</p>
 
 								<!--Login Form-->
-								<form th:action="@{/weblogin/login}" method="POST">
+								<form th:action="@{/login}" method="POST">
 									 <div class="row">
 										<div class="form-group col-xs-12">
 											<label for="my-email" class="sr-only">Email</label>
@@ -224,7 +224,7 @@
 								<p><a id="forget_pass" href="#" data-toggle="modal" data-target="#myModal">Forgot Password?</a></p>
 								<button class="btn btn-primary" type="submit">Login Now</button>
 								</form><!--Login Form Ends-->
-								<form th:action="@{/weblogin/resetPassword}" method="post">
+								<form th:action="@{/resetPassword}" method="post">
 									<div class="modal fade" id="myModal" role="dialog" style="background-color: rgba(0, 0, 0, 0.3);">
 										<div class="modal-dialog">
 											<!-- Modal content-->

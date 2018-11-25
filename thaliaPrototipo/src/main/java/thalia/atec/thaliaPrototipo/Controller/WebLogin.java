@@ -2,6 +2,8 @@ package thalia.atec.thaliaPrototipo.Controller;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,6 @@ import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.User;
 
 @Controller
-@RequestMapping("/weblogin")
 public class WebLogin {
 	
 	
@@ -45,7 +46,7 @@ public class WebLogin {
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String UserLogin(@ModelAttribute("User") User u, Model page, @RequestParam("password") String password){
+	public String UserLogin(@ModelAttribute("User") User u, Model page, @RequestParam("password") String password,HttpSession session){
 		
 		
 	//	fuser.login(u.getEmail(), password);
@@ -57,8 +58,9 @@ public class WebLogin {
 			
 
 			//page.addAttribute("User",us.get());
+			session.setAttribute("User", us.get());
 
-			return "redirect:/webhome/feedmain?iduser="+us.get().getId();
+			return "redirect:/feed?frag=feed";
 			
 		}
 		
