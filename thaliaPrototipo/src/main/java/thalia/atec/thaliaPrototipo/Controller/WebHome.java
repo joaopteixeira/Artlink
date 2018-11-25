@@ -38,7 +38,7 @@ public class WebHome {
 	}
 	
 	@GetMapping("/feed")
-	public String feedMain(Model page,@RequestParam("frag") String frag,HttpSession session){
+	public String feed(Model page,@RequestParam("frag") String frag,HttpSession session){
 		
 
 		
@@ -47,7 +47,6 @@ public class WebHome {
 		Optional<User> user = userrep.findById(u.getId());
 		
 		
-
 
 		if(user.isPresent()) {
 			
@@ -60,6 +59,8 @@ public class WebHome {
 			
 			page.addAttribute("User",user.get());
 			page.addAttribute("posts",fpost.getPost(u.getId(), 0, 0));
+			
+			return "feedmain.html";
 		
 			}
 			
@@ -79,13 +80,11 @@ public class WebHome {
 		  
 
 			return "feedmain.html";
-	
 		}
 		
 		return "redirect:/index";
 		
 	}
-		
 		
 	
 	
