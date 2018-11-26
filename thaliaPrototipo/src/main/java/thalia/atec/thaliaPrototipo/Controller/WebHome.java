@@ -91,4 +91,18 @@ public class WebHome {
 		
 	}
 	
+	@GetMapping("/NewPost")
+	public String feed(@RequestParam("Post")Post post, HttpSession session){
+		
+		
+		
+		
+		
+		 fpost.newPost(post);
+		
+		 return "redirect:/feed";
+	}
+
+	
+	
 }
