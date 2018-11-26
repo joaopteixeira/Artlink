@@ -2,20 +2,21 @@
 
 
 <div class="create-post">
-  <!--<div th:object="${Post}" class="text-header">Fazer Post</div>
-  <form th:action="${/NewPost}" method="POST"> -->
+  <div class="text-header">Fazer Post</div>
+  <form th:action="@{/newpost}" method="GET">
   <div class="row">
     <div class="col-md-12">
         <div class="form-group col-md-12">
           <img th:src="${User.pathimage}" alt="" class="profile-photo-md" />
-          <textarea name="texts" id="start" rows="3" class="form-control" placeholder="Dercription" style="resize:none;" maxlength="150" oninput="myFunction()"></textarea>
-          <input type="hidden" name="tipomedia" value="3" id="tipo_media">
+          <textarea name="content" id="start" rows="3" class="form-control" placeholder="Partilhe!!" style="resize:none;" maxlength="150" oninput="myFunction()"></textarea>
+          <input type="hidden" name="typemedia" value="3" id="tipo_media">
+          <input type="file" name="file" >
           <script>
           function myFunction() {
               var x = document.getElementById("start").value;
               document.getElementById("puthere").innerHTML = "" + x;
           }
-          </script>
+        </script>
         </div>
       </div>
     </div>
@@ -46,11 +47,11 @@
               <input id="audio-input" type="file" name="audio" value="" accept="audio/*">
             </a>
           </li>
-         </ul>
+         </ul>s
        </div>
       </div>
       <div class="" style="float:right; margin-bottom: 10px;">
-     	<button class="btn btn-primary pull-right" type="submit">Publish</button>
+     	<button class="btn btn-primary pull-right" type="submit">Publicar</button>
       </div>
       </form>
     <!--
@@ -122,18 +123,18 @@
 
   <div th:if="${post.media.typemedia.equals(0)}">
   	<img th:src="${post.media.pathfile}"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">
-    </center> 0 img
+    </center> <!--Div Image _-->
   </div>
 
 
-  <div th:if="${post.media.typemedia.equals(1)}"><span>1 video</span>
+  <div th:if="${post.media.typemedia.equals(1)}"><!--Divs Video _-->
   <div id="natc2" class="media">  
     <video class="post-video" controls> <source src="videos/1.mp4" type="video/mp4"> </video> 
   </div>
 </div>
 
 
-  <div th:if="${post.media.typemedia.equals(2)}"> <span>2 som</span>
+  <div th:if="${post.media.typemedia.equals(2)}"> <!--Divs son _-->
   <div  class="media"> 
     <audio controls> 
       <source id="output3" src="horse.ogg" type="audio/ogg">
@@ -144,7 +145,7 @@
 </div>
 
 
- <div th:if="${post.media.typemedia.equals(3)}"> <span> 3 nd </span>
+ <div th:if="${post.media.typemedia.equals(3)}"> <!--Div sem media _-->
 <div  class="media"> </div>
 </div>
 
@@ -174,7 +175,7 @@
       <div class="line-divider" ></div>
        <div class="post-comment">
         <img th:src="${Comment.userimage}" alt="" class="profile-photo-sm" style="background-color:white;"/>
-        <p><a href="timeline.html" class="profile-link"><span th:utext="${Comment.iduser}" ></span> <span th:utext="${Comment.content}" ></span>  </p>
+        <p><a href="/perfil" class="profile-link"><span th:utext="${Comment.iduser}" ></span> <span th:utext="${Comment.content}" ></span>  </p>
       </div>
 
 
@@ -190,12 +191,13 @@
 
         <!------- FORM COMENTARIO----- -->
 
-         <form style="width: 100%;" >
+         <form style="width: 100%;"  action="/newcomment" method="POST" >
           <div class="form-group" style="width: 100% !important;">
-            <div style="width: 10%;float: left;"><img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" /></div>
-            <div style="width: 90%;float: right;"><input type="text" class="form-control" name='description' placeholder="Post a comment"></div>
+            <input type="hidden" name="idpost" th:value="${post.id}">
+            <div style="width: 10%;float: left;"><img th:src="${User.pathimage}" alt="" class="profile-photo-sm" /></div>
+            <div style="width: 90%;float: right;"><input type="text" class="form-control" name='content' placeholder="Comentar"></div>
           </div>
-          <div class="form-group" style="width:100%;float: right;">  <button class="btn btn-primary pull-right" id="submit" type="submit">Publish</button></div>
+          <div class="form-group" style="width:100%;float: right;">  <button class="btn btn-primary pull-right" id="submit" type="submit">Publicar</button></div>
 
         </form>
       </div>

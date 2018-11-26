@@ -13,22 +13,16 @@ public class Watch {
 	}
 
 	
-	
-	
-	
+
 	public String getIduser() {
 		return iduser;
 	}
 
 
 
-
-
 	public void setIduser(String iduser) {
 		this.iduser = iduser;
 	}
-
-
 
 
 

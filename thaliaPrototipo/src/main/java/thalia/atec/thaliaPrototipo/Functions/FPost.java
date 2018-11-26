@@ -64,6 +64,11 @@ public class FPost {
 		
 		return "nadicionado";		 
 	}
+	 
+	 public void savePost(Post p) {
+		 
+		 prep.save(p);
+	 }
 	 /*
 	 public Page<Post> getPostWatching(User user){
 		 int cont=0;
@@ -207,6 +212,12 @@ public class FPost {
 	 public List<Post> findAllposts() {
 		 
 		 return prep.findAll();
+	 }
+	 
+	 public Post getPost(String id) {
+		 
+		 return prep.findById(id).get();
+		 
 	 }
 	 
 	 

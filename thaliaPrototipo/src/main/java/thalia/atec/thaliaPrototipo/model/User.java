@@ -148,7 +148,6 @@ public class User {
 
 
 
-
 	public void setPathimage(String pathimage) {
 		this.pathimage = pathimage;
 	}
@@ -313,8 +312,6 @@ public class User {
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-
-
 
 
 

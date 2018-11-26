@@ -1,10 +1,12 @@
 <!-- INICIO FRAGMENTOS -->
 <!-- Friend List
 ================================================= -->
+
 <div  th:fragment="friendlist">
 <div class="text-header">
   Lista de Contactos
 </div>
+<th:block th:each="friend: ${User.#lists(Watch.iduser)}">
 <div class="list-people">
   <div class="row">
 
@@ -14,18 +16,18 @@
       <div class="friend-card col-md-12 col-sm-12">
         <div class="friend-info">
         <div class="col-md-3 col-sm-3">
-          <img src="http://placehold.it/300x300" alt="user" class="profile-photo-lg" />
+          <img th:src="${friend.pathimage}" alt="foto" class="profile-photo-lg" />
         </div>
         <div class="col-md-3 col-sm-3" style="margin-top:2px;">
-            <h5><a href="timeline.html" class="profile-link">Nome Perfil </a></h5>
-            <p>Nº Watchers</p>
+            <h5><a href="timeline.html" class="profile-link"><span th:text="${friend.firstname}"></span> </a></h5>
+            <p><span th:utext="${#lists.size(post.likes)}" ></span></p>
         </div>
         <div class="col-md-3 col-sm-3" style="margin-top:2px;">
-            <h5><a href="timeline.html" class="profile-link">Categoria</a></h5>
-            <p>Sub-Categoria</p>
+            <h5><a href="timeline.html" class="profile-link"><span th:text="${friend.category}"></span></a></h5>
+            <p><span th:text="${friend.category.subcategory}"></span></p>
         </div>
         <div class="col-md-3 col-sm-3" style="margin-top:20px;">
-          <button class="btn btn-primary" style="vertical-align:center" type="button" name="button" value="">Consultar</button>
+          <button class="btn btn-primary" style="vertical-align:center" type="button" name="button" value="">Visualizar</button>
         </div>
         </div>
       </div>
@@ -36,6 +38,7 @@
 
   </div>
 </div>
+</th:block>
 </div>
 
 <!-- FIM FRAGMENTO -->
