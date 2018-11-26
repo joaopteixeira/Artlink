@@ -199,11 +199,11 @@
           <div id="sticky-menu" class="col-md-3 static">
             <ul class="nav-news-feed">
               <li><i class="fas fa-newspaper"></i><div><a href="/feed?frag=feed">Meu feed</a></div></li>
-              <li><i class="fas fa-users"></i><div><a href="newsfeed-people-nearby.html">Procurar Pessoas</a></div></li>
-              <li><i class="fas fa-address-book"></i><div><a href="newsfeed-friends.html">Lista de Contactos</a></div></li>
+              <li><i class="fas fa-users"></i><div><a href="/feed?frag=search">Procurar Pessoas</a></div></li>
+              <li><i class="fas fa-address-book"></i><div><a href="/feed?frag=contacts">Lista de Contactos</a></div></li>
               <li><i class="fas fa-comments"></i><div><a href="/feed?frag=chat">Messagens</a></div></li>
-              <li><i class="fas fa-images"></i><div><a href="newsfeed-images.html">Imagens</a></div></li>
-              <li><i class="fas fa-video"></i><div><a href="newsfeed-videos.html">Videos</a></div></li>
+              <li><i class="fas fa-images"></i><div><a href="/feed?frag=images">Imagens</a></div></li>
+              <li><i class="fas fa-video"></i><div><a href="/feed?frag=videos">Videos</a></div></li>
             </ul><!--news-feed links ends-->
           </div>
 
@@ -212,14 +212,18 @@
          
           <th:block  th:switch="${frag}">
 
-          <div th:case="feed"><span th:include="fragpost::post"></span></div>    
+          <div th:case="feed"><span th:include="fragpost::post"></span></div>  
+           <div th:case="search"><span th:include="fragsearch::search"></span></div>   
+
           <div th:case="chat"><span th:include="fragchat::chat"></span></div> 
+
+
           <div th:case="friends"><span th:include="fragfriendlist::friendlist"></span></div>    
-         <div th:case="search"><span th:include="fragsearch::search"></span></div>   
+
          <!--  <div th:case=""><span th:include=" :: "></span></div>     -->
           
 
-       </th:block>
+         </th:block>
 
           </div>
 
@@ -293,7 +297,4 @@
     <script th:src="@{/js/jquery.scrollbar.min.js}"></script>
     <script th:src="@{/js/script.js}"></script>
   </body>
-</html>
-
-
-       <!--  -->
+</html>   

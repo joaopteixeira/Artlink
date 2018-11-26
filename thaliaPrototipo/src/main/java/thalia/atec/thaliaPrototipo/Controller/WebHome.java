@@ -50,15 +50,18 @@ public class WebHome {
 
 		if(user.isPresent()) {
 			
-				
+			page.addAttribute("User",user.get());
+			page.addAttribute("frag",frag);
 			session.setAttribute("User", user.get());
 			
 			
 			
 		if(frag.compareTo("feed")==0) {
 			
-			page.addAttribute("User",user.get());
-			page.addAttribute("posts",fpost.getPost(u.getId(), 0, 0));
+
+			page.addAttribute("posts",fpost.getPost(user.get().getId(), 0, 0));
+			
+			
 			
 			return "feedmain.html";
 		
@@ -74,9 +77,11 @@ public class WebHome {
 		  
 		  if(frag.compareTo("friends")==0) {
 
-				page.addAttribute("User",(User)session.getAttribute("User"));
+			    page.addAttribute("User",(User)session.getAttribute("User"));
+				
 		  }
 			
+		  
 		  
 
 			return "feedmain.html";
@@ -85,7 +90,5 @@ public class WebHome {
 		return "redirect:/index";
 		
 	}
-		
-	
 	
 }
