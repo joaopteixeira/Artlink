@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import thalia.atec.thaliaPrototipo.Functions.FFeed;
 import thalia.atec.thaliaPrototipo.Functions.FPost;
 import thalia.atec.thaliaPrototipo.Functions.FUser;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
@@ -38,6 +39,9 @@ public class WebHome {
 	@Autowired
 	UserRepository userrep;;
 	
+	@Autowired
+	FFeed ffeed;
+	
 	@GetMapping("/index")
 	public String index() {
 		
@@ -54,19 +58,23 @@ public class WebHome {
 		
 		Optional<User> user = userrep.findById(u.getId());
 		
+	
+		
 		
 
 		if(user.isPresent()) {
 			
+			
 			page.addAttribute("User",user.get());
 			page.addAttribute("frag",frag);
 			session.setAttribute("User", user.get());
+			page.addAttribute("friends",ffeed.getFriends(user.get().getId()));
 			
 			
 			
 		if(frag.compareTo("feed")==0) {
 			
-
+		
 			System.out.println(user.get().getId());
 			page.addAttribute("posts",fpost.getPost(user.get().getId(), 0, 0));
 			
@@ -134,7 +142,7 @@ public class WebHome {
 	
 	
 @PostMapping("/newcomment")
-public String newComment(Model page,@RequestParam("content") String content,@RequestParam("idpost") String idpost, HttpSession session){
+public String newComment(@RequestParam("content") String content,@RequestParam("idpost") String idpost, HttpSession session){
 	
 	
 	User u = (User)session.getAttribute("User");
@@ -155,7 +163,7 @@ public String newComment(Model page,@RequestParam("content") String content,@Req
 	fpost.savePost(p);
 	
 	
-	   page.addAttribute("User",(User)session.getAttribute("User"));
+	//page.addAttribute("User",(User)session.getAttribute("User"));
 
 	
 	//String user = session.getAttribute();

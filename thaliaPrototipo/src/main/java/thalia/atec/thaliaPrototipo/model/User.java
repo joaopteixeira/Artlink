@@ -56,6 +56,14 @@ public class User {
 	
 	
 	
+	public String getCategory() {
+		return category;
+	}
+
+
+
+
+
 	public User() {
 		super();
 		this.preferences = new ArrayList<>();

@@ -71,51 +71,37 @@
         $(document).on("change", "#image-input", function(evt) {
 =======
      });*/
+
      $(document).ready(function(){
-       $('.media').hide();
+        $('.media').hide();
+        $("#preview-post").hide();
+        $("#natzc4").hide();
 
-       $(document).on("change", "#image-input", function(evt) {
-         $("#output2").attr('src','');
-         $("#output3").attr('src','');
-         $("#output4").attr('src','');
-          document.getElementById("audio-input").value = "";
-          document.getElementById("video-input").value = "";
-          $("#tipo_media").attr("value","0");
-          $(".media").hide();
-          $("#natc1").show();
-        });
-
-        $(document).on("change", "#video-input", function(evt) {
-          $("#output").attr('src','');
-          $("#output3").attr('src','');
-          $("#output4").attr('src','');
-           var $source = $('#output2');
-           $source[0].src = URL.createObjectURL(this.files[0]);
-           $source.parent()[0].load();
-           document.getElementById("image-input").value = "";
-
+        $(document).on("change", "#image-input", function(evt) {
            document.getElementById("audio-input").value = "";
-           $("#tipo_media").attr("value","1");
+           document.getElementById("video-input").value = "";
+           $('#output2').attr('src','');
+           $('#output3').attr('src','');
+           $('#output4').attr('src','');
+           $("#tipo_media").attr("value","0");
+           $("#natzc4").hide();
            $(".media").hide();
-           $("#natc2").show();
+           $("#natc1").show();
          });
 
-         $(document).on("change", "#audio-input", function(evt) {
-           $("#output").attr('src','');
-           $("#output2").attr('src','');
-            var $source = $('#output3');
-            var $source2 = $('#output4');
-            $source[0].src = URL.createObjectURL(this.files[0]);
-            $source2[0].src = URL.createObjectURL(this.files[0]);
-            $source.parent()[0].load();
-            $source2.parent()[0].load();
+         $(document).on("click", "#natzc2", function() {
             document.getElementById("image-input").value = "";
-            document.getElementById("video-input").value = "";
-            $("#tipo_media").attr("value","2");
+            document.getElementById("audio-input").value = "";
+            document.getElementById("video-input").value = "https://www.youtube.com/embed/";
+            $('audio').stop();
+            $('#output').attr('src','');
+            $('#output3').attr('src','');
+            $('#output4').attr('src','');
+            $("#tipo_media").attr("value","1");
+            $("#natzc4").show();
             $(".media").hide();
-            $("#natc3").show();
+            $("#natc2").show();
           });
-
 
           $(document).on("change", "#audio-input", function(evt) {
              var $source = $('#output3');
@@ -126,12 +112,43 @@
              $source2.parent()[0].load();
              document.getElementById("image-input").value = "";
              document.getElementById("video-input").value = "";
+             $('#output').attr('src','');
+             $('#output2').attr('src','');
              $("#tipo_media").attr("value","2");
+             $("#natzc4").hide();
              $(".media").hide();
              $("#natc3").show();
            });
-       });
 
+           $(document).on("click", "#natzc5", function() {
+              document.getElementById("image-input").value = "";
+              document.getElementById("audio-input").value = "";
+              document.getElementById("video-input").value = "";
+              $('#output').attr('src','');
+              $('#output2').attr('src','');
+              $('#output3').attr('src','');
+              $('#output4').attr('src','');
+              $("#tipo_media").attr("value","3");
+              $("#natzc4").hide();
+              $(".media").hide();
+            });
+
+          $("#start").on("change keyup paste", function() {
+              var textarea = $("#start").val();
+              if(textarea != "") {
+                $("#preview-post").show();
+              }else {
+                $("#preview-post").hide();
+              }
+          });
+
+          $("#video-input").on("change keyup paste", function() {
+              var textarea = $("#video-input").val();
+              $('#output2').attr('src',textarea);
+
+
+          });
+       });
     </script>
 
     <!-- Header
@@ -231,6 +248,7 @@
 
           <!-- LIST CONTACTS
           ================================================= -->
+          <th:block th:each="friend: ${friends}">
           <div class="col-md-2 static">
             <div class="suggestions" id="sticky-sidebar">
               <h4 class="grey">Contactos Online</h4>
@@ -238,10 +256,10 @@
               <!-- MODEL CONTACT ONLINE -->
 
               <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                <img th:src="${friend.pathimage}" alt="" class="profile-photo-sm pull-left" />
                 <div>
-                  <h5><a href="timeline.html">Diana Amber</a></h5>
-                  <p class="text-green"> 15.000 watchers</p>
+                  <h5><a href="timeline.html"><span th:text="${friend.firstname}"></span></a></h5>
+                  <p class="text-green"><span th:text="${friend.category}"></span></p>
                 </div>
               </div>
 
@@ -249,6 +267,7 @@
 
               </div>
             </div>
+            </th:block>
           </div>
         </div>
       </div>
