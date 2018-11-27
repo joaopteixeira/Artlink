@@ -118,8 +118,8 @@ public class FUser {                   //Funcoes pro USER
 			
 				email.setFrom("artlinkrecovery@gmail.com");
 				email.setSubject("Recuperação de Password da sua conta Artlink");
-				email.setMsg("A sua nova password: "
-						+ newPassword + "Se não efectuou este pedido por favor contacte a administração da Artlink");
+				email.setMsg("A sua nova password:  "
+						+ newPassword + "   :Se não efectuou este pedido por favor contacte a administração da Artlink");
 				email.addTo(usermail);
 				email.send();
 				
