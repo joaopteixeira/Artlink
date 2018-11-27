@@ -157,6 +157,7 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 	
 	Post p = fpost.getPost(idpost);
 
+
 	
 	p.getComments().add(new Comment(u.getId(), content, reportDate));
 	
