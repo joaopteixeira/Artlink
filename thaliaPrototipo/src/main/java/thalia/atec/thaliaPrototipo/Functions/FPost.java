@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
+import thalia.atec.thaliaPrototipo.model.Comment;
 import thalia.atec.thaliaPrototipo.model.Post;
 import thalia.atec.thaliaPrototipo.model.User;
 import thalia.atec.thaliaPrototipo.model.Watch;
@@ -65,11 +66,13 @@ public class FPost {
 		return "nadicionado";		 
 	}
 	 
+	 /*
+	 
 	 public void savePost(Optional<Post> p) {
 		 
 		 prep.save(p);
 	 }
-	 /*
+	 
 	 public Page<Post> getPostWatching(User user){
 		 int cont=0;
 		 
@@ -115,6 +118,15 @@ public class FPost {
 					 p.setUserwatched(u1.get().getWatched().size());
 					 p.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
 					 p.setUserimage(u1.get().getPathimage());
+					 ArrayList<Comment> comments = new ArrayList<>();
+					 for(Comment c:p.getComments()) {
+						 Optional<User> usercom = urep.findById(c.getIduser());
+						 c.setUsername(usercom.get().getFirstname()+" "+usercom.get().getLastname());
+						 c.setImguser(usercom.get().getPathimage());
+						 comments.add(c);
+					 }
+					 p.setComments(comments);
+					 
 					 aux.add(p);
 					 check=true;
 				 }
@@ -129,6 +141,14 @@ public class FPost {
 						 p.setUserwatched(u.getWatched().size());
 						 p.setUsername(u.getFirstname()+" "+u.getLastname());
 						 p.setUserimage(u.getPathimage());
+						 ArrayList<Comment> comments = new ArrayList<>();
+						 for(Comment c:p.getComments()) {
+							 Optional<User> usercom = urep.findById(c.getIduser());
+							 c.setUsername(usercom.get().getFirstname()+" "+usercom.get().getLastname());
+							 c.setImguser(usercom.get().getPathimage());
+							 comments.add(c);
+						 }
+						 p.setComments(comments);
 						 aux.add(p);
 					 }
 				 }
@@ -158,6 +178,14 @@ public class FPost {
 					 p1.setUserwatched(u1.get().getWatched().size());
 					 p1.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
 					 p1.setUserimage(u1.get().getPathimage());
+					 ArrayList<Comment> comments = new ArrayList<>();
+					 for(Comment c:p1.getComments()) {
+						 Optional<User> usercom = urep.findById(c.getIduser());
+						 c.setUsername(usercom.get().getFirstname()+" "+usercom.get().getLastname());
+						 c.setImguser(usercom.get().getPathimage());
+						 comments.add(c);
+					 }
+					 p1.setComments(comments);
 					 aux.add(p1);
 				 }
 				 
@@ -216,15 +244,36 @@ public class FPost {
 	 
 
 	 
-	 public Optional<Post> getThePost(String id) {
+	 public Post addComment(String idpost,String hash,String content) {
 		 
-		 return prep.findById(id);
+		 DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+			// Get the date today using Calendar object.
+			Date today = Calendar.getInstance().getTime();        
+			// Using DateFormat format method we can create a string 
+			// representation of a date with the defined format.
+			String reportDate = df.format(today);
+
+		 
+		 Optional<Post> post = prep.findById(idpost);
+		 Optional<User> user = urep.findByHashes(hash);
+		 
+		 
+		 if(post.isPresent() && user.isPresent()) {
+			 
+			 
+			 Comment  c = new Comment(user.get().getId(),user.get().getFirstname()+" "+user.get().getLastname(),content,reportDate,"");
+			 post.get().getComments().add(c);
+			 
+			 prep.save(post.get());
+			 
+			 return post.get();
+		 }
+		 
+		 return null;
 		 
 	 }
-	 
-	 
-	 
-	 
+
 	 
 	 
 	 
@@ -255,13 +304,16 @@ public class FPost {
 			
 			prep.save(p.get());
 		}
+					
 		
-		
-		
+	}
+
+	public void savePost(Optional<Post> p) {
+		prep.save(p.get());
 		
 	}
 	 
-	 
+
 	 
 
 }
