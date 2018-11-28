@@ -155,7 +155,7 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 	// representation of a date with the defined format.
 	String reportDate = df.format(today);
 	
-	Post p = fpost.getPost(idpost);
+	Optional<Post> p = fpost.getThePost(idpost);
 	
 	//p.getComments().add(new Comment(u.getId(), content, reportDate));
 	

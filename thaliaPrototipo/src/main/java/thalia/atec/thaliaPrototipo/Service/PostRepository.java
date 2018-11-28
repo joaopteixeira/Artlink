@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import thalia.atec.thaliaPrototipo.model.Post;
+import thalia.atec.thaliaPrototipo.model.User;
 
 public interface PostRepository extends MongoRepository<Post, String> {
 	
@@ -15,8 +16,7 @@ public interface PostRepository extends MongoRepository<Post, String> {
 	Optional<Post> findById(String id);
 	List<Post> findByIduser(String iduser);
 	
-	//List<Post> findByCreatorDistrict(String district);
-	List<Post> findByCreatorCategoryDescriptionAndCreatorCategorySubCategoryDescription(String discription,String subCategoryDiscription);
-	List<Post> findByCreatorCategoryDescription(String discription);
+	Page<Post> findAll(Pageable pageable);
+	Optional<User> findByUserid(String id);
 
 }

@@ -65,7 +65,7 @@ public class FPost {
 		return "nadicionado";		 
 	}
 	 
-	 public void savePost(Post p) {
+	 public void savePost(Optional<Post> p) {
 		 
 		 prep.save(p);
 	 }
@@ -214,9 +214,11 @@ public class FPost {
 		 return prep.findAll();
 	 }
 	 
-	 public Post getPost(String id) {
+
+	 
+	 public Optional<Post> getThePost(String id) {
 		 
-		 return prep.findById(id).get();
+		 return prep.findById(id);
 		 
 	 }
 	 
