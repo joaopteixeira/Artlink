@@ -15,7 +15,7 @@ public interface PostRepository extends MongoRepository<Post, String> {
 	Optional<Post> findById(String id);
 	List<Post> findByIduser(String iduser);
 	
-	List<Post> findByCreatorDistrict(String district);
+	//List<Post> findByCreatorDistrict(String district);
 	List<Post> findByCreatorCategoryDescriptionAndCreatorCategorySubCategoryDescription(String discription,String subCategoryDiscription);
 	List<Post> findByCreatorCategoryDescription(String discription);
 
