@@ -182,8 +182,9 @@
 
       <div class="line-divider" ></div>
        <div class="post-comment">
-        <img th:src="${Comment.userimage}" alt="" class="profile-photo-sm" style="background-color:white;"/>
-        <p><a href="/perfil" class="profile-link"><span th:utext="${Comment.iduser}" ></span> <span th:utext="${Comment.content}" ></span></a></p>
+       <img th:src="${Comment.imguser}" alt="" class="profile-photo-sm" style="background-color:white;"/> 
+        <p><a href="/perfil" class="profile-link"><span th:text="${Comment.username}" ></span>: </a>
+          <span th:utext="${Comment.content}" ></span></p>
       </div>
 
 

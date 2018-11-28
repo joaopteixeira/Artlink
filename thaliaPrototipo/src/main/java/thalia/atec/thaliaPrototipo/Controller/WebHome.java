@@ -144,37 +144,19 @@ public class WebHome {
 @PostMapping("/newcomment")
 public String newComment(@RequestParam("content") String content,@RequestParam("idpost") String idpost, HttpSession session){
 	
+	System.out.println("Id-POST:  "+idpost);
+	System.out.println("Content:  "+content);
 	
 	User u = (User)session.getAttribute("User");
 	
-	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	String hash = (String)session.getAttribute("hash");
+	System.out.println("HASH:  "+hash);
 
-	// Get the date today using Calendar object.
-	Date today = Calendar.getInstance().getTime();        
-	// Using DateFormat format method we can create a string 
-	// representation of a date with the defined format.
-	String reportDate = df.format(today);
-	
-	Optional<Post> p = fpost.getThePost(idpost);
-	
-	//p.getComments().add(new Comment(u.getId(), content, reportDate));
-	
-	fpost.savePost(p);
-	
-	
-	
-	
-	
-	//page.addAttribute("User",(User)session.getAttribute("User"));
-
-	
-	//String user = session.getAttribute();
-	
-	
+	Post p = fpost.addComment(idpost,hash,content);
 
 	
 	
-  return "redirect:/feed";
+  return "redirect:/feed?frag=feed";
 }
 
 	

@@ -35,14 +35,13 @@ public class RestPost {
 	@Autowired
     private FileStorageService fileStorageService;
 	
-	@Autowired
-	PostRepository prep;
+
 	
 	@Autowired
 	UserRepository urep;
 	
 	@Autowired
-	FPost fpost;
+	FPost ffpost;
 	
 	@RequestMapping("/get")
 	public ResponseEntity<?> getPosts(@RequestParam("iduser") String iduser,@RequestParam("page") String page,@RequestParam("size") String size) {
@@ -52,7 +51,7 @@ public class RestPost {
 		try {
 			
 			if(user.isPresent()) {
-				List<Post> aux = fpost.getPost(iduser, Integer.valueOf(page),Integer.valueOf(size));
+				List<Post> aux = ffpost.getPost(iduser, Integer.valueOf(page),Integer.valueOf(size));
 				
 				return new ResponseEntity<>((aux.size()==0?"null":aux),HttpStatus.OK);
 			}
@@ -65,21 +64,13 @@ public class RestPost {
 		
 		
 	}
-	/*
-	@RequestMapping("/getuser")
-	public ResponseEntity<List<Post>> getPosts123(@RequestParam("id") String id) {
-		
-		
+	
 
-		return new ResponseEntity<List<Post>>(fpost.getPost("asdda",3),HttpStatus.OK);
-
-	}
-	*/
 	
 	@PostMapping("/addpost")
 	public ResponseEntity<String> addPost(@RequestBody Post post){
 		
-		return new ResponseEntity<>(fpost.newPost(post),HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(ffpost.newPost(post),HttpStatus.ACCEPTED);
 		
 	}
 
@@ -87,7 +78,7 @@ public class RestPost {
 	@GetMapping("/like")
 	public ResponseEntity<String> like(@RequestParam("id_post") String id_post, @RequestParam("id_user") String id_user){
 		
-		fpost.like(id_user, id_post);
+		ffpost.like(id_user, id_post);
 		
 		return new ResponseEntity<String>("",HttpStatus.OK);
 	}
@@ -118,9 +109,9 @@ public class RestPost {
 		
 		
 		return null;
-		
-		
-		
+
 	}
+	
+	
 	
 }

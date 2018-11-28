@@ -50,13 +50,16 @@ public class WebLogin {
 		
 		
 	//	fuser.login(u.getEmail(), password);
-
 		
-		Optional<User> us = userRepo.findByHashes(fuser.login(u.getEmail(), password));
+		String hash = fuser.login(u.getEmail(), password);
+		
+		Optional<User> us = userRepo.findByHashes(hash);
+		
+		
 		
 		if(us.isPresent()) {
 			
-
+			session.setAttribute("hash", hash);
 			//page.addAttribute("User",us.get());
 			session.setAttribute("User", us.get());
 
