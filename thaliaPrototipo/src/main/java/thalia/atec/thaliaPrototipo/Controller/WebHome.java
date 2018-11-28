@@ -156,12 +156,13 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 	String reportDate = df.format(today);
 	
 	Post p = fpost.getPost(idpost);
-
-
 	
-	p.getComments().add(new Comment(u.getId(), content, reportDate));
+	//p.getComments().add(new Comment(u.getId(), content, reportDate));
 	
 	fpost.savePost(p);
+	
+	
+	
 	
 	
 	//page.addAttribute("User",(User)session.getAttribute("User"));
@@ -170,14 +171,11 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 	//String user = session.getAttribute();
 	
 	
-	
-	
+
 	
 	
   return "redirect:/feed";
 }
 
-	
-	
 	
 }

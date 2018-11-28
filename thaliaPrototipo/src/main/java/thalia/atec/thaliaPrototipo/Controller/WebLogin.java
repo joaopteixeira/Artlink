@@ -42,7 +42,7 @@ public class WebLogin {
 		
 	
 		
-		return "redirect:/index.html";     // vai para feed 
+		return "redirect:/index.html";     // 
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)

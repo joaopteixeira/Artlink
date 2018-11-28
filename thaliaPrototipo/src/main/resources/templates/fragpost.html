@@ -199,7 +199,7 @@
 
         <!------- FORM COMENTARIO----- -->
 
-         <form style="width: 100%;"  th:action="@{newcomment}" method="POST" >
+         <form style="width: 100%;"  th:action="@{/newcomment}" method="POST" >
           <div class="form-group" style="width: 100% !important;">
             <input type="hidden" name="idpost" th:value="${post.id}">
             <div style="width: 10%;float: left;"><img th:src="${User.pathimage}" alt="" class="profile-photo-sm" /></div>
