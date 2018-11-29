@@ -8,7 +8,7 @@
     <div class="col-md-12">
         <div class="form-group col-md-12">
           <img th:src="${User.pathimage}" alt="" class="profile-photo-md" />
-          <textarea name="content" id="start" rows="3" class="form-control" placeholder="Partilhe!!" style="resize:none;" maxlength="150" oninput="myFunction()"></textarea>
+          <textarea name="content" id="start" rows="3" class="form-control" placeholder="Partilhe!!" style="resize:none;" maxlength="150" oninput="myFunction()" required></textarea>
           <input type="hidden" name="typemedia" value="3" id="tipo_media">
           <input id="file-input"  th:name="file" type="file" accept="" />
           <script>

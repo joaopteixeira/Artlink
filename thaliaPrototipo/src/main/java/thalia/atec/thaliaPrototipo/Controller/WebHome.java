@@ -22,12 +22,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import thalia.atec.thaliaPrototipo.Functions.FCategories;
+import thalia.atec.thaliaPrototipo.Functions.FCategory;
 import thalia.atec.thaliaPrototipo.Functions.FFeed;
 import thalia.atec.thaliaPrototipo.Functions.FPost;
 import thalia.atec.thaliaPrototipo.Functions.FUser;
+import thalia.atec.thaliaPrototipo.Service.CategoryRepository;
 import thalia.atec.thaliaPrototipo.Service.FileStorageService;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.Util.DateUtil;
+import thalia.atec.thaliaPrototipo.model.Category;
 import thalia.atec.thaliaPrototipo.model.Comment;
 import thalia.atec.thaliaPrototipo.model.Media;
 import thalia.atec.thaliaPrototipo.model.Post;
@@ -40,8 +44,13 @@ public class WebHome {
 	FPost  fpost;
 	
 	@Autowired
+	FUser  fuser;
+	
+	@Autowired
 	UserRepository userrep;;
 	
+	@Autowired
+	CategoryRepository catrep;
 	@Autowired
 	FFeed ffeed;
 	
@@ -103,10 +112,22 @@ public class WebHome {
 			    page.addAttribute("User",(User)session.getAttribute("User"));
 				
 		  }
+		  
+		  
+		  
+		  if(frag.compareTo("search")==0) {	
+			  
+			  
+			List<Category> categories =  catrep.findAll();
+			page.addAttribute("categories", categories);
 			
-		  
-		  
+			
+		}
 
+		  
+		  
+		  
+		  
 			return "feedmain.html";
 		}
 		
@@ -173,7 +194,27 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 
 	
 	
+	
   return "redirect:/feed?frag=feed";
+}
+
+
+@PostMapping("/newsearch")
+public String NewSearch(Model page,@RequestParam("keyword") String keyword, HttpSession session) {
+	
+	
+	List<User> results = fuser.getUserContainig(keyword);
+	
+	
+
+	
+	page.addAttribute("results",results);
+	
+	page.addAttribute("User",(User)session.getAttribute("User"));
+	page.addAttribute("frag","search");
+	
+	
+	 return "feedmain.html";
 }
 
 	
