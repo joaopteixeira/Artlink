@@ -132,26 +132,24 @@
 
   <div th:if="${post.media.typemedia.equals(0)}">
   	<img th:src="${post.media.pathfile}"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">
-    </center> <!--Div Image _-->
+     <!--Div Image _-->
   </div>
 
 
   <div th:if="${post.media.typemedia.equals(1)}"><!--Divs Video _-->
-  <div id="natc2" class="media">  
+  <div  class="media">  
     <iframe class="post-video" th:src="${post.media.pathfile}" width="420" height="315"></iframe>
   </div>
 </div>
 
 
   <div th:if="${post.media.typemedia.equals(2)}"> <!--Divs son _-->
-  <div  class="media"> 
     <audio controls> 
-      <source id="output3" src="horse.ogg" type="audio/ogg">
-      <source id="output4" src="horse.mp3" type="audio/mpeg">
+      <source th:src="${post.media.pathfile}" type="audio/mpeg">
     Your browser does not support the audio element.
     </audio>
-  </div>
 </div>
+
 
 
  <div th:if="${post.media.typemedia.equals(3)}"> <!--Div sem media _-->
