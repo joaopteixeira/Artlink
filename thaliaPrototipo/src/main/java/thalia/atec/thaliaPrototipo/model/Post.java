@@ -130,6 +130,19 @@ public class Post {
 	
 
 	
+	
+
+
+
+	public ArrayList<Comment> getComments() {
+		return comments;
+	}
+
+
+
+	public void setComments(ArrayList<Comment> comments) {
+		this.comments = comments;
+	}
 
 
 

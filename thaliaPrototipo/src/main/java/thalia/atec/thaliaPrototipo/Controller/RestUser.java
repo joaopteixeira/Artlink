@@ -44,7 +44,7 @@ public class RestUser {
 		
 		
 		String status = fuser.Registry(user, password);
-		
+	
 		
 		
 		if(status.compareTo("Registado")==0) {
@@ -58,6 +58,13 @@ public class RestUser {
 		
 		
 	}
+	@GetMapping("/1")
+	public void encryptpass(@RequestParam("pass") String pass) {
+		
+		fuser.encryptpass(pass);
+	}
+	
+	
 	@GetMapping("/getuser")
 	public ResponseEntity<?> getuser(@RequestParam(name="hash",defaultValue="") String hash){
 		
@@ -73,6 +80,19 @@ public class RestUser {
 		return new ResponseEntity<String>("null",HttpStatus.ACCEPTED);
 		
 		
+		
+	}
+	
+	@GetMapping("/resetpass")
+	public ResponseEntity<String> resetPass(@RequestParam("email") String email){
+		
+		String status = fuser.sendEmailReset(email);
+		
+		if(status.compareTo("enviado pedido")==0) {
+			return new ResponseEntity<String>("certo",HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<String>("null",HttpStatus.OK);
 		
 	}
 	

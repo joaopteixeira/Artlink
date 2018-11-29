@@ -2,11 +2,19 @@ package thalia.atec.thaliaPrototipo.Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.annotation.MultipartConfig;
 
+import org.bson.BsonDocument;
+import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +27,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.mongodb.util.JSON;
+
 import thalia.atec.thaliaPrototipo.Functions.FPost;
 import thalia.atec.thaliaPrototipo.Service.FileStorageService;
 import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.UploadFile.UploadFileResponse;
+import thalia.atec.thaliaPrototipo.model.Comment;
 import thalia.atec.thaliaPrototipo.model.Post;
 import thalia.atec.thaliaPrototipo.model.User;
 
@@ -75,6 +88,84 @@ public class RestPost {
 
 	}
 	*/
+	/*
+	@GetMapping("/notify")
+	public ResponseEntity<String> notify(@RequestParam("iduser") String iduser,@RequestParam("qtd") String qtd){
+		
+		Optional<User> user = urep.findById(iduser);
+		
+		if(user.isPresent()) {
+			
+			
+			
+		}
+		
+		
+	}*/
+	
+	
+	@GetMapping("/addcomment")
+	public ResponseEntity<?> addComment(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost,@RequestParam("content") String content){
+		
+		Post p = fpost.addComment(idpost, hash, content);
+		
+		if(p!=null) {
+			return new ResponseEntity<>(p,HttpStatus.ACCEPTED);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+		
+	}
+	
+	@GetMapping("/getcomment")
+	public ResponseEntity<?> getComment(@RequestParam("hash") String hash,@RequestParam("idcomment") String idcomment){
+		
+		Comment c = fpost.getComment(hash, idcomment);
+		
+		if(c!=null) {
+			return new ResponseEntity<>(c,HttpStatus.ACCEPTED);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+		
+	}
+	
+	@GetMapping("/getcommentbysize")
+	public ResponseEntity<?> getCommentBySize(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost,@RequestParam("size") String size){
+		
+		Post p = fpost.getPostBySizeComment(hash, idpost, Integer.valueOf(size));
+		
+		if(p!=null) {
+			return new ResponseEntity<>(p.getComments(),HttpStatus.ACCEPTED);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+		
+	}
+	
+	
+	
+	@GetMapping("/getcomments")
+	public ResponseEntity<?> getComments(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost){
+		
+		List<Comment> comments = fpost.getComments(idpost, hash);
+		
+		if(comments!=null) {
+			return new ResponseEntity<>(comments,HttpStatus.ACCEPTED);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+		
+	}
+	
 	
 	@PostMapping("/addpost")
 	public ResponseEntity<String> addPost(@RequestBody Post post){
@@ -82,7 +173,6 @@ public class RestPost {
 		return new ResponseEntity<>(fpost.newPost(post),HttpStatus.ACCEPTED);
 		
 	}
-
 	
 	@GetMapping("/like")
 	public ResponseEntity<String> like(@RequestParam("id_post") String id_post, @RequestParam("id_user") String id_user){

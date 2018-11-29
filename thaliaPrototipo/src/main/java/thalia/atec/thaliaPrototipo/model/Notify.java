@@ -27,6 +27,7 @@ public class Notify {
 	
 	
 	String idpost;
+	String idcomment;
 	String comment;
 	
 	int estado;
@@ -48,6 +49,20 @@ public class Notify {
 	
 	
 	
+	public String getIdcomment() {
+		return idcomment;
+	}
+
+
+
+
+	public void setIdcomment(String idcomment) {
+		this.idcomment = idcomment;
+	}
+
+
+
+
 	public int getEstado() {
 		return estado;
 	}

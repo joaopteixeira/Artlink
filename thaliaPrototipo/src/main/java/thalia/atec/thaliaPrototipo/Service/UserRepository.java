@@ -3,7 +3,11 @@ package thalia.atec.thaliaPrototipo.Service;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.Document;
+import org.springframework.data.domain.Example;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 import thalia.atec.thaliaPrototipo.model.User;
 
@@ -18,5 +22,6 @@ public interface UserRepository extends MongoRepository<User, String> {
 	Optional<User> findByHashes(String hashes);
 	List<User> findByFirstnameContainingOrLastnameContaining(String firstname,String lastname);
 	
+
 
 }

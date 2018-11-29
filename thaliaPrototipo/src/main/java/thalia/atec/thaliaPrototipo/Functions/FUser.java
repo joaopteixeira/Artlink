@@ -3,6 +3,7 @@ package thalia.atec.thaliaPrototipo.Functions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.Country;
 import thalia.atec.thaliaPrototipo.model.Login;
 import thalia.atec.thaliaPrototipo.model.User;
+import thalia.atec.thaliaPrototipo.model.Watch;
  
 @Service("fuser")
 public class FUser {                   //Funcoes pro USER  
@@ -75,12 +77,82 @@ public class FUser {                   //Funcoes pro USER
 			u.setTokkensquantity(10);	
 			u.setPathimage(WebServices.SERVER+"/upload/downloadFile/userdefault.png");//Quantidade Inicial de Tokkens
 			u.setAccactivated(false);
+			u.getWatching().add(new Watch("5bf7181088ee2d3d8be652bd", "10/24/2018 21:21:21"));
 			userRep.save(u);		
 			
 		}
 		
 		
 		return "Registado";
+		
+	}
+	
+	public void encryptpass(String pass) {
+		
+		int size = pass.length();
+		
+		
+		String[] chars = new String[size];
+		
+		
+		for(int i=0;i<size;i++) {
+			chars[i] = String.valueOf(pass.charAt(i));
+		}
+		
+			
+		String p = "";
+		for(int i=0;i<size;i++) {
+			Random r = new Random();
+			int num = r.nextInt(5);
+			p+=chars[i]+String.valueOf(num)+UUID.randomUUID().toString().substring(0, num);
+		}
+		
+		
+		System.out.println(p);
+		
+		//dsycryption(p);
+		
+		
+		
+		
+		
+	}
+	
+	public void dsycryption(String pass) {
+		
+		int size = pass.length();
+		
+		
+		String[] chars = new String[size];
+		
+		
+		for(int i=0;i<size;i++) {
+			chars[i] = String.valueOf(pass.charAt(i));
+		}
+		
+		String[] passnew = new String[size];
+		
+		passnew[0]=chars[0];
+		int i=0;
+		for(int j=1;i<size-1;j++) {
+			if(Integer.valueOf(chars[i+1])+i+2<size) {
+				i=2+i+Integer.valueOf(chars[i+1]);
+				
+				passnew[j] = chars[i];
+			}else {
+				break;
+			}
+			
+		}
+		
+		String p = "";
+		for(int j=0;j<passnew.length;j++) {
+			if(passnew[j]!=null)
+			p+=passnew[j];
+		}
+		
+		System.out.println(p);
+		
 		
 	}
 	
