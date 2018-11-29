@@ -65,7 +65,7 @@ public class WebHome {
 	}
 	
 	@GetMapping("/feed")
-	public String feed(Model page,@RequestParam("frag") String frag,HttpSession session){
+	public String feed(Model page,@RequestParam("main") String main,@RequestParam("frag") String frag,HttpSession session){
 		
 
 		
@@ -74,65 +74,73 @@ public class WebHome {
 		Optional<User> user = userrep.findById(u.getId());
 		
 	
-		
-		
+		if (user.isPresent()) {
 
-		if(user.isPresent()) {
-			
-			
-			page.addAttribute("User",user.get());
-			page.addAttribute("frag",frag);
+			page.addAttribute("User", user.get());
+			page.addAttribute("main", main);
+			page.addAttribute("frag", frag);
 			session.setAttribute("User", user.get());
-			page.addAttribute("friends",ffeed.getFriends(user.get().getId()));
-			
-			
-			
-		if(frag.compareTo("feed")==0) {
-			
-		
-			System.out.println(user.get().getId());
-			page.addAttribute("posts",fpost.getPost(user.get().getId(), 0, 0));
-			
-			
-			
-			return "feedmain.html";
-		
-			}
-			
-		  if(frag.compareTo("chat")==0) {
+			page.addAttribute("friends", ffeed.getFriends(user.get().getId()));
 
-				page.addAttribute("User",(User)session.getAttribute("User"));
-				
-				
-			}
-			
-		  
-		  if(frag.compareTo("friends")==0) {
+			if (main.compareTo("perfil") == 0) {
 
-			    page.addAttribute("User",(User)session.getAttribute("User"));
-				
-		  }
-		  
-		  
-		  
-		  if(frag.compareTo("search")==0) {	
-			  
-			  
-			List<Category> categories =  catrep.findAll();
-			page.addAttribute("categories", categories);
-			
-			
+				if (frag.compareTo("info") == 0) {
+
+					page.addAttribute("main", "perfil");
+					page.addAttribute("frag", "info");
+
+					return "feedmain.html";
+
+				}
+
+			}
+
+			if (main.compareTo("homepage") == 0) {
+
+				if (frag.compareTo("post") == 0) {
+
+					page.addAttribute("frag", "post");
+					System.out.println(user.get().getId());
+					page.addAttribute("posts", fpost.getPost(user.get().getId(), 0, 0));
+
+					return "feedmain.html";
+
+				}
+
+				if (frag.compareTo("chat") == 0) {
+
+					page.addAttribute("frag", "chat");
+					page.addAttribute("User", (User) session.getAttribute("User"));
+					return "feedmain.html";
+
+				}
+
+				if (frag.compareTo("contacts") == 0) {
+
+					page.addAttribute("frag", "contacts");
+					page.addAttribute("User", (User) session.getAttribute("User"));
+					return "feedmain.html";
+
+				}
+
+				if (frag.compareTo("search") == 0) {
+
+					
+					page.addAttribute("frag", "search");
+					List<Category> categories = catrep.findAll();
+					page.addAttribute("categories", categories);
+					
+					return "feedmain.html";
+
+				}
+
+				return "feedmain.html";
+
+			}
 		}
 
-		  
-		  
-		  
-		  
-			return "feedmain.html";
-		}
-		
 		return "redirect:/index";
-		
+
 	}
 	
 	@PostMapping("/newpost")
@@ -174,7 +182,7 @@ public class WebHome {
 		
 //		
 	
-	 return "redirect:/feed?frag=feed";
+	 return "redirect:/feed?main=homepage&frag=post";
 	}
 //	
 	
@@ -195,11 +203,11 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 	
 	
 	
-  return "redirect:/feed?frag=feed";
+  return "redirect:/feed?main=homepage&frag=post";
 }
 
 
-@PostMapping("/newsearch")
+@PostMapping("/newsearch")	
 public String NewSearch(Model page,@RequestParam("keyword") String keyword, HttpSession session) {
 	
 	
@@ -211,11 +219,13 @@ public String NewSearch(Model page,@RequestParam("keyword") String keyword, Http
 	page.addAttribute("results",results);
 	
 	page.addAttribute("User",(User)session.getAttribute("User"));
+	page.addAttribute("main","homepage");
 	page.addAttribute("frag","search");
 	
-	
-	 return "feedmain.html";
+	  return "redirect:/feed?main=homepage&frag=search";
 }
 
-	
+
+
+
 }

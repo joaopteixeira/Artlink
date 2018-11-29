@@ -1,0 +1,88 @@
+<div th:fragment="info">
+
+
+<!-- Basic Information
+================================================= -->
+<div class="edit-profile-container">
+  <div class="block-title">
+    <h4 class="grey"><i class="icon ion-android-checkmark-circle"></i>Editar Informação</h4>
+    <div class="line"></div>
+    <p>...</p>
+    <div class="line"></div>
+  </div>
+  <div class="edit-block">
+    <form name="basic-info" id="basic-info" class="form-inline">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <label for="nome">Nome</label>
+          <input id="nome" class="form-control input-group-lg" type="text" name="nome" title="Enter first name" placeholder="Nome" value="" />
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="apelido" class="">Apelido</label>
+          <input id="apelido" class="form-control input-group-lg" type="text" name="apelido" title="Enter last name" placeholder="Apelido" value="" />
+        </div>
+      </div>
+      <div class="form-group gender">
+        <span class="custom-label"><strong>Género: </strong></span>
+        <label class="radio-inline">
+          <input type="radio" name="optradio" checked>Masculino
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="optradio">Feminino
+        </label>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-6"> <!-- Date input -->
+          <label class="control-label" for="date">Data de Nascimento</label>
+          <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+        </div>
+    </div>
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <label class="sr-only">City</label>
+          <select class="form-control" name="city">
+            <option value="indiferente">Indiferente</option>
+            <option value="aveiro">Aveiro</option>
+            <option value="beja">Beja</option>
+            <option value="braga">Braga</option>
+            <option value="braganca">Bragança</option>
+            <option value="castelo_branco">Castelo Branco</option>
+            <option value="coimbra">Coimbra</option>
+            <option value="evora">Évora</option>
+            <option value="faro">Faro</option>
+            <option value="guarda">Guarda</option>
+            <option value="ilha_da_madeira">Ilha da Madeira</option>
+            <option value="ilha_das_flores">Ilha das Flores</option>
+            <option value="ilha_porto_santo">Ilha de Porto Santo</option>
+            <option value="ilha_santa_maria">Ilha de Santa Maria</option>
+            <option value="ilha_sao_jorge">Ilha de São Jorge</option>
+            <option value="ilha_sao_miguel">Ilha de São Miguel</option>
+            <option value="ilha_do_corvo">Ilha do Corvo</option>
+            <option value="ilha_do_faial">Ilha do Faial</option>
+            <option value="ilha_do_pico">Ilha do Pico</option>
+            <option value="ilha_graciosa">Ilha Graciosa</option>
+            <option value="ilha_terceira">Ilha Terceira</option>
+            <option value="leiria">Leiria</option>
+            <option value="lisboa">Lisboa</option>
+            <option value="portalegre">Portalegre</option>
+            <option value="porto">Porto</option>
+            <option value="santarem">Santarém</option>
+            <option value="setubal">Setúbal</option>
+            <option value="viana_do_castelo">Viana do Castelo</option>
+            <option value="vila_real">Vila Real</option>
+            <option value="viseu">Viseu</option>
+            </select>
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="country" class="sr-only"></label>
+          <select class="form-control" id="country">
+            <option value="country" disabled selected>Country</option>
+            <option value="0">Portugal</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary">Salvar</button>
+    </form>
+  </div>
+</div>
+</div>

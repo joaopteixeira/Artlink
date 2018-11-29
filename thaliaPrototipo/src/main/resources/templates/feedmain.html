@@ -184,10 +184,17 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
-             
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
+                  <span></a>
+                <ul class="dropdown-menu newsfeed-home">
+                  <li><a href="index.html">Landing Page 1</a></li>
+                  <li><a href="index-register.html">Landing Page 2</a></li>
+                </ul>
+              </li>
 
 
-              <li><a href="timeline.html" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
+              <li><a th:href="@{/feed?main=perfil&frag=info}" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
 
               <li>
                 <div class="imgnavbarcont">
@@ -214,68 +221,42 @@
     <!--Header End-->
 
     <div id="page-contents">
-      <div class="container">
-        <div class="row">
 
-          <!-- Newsfeed Common Side Bar Left
-          ================================================= -->
-          <div id="sticky-menu" class="col-md-3 static">
-            <ul class="nav-news-feed">
-              <li><i class="fas fa-newspaper"></i><div><a href="/feed?frag=feed">Meu feed</a></div></li>
-              <li><i class="fas fa-users"></i><div><a href="/feed?frag=search">Procurar Pessoas</a></div></li>
-              <li><i class="fas fa-address-book"></i><div><a href="/feed?frag=contacts">Lista de Contactos</a></div></li>
-              <li><i class="fas fa-comments"></i><div><a href="/feed?frag=chat">Messagens</a></div></li>
-
-            </ul><!--news-feed links ends-->
-          </div>
-
-          <div class="col-md-7">
-            <!---Frags- -->
-         
-          <th:block  th:switch="${frag}">
-
-          <div th:case="feed"><span th:include="fragpost::post"></span></div>  
-           <div th:case="search"><span th:include="fragsearch::search"></span></div>   
-
-          <div th:case="chat"><span th:include="fragchat::chat"></span></div> 
+      
 
 
-          <div th:case="contacts"><span th:include="fragfriendlist::friendlist"></span></div>    
 
-         <!--  <div th:case=""><span th:include=" :: "></span></div>     -->
+
+
+    <!-- INICIO da pagina
+    ================================================= -->
+
+
+
+  
+          <th:block  th:switch="${main}">
+
+          <div th:case="homepage"><span th:include="homepage::homepage"></span></div>  
+           <div th:case="perfil"><span th:include="perfil::perfil"></span></div>   
           
 
          </th:block>
 
-          </div>
-
-         
-
-          <!-- LIST CONTACTS
-          ================================================= -->
-          <th:block th:each="friend: ${friends}">
-          <div class="col-md-2 static">
-            <div class="suggestions" id="sticky-sidebar">
-              <h4 class="grey">Contactos Online</h4>
-
-              <!-- MODEL CONTACT ONLINE -->
-
-              <div class="follow-user">
-                <img th:src="${friend.pathimage}" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html"><span th:text="${friend.firstname}"></span></a></h5>
-                  <p class="text-green"><span th:text="${friend.category}"></span></p>
-                </div>
-              </div>
 
 
 
-              </div>
-            </div>
-            </th:block>
-          </div>
-        </div>
-      </div>
+   </div>
+    <!-- FIM DA PGINA
+    ================================================= -->
+
+
+
+
+
+
+
+
+
 
     <!-- Footer
     ================================================= -->
