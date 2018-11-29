@@ -29,8 +29,7 @@ public class FileController {
 
     @Autowired
     private FileStorageService fileStorageService;
-    
-	
+
 
     @PostMapping("/uploadFile")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file,@ModelAttribute("Post") Post id) {
@@ -42,18 +41,19 @@ public class FileController {
         String fileName = fileStorageService.storeFile(file);
     	//String fileName = rand.replace("-", "");
 
+        
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("upload/downloadFile/")
                 .path(fileName)
                 .toUriString();     
         System.out.println(fileDownloadUri);
-        
-        
+           
         return new UploadFileResponse(fileName, fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
     
-
+ 
+    
     
 
     @GetMapping("/downloadFile/{fileName:.+}")

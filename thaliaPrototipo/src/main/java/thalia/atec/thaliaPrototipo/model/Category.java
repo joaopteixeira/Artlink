@@ -13,7 +13,6 @@ public class Category {
 	private String id;
 	
 	private String description;
-	private String image;
 	private ArrayList<Category> subCategory;
 	
 	
@@ -24,27 +23,15 @@ public class Category {
 	}
 
 
-	public Category(String description,String image) {
+	public Category(String description) {
 		super();
 		this.description = description;
-		this.image = image;
 		this.subCategory = new ArrayList<>();
 	}
 
 
 	public String getId() {
 		return id;
-	}
-
-	
-
-	public String getImage() {
-		return image;
-	}
-
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 

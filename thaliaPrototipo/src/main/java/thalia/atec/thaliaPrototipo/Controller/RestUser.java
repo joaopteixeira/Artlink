@@ -39,6 +39,8 @@ public class RestUser {
 	FUser fuser;
 	
 	
+	
+	
 	@GetMapping("/registry")
 	public ResponseEntity<String> registry(@ModelAttribute User user,@RequestParam(name="password",defaultValue="") String password){
 		
@@ -122,28 +124,7 @@ public class RestUser {
 		return new ResponseEntity<List<Country>>(fuser.getCountry(),HttpStatus.OK);
 	}
 	
-	@GetMapping("/getcategory")
-	public ResponseEntity<List<Country>> getcategory(){
-		
-		
-		return new ResponseEntity<List<Country>>(fuser.getCountry(),HttpStatus.OK);
-	}
-	
-	@GetMapping("/pesquser")
-	public ResponseEntity<?> pesqUser(@RequestParam(name="hash",defaultValue="") String hash,@RequestParam("name") String name){
-		
-		Optional<User> user = urep.findByHashes(hash);
-		
-		if(user.isPresent()) {
-			
-			return new ResponseEntity<List<User>>(fuser.getUserContainig(name),HttpStatus.OK);
-		}
-
-		return new ResponseEntity<>("null",HttpStatus.OK);
-		
-	}
-	
-	
+	/*
 	
 	@RequestMapping("/mockupdata")
 	public void mockupdata() {
@@ -152,7 +133,7 @@ public class RestUser {
         u.setFirstname("João");
         u.setLastname("Vilares");
         u.setPathimage("https://media.licdn.com/dms/image/C4D03AQHZzUy4bh7AuQ/profile-displayphoto-shrink_800_800/0?e=1547683200&v=beta&t=jiwpA-lq0RmmwHKM7gaQVeIoqKIqU1DQHQH5opCzzdI");
-       
+       prep
         
         Media m = new Media(Media.IMAGE,"https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F502052%2Fbitcoin4.jpg&w=700&op=resize");
 
@@ -177,5 +158,5 @@ public class RestUser {
         
         
         
-	}
+	} */
 }

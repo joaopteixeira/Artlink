@@ -13,13 +13,17 @@ public class Comment {
 	String imguser;
 	String username;
 	String content;
+	String imguser;
 	String date;
+
 	
 	
 	public Comment(String id,String iduser,String username, String content, String date,String imguser) {
 		super();
 		this.id=id;
 		this.iduser = iduser;
+		this.username = username;
+		this.imguser = imguser;
 		this.content = content;
 		this.date = date;
 		this.imguser = imguser;
@@ -42,6 +46,20 @@ public class Comment {
 
 	public String getIduser() {
 		return iduser;
+	}
+	
+	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getImguser() {
+		return imguser;
+	}
+	public void setImguser(String imguser) {
+		this.imguser = imguser;
 	}
 	public void setIduser(String iduser) {
 		this.iduser = iduser;

@@ -8,13 +8,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import thalia.atec.thaliaPrototipo.model.Post;
+import thalia.atec.thaliaPrototipo.model.User;
 
 public interface PostRepository extends MongoRepository<Post, String> {
 	
 	
 	Optional<Post> findById(String id);
-	List<Post> findByIduser(String id);
 	Page<Post> findAll(Pageable pageable);
+	Optional<User> findByIduser(String id);
+
 	
+
 
 }

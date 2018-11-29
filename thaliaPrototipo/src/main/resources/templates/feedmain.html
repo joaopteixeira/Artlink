@@ -34,7 +34,7 @@
 
 
   </head>
-  <body>
+  <body th:object="${User}">
     <script>
     /*$('.media').hide();
      $("#natzc1").click(function(){
@@ -71,51 +71,50 @@
         $(document).on("change", "#image-input", function(evt) {
 =======
      });*/
-     $(document).ready(function(){
-       $('.media').hide();
 
-       $(document).on("change", "#image-input", function(evt) {
-         $("#output2").attr('src','');
-         $("#output3").attr('src','');
-         $("#output4").attr('src','');
-          document.getElementById("audio-input").value = "";
-          document.getElementById("video-input").value = "";
+     $(document).ready(function(){
+        $('.media').hide();
+        $("#preview-post").hide();
+        $("#natzc4").hide();
+
+
+        $("#image").click(function(){
+          $('#file-input').attr('accept','image/*');
           $("#tipo_media").attr("value","0");
-          $(".media").hide();
-          $("#natc1").show();
+        });
+        $("#audio").click(function(){
+          $('#file-input').attr('accept','audio/*');
+          $("#tipo_media").attr("value","2");
         });
 
-        $(document).on("change", "#video-input", function(evt) {
-          $("#output").attr('src','');
-          $("#output3").attr('src','');
-          $("#output4").attr('src','');
-           var $source = $('#output2');
-           $source[0].src = URL.createObjectURL(this.files[0]);
-           $source.parent()[0].load();
-           document.getElementById("image-input").value = "";
-
+        $(document).on("change", "#image-input", function(evt) {
            document.getElementById("audio-input").value = "";
-           $("#tipo_media").attr("value","1");
+           document.getElementById("video-input").value = "";
+           $('#output2').attr('src','');
+           $('#output3').attr('src','');
+           $('#image-input').attr('accept','image/*');
+           $('#output4').attr('src','');
+           
+
+           $("#natzc4").hide();
            $(".media").hide();
-           $("#natc2").show();
+           $("#natc1").show();
          });
 
-         $(document).on("change", "#audio-input", function(evt) {
-           $("#output").attr('src','');
-           $("#output2").attr('src','');
-            var $source = $('#output3');
-            var $source2 = $('#output4');
-            $source[0].src = URL.createObjectURL(this.files[0]);
-            $source2[0].src = URL.createObjectURL(this.files[0]);
-            $source.parent()[0].load();
-            $source2.parent()[0].load();
+         $(document).on("click", "#natzc2", function() {
             document.getElementById("image-input").value = "";
-            document.getElementById("video-input").value = "";
-            $("#tipo_media").attr("value","2");
+            document.getElementById("audio-input").value = "";
+            document.getElementById("video-input").value = "https://www.youtube.com/embed/";
+            $('audio').stop();
+            $('#output').attr('src','');
+            $('#output3').attr('src','');
+            $('#output4').attr('src','');
+            $("#tipo_media").attr("value","1");
+            $("#natzc4").show();
             $(".media").hide();
-            $("#natc3").show();
-          });
+            $("#natc2").show();
 
+          });
 
           $(document).on("change", "#audio-input", function(evt) {
              var $source = $('#output3');
@@ -126,12 +125,43 @@
              $source2.parent()[0].load();
              document.getElementById("image-input").value = "";
              document.getElementById("video-input").value = "";
+             $('#output').attr('src','');
+             $('#output2').attr('src','');
              $("#tipo_media").attr("value","2");
+             $("#natzc4").hide();
              $(".media").hide();
              $("#natc3").show();
            });
-       });
 
+           $(document).on("click", "#natzc5", function() {
+              document.getElementById("image-input").value = "";
+              document.getElementById("audio-input").value = "";
+              document.getElementById("video-input").value = "";
+              $('#output').attr('src','');
+              $('#output2').attr('src','');
+              $('#output3').attr('src','');
+              $('#output4').attr('src','');
+              $("#tipo_media").attr("value","3");
+              $("#natzc4").hide();
+              $(".media").hide();
+            });
+
+          $("#start").on("change keyup paste", function() {
+              var textarea = $("#start").val();
+              if(textarea != "") {
+                $("#preview-post").show();
+              }else {
+                $("#preview-post").hide();
+              }
+          });
+
+          $("#video-input").on("change keyup paste", function() {
+              var textarea = $("#video-input").val();
+              $('#output2').attr('src',textarea);
+
+
+          });
+       });
     </script>
 
     <!-- Header
@@ -148,32 +178,25 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" /></a>
+            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" /></span></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
-                  <span><img src="" alt="" /></span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                </ul>
-              </li>
+             
 
 
-              <li><a href="timeline.html" class="profile-link text-legreen" ></a></li>
+              <li><a href="timeline.html" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
 
               <li>
                 <div class="imgnavbarcont">
                   <a class="dropdown-toggle link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md imgnavbar" />
+                    <img th:src="${User.pathimage}" alt="user" class="profile-photo-md imgnavbar" />
                   </a>
                   <ul class="dropdown-menu newsfeed-home">
                   <li><a href="timeline.html">Perfil</a></li>
-                  <li><a href="index.html">Logout</a></li>
+                  <li><a href="/index">Logout</a></li>
                 </ul>
                 </div>
               </li>
@@ -198,24 +221,31 @@
           ================================================= -->
           <div id="sticky-menu" class="col-md-3 static">
             <ul class="nav-news-feed">
-              <li><i class="fas fa-newspaper"></i><div><a href="newsfeed.html">Meu feed</a></div></li>
-              <li><i class="fas fa-users"></i><div><a href="newsfeed-people-nearby.html">Encontra Pessoas</a></div></li>
-              <li><i class="fas fa-address-book"></i><div><a href="newsfeed-friends.html">Lista de Contactos</a></div></li>
-              <li><i class="fas fa-comments"></i><div><a href="newsfeed-messages.html">Messagens</a></div></li>
-              <li><i class="fas fa-images"></i><div><a href="newsfeed-images.html">Imagens</a></div></li>
-              <li><i class="fas fa-video"></i><div><a href="newsfeed-videos.html">Videos</a></div></li>
+              <li><i class="fas fa-newspaper"></i><div><a href="/feed?frag=feed">Meu feed</a></div></li>
+              <li><i class="fas fa-users"></i><div><a href="/feed?frag=search">Procurar Pessoas</a></div></li>
+              <li><i class="fas fa-address-book"></i><div><a href="/feed?frag=contacts">Lista de Contactos</a></div></li>
+              <li><i class="fas fa-comments"></i><div><a href="/feed?frag=chat">Messagens</a></div></li>
+
             </ul><!--news-feed links ends-->
           </div>
 
           <div class="col-md-7">
             <!---Frags- -->
          
+          <th:block  th:switch="${frag}">
+
+          <div th:case="feed"><span th:include="fragpost::post"></span></div>  
+           <div th:case="search"><span th:include="fragsearch::search"></span></div>   
+
+          <div th:case="chat"><span th:include="fragchat::chat"></span></div> 
+
+
+          <div th:case="contacts"><span th:include="fragfriendlist::friendlist"></span></div>    
+
+         <!--  <div th:case=""><span th:include=" :: "></span></div>     -->
           
 
-
-
-
-
+         </th:block>
 
           </div>
 
@@ -223,6 +253,7 @@
 
           <!-- LIST CONTACTS
           ================================================= -->
+          <th:block th:each="friend: ${friends}">
           <div class="col-md-2 static">
             <div class="suggestions" id="sticky-sidebar">
               <h4 class="grey">Contactos Online</h4>
@@ -230,10 +261,10 @@
               <!-- MODEL CONTACT ONLINE -->
 
               <div class="follow-user">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
+                <img th:src="${friend.pathimage}" alt="" class="profile-photo-sm pull-left" />
                 <div>
-                  <h5><a href="timeline.html">Diana Amber</a></h5>
-                  <p class="text-green"> 15.000 watchers</p>
+                  <h5><a href="timeline.html"><span th:text="${friend.firstname}"></span></a></h5>
+                  <p class="text-green"><span th:text="${friend.category}"></span></p>
                 </div>
               </div>
 
@@ -241,6 +272,7 @@
 
               </div>
             </div>
+            </th:block>
           </div>
         </div>
       </div>
@@ -254,10 +286,9 @@
             <div class="col-md-3 col-sm-3">
               <h5>Segue os Programadores</h5>
               <ul class="list-inline social-icons">
-                <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-                <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-                <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-                <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
                 <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
               </ul>
             </div>
@@ -272,7 +303,7 @@
         </div>
       </div>
       <div class="copyright">
-        <p>Grupo Thalia © 2018. ATEC</p>
+        <p>Artlink © 2018. ATEC</p>
       </div>
     </footer>
 
@@ -283,10 +314,11 @@
     <!-- Scripts
     ================================================= -->
     <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script> -->
-    <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.sticky-kit.min.js"></script>
-    <script src="js/jquery.scrollbar.min.js"></script>
-    <script src="js/script.js"></script>
+    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.sticky-kit.min.js}"></script>
+    <script th:src="@{/js/jquery.scrollbar.min.js}"></script>
+    <script th:src="@{/js/script.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
   </body>
-</html>
+</html>   

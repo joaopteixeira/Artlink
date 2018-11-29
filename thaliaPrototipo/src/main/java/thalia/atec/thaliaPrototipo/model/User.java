@@ -31,7 +31,7 @@ public class User {
 
 	 String phonenumber;
 	 
-	 String pathimage;
+	 String pathimage;   
 
 	int tokkensquantity,gender;
 	
@@ -55,6 +55,15 @@ public class User {
 	
 	
 	
+	
+	public String getCategory() {
+		return category;
+	}
+
+
+
+
+
 	public User() {
 		super();
 		this.preferences = new ArrayList<>();
@@ -99,15 +108,6 @@ public class User {
 
 	
 	
-	
-
-	public String getCategory() {
-		return category;
-	}
-
-
-
-
 
 	public String getUsername() {
 		return username;
@@ -152,7 +152,6 @@ public class User {
 	public String getPathimage() {
 		return pathimage;
 	}
-
 
 
 
@@ -321,8 +320,6 @@ public class User {
 	public void setDistrict(String district) {
 		this.district = district;
 	}
-
-
 
 
 

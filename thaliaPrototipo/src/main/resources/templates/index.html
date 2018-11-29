@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title> Artlink | Explora o Mundo da arte </title>
+		<title>Artlink</title>
 
     <!-- Stylesheets
     ================================================= -->
@@ -13,6 +13,7 @@
     	<link rel="stylesheet" href="css/font-awesome.min.css" />
 		<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
 
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
@@ -35,21 +36,21 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand" href="index-register.html"><img src="images/logo.png" alt="logo" /></a>
+							<a class="navbar-brand" href="#" style=" color:white; font-size: 38px;font-family: 'Megrim', cursive;">artlink<span style="color:#40CC9B;">.pt</span></a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="navbar-header col-sm-6 text-center mx-auto" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right main-menu">
 								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="images/down-arrow.png" alt="" /></span></a>
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span><img src="images/down-arrow.png" alt="" /></span></a>
 									<ul class="dropdown-menu newsfeed-home">
 										<li><a href="index.html">Landing Page 1</a></li>
 										<li><a href="index-register.html">Landing Page 2</a></li>
 									</ul>
 								</li>
 
-								<li class="dropdown"><a href="contact.html">Contact Us</a></li>
+								<li class="dropdown"><a href="contact.html">Contactar-nos</a></li>
 							</ul>
 						</div>
 					</div>
@@ -81,7 +82,7 @@
 								<!-- Register/Login Tabs-->
 								<div class="reg-options">
 									<ul class="nav nav-tabs">
-										<li class="active col-sm-6 tabview"><a href="#register" class="tabview" data-toggle="tab">Register</a></li>
+										<li class="active col-sm-6 tabview"><a href="#register" class="tabview" data-toggle="tab">Registar</a></li>
 										<li class=" col-sm-6 tabview"><a href="#login" class="" data-toggle="tab">Login</a></li>
 									</ul><!--Tabs End-->
 								</div>
@@ -93,18 +94,18 @@
 						<!--Registration Form Contents-->
 						<div class="tab-content">
 							<div class="tab-pane active" id="register">
-								<h3>Register Now !!!</h3>
+								<h3>Registar!!!</h3>
 								<p class="text-muted">Be cool and join today. Meet millions</p>
 
 								<!--Register Form-->
-								<form name="registration_form" class="form-inline" th:action="@{/weblogin/registry}" method="POST">
+								<form name="registration_form" class="form-inline" th:action="@{/registry}" method="POST">
 									<div class="row">
 										<div class="form-group col-xs-6">
-											<label class="sr-only">First Name</label>
+											<label class="sr-only">Nome</label>
 											<input id="firstname" class="form-control input-group newborder" type="text" name="firstname" title="Enter first name" placeholder="First name" required/>
 										</div>
 										<div class="form-group col-xs-6">
-											<label class="sr-only">Last Name</label>
+											<label class="sr-only">Apelido</label>
 											<input id="lastname" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="Last name" required/>
 										</div>
 									</div>
@@ -125,7 +126,7 @@
 									<br>
 										<div class="row">
 											<div class="form-group"> <!-- Date input -->
-												<label class="control-label" for="date">Date of Birth</label>
+												<label class="control-label" for="date">Data de Nascimento</label>
 												<input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" required/>
 											</div>
 							    </div>
@@ -144,7 +145,7 @@
 									<br>
 										<div class="row">
 											<div class="form-group col-xs-6">
-												<label class="sr-only">City</label>
+												<label class="sr-only">Distrito</label>
 												<select class="form-control" name="city">
 													<option value="indiferente">Indiferente</option>
 													<option value="aveiro">Aveiro</option>
@@ -190,10 +191,10 @@
 									<br>
 									<div class="row">
 										<div class="col-sm-6" id="procurado">
-											<button class="btn btn-primary btn-large">Find Me!</button>
+											<button class="btn btn-primary btn-large">Quero ser encontrado</button>
 										</div>
 										<div class="col-sm-6" id="procurador">
-											<button class="btn btn-primary btn-large">Let Me Find!</button>
+											<button class="btn btn-primary btn-large">Quero encontrar Artistas</button>
 										</div>
 									</div>
 
@@ -207,7 +208,7 @@
 								<p class="text-muted">Log into your account</p>
 
 								<!--Login Form-->
-								<form th:action="@{/weblogin/login}" method="POST">
+								<form th:action="@{/login}" method="POST">
 									 <div class="row">
 										<div class="form-group col-xs-12">
 											<label for="my-email" class="sr-only">Email</label>
@@ -224,7 +225,7 @@
 								<p><a id="forget_pass" href="#" data-toggle="modal" data-target="#myModal">Forgot Password?</a></p>
 								<button class="btn btn-primary" type="submit">Login Now</button>
 								</form><!--Login Form Ends-->
-								<form th:action="@{/weblogin/resetPassword}" method="post">
+								<form th:action="@{/resetPassword}" method="post">
 									<div class="modal fade" id="myModal" role="dialog" style="background-color: rgba(0, 0, 0, 0.3);">
 										<div class="modal-dialog">
 											<!-- Modal content-->
@@ -235,7 +236,7 @@
 												</div>
 												<div class="modal-body">
 	
-													<p>Some text in the modal.</p>
+													<p>Intruduza o seu email.</p>
 													<!-- <p>Esqueceu a sua palavra pass?</p>
 													<p>Insira o seu email.</p> -->
 													<div class="row">
@@ -247,7 +248,7 @@
 								
 												</div>
 												<div class="modal-footer">
-													<button type="submit" class="btn btn-primary">Submeter</button>
+													<button type="submit" class="btn btn-primary">Recuperar</button>
 													<button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
 												</div>
 											</div>
@@ -297,6 +298,8 @@
 		<div class="col-md-3">
           <div class="card-block">
                 <h4 class="card-title">Gonçalo Lavrador</h4>
+                <img class="card-img-top" src="..." alt="Card image cap">
+                 <div class="card-block">
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 <a href="https://www.linkedin.com/in/gon%C3%A7alo-lavrador-703256175/" class="btn btn-primary">Read More</a>
               </div>
@@ -350,3 +353,6 @@
 
 	</body>
 </html>
+
+
+
