@@ -253,26 +253,7 @@ public class FUser {                   //Funcoes pro USER
 		
 	}
 	
-public List<User> getUserContainig(String name){
-		
-		String firstname = "";
-		String lastname = "";
-		
-		if(name.contains(" ")) {
-			firstname = name.substring(0, name.indexOf(" "));
-			lastname = name.substring(name.indexOf(" "),name.length()-1);
-		}else {
-			firstname = name;
-			lastname = name;
-		}
-		
-		System.out.println(firstname);
-		System.out.println(lastname);
-		
-		
-		return userRep.findByFirstnameContainingOrLastnameContaining(firstname,lastname);
-		
-	}
+
 	 
 	
 	

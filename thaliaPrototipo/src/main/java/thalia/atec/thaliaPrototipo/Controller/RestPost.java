@@ -27,8 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import com.mongodb.util.JSON;
 
 import thalia.atec.thaliaPrototipo.Functions.FPost;
@@ -84,7 +83,7 @@ public class RestPost {
 	@GetMapping("/addcomment")
 	public ResponseEntity<?> addComment(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost,@RequestParam("content") String content){
 		
-		Post p = fpost.addComment(idpost, hash, content);
+		Post p = ffpost.addComment(idpost, hash, content);
 		
 		if(p!=null) {
 			return new ResponseEntity<>(p,HttpStatus.ACCEPTED);
@@ -99,7 +98,7 @@ public class RestPost {
 	@GetMapping("/getcomment")
 	public ResponseEntity<?> getComment(@RequestParam("hash") String hash,@RequestParam("idcomment") String idcomment){
 		
-		Comment c = fpost.getComment(hash, idcomment);
+		Comment c = ffpost.getComment(hash, idcomment);
 		
 		if(c!=null) {
 			return new ResponseEntity<>(c,HttpStatus.ACCEPTED);
@@ -114,7 +113,7 @@ public class RestPost {
 	@GetMapping("/getcommentbysize")
 	public ResponseEntity<?> getCommentBySize(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost,@RequestParam("size") String size){
 		
-		Post p = fpost.getPostBySizeComment(hash, idpost, Integer.valueOf(size));
+		Post p = ffpost.getPostBySizeComment(hash, idpost, Integer.valueOf(size));
 		
 		if(p!=null) {
 			return new ResponseEntity<>(p.getComments(),HttpStatus.ACCEPTED);
@@ -131,7 +130,7 @@ public class RestPost {
 	@GetMapping("/getcomments")
 	public ResponseEntity<?> getComments(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost){
 		
-		List<Comment> comments = fpost.getComments(idpost, hash);
+		List<Comment> comments = ffpost.getComments(idpost, hash);
 		
 		if(comments!=null) {
 			return new ResponseEntity<>(comments,HttpStatus.ACCEPTED);

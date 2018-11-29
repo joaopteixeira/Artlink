@@ -13,7 +13,6 @@ public class Comment {
 	String imguser;
 	String username;
 	String content;
-	String imguser;
 	String date;
 
 	
@@ -26,7 +25,6 @@ public class Comment {
 		this.imguser = imguser;
 		this.content = content;
 		this.date = date;
-		this.imguser = imguser;
 		this.username = username;
 	}
 	
@@ -49,12 +47,7 @@ public class Comment {
 	}
 	
 	
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 	public String getImguser() {
 		return imguser;
 	}
@@ -76,12 +69,7 @@ public class Comment {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getImguser() {
-		return imguser;
-	}
-	public void setImguser(String imguser) {
-		this.imguser = imguser;
-	}
+	
 	public String getUsername() {
 		return username;
 	}

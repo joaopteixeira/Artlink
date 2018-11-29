@@ -73,7 +73,14 @@ public class FPost {
 		
 		return "nadicionado";		 
 	}
+	 
 	 /*
+	 
+	 public void savePost(Optional<Post> p) {
+		 
+		 prep.save(p);
+	 }
+	 
 	 public Page<Post> getPostWatching(User user){
 		 int cont=0;
 		 
@@ -244,7 +251,8 @@ public class FPost {
 		 return prep.findAll();
 	 }
 	 
-	 public Comment getComment(String hash,String idcomment) {
+	 
+public Comment getComment(String hash,String idcomment) {
 		 
 		 Optional<User> user = urep.findByHashes(hash);
 		 
@@ -293,7 +301,7 @@ public class FPost {
 		 
 		 
 	 }
-	 
+
 	 
 	 
 	 public Post addComment(String idpost,String hash,String content) {
@@ -407,13 +415,16 @@ public class FPost {
 			
 			prep.save(p.get());
 		}
+					
 		
-		
-		
+	}
+
+	public void savePost(Optional<Post> p) {
+		prep.save(p.get());
 		
 	}
 	 
-	 
+
 	 
 
 }
