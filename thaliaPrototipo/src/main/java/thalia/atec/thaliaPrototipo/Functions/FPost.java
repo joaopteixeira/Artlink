@@ -73,14 +73,7 @@ public class FPost {
 		
 		return "nadicionado";		 
 	}
-	 
 	 /*
-	 
-	 public void savePost(Optional<Post> p) {
-		 
-		 prep.save(p);
-	 }
-	 
 	 public Page<Post> getPostWatching(User user){
 		 int cont=0;
 		 
@@ -251,7 +244,55 @@ public class FPost {
 		 return prep.findAll();
 	 }
 	 
+	 public Comment getComment(String hash,String idcomment) {
+		 
+		 Optional<User> user = urep.findByHashes(hash);
+		 
+		 
+		 if(user.isPresent()) {
+			 
+			 for(Post p:prep.findAll()) {
+				 
+				 for(Comment c:p.getComments()) {
+					 if(c.getId().compareTo(idcomment)==0) {
+						 return c;
+					 }
+				 }
+				 
+			 }
+			 
+		 }
+		 
+		 return null;
+		 
+	 }
 	 
+	 public Post getPostBySizeComment(String hash,String idpost,int size) {
+		 
+		 Optional<User> user = urep.findByHashes(hash);
+		 Optional<Post> post = prep.findById(idpost);
+		 
+		 
+		 if(user.isPresent() && post.isPresent()) {
+			 
+			 if(post.get().getComments().size()>size) {
+				 ArrayList<Comment> comments = new ArrayList<>();
+				 for(Comment c:post.get().getComments()) {
+					 Optional<User> usercom = urep.findById(c.getIduser());
+					 c.setUsername(usercom.get().getFirstname()+" "+usercom.get().getLastname());
+					 c.setImguser(usercom.get().getPathimage());
+					 comments.add(c);
+				 }
+				 post.get().setComments(comments);
+				 return post.get();
+			 }
+			 
+		 }
+		 
+		 return null;
+		 
+		 
+	 }
 	 
 	 
 	 
@@ -366,16 +407,13 @@ public class FPost {
 			
 			prep.save(p.get());
 		}
-					
 		
-	}
-
-	public void savePost(Optional<Post> p) {
-		prep.save(p.get());
+		
+		
 		
 	}
 	 
-
+	 
 	 
 
 }
