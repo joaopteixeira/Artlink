@@ -13,6 +13,22 @@ var multipleFileUploadSuccess = document.querySelector('#multipleFileUploadSucce
 function uploadSingleFile(file) {
     var formData = new FormData();
     formData.append("file", file);
+     /*var id = document.getElementById("tipo_media").value;
+     console.log(id);
+     console.log(document.getElementById("tipo_media").value);*/
+
+/*
+    if(id == 0){
+        formData.append("file", image);
+    }
+    if(id == 1){
+        formData.append("file", video);
+    }
+    if(id == 2){
+        formData.append("file", audio);
+    }*/
+ 
+
 
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/uploadFile");

@@ -3,14 +3,14 @@
 
 <div class="create-post">
   <div class="text-header">Fazer Post</div>
-  <form th:action="@{/newpost}" method="GET">
+  <form th:action="@{/newpost}" method="Post" enctype="multipart/form-data">
   <div class="row">
     <div class="col-md-12">
         <div class="form-group col-md-12">
           <img th:src="${User.pathimage}" alt="" class="profile-photo-md" />
           <textarea name="content" id="start" rows="3" class="form-control" placeholder="Partilhe!!" style="resize:none;" maxlength="150" oninput="myFunction()"></textarea>
           <input type="hidden" name="typemedia" value="3" id="tipo_media">
-          <input type="file" name="file" >
+          <input id="file-input"  th:name="file" type="file" accept="" />
           <script>
           function myFunction() {
               var x = document.getElementById("start").value;
@@ -25,10 +25,10 @@
         <ul class="file col-md-12">
                       <li id="natzc1" class="col-md-2" style="width:10%;">
                         <a>
-                          <label for="image-input">
+                          <label id="image" for="file-input">
                             <i class="ion-images"></i>
                           </label>
-                          <input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)"/>
+                         <!-- <input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)"/>-->
                         </a>
                       </li>
                       <li id="natzc2" class="col-md-2" style="width:10%;">
@@ -40,10 +40,10 @@
                       </li>
                       <li id="natzc3" class="col-md-2" style="width:10%;">
                         <a>
-                          <label for="audio-input">
+                          <label id="audio" for="file-input">
                             <i  class="ion-compose"></i>
                           </label>
-                          <input id="audio-input" type="file" name="audio" value="" accept="audio/*">
+                          <!--<input id="audio-input" type="file" name="audio" value="" accept="audio/*">-->
                         </a>
                       </li>
                       <li id="natzc4">
@@ -132,26 +132,24 @@
 
   <div th:if="${post.media.typemedia.equals(0)}">
   	<img th:src="${post.media.pathfile}"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">
-    </center> <!--Div Image _-->
+     <!--Div Image _-->
   </div>
 
 
   <div th:if="${post.media.typemedia.equals(1)}"><!--Divs Video _-->
-  <div id="natc2" class="media">  
+  <div  class="media">  
     <iframe class="post-video" th:src="${post.media.pathfile}" width="420" height="315"></iframe>
   </div>
 </div>
 
 
   <div th:if="${post.media.typemedia.equals(2)}"> <!--Divs son _-->
-  <div  class="media"> 
     <audio controls> 
-      <source id="output3" src="horse.ogg" type="audio/ogg">
-      <source id="output4" src="horse.mp3" type="audio/mpeg">
+      <source th:src="${post.media.pathfile}" type="audio/mpeg">
     Your browser does not support the audio element.
     </audio>
-  </div>
 </div>
+
 
 
  <div th:if="${post.media.typemedia.equals(3)}"> <!--Div sem media _-->
