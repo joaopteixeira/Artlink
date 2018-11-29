@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import thalia.atec.thaliaPrototipo.Functions.FFeed;
 import thalia.atec.thaliaPrototipo.Functions.FPost;
 import thalia.atec.thaliaPrototipo.Functions.FUser;
+import thalia.atec.thaliaPrototipo.Service.FileStorageService;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.Util.DateUtil;
 import thalia.atec.thaliaPrototipo.model.Comment;
@@ -41,6 +44,9 @@ public class WebHome {
 	
 	@Autowired
 	FFeed ffeed;
+	
+	 @Autowired
+	 private FileStorageService fileStorageService;
 	
 	@GetMapping("/index")
 	public String index() {
@@ -108,36 +114,47 @@ public class WebHome {
 		
 	}
 	
-////	@GetMapping("/newpost")
-//	public String feed(@RequestParam("content") String content, HttpSession session){
+	@PostMapping("/newpost")
+  public String feed(@RequestParam("file") MultipartFile file,@RequestParam("content") String content,@RequestParam("typemedia") int typemedia,/*@RequestParam("pathfile") String pathfile,*/ HttpSession session){
 //		
 //		
-//		User u = (User)session.getAttribute("User");
+		String fileName = fileStorageService.storeFile(file);
+    	//String fileName = rand.replace("-", "");
+
+        
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("upload/downloadFile/")
+                .path(fileName)
+                .toUriString();     
+        System.out.println(fileDownloadUri);
+		
+		
+		User u = (User)session.getAttribute("User");
 //		
-//		Post p = new Post();
+		Post p = new Post();
 //		
 //		
-//	    LocalDateTime date =  LocalDateTime.now();  
+		LocalDateTime date =  LocalDateTime.now();  
 //
 //		
-//		String username = u.getUsername() ;
+			String username = u.getUsername() ;
 //		
-//		String iduser;
+			String iduser;
 //		
-//		Media media;
+			Media media = new Media(typemedia,fileDownloadUri);//pathfile);
 //		
 //		
-//	    p.setContent(content);
-//		p.setUsername(username);
-//		p.setDate(date.toString());
-//
+	    p.setContent(content);
+		p.setUsername(username);
+		p.setIduser(u.getId());
+		p.setDate(date.toString());	
+		p.setMedia(media);
+		fpost.newPost(p);
+		
 //		
-//	
-//		
-//		 fpost.newPost(p);
-//		
-//		 return "redirect:/feed";
-//	}
+	
+	 return "redirect:/feed?frag=feed";
+	}
 //	
 	
 	

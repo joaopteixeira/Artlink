@@ -3,14 +3,14 @@
 
 <div class="create-post">
   <div class="text-header">Fazer Post</div>
-  <form th:action="@{/newpost}" method="GET">
+  <form th:action="@{/newpost}" method="Post" enctype="multipart/form-data">
   <div class="row">
     <div class="col-md-12">
         <div class="form-group col-md-12">
           <img th:src="${User.pathimage}" alt="" class="profile-photo-md" />
           <textarea name="content" id="start" rows="3" class="form-control" placeholder="Partilhe!!" style="resize:none;" maxlength="150" oninput="myFunction()"></textarea>
           <input type="hidden" name="typemedia" value="3" id="tipo_media">
-          <input type="file" name="file" >
+          <input id="file-input"  th:name="file" type="file" accept="" />
           <script>
           function myFunction() {
               var x = document.getElementById("start").value;
@@ -25,10 +25,10 @@
         <ul class="file col-md-12">
                       <li id="natzc1" class="col-md-2" style="width:10%;">
                         <a>
-                          <label for="image-input">
+                          <label id="image" for="file-input">
                             <i class="ion-images"></i>
                           </label>
-                          <input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)"/>
+                         <!-- <input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)"/>-->
                         </a>
                       </li>
                       <li id="natzc2" class="col-md-2" style="width:10%;">
@@ -40,10 +40,10 @@
                       </li>
                       <li id="natzc3" class="col-md-2" style="width:10%;">
                         <a>
-                          <label for="audio-input">
+                          <label id="audio" for="file-input">
                             <i  class="ion-compose"></i>
                           </label>
-                          <input id="audio-input" type="file" name="audio" value="" accept="audio/*">
+                          <!--<input id="audio-input" type="file" name="audio" value="" accept="audio/*">-->
                         </a>
                       </li>
                       <li id="natzc4">

@@ -44,7 +44,11 @@ public class Post {
 	
 
 	public Post() {
+		
 		super();
+		this.comments = new ArrayList<>();
+		this.likes = new ArrayList<>();
+		
 	}
 
 
