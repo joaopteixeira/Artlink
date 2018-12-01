@@ -65,7 +65,7 @@ public class WebHome {
 	}
 	
 	@GetMapping("/feed")
-	public String feed(Model page,@RequestParam("main") String main,@RequestParam("frag") String frag,HttpSession session){
+	public String feed(Model page,@RequestParam("main") String main,@RequestParam("frag") String frag,@RequestParam(value="keyword",defaultValue="*") String keyword,HttpSession session){
 		
 
 		
@@ -84,14 +84,63 @@ public class WebHome {
 
 			if (main.compareTo("perfil") == 0) {
 
-				if (frag.compareTo("info") == 0) {
+				if (frag.compareTo("timeline") == 0) {
 
-					page.addAttribute("main", "perfil");
-					page.addAttribute("frag", "info");
+					
+					page.addAttribute("User", (User) session.getAttribute("User"));
+					page.addAttribute("posts",fpost.getPostsByUser(u.getId() ) );
+					page.addAttribute("frag", "timeline");
 
 					return "feedmain.html";
 
 				}
+				
+				if (frag.compareTo("about") == 0) {
+
+			
+					page.addAttribute("frag", "about");
+
+					return "feedmain.html";
+
+				}
+				
+				if (frag.compareTo("galeria") == 0) {
+
+				
+					page.addAttribute("frag", "galeria");
+
+					return "feedmain.html";
+
+				}
+				
+				if (frag.compareTo("playlist") == 0) {
+
+			
+					page.addAttribute("frag", "playlist");
+
+					return "feedmain.html";
+
+				}
+				
+				if (frag.compareTo("amigos") == 0) {
+
+				
+					page.addAttribute("frag", "amigos");
+
+					return "feedmain.html";
+
+				}
+				
+				if (frag.compareTo("profile") == 0) {
+
+			
+					page.addAttribute("frag", "profile");
+
+					return "feedmain.html";
+
+				}
+				
+	
 
 			}
 
@@ -125,12 +174,19 @@ public class WebHome {
 
 				if (frag.compareTo("search") == 0) {
 
-					
-					page.addAttribute("frag", "search");
+			
 					List<Category> categories = catrep.findAll();
 					page.addAttribute("categories", categories);
 					
-					return "feedmain.html";
+				
+				
+					
+					if(keyword.compareTo("*")!=0) {
+						
+						List<User> results = fuser.getUserContainig(keyword);
+
+						page.addAttribute("results",results);
+					}
 
 				}
 
@@ -211,18 +267,11 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 public String NewSearch(Model page,@RequestParam("keyword") String keyword, HttpSession session) {
 	
 	
-	List<User> results = fuser.getUserContainig(keyword);
-	
-	
+	page.addAttribute("User",(User)session.getAttribute("User"));
 
 	
-	page.addAttribute("results",results);
-	
-	page.addAttribute("User",(User)session.getAttribute("User"));
-	page.addAttribute("main","homepage");
-	page.addAttribute("frag","search");
-	
-	  return "redirect:/feed?main=homepage&frag=search";
+
+	  return "redirect:/feed?main=homepage&frag=search&keyword="+keyword;
 }
 
 

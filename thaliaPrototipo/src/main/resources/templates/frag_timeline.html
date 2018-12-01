@@ -1,291 +1,113 @@
 
 <div th:fragment="timeline">
 
-<div class="row">
-  <div class="col-md-3 static"> <!-- Informação da pessoa -->
-    <div id="sticky-sidebar">
-      <h3>Sarah Cruiz</h3>
-      <p class="text-muted">Creative Director</p>
-      <div class="feed-item">
-        <div class="live-activity">
-          <p><p class="profile-link">Sobre</p></p>
-          <input  id="1" class="text-grey" type="text">
-          <p class="text-muted">Idade: <span>23</span></p>
-          <p class="text-muted">Género: <span>Feminino</span></p>
-          <p class="text-muted"><span>Lisboa</span>, <span>Portugal</span></p>
-          <p class="text-muted">Email: <span>Sara@gmail.com</span></p>
-          <p class="text-muted">Data de Nascimento: <span>15/10/1989</span></p>
+  <div class="row">
+    <!-- ||| -->
+    <div class="col-md-3 static"> <!-- Informação da pessoa -->
+      <div id="sticky-sidebar">
+        <h3><span th:src="${User.firstname}"></span></h3>
+        <p class="text-muted"><span th:src="${User.category}"></span></p>
+        <div class="feed-item">
+          <div class="live-activity">
+            <p class="profile-link">Sobre</p>
+            <input  id="1" class="text-grey" type="text">
+            <p class="text-muted">Idade: <span th:utext="${User.firstname}"></span></p>
+            <p class="text-muted">Género: <span th:utext="${User.gender}"></span></p>
+            <p class="text-muted">Lisboa<span th:utext="${User.country}"></span></p>
+            <p class="text-muted">Email: <span th:utext="${User.email}"></span></p>
+            <p class="text-muted">Data de Nascimento: <span th:utext="${User.birthdate}"></span></p>
+          </div>
         </div>
-      </div>
-      <div class="feed-item">
-        <div class="live-activity">
-          <p><p class="profile-link">Empresa | Artista</p></p>
+        <div class="feed-item">
+          <div class="live-activity">
+            <p class="profile-link"><span th:utext="${User.type}"></span></p>
+          </div>
         </div>
       </div>
     </div>
+    <div class="col-md-7"><!-- Fragmento -->
+      <!-- Lista de todos os Posts
+      ================================================= -->
+      <th:block th:each="post : ${posts}">
+
+                <!-- POST MODELO -->
+              <div class="post-content">
+
+
+
+                <div th:if="${post.media.typemedia.equals(0)}">
+                  <img th:src="${post.media.pathfile}"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">
+                   <!--Div Image _-->
+                </div>
+
+
+                <div th:if="${post.media.typemedia.equals(1)}"><!--Divs Video _-->
+                <div  class="media">  
+                  <iframe class="post-video" th:src="${post.media.pathfile}" width="420" height="315"></iframe>
+                </div>
+              </div>
+
+
+                <div th:if="${post.media.typemedia.equals(2)}"> <!--Divs son _-->
+                  <audio controls> 
+                    <source th:src="${post.media.pathfile}" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                  </audio>
+              </div>
+
+
+
+               <div th:if="${post.media.typemedia.equals(3)}"> <!--Div sem media _-->
+              <div  class="media"></div>
+              </div>
+
+
+
+                  <div class="post-container">
+                  <img th:src="${post.userimage}" alt="user" class="profile-photo-md pull-left" />
+                  <div class="post-detail">
+                    <div class="user-info">
+                      <h5><a href="#"> <span th:utext="${post.username}"> </span></a> <span class="following" th:utext="${post.userwatched}"> </span></h5>
+                      <p class="text-muted"><span th:utext="${T(thalia.atec.thaliaPrototipo.Util.DateUtil).timeago(post.date)}"></span> </p>
+                    </div>
+                    <div class="reaction">
+                      <a class="btn text-green"><i class="icon ion-thumbsup"></i> <span th:utext="${#lists.size(post.likes)}" ></span> </a>
+                  
+                    </div>
+                    <div class="line-divider"></div>
+                  </div>
+                  </div>
+                    <div class="post-text">
+                      <p> <span th:utext="${post.content}" ></span></p>
+                    </div>
+
+
+               
+               <th:block th:each="Comment : ${post.comments}">
+                    <div class="line-divider" ></div>
+                     <div class="post-comment">
+                     <img th:src="${Comment.imguser}" alt="" class="profile-photo-sm" style="background-color:white;"/> 
+                      <p><a href="/perfil" class="profile-link"><span th:text="${Comment.username}"></span>: </a>
+                        <span th:utext="${Comment.content}" ></span></p>
+                    </div>
+                </th:block>   
+                   <!-- Fim dos Comentários de cada post -->
+              <div class="post-comment">
+
+                  <!------- FORM COMENTARIO----- -->
+                  <form style="width: 100%;"  th:action="@{/newcomment}" method="POST" >
+                    <div class="form-group" style="width: 100% !important;">
+                      <input type="hidden" name="idpost" th:value="${post.id}">
+                      <div style="width: 10%;float: left;"><img th:src="${User.pathimage}" alt="" class="profile-photo-sm" /></div>
+                      <div style="width: 90%;float: right;"><input type="text" class="form-control" name='content' placeholder="Comentar"></div>
+                    </div>
+                    <div class="form-group" style="width:100%;float: right;">  <button class="btn btn-primary pull-right" id="submit" type="submit">Publicar</button></div>
+                  </form>
+              </div>
+          </div>
+        </th:block>
+    
+    </div>
+    <div class="col-md-2 static"></div>
   </div>
-  <div class="col-md-7"><!-- Fragmento -->
-    <!-- Lista de todos os Posts
-    ================================================= -->
-    <!-- Post Create Box
-    ================================================= -->
-    <div class="create-post"></div>
-    <!-- Post Content
-    ================================================= -->
-    <div class="post-content">
-      <!--Post Date-->
-      <div class="post-date hidden-xs hidden-sm">
-        <h5>Sarah</h5>
-        <p class="text-grey">Sometimes ago</p>
-      </div><!--Post Date End-->
-
-      <img src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" />
-      <div class="post-container">
-        <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-        <div class="post-detail">
-          <div class="user-info">
-            <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-            <p class="text-muted">Published a photo about 15 mins ago</p>
-          </div>
-          <div class="reaction">
-            <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-            <a class="btn text-red"><i class="icon ion-thumbsdown"></i> 13</a>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <!-- FORM COMENTARIO -->
-             <form style="width: 100%;" >
-              <div class="form-group" style="width: 100% !important;">
-                <div style="width: 10%;float: left;"><img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" /></div>
-                <div class="row">
-                  <div class="form-group">
-                    <div class=" col-xs-8"><input type="text" class="form-control" name='description' placeholder="Post a comment"></div>
-                    <div class=" col-xs-2" style="position:relative; top:4px; left:30px;"><button class="btn btn-primary pull-right" style="padding: 7px 20px;" type="submit">Comentar</button></div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="post-content">
-      <!--Post Date-->
-      <div class="post-date hidden-xs hidden-sm">
-        <h5>Sarah</h5>
-        <p class="text-grey">Sometimes ago</p>
-      </div><!--Post Date End-->
-
-      <img src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" />
-      <div class="post-container">
-        <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-        <div class="post-detail">
-          <div class="user-info">
-            <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-            <p class="text-muted">Published a photo about 15 mins ago</p>
-          </div>
-          <div class="reaction">
-            <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-            <a class="btn text-red"><i class="icon ion-thumbsdown"></i> 13</a>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <!-- FORM COMENTARIO -->
-             <form style="width: 100%;" >
-              <div class="form-group" style="width: 100% !important;">
-                <div style="width: 10%;float: left;"><img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" /></div>
-                <div class="row">
-                  <div class="form-group">
-                    <div class=" col-xs-8"><input type="text" class="form-control" name='description' placeholder="Post a comment"></div>
-                    <div class=" col-xs-2" style="position:relative; top:4px; left:30px;"><button class="btn btn-primary pull-right" style="padding: 7px 20px;" type="submit">Comentar</button></div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="post-content">
-      <!--Post Date-->
-      <div class="post-date hidden-xs hidden-sm">
-        <h5>Sarah</h5>
-        <p class="text-grey">Sometimes ago</p>
-      </div><!--Post Date End-->
-
-      <img src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" />
-      <div class="post-container">
-        <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-        <div class="post-detail">
-          <div class="user-info">
-            <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-            <p class="text-muted">Published a photo about 15 mins ago</p>
-          </div>
-          <div class="reaction">
-            <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-            <a class="btn text-red"><i class="icon ion-thumbsdown"></i> 13</a>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <!-- FORM COMENTARIO -->
-             <form style="width: 100%;" >
-              <div class="form-group" style="width: 100% !important;">
-                <div style="width: 10%;float: left;"><img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" /></div>
-                <div class="row">
-                  <div class="form-group">
-                    <div class=" col-xs-8"><input type="text" class="form-control" name='description' placeholder="Post a comment"></div>
-                    <div class=" col-xs-2" style="position:relative; top:4px; left:30px;"><button class="btn btn-primary pull-right" style="padding: 7px 20px;" type="submit">Comentar</button></div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="post-content">
-      <!--Post Date-->
-      <div class="post-date hidden-xs hidden-sm">
-        <h5>Sarah</h5>
-        <p class="text-grey">Sometimes ago</p>
-      </div><!--Post Date End-->
-
-      <img src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" />
-      <div class="post-container">
-        <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-        <div class="post-detail">
-          <div class="user-info">
-            <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-            <p class="text-muted">Published a photo about 15 mins ago</p>
-          </div>
-          <div class="reaction">
-            <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-            <a class="btn text-red"><i class="icon ion-thumbsdown"></i> 13</a>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <!-- FORM COMENTARIO -->
-             <form style="width: 100%;" >
-              <div class="form-group" style="width: 100% !important;">
-                <div style="width: 10%;float: left;"><img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" /></div>
-                <div class="row">
-                  <div class="form-group">
-                    <div class=" col-xs-8"><input type="text" class="form-control" name='description' placeholder="Post a comment"></div>
-                    <div class=" col-xs-2" style="position:relative; top:4px; left:30px;"><button class="btn btn-primary pull-right" style="padding: 7px 20px;" type="submit">Comentar</button></div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="post-content">
-      <!--Post Date-->
-      <div class="post-date hidden-xs hidden-sm">
-        <h5>Sarah</h5>
-        <p class="text-grey">Sometimes ago</p>
-      </div><!--Post Date End-->
-
-      <img src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" />
-      <div class="post-container">
-        <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
-        <div class="post-detail">
-          <div class="user-info">
-            <h5><a href="timeline.html" class="profile-link">Sarah Cruiz</a> <span class="following">following</span></h5>
-            <p class="text-muted">Published a photo about 15 mins ago</p>
-          </div>
-          <div class="reaction">
-            <a class="btn text-green"><i class="icon ion-thumbsup"></i> 13</a>
-            <a class="btn text-red"><i class="icon ion-thumbsdown"></i> 13</a>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-text">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-          </div>
-          <div class="line-divider"></div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-            <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-          </div>
-          <div class="post-comment">
-            <!-- FORM COMENTARIO -->
-             <form style="width: 100%;" >
-              <div class="form-group" style="width: 100% !important;">
-                <div style="width: 10%;float: left;"><img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" /></div>
-                <div class="row">
-                  <div class="form-group">
-                    <div class=" col-xs-8"><input type="text" class="form-control" name='description' placeholder="Post a comment"></div>
-                    <div class=" col-xs-2" style="position:relative; top:4px; left:30px;"><button class="btn btn-primary pull-right" style="padding: 7px 20px;" type="submit">Comentar</button></div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-  </div>
-  <div class="col-md-2 static">
-
-  </div>
-</div>
 </div>

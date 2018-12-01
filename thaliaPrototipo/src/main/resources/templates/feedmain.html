@@ -185,21 +185,17 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
+                <a th:href="@{/feed?main=homepage&frag=post}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Página Principal
                   <span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                </ul>
               </li>
 
 
-              <li><a th:href="@{/feed?main=perfil&frag=info}" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
+              <li><a th:href="@{/feed?main=perfil&frag=timeline}" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
 
               <li>
                 <div class="imgnavbarcont">
                   <a class="dropdown-toggle link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img th:src="${User.pathimage}" alt="user" class="profile-photo-md imgnavbar" />
+                    <img th:src="${User.pathimage}" alt="user" class="profile-photo-md imgnavbar" style="background: white;"/>
                   </a>
                   <ul class="dropdown-menu newsfeed-home">
                   <li><a href="timeline.html">Perfil</a></li>

@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-md-9 col-sm-9">
 
-      <form th:action="@{/newsearch}" method="post">
+      <form th:action="@{/newsearch?main=homepage&frag=search}" method="POST">
         <div class="form-group col-md-12 col-sm-12" style="margin-bottom:2%;">
           <input class="form-control" type="text" name="keyword" value="" placeholder="Procurar">
         </div>

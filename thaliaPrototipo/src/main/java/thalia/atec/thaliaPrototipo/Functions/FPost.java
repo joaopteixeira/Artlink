@@ -424,6 +424,16 @@ public Comment getComment(String hash,String idcomment) {
 		
 	}
 	 
+	
+	public List<User> getPostsByUser(String iduser){
+		
+		
+		
+		
+		
+		
+		return prep.findByIduser(iduser);
+	}
 
 	 
 

@@ -15,8 +15,9 @@ public interface PostRepository extends MongoRepository<Post, String> {
 	
 	Optional<Post> findById(String id);
 	Page<Post> findAll(Pageable pageable);
-	Optional<User> findByIduser(String id);
-
+	List<User> findByIduser(String id);
+	
+	
 	
 
 
