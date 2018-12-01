@@ -33,16 +33,29 @@ public class WebLogin {
 
 	
 	@RequestMapping(value="/registry", method=RequestMethod.POST)
-	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page){
+	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page,HttpSession session){
 
 		
 		System.out.println("");
 		
-		fuser.Registry(u,password);
 		
+		Optional<User> us = userRepo.findByEmail(u.getEmail());
+		
+		if(us.isPresent()) {
+			
+			
+			return "redirect:/index.html"; 
+
+			
+			
+		}
 	
 		
-		return "redirect:/index.html";     // 
+		fuser.Registry(u,password);
+		session.setAttribute("User",u);
+		return UserLogin(u,page,password,session);
+		
+		    // 
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
