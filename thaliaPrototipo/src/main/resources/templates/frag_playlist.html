@@ -2,68 +2,70 @@
 <div th:fragment="playlist" >
 
 <div class="row">
-  <div class="col-md-3 static"> <!-- Informação da pessoa -->
-    <div id="sticky-sidebar">
-      <h3>Sarah Cruiz</h3>
-      <p class="text-muted">Creative Director</p>
-      <div class="feed-item">
-        <div class="live-activity">
-          <p><p class="profile-link">Sobre</p></p>
-          <input  id="1" class="text-grey" type="text">
-          <p class="text-muted">Idade: <span>23</span></p>
-          <p class="text-muted">Género: <span>Feminino</span></p>
-          <p class="text-muted"><span>Lisboa</span>, <span>Portugal</span></p>
-          <p class="text-muted">Email: <span>Sara@gmail.com</span></p>
-          <p class="text-muted">Data de Nascimento: <span>15/10/1989</span></p>
-        </div>
-      </div>
-      <div class="feed-item">
-        <div class="live-activity">
-          <p><p class="profile-link">Empresa | Artista</p></p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-7">
-
-    <!-- Post Create Box
-    ================================================= -->
-    <br><br>
-    <!-- Media
-    ================================================= -->
-    <div class="media">
-      <div class="row js-masonry" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": true }'>
-        <!-- fragemnto do Audio  -->
-        <div class="grid-item col-md-6 col-sm-6">
-          <div class="media-grid">
-            <div>
-              <audio controls>
-                <source src=".ogg" type="audio/ogg">
-                <source src=".mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
-            </div>
-            <div class="media-info">
-              <div class="reaction">
-                <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 46</a>
-                <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 11</a>
-              </div>
-              <div class="user-info">
-                <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm pull-left" />
-                <div class="user">
-                  <h6><a href="#" class="profile-link">Julia Cox</a></h6>
-                  <a class="text-green" href="#">Friend</a>
-                </div>
-              </div>
-            </div>
+    <!-- ||| -->
+    <div class="col-md-3 static"> <!-- Informação da pessoa -->
+      <div id="sticky-sidebar">
+        <h3><span th:src="${User.firstname}"></span></h3>
+        <p class="text-muted"><span th:src="${User.category}"></span></p>
+        <div class="feed-item">
+          <div class="live-activity">
+            <p class="profile-link">Sobre</p>
+            <input  id="1" class="text-grey" type="text">
+            <p class="text-muted">Nome: <span th:utext="${User.firstname}"></span></p>
+            <p class="text-muted">Género: <div th:if="${User.gender.equals(2)}"> <span>Masculino</span> </div><div th:if="${User.gender.equals(1)}"> <span>Feminino</span> </div></p>
+            <p class="text-muted">Pais: <span th:utext="${User.country}"></span></p>
+            <p class="text-muted">Districto: <span th:utext="${User.district}"></span></p>
+            <p class="text-muted">Email: <span th:utext="${User.email}"></span></p>
+            <p class="text-muted">Data de Nascimento: <span th:utext="${User.birthdate}"></span></p>
           </div>
         </div>
-        <!-- FIM do Fragmento -->
+        <div class="feed-item">
+          <div class="live-activity">
+            <p class="profile-link"> <div th:if="${User.type.equals(0)}"><span> Artista </span></div> <div th:if="${User.type.equals(1)}"><span> Observador </span></div></p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-2 static">
+    <div class="col-md-7"><!-- Fragmento -->
+      <!-- Lista de todos os Posts
+      ================================================= -->
 
+     <th:block th:each="post : ${posts}">
+                
+              <div class="post-content">
+
+
+
+                <div th:if="${post.media.typemedia.equals(0)}">  </div>
+
+
+                <div th:if="${post.media.typemedia.equals(1)}"><!--Divs Video _--></div>
+
+
+      
+
+                <div th:if="${post.media.typemedia.equals(2)}"> <!--Divs son _-->
+                 <audio controls> 
+                  <source th:src="${post.media.pathfile}" type="audio/mpeg">
+                  Your browser does not support the audio element.
+                </audio></div>
+
+
+
+               <div th:if="${post.media.typemedia.equals(3)}"> </div>
+
+
+
+
+             
+                   <!-- Fim dos Comentários de cada post -->
+            
+          </div>
+      
+        </th:block>
+   
+    </div>
+    <div class="col-md-2 static"></div>
   </div>
-</div>
+
 </div>

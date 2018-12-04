@@ -88,7 +88,12 @@ public class WebHome {
 
 					
 					page.addAttribute("User", (User) session.getAttribute("User"));
-					page.addAttribute("posts",fpost.getPostsByUser(u.getId() ) );
+								
+					
+					List posts = (List) fpost.getPostsByUser(u.getId());
+					
+					
+					page.addAttribute("posts",posts);
 					page.addAttribute("frag", "timeline");
 
 					return "feedmain.html";
@@ -106,7 +111,14 @@ public class WebHome {
 				
 				if (frag.compareTo("galeria") == 0) {
 
+					
+					page.addAttribute("User", (User) session.getAttribute("User"));
 				
+					
+					List posts = (List) fpost.getPostsByUser(u.getId());
+					
+					
+					page.addAttribute("posts",posts);
 					page.addAttribute("frag", "galeria");
 
 					return "feedmain.html";
@@ -117,6 +129,10 @@ public class WebHome {
 
 			
 					page.addAttribute("frag", "playlist");
+					List posts = (List) fpost.getPostsByUser(u.getId());
+					
+					
+					page.addAttribute("posts",posts);
 
 					return "feedmain.html";
 
@@ -139,8 +155,18 @@ public class WebHome {
 					return "feedmain.html";
 
 				}
+				if (frag.compareTo("password") == 0) {
+
+					
+					page.addAttribute("frag", "password");
+					
+					
+
+					return "feedmain.html";
+
+				}
 				
-	
+				
 
 			}
 

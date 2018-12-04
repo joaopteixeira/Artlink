@@ -425,7 +425,7 @@ public Comment getComment(String hash,String idcomment) {
 	}
 	 
 	
-	public List<User> getPostsByUser(String iduser){
+	public List<Post> getPostsByUser(String iduser){
 		
 		
 		

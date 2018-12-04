@@ -5,22 +5,23 @@
     <!-- ||| -->
     <div class="col-md-3 static"> <!-- Informação da pessoa -->
       <div id="sticky-sidebar">
-        <h3><span th:src="${User.firstname}"></span></h3>
+        <h3><span th:src="${User.firstname}"></span> ><span th:src="${User.lastname}"></span></h3>
         <p class="text-muted"><span th:src="${User.category}"></span></p>
         <div class="feed-item">
           <div class="live-activity">
             <p class="profile-link">Sobre</p>
             <input  id="1" class="text-grey" type="text">
-            <p class="text-muted">Idade: <span th:utext="${User.firstname}"></span></p>
-            <p class="text-muted">Género: <span th:utext="${User.gender}"></span></p>
-            <p class="text-muted">Lisboa<span th:utext="${User.country}"></span></p>
+            <p class="text-muted">Nome: <span th:utext="${User.firstname}"></span></p>
+            <p class="text-muted">Género: <div th:if="${User.gender.equals(2)}"> <span>Masculino</span> </div><div th:if="${User.gender.equals(1)}"> <span>Feminino</span> </div></p>
+            <p class="text-muted">Pais: <span th:utext="${User.country}"></span></p>
+            <p class="text-muted">Districto: <span th:utext="${User.district}"></span></p>
             <p class="text-muted">Email: <span th:utext="${User.email}"></span></p>
             <p class="text-muted">Data de Nascimento: <span th:utext="${User.birthdate}"></span></p>
           </div>
         </div>
         <div class="feed-item">
           <div class="live-activity">
-            <p class="profile-link"><span th:utext="${User.type}"></span></p>
+            <p class="profile-link"> <div th:if="${User.type.equals(0)}"><span> Artista </span></div> <div th:if="${User.type.equals(1)}"><span> Observador </span></div></p>
           </div>
         </div>
       </div>
@@ -28,9 +29,9 @@
     <div class="col-md-7"><!-- Fragmento -->
       <!-- Lista de todos os Posts
       ================================================= -->
-      <th:block th:each="post : ${posts}">
 
-                <!-- POST MODELO -->
+     <th:block th:each="post : ${posts}">
+                
               <div class="post-content">
 
 
@@ -105,8 +106,9 @@
                   </form>
               </div>
           </div>
+      
         </th:block>
-    
+   
     </div>
     <div class="col-md-2 static"></div>
   </div>
