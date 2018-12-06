@@ -7,7 +7,7 @@
     <!--Edit Profile Menu-->
     <ul class="edit-menu">
       <li class="active"><i class="icon ion-ios-information-outline"></i><a href="edit-profile-basic.html">Informação</a></li>
-      <li><i class="icon ion-ios-briefcase-outline"></i><a href="edit-profile-work-edu.html">Education and Work</a></li>
+      <li><i class="icon ion-ios-briefcase-outline"></i><a href="edit-profile-work-edu.html">Sobre Mim</a></li>
       <li><i class="icon ion-ios-heart-outline"></i><a href="edit-profile-interests.html">Meus Interesses</a></li>
       <li><i class="icon ion-ios-settings"></i><a href="edit-profile-settings.html">Definições de conta</a></li>
       <li><i class="icon ion-ios-locked-outline"></i><a th:include="frag_perfil_password::password">Mudar de Password</a></li>
@@ -19,46 +19,33 @@
 
 <!-- Basic Information
 ================================================= -->
-<div th:action="${editprofile}" class="edit-profile-container">
+ 
+<div class="edit-profile-container">
+
+
   <div class="block-title">
     <h4 class="grey"><i class="icon ion-android-checkmark-circle"></i>Editar Informação</h4>
-    <div class="line"></div>
-    <p>...</p>
-    <div class="line"></div>
   </div>
-  <div class="edit-block">
-    <form name="basic-info" id="basic-info" class="form-inline">
+  <div class="edit-block"><form th:action="@{/editprofile}" method="Post" name="basic-info" id="basic-info" class="form-inline">
       <div class="row">
         <div class="form-group col-xs-6">
           <label for="nome">Nome</label>
-          <input id="nome" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="Nome" value="" />
+          <input id="nome" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="Nome" th:value="${User.firstname}"  />
         </div>
         <div class="form-group col-xs-6">
           <label for="apelido" class="">Apelido</label>
-          <input id="apelido" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="Apelido" value="" />
-           <input id="apelido" class="form-control input-group-lg" type="hidden" name="email" th:value="${email}" />
-
+          <input id="apelido" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="Apelido" th:value="${User.lastname}" />
+         
         </div>
       </div>
       <div class="form-group gender">
-        <span class="custom-label"><strong>Género: </strong></span>
-        <label class="radio-inline">
-          <input type="radio" name="optradio" value="2" required="">Masculino
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="optradio"  value="2" required="">Feminino
-        </label>
       </div>
       <div class="row">
-        <div class="form-group col-xs-6"> <!-- Date input -->
-          <label class="control-label" for="date">Data de Nascimento</label>
-          <input class="form-control" id="date" name="birthdate" placeholder="MM/DD/YYYY" type="text"/>
-        </div>
     </div>
       <div class="row">
         <div class="form-group col-xs-6">
           <label class="sr-only">City</label>
-          <select class="form-control" name="city">
+          <select class="form-control"  name="district" th:value="${User.district}"  >
             <option value="indiferente">Indiferente</option>
             <option value="aveiro">Aveiro</option>
             <option value="beja">Beja</option>
@@ -93,15 +80,19 @@
         </div>
         <div class="form-group col-xs-6">
           <label for="country" class="sr-only"></label>
-          <select class="form-control" id="country">
+          <select class="form-control" name="country" id="country" th:value="${User.country}" >
             <option value="country" disabled selected>Country</option>
             <option value="0">Portugal</option>
           </select>
         </div>
       </div>
-      <button class="btn btn-primary">Salvar</button>
-    </form>
+      <button type="submit" class="btn btn-primary">Editar</button>
+   </form>
+  </div>
   </div>
 </div>
+
+</div>
+
 </div>
 </div>

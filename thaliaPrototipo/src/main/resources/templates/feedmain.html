@@ -26,6 +26,11 @@
     <link rel="stylesheet" th:href=@{/css/ionicons.min.css}>
     <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
     <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
+        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
@@ -172,20 +177,15 @@
 
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" /></span></a>
+
+            <a class="navbar-brand" href="#" style=" color:white; font-size: 38px;font-family: 'Megrim', cursive;">artlink<span style="color:#40CC9B;">.pt</span></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
-                <a th:href="@{/feed?main=homepage&frag=post}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Página Principal
+                <a th:href="@{/feed?main=homepage&frag=post}"aria-expanded="false">Página Principal
                   <span></a>
               </li>
 
@@ -198,17 +198,20 @@
                     <img th:src="${User.pathimage}" alt="user" class="profile-photo-md imgnavbar" style="background: white;"/>
                   </a>
                   <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="timeline.html">Perfil</a></li>
+                  <li><a th:href="@{/feed?main=perfil&frag=timeline}">Perfil</a></li>
                   <li><a href="/index">Logout</a></li>
                 </ul>
                 </div>
               </li>
             </ul>
             <form class="navbar-form hidden-sm">
+              <action th:action="@{/newsearch}" method="POST">
               <div class="form-group">
                 <i class="icon ion-android-search"></i>
-                <input type="text" class="form-control" placeholder="Search friends, photos, videos">
+                <input type="hidden" name="frag" value="search"><input type="hidden" name="main" value="homepage">
+                <input type="text" class="form-control" name="keyword" placeholder="Procura Artistas">
               </div>
+            </action>
             </form>
           </div>
         </div>

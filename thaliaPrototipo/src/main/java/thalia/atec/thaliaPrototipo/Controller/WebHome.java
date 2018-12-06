@@ -98,7 +98,7 @@ public class WebHome {
 
 					return "feedmain.html";
 
-				}
+				}else
 				
 				if (frag.compareTo("about") == 0) {
 
@@ -107,7 +107,7 @@ public class WebHome {
 
 					return "feedmain.html";
 
-				}
+				}else
 				
 				if (frag.compareTo("galeria") == 0) {
 
@@ -123,7 +123,7 @@ public class WebHome {
 
 					return "feedmain.html";
 
-				}
+				}else
 				
 				if (frag.compareTo("playlist") == 0) {
 
@@ -136,7 +136,7 @@ public class WebHome {
 
 					return "feedmain.html";
 
-				}
+				}else
 				
 				if (frag.compareTo("amigos") == 0) {
 
@@ -145,7 +145,7 @@ public class WebHome {
 
 					return "feedmain.html";
 
-				}
+				}else
 				
 				if (frag.compareTo("profile") == 0) {
 
@@ -154,7 +154,7 @@ public class WebHome {
 
 					return "feedmain.html";
 
-				}
+				}else
 				if (frag.compareTo("password") == 0) {
 
 					
@@ -168,9 +168,7 @@ public class WebHome {
 				
 				
 
-			}
-
-			if (main.compareTo("homepage") == 0) {
+			}else if (main.compareTo("homepage") == 0) {
 
 				if (frag.compareTo("post") == 0) {
 
@@ -180,7 +178,7 @@ public class WebHome {
 
 					return "feedmain.html";
 
-				}
+				}else
 
 				if (frag.compareTo("chat") == 0) {
 
@@ -188,7 +186,7 @@ public class WebHome {
 					page.addAttribute("User", (User) session.getAttribute("User"));
 					return "feedmain.html";
 
-				}
+				}else
 
 				if (frag.compareTo("contacts") == 0) {
 
@@ -196,7 +194,7 @@ public class WebHome {
 					page.addAttribute("User", (User) session.getAttribute("User"));
 					return "feedmain.html";
 
-				}
+				}else
 
 				if (frag.compareTo("search") == 0) {
 
@@ -295,7 +293,8 @@ public String NewSearch(Model page,@RequestParam("keyword") String keyword, Http
 	
 	page.addAttribute("User",(User)session.getAttribute("User"));
 
-	
+	page.addAttribute("main", "homepage");
+	page.addAttribute("frag", "perfil");
 
 	  return "redirect:/feed?main=homepage&frag=search&keyword="+keyword;
 }

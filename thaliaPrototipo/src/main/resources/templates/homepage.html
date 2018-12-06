@@ -40,13 +40,15 @@
 
           <!-- LIST CONTACTS
           ================================================= -->
-          <th:block th:each="friend: ${friends}">
+
+          
           <div class="col-md-2 static">
+            <h4 class="grey">Contactos Online</h4>
             <div class="suggestions" id="sticky-sidebar">
-              <h4 class="grey">Contactos Online</h4>
+            
 
               <!-- MODEL CONTACT ONLINE -->
-
+                <th:block th:each="friend: ${friends}">
               <div class="follow-user">
                 <img th:src="${friend.pathimage}" alt="" class="profile-photo-sm pull-left" />
                 <div>
@@ -54,12 +56,12 @@
                   <p class="text-green"><span th:text="${friend.category}"></span></p>
                 </div>
               </div>
-
+                </th:block>
 
 
               </div>
             </div>
-            </th:block>
+            
           </div>
         </div>
       </div>

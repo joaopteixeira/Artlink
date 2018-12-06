@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +22,8 @@ import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.Login;
 import thalia.atec.thaliaPrototipo.model.User;
 
+
+@Controller
 public class WebProfile {
 	
 	@Autowired
@@ -36,19 +39,30 @@ public class WebProfile {
 	UserRepository userRepo;
 	
 
-@PostMapping("/editProfile")	
-public String NewSearch(Model page, HttpSession session) {
+	@PostMapping("/editprofile")
+	public String editprofile(HttpSession session,@RequestParam("firstname") String firstname ,
+			@RequestParam("lastname") String lastname,@RequestParam("district") String district,@RequestParam("country") String country,Model page ) {
 	
+
+	User u = (User)session.getAttribute("User");
+
+
 	
-	page.addAttribute("User",(User)session.getAttribute("User"));
+	u.setFirstname(firstname);
+	u.setLastname(lastname);
+	u.setDistrict(district);
+	u.setCountry(country);
 	
-	
+	userRepo.save(u);
 	
 	
 	
 	
 
-	  return "redirect:/";
+	return "redirect:/feed?main=perfil&frag=timeline";
+	
+	
+	
 }
 
 	
@@ -75,7 +89,7 @@ public String newpassword(@RequestParam("password") String password ,@RequestPar
 			fuser.sendEmailNovaPassword(u.getEmail(),newpassword);
 			
 			System.out.println("Mudou pass"+newpassword);
-			return "redirect:/index";
+			return "suceso.html";
 			
 		
 		

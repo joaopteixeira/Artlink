@@ -30,6 +30,11 @@
       <!-- Lista de todos os Posts
       ================================================= -->
 
+<div th:if="${not #lists.isEmpty(posts}">
+ No Ha Posts
+</div>
+
+
      <th:block th:each="post : ${posts}">
                 
               <div class="post-content">
@@ -60,6 +65,7 @@
           </div>
       
         </th:block>
+          
    
     </div>
     <div class="col-md-2 static"></div>

@@ -111,7 +111,7 @@ public class FPost {
 		 Optional<User> user = urep.findById(iduser);
 		 ArrayList<Post> aux = new ArrayList<>();
 		 boolean check=false;
-		 int range=20;
+		 int range=5;
 		 
 		 
 		 
