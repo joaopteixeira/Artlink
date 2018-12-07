@@ -100,7 +100,7 @@
     <img th:src="${User.pathimage}" alt="user" class="profile-photo-md pull-left" />
     <div class="post-detail">
       <div class="user-info">
-        <h5><a href="timeline.html" class="profile-link"><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></span></a> <span class="following"><span th:utext="${User.userwatched}" ></span></span></h5>
+        <h5><a href="#" class="profile-link"><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></span></a> <span class="following"><span th:utext="${User.userwatched}" ></span></span></h5>
       </div>
       <div class="reaction">
         <a class="btn text-green"><i class="icon ion-thumbsup"></i> 0 </a>
@@ -162,7 +162,7 @@
     <img th:src="${post.userimage}" alt="user" class="profile-photo-md pull-left" />
     <div class="post-detail">
       <div class="user-info">
-        <h5><a href="#"> <span th:utext="${post.username}"> </span></a> <span class="following"> <span th:utext="${post.userwatched}"> </span></h5>
+        <h5><a  th:href="@{/profile?personid=} + ${post.iduser}"> <span th:utext="${post.username}"> </span></a> <span class="following"> <span th:utext="${post.userwatched}"> </span></h5>
         <p class="text-muted"><span th:utext="${T(thalia.atec.thaliaPrototipo.Util.DateUtil).timeago(post.date)}"></span> </p>
       </div>
       <div class="reaction">
@@ -181,7 +181,7 @@
       <div class="line-divider" ></div>
        <div class="post-comment">
        <img th:src="${Comment.imguser}" alt="" class="profile-photo-sm" style="background-color:white;"/> 
-        <p><a href="/perfil" class="profile-link"><span th:text="${Comment.username}" ></span>: </a>
+        <p><a th:href="@{/profile?personid=} + ${Comment.iduser}" class="profile-link"><span th:text="${Comment.username}" ></span>: </a>
           <span th:utext="${Comment.content}" ></span></p>
       </div>
 

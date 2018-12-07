@@ -5,23 +5,23 @@
     <!-- ||| -->
     <div class="col-md-3 static"> <!-- Informação da pessoa -->
       <div id="sticky-sidebar">
-        <h3><span th:src="${User.firstname}"></span> ><span th:src="${User.lastname}"></span></h3>
-        <p class="text-muted"><span th:src="${User.category}"></span></p>
+        <h3><span th:src="${Person.firstname}"></span> ><span th:src="${Person.lastname}"></span></h3>
+        <p class="text-muted"><span th:src="${Person.category}"></span></p>
         <div class="feed-item">
           <div class="live-activity">
             <p class="profile-link">Sobre</p>
             <input  id="1" class="text-grey" type="text">
-            <p class="text-muted">Nome: <span th:utext="${User.firstname}"></span></p>
-            <p class="text-muted">Género: <div th:if="${User.gender.equals(2)}"> <span>Masculino</span> </div><div th:if="${User.gender.equals(1)}"> <span>Feminino</span> </div></p>
-            <p class="text-muted">Pais: <span th:utext="${User.country}"></span></p>
-            <p class="text-muted">Districto: <span th:utext="${User.district}"></span></p>
-            <p class="text-muted">Email: <span th:utext="${User.email}"></span></p>
-            <p class="text-muted">Data de Nascimento: <span th:utext="${User.birthdate}"></span></p>
+            <p class="text-muted">Nome: <span th:utext="${Person.firstname}"></span></p>
+            <p class="text-muted">Género: <div th:if="${Person.gender.equals(2)}"> <span>Masculino</span> </div><div th:if="${Person.gender.equals(1)}"> <span>Feminino</span> </div></p>
+            <p class="text-muted">Pais: <span th:utext="${Person.country}"></span></p>
+            <p class="text-muted">Districto: <span th:utext="${Person.district}"></span></p>
+            <p class="text-muted">Email: <span th:utext="${Person.email}"></span></p>
+            <p class="text-muted">Data de Nascimento: <span th:utext="${Person.birthdate}"></span></p>
           </div>
         </div>
         <div class="feed-item">
           <div class="live-activity">
-            <p class="profile-link"> <div th:if="${User.type.equals(0)}"><span> Artista </span></div> <div th:if="${User.type.equals(1)}"><span> Observador </span></div></p>
+            <p class="profile-link"> <div th:if="${Person.type.equals(0)}"><span> Artista </span></div> <div th:if="${Person.type.equals(1)}"><span> Observador </span></div></p>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@
                   <img th:src="${post.userimage}" alt="user" class="profile-photo-md pull-left" />
                   <div class="post-detail">
                     <div class="user-info">
-                      <h5><a href="#"> <span th:utext="${post.username}"> </span></a> <span class="following" th:utext="${post.userwatched}"> </span></h5>
+                      <h5><a th:href="@{/profile?personid=} + ${post.iduser}">> <span th:utext="${post.username}"> </span></a> <span class="following" th:utext="${post.userwatched}"> </span></h5>
                       <p class="text-muted"><span th:utext="${T(thalia.atec.thaliaPrototipo.Util.DateUtil).timeago(post.date)}"></span> </p>
                     </div>
                     <div class="reaction">
@@ -88,7 +88,7 @@
                     <div class="line-divider" ></div>
                      <div class="post-comment">
                      <img th:src="${Comment.imguser}" alt="" class="profile-photo-sm" style="background-color:white;"/> 
-                      <p><a href="/perfil" class="profile-link"><span th:text="${Comment.username}"></span>: </a>
+                      <p><a th:href="@{/profile?personid=} + ${Comment.iduser}" class="profile-link"><span th:text="${Comment.username}"></span>: </a>
                         <span th:utext="${Comment.content}" ></span></p>
                     </div>
                 </th:block>   

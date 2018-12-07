@@ -27,7 +27,9 @@
     <h4 class="grey"><i class="icon ion-android-checkmark-circle"></i>Editar Informação</h4>
   </div>
   <div class="edit-block"><form th:action="@{/editprofile}" method="Post" name="basic-info" id="basic-info" class="form-inline">
-      <div class="row">
+      <div class="row">        
+
+
         <div class="form-group col-xs-6">
           <label for="nome">Nome</label>
           <input id="nome" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="Nome" th:value="${User.firstname}"  />
@@ -39,13 +41,17 @@
         </div>
       </div>
       <div class="form-group gender">
+        
       </div>
       <div class="row">
+
+          
+   
     </div>
       <div class="row">
         <div class="form-group col-xs-6">
           <label class="sr-only">City</label>
-          <select class="form-control"  name="district" th:value="${User.district}"  >
+          <select class="form-control"  name="district"  >
             <option value="indiferente">Indiferente</option>
             <option value="aveiro">Aveiro</option>
             <option value="beja">Beja</option>
@@ -80,11 +86,15 @@
         </div>
         <div class="form-group col-xs-6">
           <label for="country" class="sr-only"></label>
-          <select class="form-control" name="country" id="country" th:value="${User.country}" >
+          <select class="form-control" name="country" id="country">
             <option value="country" disabled selected>Country</option>
             <option value="0">Portugal</option>
           </select>
         </div>
+
+       
+
+
       </div>
       <button type="submit" class="btn btn-primary">Editar</button>
    </form>

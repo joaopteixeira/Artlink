@@ -76,7 +76,7 @@ public class WebLogin {
 			//page.addAttribute("User",us.get());
 			session.setAttribute("User", us.get());
 
-			return "redirect:/feed?main=homepage&frag=post";
+			return "redirect:/feed?main=homepage&frag=post&personid=you";
 			
 		}
 		

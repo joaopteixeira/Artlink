@@ -62,7 +62,6 @@ public class WebProfile {
 	return "redirect:/feed?main=perfil&frag=timeline";
 	
 	
-	
 }
 
 	

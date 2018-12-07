@@ -76,7 +76,7 @@ public class FUser {                   //Funcoes pro USER
 			u.setTokkensquantity(10);	
 			u.setPathimage(WebServices.SERVER+"/upload/downloadFile/userdefault.png");//Quantidade Inicial de Tokkens
 			u.setAccactivated(false);
-			u.getWatching().add(new Watch("5bf7181088ee2d3d8be652bd", "10/24/2018 21:21:21"));
+			
 			userRep.save(u);		
 			
 		}

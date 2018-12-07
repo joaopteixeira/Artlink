@@ -10,22 +10,21 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <img th:src="${User.pathimage}" alt="" class="img-responsive profile-photo" />
+                  <img th:src="${Person.pathimage}" alt="" class="img-responsive profile-photo" />
 
                 </div>
               </div>
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
-                  <li><a href="/feed?main=perfil&frag=timeline" class="active">Timeline</a></li>
-                  <li><a href="/feed?main=perfil&frag=about">About</a></li>
-                  <li><a href="/feed?main=perfil&frag=galeria">Galeria</a></li>
-									<li><a href="/feed?main=perfil&frag=playlist">PlayList</a></li>
-                  <li><a href="/feed?main=perfil&frag=amigos">Amigos</a></li>
-									<li><a href="/feed?main=perfil&frag=profile">Profile</a></li>
+                  <li><a th:href="@{/feed?main=perfil&frag=about&personid=}+ ${Person.id}">Sobre Min</a></li>
+                  <li><a th:href="@{/feed?main=perfil&frag=galeria&personid=}+ ${Person.id}">Galeria</a></li>
+									<li><a th:href="@{/feed?main=perfil&frag=playlist&personid=}+ ${Person.id}">PlayList</a></li>
+                  <li><a th:href="@{/feed?main=perfil&frag=amigos&personid=}+ ${Person.id}">Seguidores</a></li>
+									<li><a th:href="@{/feed?main=perfil&frag=profile&personid=}+ ${Person.id}">Meu Perfil</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
-                  <li><span th:text="${User.userwatched}"</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
+                  <li><span th:text="${Person.userwatched}"</li>
+                  <li><button class="btn-primary">Seguir</button></li>
                 </ul>
               </div>
             </div>
@@ -43,6 +42,7 @@
            <div th:case="profile"><span th:include="frag_perfil_info::info"></span></div>  
 
            <div th:case="password"><span th:include="frag_perfil_password::password"></span></div>  
+
 
           </th:block>
 

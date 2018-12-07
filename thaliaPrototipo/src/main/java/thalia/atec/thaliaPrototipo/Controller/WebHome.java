@@ -65,7 +65,7 @@ public class WebHome {
 	}
 	
 	@GetMapping("/feed")
-	public String feed(Model page,@RequestParam("main") String main,@RequestParam("frag") String frag,@RequestParam(value="keyword",defaultValue="*") String keyword,HttpSession session){
+	public String feed(Model page,@RequestParam("personid") String personid,@RequestParam("main") String main,@RequestParam("frag") String frag,@RequestParam(value="keyword",defaultValue="*") String keyword,HttpSession session){
 		
 
 		
@@ -73,8 +73,10 @@ public class WebHome {
 		
 		Optional<User> user = userrep.findById(u.getId());
 		
-	
+		page.addAttribute("personid","you");
 		if (user.isPresent()) {
+
+
 
 			page.addAttribute("User", user.get());
 			page.addAttribute("main", main);
@@ -83,22 +85,36 @@ public class WebHome {
 			page.addAttribute("friends", ffeed.getFriends(user.get().getId()));
 
 			if (main.compareTo("perfil") == 0) {
+				
+				
+				page.addAttribute("User", (User) session.getAttribute("User"));
+				
+				Optional<User> persona = userrep.findById(personid);
+							
+				
+				List posts = (List) fpost.getPostsByUser(persona.get().getId());
+				
+	
+				
+				page.addAttribute("Person",persona.get());
+				page.addAttribute("posts",posts);
+				page.addAttribute("personid",personid);
+		
 
 				if (frag.compareTo("timeline") == 0) {
 
 					
 					page.addAttribute("User", (User) session.getAttribute("User"));
 								
-					
-					List posts = (List) fpost.getPostsByUser(u.getId());
-					
-					
-					page.addAttribute("posts",posts);
+
+
 					page.addAttribute("frag", "timeline");
 
 					return "feedmain.html";
 
 				}else
+					
+				
 				
 				if (frag.compareTo("about") == 0) {
 
@@ -115,7 +131,7 @@ public class WebHome {
 					page.addAttribute("User", (User) session.getAttribute("User"));
 				
 					
-					List posts = (List) fpost.getPostsByUser(u.getId());
+					
 					
 					
 					page.addAttribute("posts",posts);
@@ -128,9 +144,7 @@ public class WebHome {
 				if (frag.compareTo("playlist") == 0) {
 
 			
-					page.addAttribute("frag", "playlist");
-					List posts = (List) fpost.getPostsByUser(u.getId());
-					
+					page.addAttribute("frag", "playlist");	
 					
 					page.addAttribute("posts",posts);
 
@@ -207,6 +221,8 @@ public class WebHome {
 					
 					if(keyword.compareTo("*")!=0) {
 						
+						page.addAttribute("personid","you");
+						
 						List<User> results = fuser.getUserContainig(keyword);
 
 						page.addAttribute("results",results);
@@ -215,8 +231,11 @@ public class WebHome {
 				}
 
 				return "feedmain.html";
-
+				
+				
 			}
+			
+				
 		}
 
 		return "redirect:/index";
@@ -262,7 +281,7 @@ public class WebHome {
 		
 //		
 	
-	 return "redirect:/feed?main=homepage&frag=post";
+	 return "redirect:/feed?main=homepage&personid=you&frag=post";
 	}
 //	
 	
@@ -283,12 +302,12 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 	
 	
 	
-  return "redirect:/feed?main=homepage&frag=post";
+  return "redirect:/feed?main=homepage&personid=you&frag=post";
 }
 
 
 @PostMapping("/newsearch")	
-public String NewSearch(Model page,@RequestParam("keyword") String keyword, HttpSession session) {
+public String NewSearch(Model page,@RequestParam("personid") String personid,@RequestParam("keyword") String keyword, HttpSession session) {
 	
 	
 	page.addAttribute("User",(User)session.getAttribute("User"));
@@ -296,7 +315,30 @@ public String NewSearch(Model page,@RequestParam("keyword") String keyword, Http
 	page.addAttribute("main", "homepage");
 	page.addAttribute("frag", "perfil");
 
-	  return "redirect:/feed?main=homepage&frag=search&keyword="+keyword;
+	  return "redirect:/feed?main=homepage&personid=you&frag=search&keyword="+keyword;
+}
+
+
+@GetMapping("/profile")	
+public String profile(Model page, HttpSession session,@RequestParam("personid") String personid) {
+	
+	
+	page.addAttribute("User",(User)session.getAttribute("User"));
+	
+	User u = (User)session.getAttribute("User");
+	
+	
+	
+
+	page.addAttribute("main", "perfil");
+	page.addAttribute("frag", "timeline");
+	
+
+	
+	
+	
+
+	  return "redirect:/feed?main=perfil&frag=timeline&personid="+personid;
 }
 
 

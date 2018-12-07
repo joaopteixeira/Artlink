@@ -8,10 +8,10 @@
           ================================================= -->
           <div id="sticky-menu" class="col-md-3 static">
             <ul class="nav-news-feed">
-              <li><i class="fas fa-newspaper"></i><div><a href="/feed?main=homepage&frag=post">Meu feed</a></div></li>
-              <li><i class="fas fa-users"></i><div><a href="/feed?main=homepage&frag=search">Procurar Pessoas</a></div></li>
-              <li><i class="fas fa-address-book"></i><div><a href="feed?main=homepage&frag=contacts">Lista de Contactos</a></div></li>
-              <li><i class="fas fa-comments"></i><div><a href="/feed?main=homepage&frag=chat">Messagens</a></div></li>
+              <li><i class="fas fa-newspaper"></i><div><a href="/feed?main=homepage&personid=you&frag=post">Meu feed</a></div></li>
+              <li><i class="fas fa-users"></i><div><a th:href="@{/feed?main=homepage&personid=you&frag=search}">Procurar Pessoas</a></div></li>
+              <li><i class="fas fa-address-book"></i><div><a href="feed?main=homepage&personid=you&frag=contacts">Lista de Contactos</a></div></li>
+         
 
             </ul><!--news-feed links ends-->
           </div>
@@ -52,7 +52,7 @@
               <div class="follow-user">
                 <img th:src="${friend.pathimage}" alt="" class="profile-photo-sm pull-left" />
                 <div>
-                  <h5><a href="timeline.html"><span th:text="${friend.firstname}"></span></a></h5>
+                  <h5><a th:href="@{/profile?personid=} + ${friend.id}"><span th:text="${friend.firstname}"></span></a></h5>
                   <p class="text-green"><span th:text="${friend.category}"></span></p>
                 </div>
               </div>

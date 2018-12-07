@@ -39,7 +39,7 @@
             <div class="card-info">
               <img th:src="${friend.pathimage}" alt="user" class="profile-photo-lg" />
               <div class="friend-info">
-                <a href="#" class="pull-right text-green"><span th:text="${friend.category}"></span></a>
+                <a  th:href="@{/profile?personid=} + ${friend.iduser}"class="pull-right text-green"><span th:text="${friend.category}"></span></a>
                 <h5><a href="timeline.html" class="profile-link"><span th:text="${friend.firstname}"><span th:text="${friend.lastname}"></span></span></a></h5>
                 <p><span th:text="${friend.subcategory}"></span></p>
               </div>

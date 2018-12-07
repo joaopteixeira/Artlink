@@ -185,12 +185,12 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
-                <a th:href="@{/feed?main=homepage&frag=post}"aria-expanded="false">Página Principal
+                <a th:href="@{/feed?main=homepage&frag=post&personid=}+ ${User.id}"aria-expanded="false">Página Principal
                   <span></a>
               </li>
 
 
-              <li><a th:href="@{/feed?main=perfil&frag=timeline}" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
+              <li><a th:href="@{/profile?personid=} + ${User.id}" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
 
               <li>
                 <div class="imgnavbarcont">
@@ -198,7 +198,7 @@
                     <img th:src="${User.pathimage}" alt="user" class="profile-photo-md imgnavbar" style="background: white;"/>
                   </a>
                   <ul class="dropdown-menu newsfeed-home">
-                  <li><a th:href="@{/feed?main=perfil&frag=timeline}">Perfil</a></li>
+                  <li><a th:href="@{/feed?main=perfil&frag=timeline&personid=}+ ${User.id}">Perfil</a></li>
                   <li><a href="/index">Logout</a></li>
                 </ul>
                 </div>
@@ -208,8 +208,8 @@
               <action th:action="@{/newsearch}" method="POST">
               <div class="form-group">
                 <i class="icon ion-android-search"></i>
-                <input type="hidden" name="frag" value="search"><input type="hidden" name="main" value="homepage">
-                <input type="text" class="form-control" name="keyword" placeholder="Procura Artistas">
+                <input type="hidden" name="frag" value="search"><input type="hidden" name="main" value="homepage"><input type="hidden" name="personid" value="you">
+                <input type="text" class="form-control" name="keyword" placeholder="Procurar Artistas">
               </div>
             </action>
             </form>
@@ -237,7 +237,7 @@
 
           <div th:case="homepage"><span th:include="homepage::homepage"></span></div>  
            <div th:case="perfil"><span th:include="perfil::perfil"></span></div>   
-          
+         
 
          </th:block>
 
