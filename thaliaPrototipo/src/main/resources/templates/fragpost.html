@@ -10,7 +10,7 @@
           <img th:src="${User.pathimage}" alt="" class="profile-photo-md" />
           <textarea name="content" id="start" rows="3" class="form-control" placeholder="Partilhe!!" style="resize:none;" maxlength="150" oninput="myFunction()" required></textarea>
           <input type="hidden" name="typemedia" value="3" id="tipo_media">
-          <input id="file-input"  th:name="file" type="file" accept="" />
+          <input id="file-input"  th:name="file" type="file" accept="" style="display:none;" onchange="loadFile(event)"/>
           <script>
           function myFunction() {
               var x = document.getElementById("start").value;
@@ -20,12 +20,12 @@
         </div>
       </div>
     </div>
-     <div class="media-upload" style="margin-top:2%;">
-       <div class="row">
-        <ul class="file col-md-12">
+      <div class="media-upload" style="margin-top:2%;">
+                   <div class="row">
+                     <ul class="file col-md-12">
                       <li id="natzc1" class="col-md-2" style="width:10%;">
                         <a>
-                          <label id="image" for="file-input">
+                          <label for="file-input">
                             <i class="ion-images"></i>
                           </label>
                          <!-- <input id="image-input"  name="image" type="file" accept="image/*" onchange="loadFile(event)"/>-->
@@ -47,7 +47,7 @@
                         </a>
                       </li>
                       <li id="natzc4">
-                        <input id="video-input" class="form-control" name="" type="text" size="42" placeholder="Link do Video" value="https://www.youtube.com/embed/" style="visibility: visible;"/>
+                        <input id="video-input" class="form-control" name="video" type="text" size="42" placeholder="Link do Video" value="https://www.youtube.com/embed/" style="visibility: visible;"/>
                       </li>
                       <li id="natzc5">
                         <a>
@@ -56,9 +56,9 @@
                         </label>
                       </a>
                       </li>
-                     </ul>
-       </div>
-      </div>
+                    </ul>
+                   </div>
+                  </div>
       <div class="" style="float:right; margin-bottom: 10px;">
      	<button class="btn btn-primary pull-right" type="submit">Publicar</button>
       </div>
@@ -83,137 +83,46 @@
        <!-- Preview Post
 ================================================= -->
         <div class="post-content" id="preview-post">
-              <div id="natc1" class="media">
+              <div id="natc1" class="media media-preview">
                 <img id="output" src="http://placehold.it/1920x1280" alt="post-image" class="img-responsive post-image" style="max-height:400px; width:auto; margin:auto; display:block;" />
               </div>
-              <div id="natc2" class="media">
-                <iframe class="post-video"  width="570" height="315" id="output2" src=""></iframe>
+              <div id="natc2" class="media media-preview">
+                  <iframe class="post-video"  width="570" height="315" id="output2" src=""></iframe>
               </div>
-              <div id="natc3" class="media">
-                <audio id="post_audio" controls>
+              <div id="natc3" class="media media-preview">
+                <audio controls>
                   <source id="output3" src="horse.ogg" type="audio/ogg">
                   <source id="output4" src="horse.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
                 </audio>
               </div>
-  <div class="post-container">
-    <img th:src="${User.pathimage}" alt="user" class="profile-photo-md pull-left" />
-    <div class="post-detail">
-      <div class="user-info">
-        <h5><a href="#" class="profile-link"><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></span></a> <span class="following"><span th:utext="${User.userwatched}" ></span></span></h5>
-      </div>
-      <div class="reaction">
-        <a class="btn text-green"><i class="icon ion-thumbsup"></i> 0 </a>
-      </div>
-      <div class="line-divider"></div>
-      <div class="post-text">
-        <div id="puthere"></div>
-        <!-- <p id="puthere">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p> -->
-      </div>
-      <div class="line-divider"></div>
-    </div>
-  </div>
-</div>
+              <div class="post-container">
+                <img src="http://placehold.it/300x300" alt="user" class="profile-photo-md pull-left" />
+                <div class="post-detail">
+                  <div class="user-info">
+                    <h5><a href="timeline.html" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
+                  </div>
+                  <div class="reaction">
+                    <a class="btn text-green"><i class="icon ion-thumbsup"></i> 0 </a>
+                  </div>
+                  <div class="line-divider"></div>
+                  <div class="post-text">
+                    <div id="puthere"></div>
+                    
+                  </div>
+                  <div class="line-divider"></div>
+                </div>
+              </div>
+            </div>
 
-    
+
 </div><!-- Post Create Box End-->
 <br>
-<hr class="separate text-legreen"></hr>
+<hr class="separate text-legreen">
+
+<div id="posts">
 
 
-
-
-  <th:block th:each="post : ${posts}">
-
-  <!-- POST MODELO -->
-<div class="post-content">
-
-
-
-  <div th:if="${post.media.typemedia.equals(0)}">
-  	<img th:src="${post.media.pathfile}"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">
-     <!--Div Image _-->
-  </div>
-
-
-  <div th:if="${post.media.typemedia.equals(1)}"><!--Divs Video _-->
-  <div  class="media">  
-    <iframe class="post-video" th:src="${post.media.pathfile}" width="420" height="315"></iframe>
-  </div>
 </div>
-
-
-  <div th:if="${post.media.typemedia.equals(2)}"> <!--Divs son _-->
-    <audio controls> 
-      <source th:src="${post.media.pathfile}" type="audio/mpeg">
-    Your browser does not support the audio element.
-    </audio>
+<button onclick="topFunction()" id="myBtn" class="myBtnscroll BtnScrollUp" title="Go to top">Top</button>
 </div>
-
-
-
- <div th:if="${post.media.typemedia.equals(3)}"> <!--Div sem media _-->
-<div  class="media"> </div>
-</div>
-
-
-
-	  <div class="post-container">
-    <img th:src="${post.userimage}" alt="user" class="profile-photo-md pull-left" />
-    <div class="post-detail">
-      <div class="user-info">
-        <h5><a  th:href="@{/profile?personid=} + ${post.iduser}"> <span th:utext="${post.username}"> </span></a> <span class="following"> <span th:utext="${post.userwatched}"> </span></h5>
-        <p class="text-muted"><span th:utext="${T(thalia.atec.thaliaPrototipo.Util.DateUtil).timeago(post.date)}"></span> </p>
-      </div>
-      <div class="reaction">
-        <a class="btn text-green"><i class="icon ion-thumbsup"></i> <span th:utext="${#lists.size(post.likes)}" ></span> </a>
-    
-      </div>
-      <div class="line-divider"></div>
-      <div class="post-text">
-        <p> <span th:utext="${post.content}" ></p>
-      </div>
-
-
- 
-  <th:block th:each="Comment : ${post.comments}">
-
-      <div class="line-divider" ></div>
-       <div class="post-comment">
-       <img th:src="${Comment.imguser}" alt="" class="profile-photo-sm" style="background-color:white;"/> 
-        <p><a th:href="@{/profile?personid=} + ${Comment.iduser}" class="profile-link"><span th:text="${Comment.username}" ></span>: </a>
-          <span th:utext="${Comment.content}" ></span></p>
-      </div>
-
-
-  </th:block>   
-
-
-  	 <!-- Fim dos Comentários de cada post -->
-    
-
-
-
-      <div class="post-comment">
-
-        <!------- FORM COMENTARIO----- -->
-
-         <form style="width: 100%;"  th:action="@{/newcomment}" method="POST" >
-          <div class="form-group" style="width: 100% !important;">
-            <input type="hidden" name="idpost" th:value="${post.id}">
-            <div style="width: 10%;float: left;"><img th:src="${User.pathimage}" alt="" class="profile-photo-sm" /></div>
-            <div style="width: 90%;float: right;"><input type="text" class="form-control" name='content' placeholder="Comentar">
-         
-            </div>
-          </div>
-          <div class="form-group" style="width:100%;float: right;">  <button class="btn btn-primary pull-right" id="submit" type="submit">Publicar</button></div>
-
-        </form>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
-</div>
-
-</th:block>
