@@ -67,6 +67,59 @@ public class RestUser {
 	}
 	
 	
+
+	@GetMapping("addwatching")
+	public ResponseEntity<?> addWatching(@RequestParam("hash") String hash,@RequestParam("iduser") String iduser){
+		
+		return new ResponseEntity<>(fuser.addWatching(hash, iduser),HttpStatus.OK);
+		
+		
+	}
+	
+
+	
+	@GetMapping("pesquser")
+	public ResponseEntity<?> pesq(@RequestParam("hash") String hash,@RequestParam("name") String name,@RequestParam(value="district",defaultValue="Qualquer") String district,@RequestParam(value="category",defaultValue="Qualquer"
+	) String category,@RequestParam(value="subcategory",defaultValue="Qualquer") String subcategory){
+		
+		if(district.compareTo("")==0) {
+			district="Qualquer";
+		}
+		if(category.compareTo("")==0) {
+			category="Qualquer";
+		}
+		if(subcategory.compareTo("")==0) {
+			subcategory="Qualquer";
+		}
+		
+		
+		Optional<User> user = urep.findByHashes(hash);
+		if(user.isPresent()) {
+			List<User> users = fuser.getUserAdvacend(name, district, category, subcategory);
+			
+			if(users!=null) {
+				return new ResponseEntity<List<User>>(users,HttpStatus.OK);
+			}
+			
+			
+			
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+		
+		
+		
+	}
+
+	@GetMapping("/changepass")
+	public ResponseEntity<String> changePass(@RequestParam("hash") String hash,@RequestParam("holder") String holder,@RequestParam("nova") String nova) {
+		
+		return new ResponseEntity<String>(fuser.changePassword(hash, holder, nova),HttpStatus.OK);
+	}
+	
+	
 	@GetMapping("/getuser")
 	public ResponseEntity<?> getuser(@RequestParam(name="hash",defaultValue="") String hash){
 		
@@ -84,6 +137,7 @@ public class RestUser {
 		
 		
 	}
+	
 	
 	@GetMapping("/resetpass")
 	public ResponseEntity<String> resetPass(@RequestParam("email") String email){

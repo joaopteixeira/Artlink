@@ -1,6 +1,10 @@
 package thalia.atec.thaliaPrototipo.Functions;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -155,6 +159,65 @@ public class FUser {                   //Funcoes pro USER
 		
 	}
 	
+	
+	public String changePassword(String hash,String holder,String nova) {
+		
+		Optional<User> user = userRep.findByHashes(hash);
+		
+		if(user.isPresent()) {
+			
+			Optional<Login> login = loginRep.findByEmailAndPassword(user.get().getEmail(), holder);
+			
+			if(login.isPresent()) {
+				
+				login.get().setPassword(nova);
+				
+				loginRep.save(login.get());
+				return "aceite";
+			}else {
+				return "erroholder";
+			}
+			
+		}else {
+			return "null";
+		}
+		
+		
+	}
+	
+	
+	public List<User> getUserAdvacend(String name,String district,String category,String subcategory){
+		String firstname = "";
+		String lastname = "";
+		
+		if(name.contains(" ")) {
+			firstname = name.substring(0, name.indexOf(" "));
+			lastname = name.substring(name.indexOf(" "),name.length()-1);
+		}else {
+			firstname = name;
+			lastname = name;
+		}
+		
+		System.out.println(category);
+		System.out.println(district);
+		if(category.compareTo("Qualquer")==0 && district.compareTo("Qualquer")==0) {
+			return userRep.findByFirstnameContainingOrLastnameContaining(firstname,lastname);
+		}
+		else if(category.compareTo("Qualquer")==0 && district.compareTo("Qualquer")!=0) {
+			return userRep.findByDistrict(district);
+		}else if(category.compareTo("Qualquer")!=0 && subcategory.compareTo("Qualquer")!=0 && district.compareTo("Qualquer")!=0) {
+			return userRep.findByDistrictAndCategoryAndSubcategory(district, category, subcategory);
+		}else if(category.compareTo("Qualquer")!=0 && subcategory.compareTo("Qualquer")==0 && district.compareTo("Qualquer")!=0) {
+			return userRep.findByDistrictAndCategory( district, category);
+		}else if(category.compareTo("Qualquer")!=0 && subcategory.compareTo("Qualquer")!=0 && district.compareTo("Qualquer")==0) {
+			return userRep.findByCategoryAndSubcategory( category, subcategory);
+		}else if(category.compareTo("Qualquer")!=0 && subcategory.compareTo("Qualquer")==0 && district.compareTo("Qualquer")==0) {
+			return userRep.findByCategory( category);
+		}
+		
+		return null;
+		
+	}
 	
 	
 	
@@ -326,7 +389,78 @@ public String sendEmailNovaPassword(String usermail,String newpass) {
 	}
 	
 
-	 
+
+	
+	public String addWatching(String hash,String iduser) {
+		
+		Optional<User> user = userRep.findByHashes(hash);
+		Optional<User> user2 = userRep.findById(iduser);
+		
+		
+		if(user.isPresent() && user2.isPresent()) {
+			DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+
+			// Get the date today using Calendar object.
+			Date today = Calendar.getInstance().getTime();        
+			// Using DateFormat format method we can create a string 
+			// representation of a date with the defined format.
+			String reportDate = df.format(today);
+			
+			
+			
+			boolean check = false;
+			boolean check1 = false;
+			
+			
+			
+
+			
+			if(!user.get().getWatching().isEmpty() && !user2.get().getWatched().isEmpty()) {
+				
+				for(Watch w : user.get().getWatching()) {
+					if(w.getIduser().compareTo(iduser)==0) {
+						check=true;
+					
+					}
+					if(check) {
+						user.get().getWatching().remove(w);
+						break;
+					}
+				}
+				for(Watch w : user2.get().getWatched()) {
+					if(w.getIduser().compareTo(user.get().getId())==0) {
+						check1=true;
+					
+					}
+					if(check1) {
+						user2.get().getWatched().remove(w);
+						break;
+					}
+				}
+			}
+			
+			
+			
+			if(!check && !check1) {
+				user.get().getWatching().add(new Watch(iduser, reportDate,user2.get().getFirstname()+" "+user2.get().getLastname(),user2.get().getPathimage()));
+				user2.get().getWatched().add(new Watch(user.get().getId(), reportDate,user.get().getFirstname()+" "+user.get().getLastname(),user.get().getPathimage()));
+				
+				userRep.save(user.get());
+				userRep.save(user2.get());
+				
+				return "aceite";
+			}else {
+				userRep.save(user.get());
+				userRep.save(user2.get());
+			}
+			
+			
+		}
+		
+		return "naceite";
+		
+	}
+	
 	
 	
 }

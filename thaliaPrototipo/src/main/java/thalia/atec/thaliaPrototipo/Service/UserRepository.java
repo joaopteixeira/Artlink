@@ -21,8 +21,10 @@ public interface UserRepository extends MongoRepository<User, String> {
 	Optional<User> findByEmail(String email);
 	Optional<User> findByHashes(String hashes);
 	List<User> findByFirstnameContainingOrLastnameContaining(String firstname, String lastname);
-
-	
-
+	List<User> findByDistrictAndCategoryAndSubcategory(String district,String category,String Subcategory);
+	List<User> findByDistrictAndCategory(String district,String category);
+	List<User> findByCategory(String category);
+	List<User> findByCategoryAndSubcategory(String category,String subcategory);
+	//List<User> findByDistrict(String district);
 
 }

@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import thalia.atec.thaliaPrototipo.Functions.FCategories;
 import thalia.atec.thaliaPrototipo.Functions.FUser;
 import thalia.atec.thaliaPrototipo.Service.CategoryRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
@@ -18,19 +17,6 @@ public interface Utilities{
 
 	
 	
-	
-	public static List<Category> getCategories() {
-		
-		
-		
-		
-		return FCategories.getCategories();
-		
-		
-		
-	}
-
-
 	
 	
 	

@@ -77,6 +77,52 @@ public class RestPost {
 		
 	}
 	
+	
+	@GetMapping("/getpostimage")
+	public ResponseEntity<?> getPostImage(@RequestParam("hash") String hash,@RequestParam("iduser") String iduser){
+		
+		List<Post> c = ffpost.getPostImage(hash,iduser);
+		
+		if(c!=null) {
+			return new ResponseEntity<>(c,HttpStatus.ACCEPTED);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+		
+	}
+	@GetMapping("/getpostbyiduser")
+	public ResponseEntity<?> getPostByIdUser(@RequestParam("hash") String hash,@RequestParam("iduser") String iduser){
+		
+		List<Post> c = ffpost.getPostById(hash,iduser);
+		
+		if(c!=null) {
+			return new ResponseEntity<>(c,HttpStatus.ACCEPTED);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+		
+	}
+	@GetMapping("/getpostsound")
+	public ResponseEntity<?> getPostSound(@RequestParam("hash") String hash,@RequestParam("iduser") String iduser){
+		
+		List<Post> c = ffpost.getPostSound(hash,iduser);
+		
+		if(c!=null) {
+			return new ResponseEntity<>(c,HttpStatus.ACCEPTED);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+		
+	}
+
+	
+	
 
 	
 	
@@ -110,6 +156,7 @@ public class RestPost {
 		
 	}
 	
+
 	@GetMapping("/getcommentbysize")
 	public ResponseEntity<?> getCommentBySize(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost,@RequestParam("size") String size){
 		
@@ -124,8 +171,6 @@ public class RestPost {
 		
 		
 	}
-	
-	
 	
 	@GetMapping("/getcomments")
 	public ResponseEntity<?> getComments(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost){

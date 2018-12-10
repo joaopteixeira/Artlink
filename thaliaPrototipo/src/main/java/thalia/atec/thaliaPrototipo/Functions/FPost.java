@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.Comment;
+import thalia.atec.thaliaPrototipo.model.Media;
 import thalia.atec.thaliaPrototipo.model.Notify;
 import thalia.atec.thaliaPrototipo.model.Post;
 import thalia.atec.thaliaPrototipo.model.User;
@@ -111,7 +112,7 @@ public class FPost {
 		 Optional<User> user = urep.findById(iduser);
 		 ArrayList<Post> aux = new ArrayList<>();
 		 boolean check=false;
-		 int range=5;
+		 int range=20;
 		 
 		 
 		 
@@ -274,6 +275,105 @@ public Comment getComment(String hash,String idcomment) {
 		 return null;
 		 
 	 }
+
+
+
+
+public List<Post> getPostImage(String hash,String iduser){
+	 Optional<User> user = urep.findByHashes(hash);
+	 Optional<User> user1 = urep.findById(iduser);
+	 
+	 
+	 if(user.isPresent() && user1.isPresent()) {
+		 
+		 return prep.findByMediaTypemediaAndIduser(Media.IMAGE,user1.get().getId());
+		 
+	 }
+	 
+	 return null;
+	 
+	 
+	 
+}
+
+public List<Post> getPostById(String hash,String iduser){
+	 Optional<User> user = urep.findByHashes(hash);
+	 Optional<User> user1 = urep.findById(iduser);
+	 
+	 
+	 if(user.isPresent() && user1.isPresent()) {
+		 
+		 List<Post> aux = new ArrayList<>();
+		 ArrayList<Post> aux2 = (ArrayList<Post>) prep.findByIduser(user1.get().getId());
+		
+		 
+		 for(Post p1:aux2) {
+			 
+				 Optional<User> u1 = urep.findById(p1.getIduser());
+				 p1.setUserwatched(u1.get().getWatched().size());
+				 p1.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
+				 p1.setUserimage(u1.get().getPathimage());
+				 ArrayList<Comment> comments = new ArrayList<>();
+				 for(Comment c:p1.getComments()) {
+					 Optional<User> usercom = urep.findById(c.getIduser());
+					 c.setUsername(usercom.get().getFirstname()+" "+usercom.get().getLastname());
+					 c.setImguser(usercom.get().getPathimage());
+					 comments.add(c);
+				 }
+				 p1.setComments(comments);
+				 aux.add(p1);
+			 
+			 
+			 
+		 }
+		 
+		 
+		 //sort
+		 
+		 Collections.sort(aux, new Comparator<Post>() {
+            @Override
+            public int compare(Post o1, Post o2) {
+
+                Date d1 = null;
+                Date d2 = null;
+                DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                try {
+                    d1 = df.parse(o1.getDate());
+                    d2 = df.parse(o2.getDate());
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                return d2.compareTo(d1);
+            }
+        });
+		 
+		 
+		 return aux;
+	 }
+	 
+	 return null;
+	 
+	 
+	 
+}
+public List<Post> getPostSound(String hash,String iduser){
+	 Optional<User> user = urep.findByHashes(hash);
+	 Optional<User> user1 = urep.findById(iduser);
+	 
+	 
+	 if(user.isPresent() && user1.isPresent()) {
+		 
+		 return prep.findByMediaTypemediaAndIduser(Media.SOUND,user1.get().getId());
+		 
+	 }
+	 
+	 return null;
+	 
+	 
+	 
+}
 	 
 	 public Post getPostBySizeComment(String hash,String idpost,int size) {
 		 
@@ -304,7 +404,7 @@ public Comment getComment(String hash,String idcomment) {
 
 	 
 	 
-	 public Post addComment(String idpost,String hash,String content) {
+ public Post addComment(String idpost,String hash,String content) {
 		 
 		 Optional<Post> post = prep.findById(idpost);
 		 Optional<User> user = urep.findByHashes(hash);
@@ -318,7 +418,8 @@ public Comment getComment(String hash,String idcomment) {
 				// Using DateFormat format method we can create a string 
 				// representation of a date with the defined format.
 				String reportDate = df.format(today);
-			 Comment c = new Comment(UUID.randomUUID().toString(),user.get().getId(),user.get().getFirstname()+" "+user.get().getLastname(), content, reportDate, "");
+				String idc = UUID.randomUUID().toString();
+			 Comment c = new Comment(idc,user.get().getId(),user.get().getFirstname()+" "+user.get().getLastname(), content, reportDate, "");
 			 post.get().getComments().add(c);
 			 
 			 prep.save(post.get());
@@ -337,7 +438,8 @@ public Comment getComment(String hash,String idcomment) {
 					
 					Notify n = new Notify(Notify.TPOST, Notify.SUBTPCOMMENT,us.getIduser(), user.get().getId(), user.get().getFirstname()+" "+user.get().getLastname(), user.get().getPathimage(), Notify.NVISTO);
 					n.setIdpost(post.get().getId());
-					n.setIdcomment(us.getId());
+					n.setIdcomment(idc);
+					n.setComment(content);
 					System.out.println(us.getId());
 					
 					fnotify.saveNotify(n);
@@ -356,31 +458,28 @@ public Comment getComment(String hash,String idcomment) {
 		 
 	 }
 	 
-	 public List<Comment> getComments(String idpost,String hash) {
+ 
+ public List<Comment> getComments(String idpost,String hash) {
+	 
+	 Optional<Post> post = prep.findById(idpost);
+	 Optional<User> user = urep.findByHashes(hash);
+	 
+	 ArrayList<Comment> comments = new ArrayList<>();
+	 
+	 if(post.isPresent() && user.isPresent()) {
 		 
-		 Optional<Post> post = prep.findById(idpost);
-		 Optional<User> user = urep.findByHashes(hash);
-		 
-		 ArrayList<Comment> comments = new ArrayList<>();
-		 
-		 if(post.isPresent() && user.isPresent()) {
-			 
-			 for(Comment c:post.get().getComments()) {
-				 Optional<User> u = urep.findById(post.get().getIduser());
-				 c.setImguser(u.get().getPathimage());
-				 c.setUsername(u.get().getFirstname()+" "+u.get().getLastname());
-				 comments.add(c);
-			 }
-			 return comments;
+		 for(Comment c:post.get().getComments()) {
+			 Optional<User> u = urep.findById(post.get().getIduser());
+			 c.setImguser(u.get().getPathimage());
+			 c.setUsername(u.get().getFirstname()+" "+u.get().getLastname());
+			 comments.add(c);
 		 }
-		 return null;
-		 
+		 return comments;
 	 }
+	 return null;
 	 
-	 
-	 
-	 
-	 
+ }
+ 
 	public void like(String id_user,String  id_post) {
 		
 		System.out.println(id_user+"         ::   "+id_post);
