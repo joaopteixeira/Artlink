@@ -33,16 +33,29 @@ public class WebLogin {
 
 	
 	@RequestMapping(value="/registry", method=RequestMethod.POST)
-	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page){
+	public String UserRegistry(@ModelAttribute("User") User u,@RequestParam("password") String password, Model page,HttpSession session){
 
 		
 		System.out.println("");
 		
-		fuser.Registry(u,password);
 		
+		Optional<User> us = userRepo.findByEmail(u.getEmail());
+		
+		if(us.isPresent()) {
+			
+			
+			return "redirect:/index.html"; 
+
+			
+			
+		}
 	
 		
-		return "redirect:/index.html";     // vai para feed 
+		fuser.Registry(u,password);
+		session.setAttribute("User",u);
+		return UserLogin(u,page,password,session);
+		
+		    // 
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -50,17 +63,20 @@ public class WebLogin {
 		
 		
 	//	fuser.login(u.getEmail(), password);
-
 		
-		Optional<User> us = userRepo.findByHashes(fuser.login(u.getEmail(), password));
+		String hash = fuser.login(u.getEmail(), password);
+		
+		Optional<User> us = userRepo.findByHashes(hash);
+		
+		
 		
 		if(us.isPresent()) {
 			
-
+			session.setAttribute("hash", hash);
 			//page.addAttribute("User",us.get());
 			session.setAttribute("User", us.get());
 
-			return "redirect:/feed?frag=feed";
+			return "redirect:/feed?main=homepage&frag=post&personid=you";
 			
 		}
 		

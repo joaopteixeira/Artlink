@@ -46,7 +46,24 @@ public class FNotify {
 		
 		return null;
 	}
-	
+	public List<Notify> notifyAll(String hash){
+		
+		Optional<User> user = urep.findByHashes(hash);
+		
+		
+		if(user.isPresent()) {
+			List<Notify> aux = nrep.findByUseridAndTypeNot(user.get().getId(),Notify.TMSG);
+			
+			if(!aux.isEmpty()) {
+				
+				return aux;
+			}
+		}
+		
+		
+		
+		return null;
+	}
 	
 	
 	public void saveNotify(Notify n) {
@@ -55,3 +72,4 @@ public class FNotify {
 	
 
 }
+

@@ -1,6 +1,12 @@
 package thalia.atec.thaliaPrototipo.Controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.text.ParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -84,6 +90,52 @@ public class RestChat {
 		
 		
 		
+	}
+	
+	
+	@GetMapping("/getdate")
+	public ResponseEntity<?> getDate(@RequestParam("data") String data){
+		String diferenca;
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		Date today = Calendar.getInstance().getTime();        
+		long diffInMillies;
+		long diff;
+		String reportDate = df.format(today);
+		try {
+			Date dataserver = df.parse(reportDate);
+			Date datamessage = df.parse(data);
+			diffInMillies = Math.abs(dataserver.getTime() - datamessage.getTime());
+
+		    if(TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) == 0) {
+		    	if(TimeUnit.HOURS.convert(diffInMillies, TimeUnit.MILLISECONDS) == 0) {
+			    	if(TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS) == 0) {
+			    		if(TimeUnit.SECONDS.convert(diffInMillies, TimeUnit.MILLISECONDS) == 0) {
+					    	diferenca = "Agora Mesmo";
+					    }
+			    		else {
+			    			diferenca = "A "+TimeUnit.SECONDS.convert(diffInMillies, TimeUnit.MILLISECONDS)+" segundos";
+			    		}
+				    }else {
+				    	diferenca = "A "+TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS)+" minutos";
+				    }
+			    	
+			    }else {
+			    	diferenca = "A "+TimeUnit.HOURS.convert(diffInMillies, TimeUnit.MILLISECONDS)+" horas";
+			    }
+		    }else{
+		    	diferenca = "A "+TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS)+" dias";
+		    }
+		    
+		    
+		    return new ResponseEntity<String>(String.valueOf(diferenca),HttpStatus.OK);
+			
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
 	}
 	
 	

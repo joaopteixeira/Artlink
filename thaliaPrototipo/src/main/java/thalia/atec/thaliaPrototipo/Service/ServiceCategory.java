@@ -20,7 +20,7 @@ public class ServiceCategory{
 		
 	}
 
-
+/*
 	public void mockupdata() {
 		Category category = new Category("Musico");
 		
@@ -47,5 +47,5 @@ public class ServiceCategory{
 		
 	}
 	
-	
+	*/
 }

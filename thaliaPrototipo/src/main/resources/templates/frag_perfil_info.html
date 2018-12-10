@@ -1,0 +1,108 @@
+<div th:fragment="info">
+
+
+<div class="row">
+  <div class="col-md-3" >
+
+    <!--Edit Profile Menu-->
+    <ul class="edit-menu">
+      <li class="active"><i class="icon ion-ios-information-outline"></i><a href="edit-profile-basic.html">Informação</a></li>
+      <li><i class="icon ion-ios-briefcase-outline"></i><a href="edit-profile-work-edu.html">Sobre Mim</a></li>
+      <li><i class="icon ion-ios-heart-outline"></i><a href="edit-profile-interests.html">Meus Interesses</a></li>
+      <li><i class="icon ion-ios-settings"></i><a href="edit-profile-settings.html">Definições de conta</a></li>
+      <li><i class="icon ion-ios-locked-outline"></i><a th:include="frag_perfil_password::password">Mudar de Password</a></li>
+    </ul>
+  </div>
+  <div class="col-md-7">
+
+   
+
+<!-- Basic Information
+================================================= -->
+ 
+<div class="edit-profile-container">
+
+
+  <div class="block-title">
+    <h4 class="grey"><i class="icon ion-android-checkmark-circle"></i>Editar Informação</h4>
+  </div>
+  <div class="edit-block"><form th:action="@{/editprofile}" method="Post" name="basic-info" id="basic-info" class="form-inline">
+      <div class="row">        
+
+
+        <div class="form-group col-xs-6">
+          <label for="nome">Nome</label>
+          <input id="nome" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="Nome" th:value="${User.firstname}"  />
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="apelido" class="">Apelido</label>
+          <input id="apelido" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="Apelido" th:value="${User.lastname}" />
+         
+        </div>
+      </div>
+      <div class="form-group gender">
+        
+      </div>
+      <div class="row">
+
+          
+   
+    </div>
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <label class="sr-only">City</label>
+          <select class="form-control"  name="district"  >
+            <option value="indiferente">Indiferente</option>
+            <option value="Aveiro">Aveiro</option>
+            <option value="Beja">Beja</option>
+            <option value="Braga">Braga</option>
+            <option value="Braganca">Bragança</option>
+            <option value="Castelo_branco">Castelo Branco</option>
+            <option value="Coimbra">Coimbra</option>
+            <option value="Evora">Évora</option>
+            <option value="Faro">Faro</option>
+            <option value="Guarda">Guarda</option>
+            <option value="ilha_da_madeira">Ilha da Madeira</option>
+            <option value="ilha_das_flores">Ilha das Flores</option>
+            <option value="ilha_porto_santo">Ilha de Porto Santo</option>
+            <option value="ilha_santa_maria">Ilha de Santa Maria</option>
+            <option value="ilha_sao_jorge">Ilha de São Jorge</option>
+            <option value="ilha_sao_miguel">Ilha de São Miguel</option>
+            <option value="ilha_do_corvo">Ilha do Corvo</option>
+            <option value="ilha_do_faial">Ilha do Faial</option>
+            <option value="ilha_do_pico">Ilha do Pico</option>
+            <option value="ilha_graciosa">Ilha Graciosa</option>
+            <option value="ilha_terceira">Ilha Terceira</option>
+            <option value="Leiria">Leiria</option>
+            <option value="Lisboa">Lisboa</option>
+            <option value="Portalegre">Portalegre</option>
+            <option value="Porto">Porto</option>
+            <option value="Santarem">Santarém</option>
+            <option value="Setubal">Setúbal</option>
+            <option value="Viana_do_castelo">Viana do Castelo</option>
+            <option value="Vila_real">Vila Real</option>
+            <option value="Viseu">Viseu</option>
+            </select>
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="country" class="sr-only"></label>
+          <select class="form-control" name="country" id="country">
+            <option value="country" disabled selected>Country</option>
+            <option value="0">Portugal</option>
+          </select>
+        </div>
+
+       
+
+
+      </div>
+      <button type="submit" class="btn btn-primary">Editar</button>
+   </form>
+  </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+</div>

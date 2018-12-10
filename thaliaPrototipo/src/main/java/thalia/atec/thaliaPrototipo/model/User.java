@@ -31,7 +31,42 @@ public class User {
 
 	 String phonenumber;
 	 
-	 String pathimage;   
+	 String website;
+	 
+	 String description;
+	 
+	 
+	 
+	 public String getWebsite() {
+		return website;
+	}
+
+
+
+
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+
+
+
+
+
+	public String getDescricao() {
+		return description;
+	}
+
+
+
+
+
+	public void setDescricao(String description) {
+		this.description = description;
+	}
+
+
+	String pathimage;   
 
 	int tokkensquantity,gender;
 	
@@ -78,7 +113,7 @@ public class User {
 
 	public User(String id,String firstname, String lastname, String email, String pathimage, String birthdate, int gender,
 			String district, String country, int type, String phonenumber, int tokkensquantity, Boolean status,
-			Boolean accactivated,String category,String subcategory) {
+			Boolean accactivated,String category,String subcategory,String description,String website) {
 		super();
 		this.id=id;
 		this.firstname = firstname;
@@ -86,6 +121,8 @@ public class User {
 		this.pathimage = pathimage;
 		this.email = email;
 		this.birthdate = birthdate;
+		this.website = website;
+		this.description = description;
 		this.gender = gender;
 		this.district = district;
 		this.country = country;

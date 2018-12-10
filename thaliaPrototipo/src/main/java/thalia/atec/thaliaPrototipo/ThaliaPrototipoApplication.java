@@ -1,3 +1,4 @@
+
 package thalia.atec.thaliaPrototipo;
 
 
@@ -20,7 +21,7 @@ public class ThaliaPrototipoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ThaliaPrototipoApplication.class, args);	
-		System.out.println("Thalia online ");
+		System.out.println("Artlink is online ");
 		
 		
 		

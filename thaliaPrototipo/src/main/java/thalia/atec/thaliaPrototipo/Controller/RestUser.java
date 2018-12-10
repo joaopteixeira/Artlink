@@ -46,7 +46,7 @@ public class RestUser {
 		
 		
 		String status = fuser.Registry(user, password);
-		
+	
 		
 		
 		if(status.compareTo("Registado")==0) {
@@ -60,6 +60,66 @@ public class RestUser {
 		
 		
 	}
+	@GetMapping("/1")
+	public void encryptpass(@RequestParam("pass") String pass) {
+		
+		fuser.encryptpass(pass);
+	}
+	
+	
+
+	@GetMapping("addwatching")
+	public ResponseEntity<?> addWatching(@RequestParam("hash") String hash,@RequestParam("iduser") String iduser){
+		
+		return new ResponseEntity<>(fuser.addWatching(hash, iduser),HttpStatus.OK);
+		
+		
+	}
+	
+
+	
+	@GetMapping("pesquser")
+	public ResponseEntity<?> pesq(@RequestParam("hash") String hash,@RequestParam("name") String name,@RequestParam(value="district",defaultValue="Qualquer") String district,@RequestParam(value="category",defaultValue="Qualquer"
+	) String category,@RequestParam(value="subcategory",defaultValue="Qualquer") String subcategory){
+		
+		if(district.compareTo("")==0) {
+			district="Qualquer";
+		}
+		if(category.compareTo("")==0) {
+			category="Qualquer";
+		}
+		if(subcategory.compareTo("")==0) {
+			subcategory="Qualquer";
+		}
+		
+		
+		Optional<User> user = urep.findByHashes(hash);
+		if(user.isPresent()) {
+			List<User> users = fuser.getUserAdvacend(name, district, category, subcategory);
+			
+			if(users!=null) {
+				return new ResponseEntity<List<User>>(users,HttpStatus.OK);
+			}
+			
+			
+			
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+		
+		
+		
+	}
+
+	@GetMapping("/changepass")
+	public ResponseEntity<String> changePass(@RequestParam("hash") String hash,@RequestParam("holder") String holder,@RequestParam("nova") String nova) {
+		
+		return new ResponseEntity<String>(fuser.changePassword(hash, holder, nova),HttpStatus.OK);
+	}
+	
+	
 	@GetMapping("/getuser")
 	public ResponseEntity<?> getuser(@RequestParam(name="hash",defaultValue="") String hash){
 		
@@ -78,6 +138,39 @@ public class RestUser {
 		
 	}
 	
+	
+	@GetMapping("/resetpass")
+	public ResponseEntity<String> resetPass(@RequestParam("email") String email){
+		
+		String status = fuser.sendEmailReset(email);
+		
+		if(status.compareTo("enviado pedido")==0) {
+			return new ResponseEntity<String>("certo",HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<String>("null",HttpStatus.OK);
+		
+	}
+	
+	@GetMapping("/getuserbyid")
+	public ResponseEntity<?> getuserbyid(@RequestParam(name="hash",defaultValue="") String hash,@RequestParam("iduser") String iduser){
+		
+		
+		Optional<User> user = urep.findByHashes(hash);
+		Optional<User> u = urep.findById(iduser);
+		
+		if(user.isPresent() && u.isPresent()) {
+			
+			return new ResponseEntity<User>(u.get(),HttpStatus.ACCEPTED);
+		}
+		
+		
+		return new ResponseEntity<String>("null",HttpStatus.ACCEPTED);
+		
+		
+		
+	}
+	
 	@GetMapping("/getcountry")
 	public ResponseEntity<List<Country>> getcountry(){
 		
@@ -85,7 +178,7 @@ public class RestUser {
 		return new ResponseEntity<List<Country>>(fuser.getCountry(),HttpStatus.OK);
 	}
 	
-	
+	/*
 	
 	@RequestMapping("/mockupdata")
 	public void mockupdata() {
@@ -94,7 +187,7 @@ public class RestUser {
         u.setFirstname("João");
         u.setLastname("Vilares");
         u.setPathimage("https://media.licdn.com/dms/image/C4D03AQHZzUy4bh7AuQ/profile-displayphoto-shrink_800_800/0?e=1547683200&v=beta&t=jiwpA-lq0RmmwHKM7gaQVeIoqKIqU1DQHQH5opCzzdI");
-       
+       prep
         
         Media m = new Media(Media.IMAGE,"https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F502052%2Fbitcoin4.jpg&w=700&op=resize");
 
@@ -119,5 +212,5 @@ public class RestUser {
         
         
         
-	}
+	} */
 }

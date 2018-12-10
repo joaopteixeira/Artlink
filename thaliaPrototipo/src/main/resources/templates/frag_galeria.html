@@ -1,0 +1,74 @@
+
+<div th:fragment="galeria">
+
+<div class="row">
+    <!-- ||| -->
+    <div class="col-md-3 static"> <!-- Informação da pessoa -->
+      <div id="sticky-sidebar">
+        <h3><span th:src="${User.firstname}"></span></h3>
+        <p class="text-muted"><span th:src="${User.category}"></span></p>
+        <div class="feed-item">
+          <div class="live-activity">
+            <p class="profile-link">Sobre</p>
+            <input  id="1" class="text-grey" type="text">
+            <p class="text-muted">Nome: <span th:utext="${User.firstname}"></span></p>
+            <p class="text-muted">Género: <div th:if="${User.gender.equals(2)}"> <span>Masculino</span> </div><div th:if="${User.gender.equals(1)}"> <span>Feminino</span> </div></p>
+            <p class="text-muted">Pais: <span th:utext="${User.country}"></span></p>
+            <p class="text-muted">Districto: <span th:utext="${User.district}"></span></p>
+            <p class="text-muted">Email: <span th:utext="${User.email}"></span></p>
+            <p class="text-muted">Data de Nascimento: <span th:utext="${User.birthdate}"></span></p>
+          </div>
+        </div>
+        <div class="feed-item">
+          <div class="live-activity">
+            <p class="profile-link"> <div th:if="${User.type.equals(0)}"><span> Artista </span></div> <div th:if="${User.type.equals(1)}"><span> Observador </span></div></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7"><!-- Fragmento -->
+      <!-- Lista de todos os Posts
+      ================================================= -->
+
+<div th:if="${not #lists.isEmpty(posts}">
+ No Ha Posts
+</div>
+
+
+     <th:block th:each="post : ${posts}">
+                
+              <div class="post-content">
+
+
+
+                <div th:if="${post.media.typemedia.equals(0)}">
+                  <img th:src="${post.media.pathfile}"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">
+                   <!--Div Image _-->
+                </div>
+
+
+                <div th:if="${post.media.typemedia.equals(1)}"><!--Divs Video _--></div>
+
+
+                <div th:if="${post.media.typemedia.equals(2)}">  </div>
+
+
+
+               <div th:if="${post.media.typemedia.equals(3)}"> </div>
+
+
+
+
+             
+                   <!-- Fim dos Comentários de cada post -->
+            
+          </div>
+      
+        </th:block>
+          
+   
+    </div>
+    <div class="col-md-2 static"></div>
+  </div>
+
+</div>

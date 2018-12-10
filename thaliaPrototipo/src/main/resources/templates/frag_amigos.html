@@ -1,0 +1,59 @@
+
+<div th:fragment="amigos" >
+
+<div class="row">
+  <div class="col-md-3 static">
+    <div id="sticky-sidebar">
+      <h3><span th:utext="${User.firstname}"></span> <span th:utext="${User.lastname}"></span></h3>
+      <p class="text-muted"><span th:src="${User.category}"> </span></p>
+      <div class="feed-item">
+        <div class="live-activity">
+          <p class="profile-link"><span th:src="${User.subcategory}"></span></p>
+          <p class="text-muted">Género: <span><div th:if="${User.gender.equals(2)}"> <span>Masculino</span> </div><div th:if="${User.gender.equals(1)}"> <span>Feminino</span> </div></span></p>
+          <p class="text-muted"><span><span th:utext="${User.district}"></span></span>, <span><span th:utext="${User.country}"></span></span></p>
+          <p class="text-muted">Email: <span><span th:utext="${User.email}"></span></span></p>
+          <p class="text-muted">Data de Nascimento: <span<span th:utext="${User.birthdate}"></span></span></p>
+        </div>
+      </div>
+      <div class="feed-item">
+        <div class="live-activity">
+          <p><p class="profile-link"> <div th:if="${User.type.equals(0)}"><span> Artista </span></div> <div th:if="${User.type.equals(1)}"><span> Observador </span></div></p></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+
+
+    <!-- Friend List
+    ================================================= -->
+    <div class="friend-list">
+      <div class="row">
+
+
+<th:block th:each="friend : ${friends}">
+
+        <div class="col-md-6 col-sm-6">
+          <div class="friend-card">
+            <img th:src="${friend.pathimage}" alt="profile-cover" class="img-responsive cover" />
+            <div class="card-info">
+              <img th:src="${friend.pathimage}" alt="user" class="profile-photo-lg" />
+              <div class="friend-info">
+                <a  th:href="@{/profile?personid=} + ${friend.iduser}"class="pull-right text-green"><span th:text="${friend.category}"></span></a>
+                <h5><a href="timeline.html" class="profile-link"><span th:text="${friend.firstname}"><span th:text="${friend.lastname}"></span></span></a></h5>
+                <p><span th:text="${friend.subcategory}"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+  </th:block>     
+      
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 static">
+
+  </div>
+</div>
+</div>

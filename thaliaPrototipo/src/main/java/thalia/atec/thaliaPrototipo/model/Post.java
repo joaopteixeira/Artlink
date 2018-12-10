@@ -44,7 +44,11 @@ public class Post {
 	
 
 	public Post() {
+		
 		super();
+		this.comments = new ArrayList<>();
+		this.likes = new ArrayList<>();
+		
 	}
 
 
@@ -123,6 +127,24 @@ public class Post {
 	
 	
 	
+
+	
+	
+
+
+
+	public ArrayList<Comment> getComments() {
+		return comments;
+	}
+
+
+
+	public void setComments(ArrayList<Comment> comments) {
+		this.comments = comments;
+	}
+
+
+
 	public ArrayList<String> getLikes() {
 		return likes;
 	}
@@ -158,17 +180,6 @@ public class Post {
 	}
 
 
-
-	public ArrayList<Comment> getComments() {
-		return comments;
-	}
-
-
-
-	public void setComments(ArrayList<Comment> comments) {
-		this.comments = comments;
-	}
-	
 	
 	
 	

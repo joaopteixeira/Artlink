@@ -14,18 +14,33 @@ public class Category {
 	
 	private String description;
 	private ArrayList<Category> subCategory;
+	String image;
 	
 	
 	
 	
-	public Category() {
-		super();
+	
+	public String getImage() {
+		return image;
 	}
 
 
-	public Category(String description) {
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+	public Category() {
+		
+		super();
+		this.subCategory = new ArrayList<>();
+	}
+
+
+	public Category(String description,String image) {
 		super();
 		this.description = description;
+		this.image = image;
 		this.subCategory = new ArrayList<>();
 	}
 

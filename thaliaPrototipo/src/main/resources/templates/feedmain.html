@@ -26,111 +26,802 @@
     <link rel="stylesheet" th:href=@{/css/ionicons.min.css}>
     <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
     <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
+        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
+      <link rel="stylesheet" th:href=@{/css/card.css}>
+    <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
     <!--Font Awsome-->
-    <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.5.0/css/all.css}" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <style type="text/css">
+      .thatwidth{
+        width: 100% !important;
+        margin-bottom: 15px !important;
+      }
+
+      button.css3button {
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        color: #000000;
+        padding: 0px 30px;
+        background-color: #f2f2f2;
+        border-radius: 10px;
+        border: 1px solid #000000;
+        box-shadow:
+      0px 1px 3px rgba(000,000,000,0.5),
+      inset 1px 0px 5px rgba(30,46,11,0);
+    text-shadow:
+      0px -1px 3px rgba(255,255,255,0.8),
+      0px 1px 0px rgba(255,255,255,0.3);
+    }
+
+    .css3button:active{
+      position:relative;
+      top:1px;
+    }
+
+    .myBtnscroll {
+      display: none;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: #40CC9B;
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 4px;
+    }
+    .BtnScrollUp{
+      position: fixed;
+      bottom: 45px;
+      right: 30px;
+    }
+    </style>
 
 
   </head>
   <body th:object="${User}">
-    <script>
-    /*$('.media').hide();
-     $("#natzc1").click(function(){
-       $(".media").hide();
-       $("#natc1").show();
-       $("#output2").attr("src","");
-       $("#output3").attr("src","");
-       $("#output4").attr("src","");
-       document.getElementById("video-input").value = "";
-       document.getElementById("audio-input").value = "";
-     });
 
-     $("#natzc2").click(function(){
-       $(".media").hide();
-       $("#natc2").show();
-       $("#output").attr("src","");
-       $("#output3").attr("src","");
-       $("#output4").attr("src","");
-       document.getElementById("image-input").value = "";
-       document.getElementById("audio-input").value = "";
-     });
-     $("#natzc3").click(function(){
-       $(".media").hide();
-       $("#natc3").show();
-       $("#output").attr("src","");
-       $("#output2").attr("src","");
-       document.getElementById("image-input").value = "";
-       document.getElementById("video-input").value = "";
-<<<<<<< HEAD
-     });
-      $(document).ready(function(){
-        $('.media').hide();
 
-        $(document).on("change", "#image-input", function(evt) {
-=======
-     });*/
+      <script th:inline="javascript">
 
+         /*<![CDATA[*/
+
+
+        var id = /*[[${User.id}]]*/ '';
+        var firstname = /*[[${User.firstname}]]*/ '';
+        var lastname = /*[[${User.lastname}]]*/ '';
+        var hash = /*[[${session.hash}]]*/ '';
+        var compar = '';
+        var fullname = firstname+' '+lastname;
+
+        /*]]>*/
+
+      console.log(id);
+      console.log(fullname);
+      console.log(hash);
+
+      var date = new Date();
+      console.log(date);
+
+
+      const messages = document.getElementById('chat');
+
+
+      function scrollToBottom() {
+        document.getElementById('scrollbar').scrollTop=(document.getElementById('scrollbar').scrollHeight)
+      }
+
+      function actchat(x, y){
+          
+          console.log('chat: '+x);
+          $('#displaymsg').empty();
+          $.ajax({
+            url:'/mchat/getchatbyid',
+            data:{ 'idchat' : x, 'hash' : hash },
+            dataType:'JSON',
+            type:'GET',
+            success: function (data){
+              var mensagem = '';
+              var output = ''; 
+              var tempo = '';
+
+              document.getElementById("iddchat").value = data.id;
+              document.getElementById("length").value = data.mensagens.length;
+
+
+              
+
+              for (var i = 0; i < data.mensagens.length; i++) {
+
+                 $.ajax({
+                  url:'/mchat/getdate',
+                  data:{ 'data' : data.mensagens[i].date },
+                  dataType:'text',
+                  type:'GET',
+                  success: function (datah){ 
+                    tempo = datah;
+                  },
+                  async: false,
+                  error: function (xhe) {
+                    console.log("err: "+xhe);
+                  }
+                });
+
+                if(data.mensagens[i].user.id == id){
+                  mensagem = '<li class="remetente msn">';
+                  mensagem += '<div class="chat-item">';
+                  mensagem += '   <div class="chat-item-header">';
+                  mensagem += '      <h5>Eu</h5>';
+                  mensagem += '      <small class="text-muted" id="'+i+'">'+tempo+'</small>';
+                  mensagem += '    </div>';
+                  mensagem += '    <p>'+data.mensagens[i].msg+'</p>';
+                  mensagem += ' </div>';
+                  mensagem += '</li>';
+                }
+                else{
+                  mensagem = '<li class="destinatario msn">';
+                  mensagem += '<img src="'+y+'" alt="" class="profile-photo-sm pull-left" />';
+                  mensagem += '<div class="chat-item">';
+                  mensagem += '  <div class="chat-item-header">';
+                  mensagem += '    <h5>'+data.mensagens[i].user.firstname+' '+data.mensagens[i].user.lastname+'</h5>';
+                  mensagem += '    <small class="text-muted">'+tempo+'</small>';
+                  mensagem += '  </div>';
+                  mensagem += '  <p>'+data.mensagens[i].msg+'</p>';
+                  mensagem += '</div>';
+                  mensagem += '</li>';
+                }
+
+               
+
+                document.getElementById("displaymsg").innerHTML += mensagem;
+              }
+
+              scrollToBottom();
+            },
+            error: function (xhe) {
+              console.log("err: "+xhe);
+            }
+          });
+         
+         
+        }
+
+        function sendMessage(){
+          var idchat = document.getElementById("iddchat").value;
+          var msg = document.getElementById("msg").value;
+
+          if(msg != ""){
+            $.ajax({
+            url: '/mchat/sendmsg',
+            data:{'hash':hash, 'idchat': idchat, 'msg': msg},
+            type:'GET',
+            dataType:'JSON',
+              success: function (data){
+                $('#msg').val("");
+              },
+              error: function(xhe){
+                console.log("erro:"+xhe);
+              }
+          });
+          }
+          
+
+        }
+
+     
      $(document).ready(function(){
-        $('.media').hide();
+
+        
+      setInterval(function() {
+        
+
+          $('#chat');
+          $('#lista');
+
+          var fgh = hash;
+            $.ajax({
+            url: '/mchat/get',
+            data: { 'hash' : fgh  },
+            dataType: 'JSON',
+            type: "GET",
+            success: function (chats) {
+                
+                //string = JSON.stringify(savingStatu);
+                //alert((savingStatu+'').length);
+                //console.log(chats.length);
+                //alert(id);
+                //len = chats.length;
+
+                var dif = JSON.stringify(chats);
+                      
+                      if(compar != dif){
+                        
+                      
+                        console.log('dif');
+                        compar = dif;
+
+                        $('#lista').empty();
+                        for(var k = 0; k < chats.length; k++){
+                          for(var i = 0; i < chats[k].users.length; i++) {
+                            if(id != chats[k].users[i].id){
+                              //cont++;
+                              //console.log(cont);
+                              //console.log(chats[k].users[i].pathimage);
+                              var notreaded = 0;
+                              
+
+                              for(var j = 0; j < chats[k].mensagens.length; j++){
+                                if(chats[k].mensagens[j].estado == 1 && chats[k].mensagens[j].user.id != id)
+                                  notreaded++;
+                              }
+                              var imgpath = chats[k].users[i].pathimage;
+                              output='';
+                              output+='<div  onclick="actchat(\''+chats[k].id+'\',\''+imgpath+'\')" class="iconmessages '+imgpath+'" >';
+                              output+='  <a>'
+                              output+='     <img src="'+imgpath+'" alt="" class="profile-photo-sm pull-left" />';
+                              if(notreaded != 0)
+                                output+='    <div class="alertmsg"> <h6>'+notreaded+'</h6> </div>';
+                              output+='  </a>';
+                              output+='</div>';
+                             // console.log(output);
+                              document.getElementById("lista").innerHTML += output;
+                            }
+                          } 
+                        }
+                      }         
+            },
+            error: function (xhe) {
+                console.log("err"+xhe);
+              }
+            });
+
+          }, 3000);
+
+        if(document.getElementById("iddchat").value){
+          setInterval(function() {
+              var idchatt = document.getElementById("iddchat").value;
+              var lengthh = document.getElementById("length").value;
+
+              if(idchatt != "x" && lengthh != "x"){
+                $.ajax({
+                url:'/mchat/getchatbyid',
+                data:{ 'idchat' : idchatt, 'hash' : hash },
+                dataType: 'JSON',
+                type: "GET",
+                success: function (data){
+                  var mensagem;
+                  if (data.mensagens.length > lengthh){
+                    for (var i = lengthh; i < data.mensagens.length; i++) {
+
+
+                      $.ajax({
+                        url:'/mchat/getdate',
+                        data:{ 'data' : data.mensagens[i].date },
+                        dataType:'text',
+                        type:'GET',
+                        success: function (datah){ 
+                          tempo = datah;
+                        },
+                        async: false,
+                        error: function (xhe) {
+                          console.log("err: "+xhe);
+                        }
+                      });
+
+                    if(data.mensagens[i].user.id == id){
+                      mensagem = '<li class="remetente chat-mens">';
+                      mensagem += '<div class="chat-item">';
+                      mensagem += '   <div class="chat-item-header">';
+                      mensagem += '      <h5>Eu</h5>';
+                      mensagem += '      <small class="text-muted">'+tempo+'</small>';
+                      mensagem += '    </div>';
+                      mensagem += '    <p>'+data.mensagens[i].msg+'</p>';
+                      mensagem += ' </div>';
+                      mensagem += '</li>';
+                    }
+                    else{
+                      mensagem = '<li class="destinatario chat-mens">';
+                      mensagem += '<img src="'+data.mensagens[i].pathimage+'" alt="" class="profile-photo-sm pull-left" />';
+                      mensagem += '<div class="chat-item">';
+                      mensagem += '  <div class="chat-item-header">';
+                      mensagem += '    <h5>'+data.mensagens[i].user.firstname+' '+data.mensagens[i].user.lastname+'</h5>';
+                      mensagem += '    <small class="text-muted">'+tempo+'</small>';
+                      mensagem += '  </div>';
+                      mensagem += '  <p>'+data.mensagens[i].msg+'</p>';
+                      mensagem += '</div>';
+                      mensagem += '</li>';
+                    }
+                    $("#displaymsg").append(mensagem);
+                    document.getElementById("iddchat").value = data.id;
+                    document.getElementById("length").value = data.mensagens.length;
+                    console.log($('#displaymsg').innerHeight())
+                    console.log($('.chat-mens')[0].scrollHeight);
+                    $('#displaymsg').scrollTop($('#displaymsg').scrollHeight)
+                    }
+                    scrollToBottom();
+                  }
+
+                },
+                error: function (xhe) {
+                    console.log("err"+xhe);
+                  }
+                });
+              }
+
+          },3000);
+        }
+
+       });
+
+        
+    </script>
+
+
+
+
+ <script th:inline="javascript">
+    /*<![CDATA[*/
+         var id = /*[[${session.User.id}]]*/;
+         var pathimage = /*[[${session.User.pathimage}]]*/;
+         var firstname = /*[[${session.User.firstname}]]*/;
+         var lastname = /*[[${session.User.lastname}]]*/;
+         var hash = /*[[${session.hash}]]*/;
+       /*]]>*/
+
+      var allpost;
+      var page = 0;
+      var range = 20;
+
+      window.onscroll = function() {scrollFunction()};
+
+      function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+              document.getElementById("myBtn").style.display = "block";
+          } else {
+              document.getElementById("myBtn").style.display = "none";
+          }
+      }
+
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+      }
+
+
+      function getpost(){
+        var tiipo = 0;
+        var iiduser= '';
+        var outpuut = '';
+        var outpuuut = '';
+          $.ajax({
+            url:'mposts/allposts',
+            method:'GET',
+            data: {'iduser': iiduser, tipo: tiipo, sizepost: allpost, page:page, range: range},
+            datatype:JSON,
+            cache:false,
+            success:function(data){
+              outpuut+='<div class="modal fade" id="Mymodal" tabindex="-1" role="dialog" aria-hidden="false">';
+              outpuut+='  <div class="modal-dialog modal-lg" id="postshow">';
+              outpuut+='  </div>';
+              outpuut+='</div> ';
+              var likes;
+              for (var j = 0; j < data.length; j++){
+                likes=0;
+                //document.getElementById('posts').innerHTML=outpuut;
+                //$("#posts").text(outpuut);
+                for (var k = 0; k < data[j].likes.length; k++){
+                  likes += 1;
+                }
+                outpuut+='<div class="post-content">';
+                outpuut+='<div class="media" data-toggle="modal" data-target=".modal-'+data[j].iduser+'">';
+
+                if(data[j].media.typemedia == 0){
+                  outpuut+='  <img src="'+data[j].media.pathfile+'"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">';
+                }
+                if(data[j].media.typemedia == 1){
+                  outpuut+='  <iframe class="post-video" src="'+data[j].media.pathfile+'" width="570" height="315"></iframe>';
+                }
+                if(data[j].media.typemedia == 2){
+                  outpuut+='  <audio controls> ';
+                  outpuut+='    <source src="'+data[j].media.pathfile+'" type="audio/mpeg">';
+                  outpuut+='  Your browser does not support the audio element.';
+                  outpuut+='  </audio>';
+                }
+                outpuut+='</div>';
+                outpuut+=' <div class="post-container">';
+                iiduser = data[j].iduser;
+                $.ajax({
+                 url:'mposts/finduser',
+                method:'GET',
+                 data: {'iduser': iiduser},
+                 datatype:JSON,
+                 cache:false,
+                async: false,
+                 success:function(datah){
+                  outpuut+='   <img src="'+datah[0].pathimage+'" alt="user" class="profile-photo-md pull-left" />';
+                  outpuut+='   <div class="post-detail">';
+                  outpuut+='     <div class="user-info">';
+                  outpuut+='       <h5><a href="#">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
+                  outpuuut='      <div class="post-container">';
+                  outpuuut+='        <img src="'+datah[0].pathimage+'" alt="user" class="profile-photo-md pull-left" />';
+                  outpuuut+='        <div class="post-detail">';
+                  outpuuut+='          <div class="user-info">';
+                  outpuuut+='            <h5><a href="#" class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
+                 }});
+                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  seguidores</span>';
+                outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
+                outpuut+='     </div>';
+                outpuut+='     <div class="reaction">';
+                outpuut+='       <a class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i class="icon ion-thumbsup"></i>'+likes+'</a>';
+                outpuut+='     </div>';
+                outpuut+='     <div class="line-divider"></div>';
+                outpuut+='     <div class="post-text">';
+                outpuut+='       <p>'+data[j].content+'</p>';
+                outpuut+='     </div>';
+                outpuut+='   </div>';
+                outpuut+='      <button class="css3button" onclick="poppost(\''+data[j].id+'\')">Ver Coméntarios</button>';
+                outpuut+=' </div>';
+                outpuut+='</div>';
+
+                }
+                outpuut+='<div>';
+                if(page <= 0){
+                  outpuut+='<button style="float: left;" onclick="lastposts()" disabled> « anterior </button> ';
+                }else{
+                  outpuut+='<button style="float: left;" onclick="lastposts()"> « anterior </button> ';
+                }
+                if(range*(page+1) >= allpost){
+                  outpuut+='<button style="float: right;" onclick="nextposts()" disabled> próximo » </button>';
+                }
+                else{
+                  outpuut+='<button style="float: right;" onclick="nextposts()"> próximo » </button>';
+                }
+                outpuut+='</div>';
+                $("#posts").html(outpuut);
+            },error:function(erh){
+            }
+        });
+      }
+
+
+    function poppost(idpost){
+    var idposty = idpost;
+     var outpuut='';
+     var iiduser = '';
+     var tiipo = 1;
+     var idusercontent;
+     var temp;
+     var last_post = 0;
+
+         $.ajax({
+          url:'mposts/allposts',
+          method:'GET',
+          data: {'iduser': idposty, tipo: tiipo, sizepost: allpost, page:page, range: range},
+          datatype:JSON,
+          cache:false,
+          success:function(data){
+           var likes;
+           for (var j = 0; j < data.length; j++){
+             likes=0;
+             for (var k = 0; k < data[j].likes.length; k++){
+               likes += 1;
+             }
+             outpuut+='        <div class="modal-content">';
+             outpuut+='          <div class="post-content">';
+             outpuut+='<div class="media">';
+
+             if(data[j].media.typemedia == 0){
+               outpuut+='  <img src="'+data[j].media.pathfile+'"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">';
+             }
+             if(data[j].media.typemedia == 1){
+               outpuut+='  <iframe class="post-video" src="'+data[j].media.pathfile+'" style="position: relative;left: 160px;" width="570" height="315"></iframe>';
+             }
+             if(data[j].media.typemedia == 2){
+               outpuut+='  <audio controls> ';
+               outpuut+='    <source src="'+data[j].media.pathfile+'" type="audio/mpeg">';
+               outpuut+='  Your browser does not support the audio element.';
+               outpuut+='  </audio>';
+             }
+             outpuut+='</div>';
+             outpuut+='            <div class="post-container">';
+             iiduser = data[j].iduser;
+             $.ajax({
+              url:'mposts/finduser',
+              method:'GET',
+              data: {'iduser': iiduser},
+              datatype:JSON,
+              cache:false,
+             async: false,
+              success:function(datahh){
+               outpuut+='   <img src="'+datahh[0].pathimage+'" alt="user" class="profile-photo-md pull-left">';
+               outpuut+='   <div class="post-detail">';
+               outpuut+='     <div class="user-info">';
+               outpuut+='       <h5><a>'+datahh[0].firstname+' '+datahh[0].lastname+'</a></h5>';
+              }});
+             outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  seguidores</span>';
+             outpuut+='                <p class="text-muted">'+data[j].date+'</p>';
+             outpuut+='                </div>';
+             outpuut+='                <div class="reaction">';
+             outpuut+='                  <a class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i class="icon ion-thumbsup"></i> '+likes+'</a>';
+             outpuut+='                </div>';
+             outpuut+='                <div class="line-divider"></div>';
+             outpuut+='                <div class="post-text">';
+             outpuut+='                  <p>'+data[j].content+'</p>';//post
+             outpuut+='                </div>';
+             outpuut+='                <div id="comment">';
+             for (var i = 0; i < data[j].comments.length; i++){
+               idusercontent = data[j].comments[i].iduser;
+               outpuut+='                <div class="line-divider"></div>';
+               outpuut+='                <div class="post-comment">';
+               $.ajax({
+              url:'mposts/finduser',
+             method:'GET',
+              data: {'iduser': idusercontent},
+              datatype:JSON,
+              cache:false,
+             async: false,
+              success:function(datah){
+               outpuut+='                  <img src="'+datah[0].pathimage+'" alt="" class="profile-photo-sm" />';
+               outpuut+='                  <p><a class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+' </a>';
+              }});
+               outpuut+=data[j].comments[i].content+'</p>';
+               outpuut+='                </div>';
+             }
+              outpuut+='                  </div>';
+             outpuut+='                    <div class="form-group" style="width: 100% !important;">';
+
+             outpuut+='                    </div>';
+
+             outpuut+='                <div class="post-comment">';
+             outpuut+='                  <img src="'+pathimage+'" alt="" class="profile-photo-sm">';//<-img do sess
+             outpuut+='                    <div style="width: 80%;float: right;"><input type="text"maxlength="80" class="form-control" placeholder="Comentar" id="comentario"></div>';
+             outpuut+='                  &nbsp;&nbsp;&nbsp;<button style="height:35px;width:120px;relative;top: 4px;"class="btn btn-primary pull-right" type="button" onclick="addcoment(\''+data[j].id+'\')">Publicar</button>';
+             outpuut+='              </div>';
+             outpuut+='            </div>';
+             outpuut+='          </div>';
+             outpuut+='        </div>';
+           }
+             $("#Mymodal").modal('show');
+             $("#postshow").html(outpuut);
+         }
+     });
+   }
+
+   function like(x){
+     var classlike = "."+x;
+     var content;
+     $.ajax({
+      url:'mposts/like',
+      method:'GET',
+      data: {'id_post': x, 'id_user': id},
+      cache:false,
+      success:function(){
+        $.ajax({
+         url:'mposts/getlikes',
+         method:'GET',
+         data: {'id_post': x},
+         cache:false,
+         async: false,
+         success:function(data){
+           var likes;
+           for (var j = 0; j < data.length; j++){
+             likes=0;
+             for (var k = 0; k < data[j].likes.length; k++){
+               likes += 1;
+             }
+           }
+           content ="<i class='icon ion-thumbsup'></i> "+likes;
+           $(classlike).html(content);
+           console.log(data);
+        }});
+      }});
+   }
+
+   function addcoment(x){
+     var comentario = $("#comentario").val();
+     var mensagem='';
+     if(comentario != ""){
+       $.ajax({
+         url:'mposts/addcomment',
+         method:'GET',
+         data: {'hash': hash, idpost: x, content: comentario},
+         datatype:JSON,
+         cache:false,
+         success:function(data){}});
+         mensagem = '<div class="line-divider"></div><div class="post-comment"><img src="'+pathimage+'" alt="" class="profile-photo-sm" /><p><a class="profile-link">'+firstname+' '+lastname+' </a>'+comentario+'</p></div>';
+         $("#comment").append(mensagem);
+         $("#comentario").val("");
+     }
+   }
+
+   function SizePost(){
+     $.ajax({
+       url:'mposts/sizeposts',
+       method:'GET',
+       cache:false,
+       async: false,
+       success:function(data){
+         allpost = data;
+       }});
+   }
+
+   function nextposts(){
+     page += 1;
+     getpost();
+     document.body.scrollTop = 0;
+     document.documentElement.scrollTop = 0;
+   }
+   function lastposts(){
+     page -= 1;
+     getpost();
+   }
+</script>
+<script>
+     $(document).ready(function(){
+       $(".media-preview").hide();
         $("#preview-post").hide();
         $("#natzc4").hide();
+        var numer = 3;
+        var tiipo = 0;
+        var iiduser= '';
+        var outpuut = '';
+        var outpuuut = '';
+        SizePost();
+          $.ajax({
+            url:'mposts/allposts',
+            method:'GET',
+            data: {'iduser': iiduser, tipo: tiipo, sizepost: allpost, page:page, range: range},
+            datatype:JSON,
+            cache:false,
+            success:function(data){
+              outpuut+='<div class="modal fade" id="Mymodal" tabindex="-1" role="dialog" aria-hidden="false">';
+              outpuut+='  <div class="modal-dialog modal-lg" id="postshow">';
+              outpuut+='  </div>';
+              outpuut+='</div> ';
+              var likes;
+              for (var j = 0; j < data.length; j++){
+                likes=0;
+                for (var k = 0; k < data[j].likes.length; k++){
+                  likes += 1;
+                }
+                outpuut+='<div class="post-content">';
+                outpuut+='<div class="media" data-toggle="modal" data-target=".modal-'+data[j].iduser+'">';
 
-        $(document).on("change", "#image-input", function(evt) {
-           document.getElementById("audio-input").value = "";
-           document.getElementById("video-input").value = "";
-           $('#output2').attr('src','');
-           $('#output3').attr('src','');
-           $('#output4').attr('src','');
-           $("#tipo_media").attr("value","0");
-           $("#natzc4").hide();
-           $(".media").hide();
-           $("#natc1").show();
-         });
+                if(data[j].media.typemedia == 0){
+                  outpuut+='  <img src="'+data[j].media.pathfile+'"  class="img-responsive post-image" style="height: 500px; object-fit: contain;">';
+                }
+                if(data[j].media.typemedia == 1){
+                  outpuut+='  <iframe class="post-video" src="'+data[j].media.pathfile+'" width="570" height="315"></iframe>';
+                }
+                if(data[j].media.typemedia == 2){
+                  outpuut+='  <audio controls> ';
+                  outpuut+='    <source src="'+data[j].media.pathfile+'" type="audio/mpeg">';
+                  outpuut+='  Your browser does not support the audio element.';
+                  outpuut+='  </audio>';
+                }
+                outpuut+='</div>';
+                outpuut+=' <div class="post-container">';
+                iiduser = data[j].iduser;
+                $.ajax({
+                 url:'mposts/finduser',
+                method:'GET',
+                 data: {'iduser': iiduser},
+                 datatype:JSON,
+                 cache:false,
+                async: false,
+                 success:function(datah){
+                  outpuut+='   <img src="'+datah[0].pathimage+'" alt="user" class="profile-photo-md pull-left" />';
+                  outpuut+='   <div class="post-detail">';
+                  outpuut+='     <div class="user-info">';
+                  outpuut+='       <h5><a href="#">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
+                  outpuuut='      <div class="post-container">';
+                  outpuuut+='        <img src="'+datah[0].pathimage+'" alt="user" class="profile-photo-md pull-left" />';
+                  outpuuut+='        <div class="post-detail">';
+                  outpuuut+='          <div class="user-info">';
+                  outpuuut+='            <h5><a href="#" class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
+                 }});
+                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  seguidores</span>';
+                outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
+                outpuut+='     </div>';
+                outpuut+='     <div class="reaction">';
+                outpuut+='       <a class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i class="icon ion-thumbsup"></i>'+likes+'</a>';
+                outpuut+='     </div>';
+                outpuut+='     <div class="line-divider"></div>';
+                outpuut+='     <div class="post-text">';
+                outpuut+='       <p>'+data[j].content+'</p>';
+                outpuut+='     </div>';
+                outpuut+='   </div>';
+                outpuut+='      <button class="css3button" onclick="poppost(\''+data[j].id+'\')">Ver Coméntarios</button>';
+                outpuut+=' </div>';
+                outpuut+='</div>';
 
-         $(document).on("click", "#natzc2", function() {
-            document.getElementById("image-input").value = "";
-            document.getElementById("audio-input").value = "";
-            document.getElementById("video-input").value = "https://www.youtube.com/embed/";
-            $('audio').stop();
-            $('#output').attr('src','');
-            $('#output3').attr('src','');
-            $('#output4').attr('src','');
-            $("#tipo_media").attr("value","1");
-            $("#natzc4").show();
-            $(".media").hide();
-            $("#natc2").show();
-          });
+                }
+                outpuut+='<div>';
+                if(page <= 0){
+                  outpuut+='<button style="float: left;" onclick="lastposts()" disabled> « anterior </button> ';
+                }else{
+                  outpuut+='<button style="float: left;" onclick="lastposts()"> « anterior </button> ';
+                }
+                if(range*(page+1) >= allpost){
+                  outpuut+='<button style="float: right;" onclick="nextposts()" disabled> próximo » </button>';
+                }
+                else{
+                  outpuut+='<button style="float: right;" onclick="nextposts()"> próximo » </button>';
+                }
+                outpuut+='</div>';
+                $("#posts").html(outpuut);
+            },error:function(erh){
+            }
+        });
 
-          $(document).on("change", "#audio-input", function(evt) {
-             var $source = $('#output3');
-             var $source2 = $('#output4');
-             $source[0].src = URL.createObjectURL(this.files[0]);
-             $source2[0].src = URL.createObjectURL(this.files[0]);
-             $source.parent()[0].load();
-             $source2.parent()[0].load();
-             document.getElementById("image-input").value = "";
-             document.getElementById("video-input").value = "";
-             $('#output').attr('src','');
-             $('#output2').attr('src','');
-             $("#tipo_media").attr("value","2");
-             $("#natzc4").hide();
-             $(".media").hide();
-             $("#natc3").show();
+
+        $("#natzc1").click(function(){
+          numer = 0;
+          $('#file-input').attr('accept','image/*');
+
+        });
+        $("#natzc2").click(function(){
+          numer = 1;
+          $("#tipo_media").attr("value","1");
+          document.getElementById("file-input").value = "";
+          document.getElementById("video-input").value = "https://www.youtube.com/embed/";
+          $('#output1').attr('src','');
+          $('#output3').attr('src','');
+          $('#output4').attr('src','');
+          $(".media-preview").hide();
+          $("#natzc4").show();
+          $("#natc2").show();
+        });
+
+        $("#natzc3").click(function(){
+          numer = 2;
+          $('#file-input').attr('accept','audio/*');
+        });
+
+
+          $(document).on("change", "#file-input", function(evt) {
+              if (numer == 0){
+                $("#tipo_media").attr("value","0");
+                $('#output2').attr('src','');
+                $('#output3').attr('src','');
+                $('#output4').attr('src','');
+                $("#natzc4").hide();
+                $(".media-preview").hide();
+                $("#natc1").show();
+              }
+              if (numer == 2){
+                var $source = $('#output3');
+                var $source2 = $('#output4');
+                $source[0].src = URL.createObjectURL(this.files[0]);
+                $source2[0].src = URL.createObjectURL(this.files[0]);
+                $source.parent()[0].load();
+                $source2.parent()[0].load();
+                document.getElementById("video-input").value = "";
+                $('#output').attr('src','');
+                $('#output2').attr('src','');
+                $("#tipo_media").attr("value","2");
+                $("#natzc4").hide();
+                $(".media-preview").hide();
+                $("#natc3").show();
+              }
            });
 
            $(document).on("click", "#natzc5", function() {
-              document.getElementById("image-input").value = "";
-              document.getElementById("audio-input").value = "";
-              document.getElementById("video-input").value = "";
+             document.getElementById("file-input").value = "";
               $('#output').attr('src','');
               $('#output2').attr('src','');
               $('#output3').attr('src','');
               $('#output4').attr('src','');
               $("#tipo_media").attr("value","3");
               $("#natzc4").hide();
-              $(".media").hide();
+              $(".media-preview").hide();
             });
 
           $("#start").on("change keyup paste", function() {
@@ -144,9 +835,8 @@
 
           $("#video-input").on("change keyup paste", function() {
               var textarea = $("#video-input").val();
+              $("#url-input").val(textarea);
               $('#output2').attr('src',textarea);
-
-
           });
        });
     </script>
@@ -159,47 +849,45 @@
 
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#"><img src="images/logo.png" alt="logo" /></span></a>
+
+            <a class="navbar-brand" href="#" style=" color:white; font-size: 38px;font-family: 'Megrim', cursive;">artlink<span style="color:#40CC9B;">.pt</span></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home
+
+                <a th:href="@{/feed?main=homepage&frag=post&personid=}+ ${User.id}"aria-expanded="false">Página Principal
                   <span></a>
-                <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="index.html">Landing Page 1</a></li>
-                  <li><a href="index-register.html">Landing Page 2</a></li>
-                </ul>
+              </li>
+              <li>
+                <a th:href="@{/chat?main=chat&personid=you}">Chat</a>
               </li>
 
 
-              <li><a href="timeline.html" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
+              <li><a th:href="@{/profile?personid=} + ${User.id}" class="profile-link text-legreen" ><span th:utext="${User.firstname}" ></span> <span th:utext="${User.lastname}" ></a></li>
 
               <li>
                 <div class="imgnavbarcont">
                   <a class="dropdown-toggle link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img th:src="${User.pathimage}" alt="user" class="profile-photo-md imgnavbar" />
+                    <img th:src="${User.pathimage}" alt="user" class="profile-photo-md imgnavbar" style="background: white;"/>
                   </a>
                   <ul class="dropdown-menu newsfeed-home">
-                  <li><a href="timeline.html">Perfil</a></li>
+                  <li><a th:href="@{/feed?main=perfil&frag=timeline&personid=}+ ${User.id}">Perfil</a></li>
                   <li><a href="/index">Logout</a></li>
                 </ul>
                 </div>
               </li>
             </ul>
             <form class="navbar-form hidden-sm">
+              <action th:action="@{/newsearch}" method="POST">
               <div class="form-group">
                 <i class="icon ion-android-search"></i>
-                <input type="text" class="form-control" placeholder="Search friends, photos, videos">
+                <input type="hidden" name="frag" value="search"><input type="hidden" name="main" value="homepage"><input type="hidden" name="personid" value="you">
+                <input type="text" class="form-control" name="keyword" placeholder="Procurar Artistas">
               </div>
+            </action>
             </form>
           </div>
         </div>
@@ -208,69 +896,42 @@
     <!--Header End-->
 
     <div id="page-contents">
-      <div class="container">
-        <div class="row">
 
-          <!-- Newsfeed Common Side Bar Left
-          ================================================= -->
-          <div id="sticky-menu" class="col-md-3 static">
-            <ul class="nav-news-feed">
-              <li><i class="fas fa-newspaper"></i><div><a href="/feed?frag=feed">Meu feed</a></div></li>
-              <li><i class="fas fa-users"></i><div><a href="/feed?frag=search">Procurar Pessoas</a></div></li>
-              <li><i class="fas fa-address-book"></i><div><a href="/feed?frag=contacts">Lista de Contactos</a></div></li>
-              <li><i class="fas fa-comments"></i><div><a href="/feed?frag=chat">Messagens</a></div></li>
-              <li><i class="fas fa-images"></i><div><a href="/feed?frag=images">Imagens</a></div></li>
-              <li><i class="fas fa-video"></i><div><a href="/feed?frag=videos">Videos</a></div></li>
-            </ul><!--news-feed links ends-->
-          </div>
-
-          <div class="col-md-7">
-            <!---Frags- -->
-         
-          <th:block  th:switch="${frag}">
-
-          <div th:case="feed"><span th:include="fragpost::post"></span></div>  
-           <div th:case="search"><span th:include="fragsearch::search"></span></div>   
-
-          <div th:case="chat"><span th:include="fragchat::chat"></span></div> 
+      
 
 
-          <div th:case="contacts"><span th:include="fragfriendlist::friendlist"></span></div>    
 
-         <!--  <div th:case=""><span th:include=" :: "></span></div>     -->
-          
+
+
+    <!-- INICIO da pagina
+    ================================================= -->
+
+
+
+  
+          <th:block  th:switch="${main}">
+
+          <div th:case="homepage"><span th:include="homepage::homepage"></span></div>  
+           <div th:case="perfil"><span th:include="perfil::perfil"></span></div>   
+              <div th:case="chat"><span th:include="fragchat::chat"></span></div> 
 
          </th:block>
 
-          </div>
-
-         
-
-          <!-- LIST CONTACTS
-          ================================================= -->
-          <th:block th:each="friend: ${friends}">
-          <div class="col-md-2 static">
-            <div class="suggestions" id="sticky-sidebar">
-              <h4 class="grey">Contactos Online</h4>
-
-              <!-- MODEL CONTACT ONLINE -->
-
-              <div class="follow-user">
-                <img th:src="${friend.pathimage}" alt="" class="profile-photo-sm pull-left" />
-                <div>
-                  <h5><a href="timeline.html"><span th:text="${friend.firstname}"></span></a></h5>
-                  <p class="text-green"><span th:text="${friend.category}"></span></p>
-                </div>
-              </div>
 
 
 
-              </div>
-            </div>
-            </th:block>
-          </div>
-        </div>
-      </div>
+   </div>
+    <!-- FIM DA PGINA
+    ================================================= -->
+
+
+
+
+
+
+
+
+
 
     <!-- Footer
     ================================================= -->
@@ -281,10 +942,9 @@
             <div class="col-md-3 col-sm-3">
               <h5>Segue os Programadores</h5>
               <ul class="list-inline social-icons">
-                <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-                <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-                <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-                <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
                 <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
               </ul>
             </div>
@@ -299,21 +959,30 @@
         </div>
       </div>
       <div class="copyright">
-        <p>Grupo Thalia © 2018. ATEC</p>
+        <p>Artlink © 2018. ATEC</p>
       </div>
     </footer>
 
-    <!--preloader-->
-    <!-- <div id="spinner-wrapper">
-      <div class="spinner"></div>
-    </div> -->
-    <!-- Scripts
-    ================================================= -->
-    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script> -->
-    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
+<script th:src="@{/js/jquery-3.1.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/jquery.sticky-kit.min.js}"></script>
     <script th:src="@{/js/jquery.scrollbar.min.js}"></script>
     <script th:src="@{/js/script.js}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+          format: 'mm/dd/yyyy',
+          container: container,
+          todayHighlight: true,
+          autoclose: true,
+        };
+        date_input.datepicker(options);
+      });
+  </script>
   </body>
 </html>   

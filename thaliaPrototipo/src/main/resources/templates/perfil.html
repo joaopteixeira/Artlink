@@ -1,0 +1,51 @@
+<div th:fragment="perfil">
+    <div class="container">
+      <!-- Timeline
+      ================================================= -->
+       <div class="timeline"><!--Page -->
+        <div class="timeline-cover"><!--Cabeçalho-->
+
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs"><!-- Navbar para todos  -->
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img th:src="${Person.pathimage}" alt="" class="img-responsive profile-photo" />
+
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a th:href="@{/feed?main=perfil&frag=about&personid=}+ ${Person.id}">Sobre Min</a></li>
+                  <li><a th:href="@{/feed?main=perfil&frag=galeria&personid=}+ ${Person.id}">Galeria</a></li>
+									<li><a th:href="@{/feed?main=perfil&frag=playlist&personid=}+ ${Person.id}">PlayList</a></li>
+                  <li><a th:href="@{/feed?main=perfil&frag=amigos&personid=}+ ${Person.id}">Seguidores</a></li>
+									<li><a th:href="@{/feed?main=perfil&frag=profile&personid=}+ ${Person.id}">Meu Perfil</a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  <li><span th:text="${Person.userwatched}"</li>
+                  <li><button class="btn-primary">Seguir</button></li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+        </div>
+</div>
+          <!-- Fragmentos -->
+      <div id="page-contents"> 
+          <th:block  th:switch="${frag}">
+           <div th:case="timeline"><span th:include="frag_timeline::timeline"></span></div>  
+           <div th:case="about"><span th:include="frag_about::about"></span></div>  
+           <div th:case="galeria"><span th:include="frag_galeria::galeria"></span></div>  
+           <div th:case="playlist"><span th:include="frag_playlist::playlist"></span></div>  
+           <div th:case="amigos"><span th:include="frag_amigos::amigos"></span></div>  
+           <div th:case="profile"><span th:include="frag_perfil_info::info"></span></div>  
+
+           <div th:case="password"><span th:include="frag_perfil_password::password"></span></div>  
+
+
+          </th:block>
+
+        </div>
+  </div>
+</div>        

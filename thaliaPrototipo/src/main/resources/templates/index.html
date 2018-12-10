@@ -30,27 +30,14 @@
         <div class="container">
 					<div class="row">
 						<div class="navbar-header col-sm-6">
-							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							</button>
+							
 							<a class="navbar-brand" href="#" style=" color:white; font-size: 38px;font-family: 'Megrim', cursive;">artlink<span style="color:#40CC9B;">.pt</span></a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="navbar-header col-sm-6 text-center mx-auto" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right main-menu">
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span><img src="images/down-arrow.png" alt="" /></span></a>
-									<ul class="dropdown-menu newsfeed-home">
-										<li><a href="index.html">Landing Page 1</a></li>
-										<li><a href="index-register.html">Landing Page 2</a></li>
-									</ul>
-								</li>
-
-								<li class="dropdown"><a href="contact.html">Contactar-nos/a></li>
+								
 							</ul>
 						</div>
 					</div>
@@ -69,9 +56,8 @@
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="intro-texts">
-						<h1 class="text-white">Make Cool Friends !!!</h1>
-						<p>Friend Finder is a social network template that can be used to connect people. The template offers Landing pages, News Feed, Image/Video Feed, Chat Box, Timeline and lot more. <br /> <br />Why are you waiting for? Buy it now.</p>
-						<button class="btn btn-primary">Learn More</button>
+						<h1 class="text-white"> Explora a Arte !</h1>
+						<p> Artlink é uma rede social 100% portuguesa, com o objectivo de porpocionar uma plataforma pópria e desenhada para o mundo da arte <br /> <br />Do que estás á espera? Regista-te agora e descobre um novo mundo.</p>
 					</div>
 				</div>
 				<div class="col-sm-6 col-sm-offset-1">
@@ -95,7 +81,7 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="register">
 								<h3>Registar!!!</h3>
-								<p class="text-muted">Be cool and join today. Meet millions</p>
+								<p class="text-muted">Cria o teu perfil </p>
 
 								<!--Register Form-->
 								<form name="registration_form" class="form-inline" th:action="@{/registry}" method="POST">
@@ -113,7 +99,7 @@
 									<div class="row">
 										<div class="form-group col-xs-12">
 											<label class="sr-only">Email</label>
-											<input id="email" class="form-control input-group-lg" type="text" name="Email" title="Enter Email" placeholder="Your Email" required/>
+											<input id="email" class="form-control input-group-lg" type="email" name="Email" title="Enter Email" placeholder="Your Email" required/>
 										</div>
 									</div>
 									<br>
@@ -134,10 +120,10 @@
 									<div class="row">
 										<div class="form-group">
 											<label class="radio-inline">
-												<input type="radio" name="optradio" checked>Male
+												<input type="radio" name="optradio" value="2" checked>Male
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="optradio">Female
+												<input type="radio" name="optradio" value="1">Female
 											</label>
 										</div>
 									</div>
@@ -148,15 +134,15 @@
 												<label class="sr-only">Distrito</label>
 												<select class="form-control" name="city">
 													<option value="indiferente">Indiferente</option>
-													<option value="aveiro">Aveiro</option>
-													<option value="beja">Beja</option>
-													<option value="braga">Braga</option>
-													<option value="braganca">Bragança</option>
-													<option value="castelo_branco">Castelo Branco</option>
-													<option value="coimbra">Coimbra</option>
-													<option value="evora">Évora</option>
-													<option value="faro">Faro</option>
-													<option value="guarda">Guarda</option>
+													<option value="Aveiro">Aveiro</option>
+													<option value="Beja">Beja</option>
+													<option value="Braga">Braga</option>
+													<option value="Braganca">Bragança</option>
+													<option value="Castelo_branco">Castelo Branco</option>
+													<option value="Coimbra">Coimbra</option>
+													<option value="Evora">Évora</option>
+													<option value="Faro">Faro</option>
+													<option value="Guarda">Guarda</option>
 													<option value="ilha_da_madeira">Ilha da Madeira</option>
 													<option value="ilha_das_flores">Ilha das Flores</option>
 													<option value="ilha_porto_santo">Ilha de Porto Santo</option>
@@ -168,15 +154,15 @@
 													<option value="ilha_do_pico">Ilha do Pico</option>
 													<option value="ilha_graciosa">Ilha Graciosa</option>
 													<option value="ilha_terceira">Ilha Terceira</option>
-													<option value="leiria">Leiria</option>
-													<option value="lisboa">Lisboa</option>
-													<option value="portalegre">Portalegre</option>
-													<option value="porto">Porto</option>
-													<option value="santarem">Santarém</option>
-													<option value="setubal">Setúbal</option>
-													<option value="viana_do_castelo">Viana do Castelo</option>
-													<option value="vila_real">Vila Real</option>
-													<option value="viseu">Viseu</option>
+													<option value="Leiria">Leiria</option>
+													<option value="Lisboa">Lisboa</option>
+													<option value="Portalegre">Portalegre</option>
+													<option value="Porto">Porto</option>
+													<option value="Santarem">Santarém</option>
+													<option value="Setubal">Setúbal</option>
+													<option value="Viana_do_castelo">Viana do Castelo</option>
+													<option value="Vila_real">Vila Real</option>
+													<option value="Viseu">Viseu</option>
 													</select>
 											</div>
 											<div class="form-group col-xs-6">
@@ -191,10 +177,10 @@
 									<br>
 									<div class="row">
 										<div class="col-sm-6" id="procurado">
-											<button class="btn btn-primary btn-large">Quero ser encontrado</button>
+											<button class="btn btn-primary btn-large" name="type" value="1">Quero ser encontrado</button>
 										</div>
 										<div class="col-sm-6" id="procurador">
-											<button class="btn btn-primary btn-large">Quero encontrar Artistas</button>
+											<button class="btn btn-primary btn-large" name="type" value="0">Quero encontrar Artistas</button>
 										</div>
 									</div>
 
@@ -205,14 +191,14 @@
 							<!--Login-->
 							<div class="tab-pane" id="login">
 								<h3>Login</h3>
-								<p class="text-muted">Log into your account</p>
+								<p class="text-muted">Entra no teu perfil</p>
 
 								<!--Login Form-->
 								<form th:action="@{/login}" method="POST">
 									 <div class="row">
 										<div class="form-group col-xs-12">
 											<label for="my-email" class="sr-only">Email</label>
-											<input id="my-email" class="form-control input-group-lg" type="text" name="email" title="Enter Email" placeholder="Your Email"/>
+											<input id="my-email" class="form-control input-group-lg" type="email" name="email" title="Enter Email" placeholder="Your Email"/>
 										</div>
 									</div>
 									<div class="row">
@@ -222,8 +208,8 @@
 										</div>
 									</div>
 
-								<p><a id="forget_pass" href="#" data-toggle="modal" data-target="#myModal">Forgot Password?</a></p>
-								<button class="btn btn-primary" type="submit">Login Now</button>
+								<p><a id="forget_pass" href="#" data-toggle="modal" data-target="#myModal">Esqueceu Password?</a></p>
+								<button class="btn btn-primary" type="submit">Login Agora</button>
 								</form><!--Login Form Ends-->
 								<form th:action="@{/resetPassword}" method="post">
 									<div class="modal fade" id="myModal" role="dialog" style="background-color: rgba(0, 0, 0, 0.3);">
@@ -232,7 +218,7 @@
 											<div class="modal-content">
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="modal-title">Forget Password</h4>
+													<h4 class="modal-title">Esqueceu Password</h4>
 												</div>
 												<div class="modal-body">
 	
@@ -270,8 +256,8 @@
 			  <img class="card-img-top" src="..." alt="Card image cap">
 			  <div class="card-block">
 			    <h4 class="card-title">João Vilares</h4>   
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-teixeira-vilares-1886a8167/" class="btn btn-primary">Read More</a>
+                <p class="card-text"></p>
+                <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-teixeira-vilares-1886a8167/" class="btn btn-primary">Ler mais</a>
 			  </div>
 			</div>
 		</div>
@@ -280,8 +266,8 @@
 			  <img class="card-img-top" src="..." alt="Card image cap">
 			  <div class="card-block">
 			    <h4 class="card-title">João Mirante</h4>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="https://www.linkedin.com/in/jo%C3%A3o-mirante-ba6334168/" class="btn btn-primary">Read More</a>
+      <p class="card-text"></p>
+                <a href="https://www.linkedin.com/in/jo%C3%A3o-mirante-ba6334168/" class="btn btn-primary">Ler mais</a>
 			  </div>
 			</div>
 		</div>
@@ -290,18 +276,18 @@
 			  <img class="card-img-top" src="..." alt="Card image cap">
 			  <div class="card-block">
                 <h4 class="card-title">Nilton Fontes</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="https://www.linkedin.com/in/nilton-fontes-868974162/" class="btn btn-primary">Read More</a>
+                <p class="card-text"></p>
+                <a href="https://www.linkedin.com/in/nilton-fontes-868974162/" class="btn btn-primary">Ler mais</a>
 			  </div>
 			</div>
 		</div>
 		<div class="col-md-3">
           <div class="card-block">
-                <h4 class="card-title">Gonçalo Lavrador</h4>
-                <img class="card-img-top" src="..." alt="Card image cap">
+          	<img class="card-img-top" src="..." alt="Card image cap">
+                <h4 class="card-title">Gonçalo Lavrador</h4>  
                  <div class="card-block">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="https://www.linkedin.com/in/gon%C3%A7alo-lavrador-703256175/" class="btn btn-primary">Read More</a>
+                <p class="card-text"></p>
+                <a href="https://www.linkedin.com/in/gon%C3%A7alo-lavrador-703256175/" class="btn btn-primary">Ler mais</a>
               </div>
             </div>
 

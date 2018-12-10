@@ -5,6 +5,12 @@ public class District {
 	private String id;
 	private String name;
 	
+	
+	
+	 
+	public District() {
+		super();
+	}
 	public District( String name) {
 		super();
 		this.name = name;

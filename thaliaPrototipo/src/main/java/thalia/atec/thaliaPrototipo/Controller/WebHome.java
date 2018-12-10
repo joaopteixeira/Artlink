@@ -19,12 +19,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
+import thalia.atec.thaliaPrototipo.Functions.FCategory;
 import thalia.atec.thaliaPrototipo.Functions.FFeed;
 import thalia.atec.thaliaPrototipo.Functions.FPost;
 import thalia.atec.thaliaPrototipo.Functions.FUser;
+import thalia.atec.thaliaPrototipo.Service.CategoryRepository;
+import thalia.atec.thaliaPrototipo.Service.FileStorageService;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.Util.DateUtil;
+import thalia.atec.thaliaPrototipo.model.Category;
 import thalia.atec.thaliaPrototipo.model.Comment;
 import thalia.atec.thaliaPrototipo.model.Media;
 import thalia.atec.thaliaPrototipo.model.Post;
@@ -37,10 +44,18 @@ public class WebHome {
 	FPost  fpost;
 	
 	@Autowired
+	FUser  fuser;
+	
+	@Autowired
 	UserRepository userrep;;
 	
 	@Autowired
+	CategoryRepository catrep;
+	@Autowired
 	FFeed ffeed;
+	
+	 @Autowired
+	 private FileStorageService fileStorageService;
 	
 	@GetMapping("/index")
 	public String index() {
@@ -50,7 +65,7 @@ public class WebHome {
 	}
 	
 	@GetMapping("/feed")
-	public String feed(Model page,@RequestParam("frag") String frag,HttpSession session){
+	public String feed(Model page,@RequestParam("personid") String personid,@RequestParam("main") String main,@RequestParam("frag") String frag,@RequestParam(value="keyword",defaultValue="*") String keyword,HttpSession session){
 		
 
 		
@@ -58,125 +73,310 @@ public class WebHome {
 		
 		Optional<User> user = userrep.findById(u.getId());
 		
-	
-		
-		
+		page.addAttribute("personid","you");
+		if (user.isPresent()) {
 
-		if(user.isPresent()) {
-			
-			
-			page.addAttribute("User",user.get());
-			page.addAttribute("frag",frag);
+
+
+			page.addAttribute("User", user.get());
+			page.addAttribute("main", main);
+			page.addAttribute("frag", frag);
 			session.setAttribute("User", user.get());
-			page.addAttribute("friends",ffeed.getFriends(user.get().getId()));
+			page.addAttribute("friends", ffeed.getFriends(user.get().getId()));
 			
 			
-			
-		if(frag.compareTo("feed")==0) {
-			
-		
-			System.out.println(user.get().getId());
-			page.addAttribute("posts",fpost.getPost(user.get().getId(), 0, 0));
-			
-			
-			
-			return "feedmain.html";
-		
-			}
-			
-		  if(frag.compareTo("chat")==0) {
-
-				page.addAttribute("User",(User)session.getAttribute("User"));
-				
+			if(main.compareTo("chat")== 0) {
+				page.addAttribute("User", (User) session.getAttribute("User"));
+				page.addAttribute("main", "chat");
+				return "feedmain.html";
 				
 			}
-			
-		  
-		  if(frag.compareTo("friends")==0) {
 
-			    page.addAttribute("User",(User)session.getAttribute("User"));
+
+			if (main.compareTo("perfil") == 0) {
 				
-		  }
-			
-		  
-		  
+				
+				page.addAttribute("User", (User) session.getAttribute("User"));
+				
+				Optional<User> persona = userrep.findById(personid);
+							
+				
+				List posts = (List) fpost.getPostsByUser(persona.get().getId());
+				
+	
+				
+				page.addAttribute("Person",persona.get());
+				page.addAttribute("posts",posts);
+				page.addAttribute("personid",personid);
+		
 
-			return "feedmain.html";
+				if (frag.compareTo("timeline") == 0) {
+
+					
+					page.addAttribute("User", (User) session.getAttribute("User"));
+								
+
+
+					page.addAttribute("frag", "timeline");
+
+					return "feedmain.html";
+
+				}else
+					
+				
+				
+				if (frag.compareTo("about") == 0) {
+
+			
+					page.addAttribute("frag", "about");
+
+					return "feedmain.html";
+
+				}else
+				
+				if (frag.compareTo("galeria") == 0) {
+
+					
+					page.addAttribute("User", (User) session.getAttribute("User"));
+				
+					
+					
+					
+					
+					page.addAttribute("posts",posts);
+					page.addAttribute("frag", "galeria");
+
+					return "feedmain.html";
+
+				}else
+				
+				if (frag.compareTo("playlist") == 0) {
+
+			
+					page.addAttribute("frag", "playlist");	
+					
+					page.addAttribute("posts",posts);
+
+					return "feedmain.html";
+
+				}else
+				
+				if (frag.compareTo("amigos") == 0) {
+
+				
+					page.addAttribute("frag", "amigos");
+
+					return "feedmain.html";
+
+				}else
+				
+				if (frag.compareTo("profile") == 0) {
+
+			
+					page.addAttribute("frag", "profile");
+
+					return "feedmain.html";
+
+				}else
+				if (frag.compareTo("password") == 0) {
+
+					
+					page.addAttribute("frag", "password");
+					
+					
+
+					return "feedmain.html";
+
+				}
+				
+				
+
+			}else if (main.compareTo("homepage") == 0) {
+
+				if (frag.compareTo("post") == 0) {
+
+					page.addAttribute("frag", "post");
+					System.out.println(user.get().getId());
+					page.addAttribute("posts", fpost.getPost(user.get().getId(), 0, 0));
+
+					return "feedmain.html";
+
+				}else
+
+				if (frag.compareTo("chat") == 0) {
+
+					page.addAttribute("frag", "chat");
+					page.addAttribute("User", (User) session.getAttribute("User"));
+					return "feedmain.html";
+
+				}else
+
+				if (frag.compareTo("contacts") == 0) {
+
+					page.addAttribute("frag", "contacts");
+					page.addAttribute("User", (User) session.getAttribute("User"));
+					return "feedmain.html";
+
+				}else
+
+				if (frag.compareTo("search") == 0) {
+
+			
+					List<Category> categories = catrep.findAll();
+					page.addAttribute("categories", categories);
+					
+				
+				
+					
+					if(keyword.compareTo("*")!=0) {
+						
+						page.addAttribute("personid","you");
+						
+						List<User> results = fuser.getUserContainig(keyword);
+
+						page.addAttribute("results",results);
+					}
+					
+
+				}
+				
+
+				else if(frag.compareTo("doevents") == 0) {
+					  page.addAttribute("User", (User)session.getAttribute("User"));
+						page.addAttribute("personid","you");
+				  }
+				
+				else if(frag.compareTo("frageventlist") == 0) {
+					  page.addAttribute("User", (User)session.getAttribute("User"));
+						page.addAttribute("personid","you");
+				  }
+				
+
+				return "feedmain.html";
+				
+				
+			}
+			
+				
 		}
-		
+
 		return "redirect:/index";
-		
+
 	}
 	
-////	@GetMapping("/newpost")
-//	public String feed(@RequestParam("content") String content, HttpSession session){
+	@PostMapping("/newpost")
+  public String feed(@RequestParam("file") MultipartFile file,@RequestParam("content") String content,@RequestParam("typemedia") int typemedia,/*@RequestParam("pathfile") String pathfile,*/ HttpSession session){
 //		
 //		
-//		User u = (User)session.getAttribute("User");
+		String fileName = fileStorageService.storeFile(file);
+    	//String fileName = rand.replace("-", "");
+
+        
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("upload/downloadFile/")
+                .path(fileName)
+                .toUriString();     
+        System.out.println(fileDownloadUri);
+		
+		
+		User u = (User)session.getAttribute("User");
 //		
-//		Post p = new Post();
+		Post p = new Post();
 //		
 //		
-//	    LocalDateTime date =  LocalDateTime.now();  
+		LocalDateTime date =  LocalDateTime.now();  
 //
 //		
-//		String username = u.getUsername() ;
+			String username = u.getUsername() ;
 //		
-//		String iduser;
+			String iduser;
 //		
-//		Media media;
+			Media media = new Media(typemedia,fileDownloadUri);//pathfile);
 //		
 //		
-//	    p.setContent(content);
-//		p.setUsername(username);
-//		p.setDate(date.toString());
-//
+	    p.setContent(content);
+		p.setUsername(username);
+		p.setIduser(u.getId());
+		p.setDate(date.toString());	
+		p.setMedia(media);
+		fpost.newPost(p);
+		
 //		
-//	
-//		
-//		 fpost.newPost(p);
-//		
-//		 return "redirect:/feed";
-//	}
+	
+	 return "redirect:/feed?main=homepage&personid=you&frag=post";
+	}
 //	
 	
 	
 @PostMapping("/newcomment")
 public String newComment(@RequestParam("content") String content,@RequestParam("idpost") String idpost, HttpSession session){
 	
+	System.out.println("Id-POST:  "+idpost);
+	System.out.println("Content:  "+content);
 	
 	User u = (User)session.getAttribute("User");
 	
-	DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+	String hash = (String)session.getAttribute("hash");
+	System.out.println("HASH:  "+hash);
 
-	// Get the date today using Calendar object.
-	Date today = Calendar.getInstance().getTime();        
-	// Using DateFormat format method we can create a string 
-	// representation of a date with the defined format.
-	String reportDate = df.format(today);
-	
-	Post p = fpost.getPost(idpost);
+	Post p = fpost.addComment(idpost,hash,content);
 
 	
-	p.getComments().add(new Comment(u.getId(), content, reportDate));
-	
-	fpost.savePost(p);
 	
 	
-	//page.addAttribute("User",(User)session.getAttribute("User"));
-
-	
-	//String user = session.getAttribute();
-	
-	
-	
-	
-	
-	
-  return "redirect:/feed";
+  return "redirect:/feed?main=homepage&personid=you&frag=post";
 }
 
+
+@PostMapping("/newsearch")	
+public String NewSearch(Model page,@RequestParam("personid") String personid,@RequestParam("keyword") String keyword, HttpSession session) {
+	
+	
+	page.addAttribute("User",(User)session.getAttribute("User"));
+
+	page.addAttribute("main", "homepage");
+	page.addAttribute("frag", "perfil");
+
+	  return "redirect:/feed?main=homepage&personid=you&frag=search&keyword="+keyword;
+}
+
+@GetMapping("/chat")	
+public String chat(Model page,@RequestParam("personid") String personid, HttpSession session) {
+	
+	
+	page.addAttribute("User",(User)session.getAttribute("User"));
+
+	page.addAttribute("main", "chat");
+
+
+	  return "redirect:/feed?main=chat&personid=you&frag=chat";
+}
+
+
+
+@GetMapping("/profile")	
+public String profile(Model page, HttpSession session,@RequestParam("personid") String personid) {
+	
+	
+	page.addAttribute("User",(User)session.getAttribute("User"));
+	
+	User u = (User)session.getAttribute("User");
 	
 	
 	
+
+	page.addAttribute("main", "perfil");
+	page.addAttribute("frag", "timeline");
+	
+
+	
+	
+	
+
+	  return "redirect:/feed?main=perfil&frag=timeline&personid="+personid;
+}
+
+
+
+
 }

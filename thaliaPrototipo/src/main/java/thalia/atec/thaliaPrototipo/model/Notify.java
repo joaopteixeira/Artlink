@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 
 public class Notify {
 	
-	public static final int TPOST=0,TMSG=1,SUBTPLIKE=2,SUBTPCOMMENT=3;
+	public static final int TPOST=0,TMSG=1,SUBTPLIKE=2,SUBTPCOMMENT=3,TEVENT=4;
 	public static final int VISTO=0,NVISTO=1;
 
 	
@@ -27,7 +27,11 @@ public class Notify {
 	
 	
 	String idpost;
+	String idcomment;
 	String comment;
+	
+	String idevent;
+	
 	
 	int estado;
 	
@@ -48,6 +52,37 @@ public class Notify {
 	
 	
 	
+	
+	public String getIdevent() {
+		return idevent;
+	}
+
+
+
+
+
+	public void setIdevent(String idevent) {
+		this.idevent = idevent;
+	}
+
+
+
+
+
+	public String getIdcomment() {
+		return idcomment;
+	}
+
+
+
+
+	public void setIdcomment(String idcomment) {
+		this.idcomment = idcomment;
+	}
+
+
+
+
 	public int getEstado() {
 		return estado;
 	}

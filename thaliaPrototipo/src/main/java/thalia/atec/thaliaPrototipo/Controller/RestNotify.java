@@ -53,6 +53,32 @@ public class RestNotify {
 		
 	}
 	
+	@GetMapping("/getall")
+	public ResponseEntity<?> notifyAll(@RequestParam(name="hash",defaultValue="") String hash){
+		
+		Optional<User> user = urep.findByHashes(hash);
+		
+		if(user.isPresent()) {
+			
+			List<Notify> aux = fnotify.notifyAll(hash);
+			
+			if(aux!=null) {
+				return new ResponseEntity<List<Notify>>(aux,HttpStatus.OK);
+			}
+			
+			return new ResponseEntity<>("null",HttpStatus.OK);
+			
+		}
+		
+	
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 	

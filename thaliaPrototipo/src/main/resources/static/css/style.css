@@ -101,7 +101,7 @@ h1.grey, h2.grey, h3.grey, h4.grey, h5.grey, h6.grey{
 
 .profile-link{font-weight: 600;}
 
-.text-muted{color: #939598;}
+.text-muted{color: black;}
 
 a{color: #40CC9B;}
 
@@ -1336,6 +1336,13 @@ ul.online-users li span.online-dot{
   box-shadow: 5px 5px 0px 0px rgba(0,0,0,0.75); */
 }
 
+ li.remetente p{
+  font-size: 20px;
+ }
+ li.destinatario p{
+  font-size: 20px;
+ }
+
 .chat-room .chat-body ul.chat-message li.remetente .chat-item::after{
   content: '';
   position: absolute;
@@ -1407,7 +1414,7 @@ ul.online-users li span.online-dot{
 }
 .scrollbar-wrapper.tab-content{
     overflow-y: auto;
-    height: 400px;
+    height: 60vh
 }
 
 .scrollbar-wrapper.contact-list{
@@ -2460,3 +2467,5 @@ div.scrollmenu  .iconmessages:hover {
   background-color: rgba(66, 244, 164,0.1);
   padding: 2px;
 }
+
+ 
