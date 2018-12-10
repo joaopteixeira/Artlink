@@ -32,12 +32,27 @@
 
         <div class="form-group col-xs-6">
           <label for="nome">Nome</label>
-          <input id="nome" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="Nome" th:value="${User.firstname}"  />
+          <input id="nome" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="name" th:value="${User.firstname}"  />
         </div>
         <div class="form-group col-xs-6">
           <label for="apelido" class="">Apelido</label>
           <input id="apelido" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="Apelido" th:value="${User.lastname}" />
-         
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="category" class="">Categoria</label>
+          <input id="category" class="form-control input-group-lg" type="text" name="category" title="Enter last name" placeholder="Categoria" th:value="${User.category}" />
+        </div>
+            <div class="form-group col-xs-6">
+          <label for="subcategory" class="">Sub-sCategoria</label>
+          <input id="subcategory" class="form-control input-group-lg" type="text" name="subcategory" title="Enter last name" placeholder="Sub-Categoria" th:value="${User.subcategory}" />
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="telemovel" class="">Telemóvel</label>
+          <input id="telemovel" class="form-control input-group-lg" type="numbers" name="phonenumber" title="Enter last name" placeholder="Telemóvel" th:value="${User.phonenumber}" />
+        </div>
+                <div class="form-group col-xs-6">
+          <label for="website">WebSite Pessoal</label>
+          <input id="website" class="form-control input-group-lg" type="text" name="website" title="Enter first name" placeholder="website" th:value="${User.website}"  />
         </div>
       </div>
       <div class="form-group gender">
