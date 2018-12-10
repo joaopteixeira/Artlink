@@ -83,6 +83,15 @@ public class WebHome {
 			page.addAttribute("frag", frag);
 			session.setAttribute("User", user.get());
 			page.addAttribute("friends", ffeed.getFriends(user.get().getId()));
+			
+			
+			if(main.compareTo("chat")== 0) {
+				page.addAttribute("User", (User) session.getAttribute("User"));
+				page.addAttribute("main", "chat");
+				return "feedmain.html";
+				
+			}
+
 
 			if (main.compareTo("perfil") == 0) {
 				
@@ -227,8 +236,21 @@ public class WebHome {
 
 						page.addAttribute("results",results);
 					}
+					
 
 				}
+				
+
+				else if(frag.compareTo("doevents") == 0) {
+					  page.addAttribute("User", (User)session.getAttribute("User"));
+						page.addAttribute("personid","you");
+				  }
+				
+				else if(frag.compareTo("frageventlist") == 0) {
+					  page.addAttribute("User", (User)session.getAttribute("User"));
+						page.addAttribute("personid","you");
+				  }
+				
 
 				return "feedmain.html";
 				
@@ -317,6 +339,19 @@ public String NewSearch(Model page,@RequestParam("personid") String personid,@Re
 
 	  return "redirect:/feed?main=homepage&personid=you&frag=search&keyword="+keyword;
 }
+
+@GetMapping("/chat")	
+public String chat(Model page,@RequestParam("personid") String personid, HttpSession session) {
+	
+	
+	page.addAttribute("User",(User)session.getAttribute("User"));
+
+	page.addAttribute("main", "chat");
+
+
+	  return "redirect:/feed?main=chat&personid=you&frag=chat";
+}
+
 
 
 @GetMapping("/profile")	

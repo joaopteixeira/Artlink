@@ -29,7 +29,7 @@
         <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
-
+      <link rel="stylesheet" th:href=@{/css/card.css}>
     <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--Google Font-->
@@ -37,45 +37,301 @@
     <!--Font Awsome-->
     <link rel="stylesheet" th:href="@{https://use.fontawesome.com/releases/v5.5.0/css/all.css}" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
+    <style type="text/css">
+      .thatwidth{
+        width: 100% !important;
+        margin-bottom: 15px !important;
+      }
+    </style>
+
 
   </head>
   <body th:object="${User}">
-    <script>
-    /*$('.media').hide();
-     $("#natzc1").click(function(){
-       $(".media").hide();
-       $("#natc1").show();
-       $("#output2").attr("src","");
-       $("#output3").attr("src","");
-       $("#output4").attr("src","");
-       document.getElementById("video-input").value = "";
-       document.getElementById("audio-input").value = "";
-     });
 
-     $("#natzc2").click(function(){
-       $(".media").hide();
-       $("#natc2").show();
-       $("#output").attr("src","");
-       $("#output3").attr("src","");
-       $("#output4").attr("src","");
-       document.getElementById("image-input").value = "";
-       document.getElementById("audio-input").value = "";
-     });
-     $("#natzc3").click(function(){
-       $(".media").hide();
-       $("#natc3").show();
-       $("#output").attr("src","");
-       $("#output2").attr("src","");
-       document.getElementById("image-input").value = "";
-       document.getElementById("video-input").value = "";
-<<<<<<< HEAD
-     });
-      $(document).ready(function(){
-        $('.media').hide();
 
-        $(document).on("change", "#image-input", function(evt) {
-=======
-     });*/
+      <script th:inline="javascript">
+
+         /*<![CDATA[*/
+
+
+        var id = /*[[${User.id}]]*/ '';
+        var firstname = /*[[${User.firstname}]]*/ '';
+        var lastname = /*[[${User.lastname}]]*/ '';
+        var hash = /*[[${session.hash}]]*/ '';
+        var compar = '';
+        var fullname = firstname+' '+lastname;
+
+        /*]]>*/
+
+      console.log(id);
+      console.log(fullname);
+      console.log(hash);
+
+      var date = new Date();
+      console.log(date);
+
+
+      const messages = document.getElementById('chat');
+
+
+      function scrollToBottom() {
+        document.getElementById('scrollbar').scrollTop=(document.getElementById('scrollbar').scrollHeight)
+      }
+
+      function actchat(x, y){
+          
+          console.log('chat: '+x);
+          $('#displaymsg').empty();
+          $.ajax({
+            url:'/mchat/getchatbyid',
+            data:{ 'idchat' : x, 'hash' : hash },
+            dataType:'JSON',
+            type:'GET',
+            success: function (data){
+              var mensagem = '';
+              var output = ''; 
+              var tempo = '';
+
+              document.getElementById("iddchat").value = data.id;
+              document.getElementById("length").value = data.mensagens.length;
+
+
+              
+
+              for (var i = 0; i < data.mensagens.length; i++) {
+
+                 $.ajax({
+                  url:'/mchat/getdate',
+                  data:{ 'data' : data.mensagens[i].date },
+                  dataType:'text',
+                  type:'GET',
+                  success: function (datah){ 
+                    tempo = datah;
+                  },
+                  async: false,
+                  error: function (xhe) {
+                    console.log("err: "+xhe);
+                  }
+                });
+
+                if(data.mensagens[i].user.id == id){
+                  mensagem = '<li class="remetente msn">';
+                  mensagem += '<div class="chat-item">';
+                  mensagem += '   <div class="chat-item-header">';
+                  mensagem += '      <h5>Eu</h5>';
+                  mensagem += '      <small class="text-muted" id="'+i+'">'+tempo+'</small>';
+                  mensagem += '    </div>';
+                  mensagem += '    <p>'+data.mensagens[i].msg+'</p>';
+                  mensagem += ' </div>';
+                  mensagem += '</li>';
+                }
+                else{
+                  mensagem = '<li class="destinatario msn">';
+                  mensagem += '<img src="'+y+'" alt="" class="profile-photo-sm pull-left" />';
+                  mensagem += '<div class="chat-item">';
+                  mensagem += '  <div class="chat-item-header">';
+                  mensagem += '    <h5>'+data.mensagens[i].user.firstname+' '+data.mensagens[i].user.lastname+'</h5>';
+                  mensagem += '    <small class="text-muted">'+tempo+'</small>';
+                  mensagem += '  </div>';
+                  mensagem += '  <p>'+data.mensagens[i].msg+'</p>';
+                  mensagem += '</div>';
+                  mensagem += '</li>';
+                }
+
+               
+
+                document.getElementById("displaymsg").innerHTML += mensagem;
+              }
+
+              scrollToBottom();
+            },
+            error: function (xhe) {
+              console.log("err: "+xhe);
+            }
+          });
+         
+         
+        }
+
+        function sendMessage(){
+          var idchat = document.getElementById("iddchat").value;
+          var msg = document.getElementById("msg").value;
+
+          if(msg != ""){
+            $.ajax({
+            url: '/mchat/sendmsg',
+            data:{'hash':hash, 'idchat': idchat, 'msg': msg},
+            type:'GET',
+            dataType:'JSON',
+              success: function (data){
+                $('#msg').val("");
+              },
+              error: function(xhe){
+                console.log("erro:"+xhe);
+              }
+          });
+          }
+          
+
+        }
+
+     
+     $(document).ready(function(){
+
+        
+      setInterval(function() {
+        
+
+          $('#chat');
+          $('#lista');
+
+          var fgh = hash;
+            $.ajax({
+            url: '/mchat/get',
+            data: { 'hash' : fgh  },
+            dataType: 'JSON',
+            type: "GET",
+            success: function (chats) {
+                
+                //string = JSON.stringify(savingStatu);
+                //alert((savingStatu+'').length);
+                //console.log(chats.length);
+                //alert(id);
+                //len = chats.length;
+
+                var dif = JSON.stringify(chats);
+                      
+                      if(compar != dif){
+                        
+                      
+                        console.log('dif');
+                        compar = dif;
+
+                        $('#lista').empty();
+                        for(var k = 0; k < chats.length; k++){
+                          for(var i = 0; i < chats[k].users.length; i++) {
+                            if(id != chats[k].users[i].id){
+                              //cont++;
+                              //console.log(cont);
+                              //console.log(chats[k].users[i].pathimage);
+                              var notreaded = 0;
+                              
+
+                              for(var j = 0; j < chats[k].mensagens.length; j++){
+                                if(chats[k].mensagens[j].estado == 1 && chats[k].mensagens[j].user.id != id)
+                                  notreaded++;
+                              }
+                              var imgpath = chats[k].users[i].pathimage;
+                              output='';
+                              output+='<div  onclick="actchat(\''+chats[k].id+'\',\''+imgpath+'\')" class="iconmessages '+imgpath+'" >';
+                              output+='  <a>'
+                              output+='     <img src="'+imgpath+'" alt="" class="profile-photo-sm pull-left" />';
+                              if(notreaded != 0)
+                                output+='    <div class="alertmsg"> <h6>'+notreaded+'</h6> </div>';
+                              output+='  </a>';
+                              output+='</div>';
+                             // console.log(output);
+                              document.getElementById("lista").innerHTML += output;
+                            }
+                          } 
+                        }
+                      }         
+            },
+            error: function (xhe) {
+                console.log("err"+xhe);
+              }
+            });
+
+          }, 3000);
+
+        if(document.getElementById("iddchat").value){
+          setInterval(function() {
+              var idchatt = document.getElementById("iddchat").value;
+              var lengthh = document.getElementById("length").value;
+
+              if(idchatt != "x" && lengthh != "x"){
+                $.ajax({
+                url:'/mchat/getchatbyid',
+                data:{ 'idchat' : idchatt, 'hash' : hash },
+                dataType: 'JSON',
+                type: "GET",
+                success: function (data){
+                  var mensagem;
+                  if (data.mensagens.length > lengthh){
+                    for (var i = lengthh; i < data.mensagens.length; i++) {
+
+
+                      $.ajax({
+                        url:'/mchat/getdate',
+                        data:{ 'data' : data.mensagens[i].date },
+                        dataType:'text',
+                        type:'GET',
+                        success: function (datah){ 
+                          tempo = datah;
+                        },
+                        async: false,
+                        error: function (xhe) {
+                          console.log("err: "+xhe);
+                        }
+                      });
+
+                    if(data.mensagens[i].user.id == id){
+                      mensagem = '<li class="remetente chat-mens">';
+                      mensagem += '<div class="chat-item">';
+                      mensagem += '   <div class="chat-item-header">';
+                      mensagem += '      <h5>Eu</h5>';
+                      mensagem += '      <small class="text-muted">'+tempo+'</small>';
+                      mensagem += '    </div>';
+                      mensagem += '    <p>'+data.mensagens[i].msg+'</p>';
+                      mensagem += ' </div>';
+                      mensagem += '</li>';
+                    }
+                    else{
+                      mensagem = '<li class="destinatario chat-mens">';
+                      mensagem += '<img src="'+data.mensagens[i].pathimage+'" alt="" class="profile-photo-sm pull-left" />';
+                      mensagem += '<div class="chat-item">';
+                      mensagem += '  <div class="chat-item-header">';
+                      mensagem += '    <h5>'+data.mensagens[i].user.firstname+' '+data.mensagens[i].user.lastname+'</h5>';
+                      mensagem += '    <small class="text-muted">'+tempo+'</small>';
+                      mensagem += '  </div>';
+                      mensagem += '  <p>'+data.mensagens[i].msg+'</p>';
+                      mensagem += '</div>';
+                      mensagem += '</li>';
+                    }
+                    $("#displaymsg").append(mensagem);
+                    document.getElementById("iddchat").value = data.id;
+                    document.getElementById("length").value = data.mensagens.length;
+                    console.log($('#displaymsg').innerHeight())
+                    console.log($('.chat-mens')[0].scrollHeight);
+                    $('#displaymsg').scrollTop($('#displaymsg').scrollHeight)
+                    }
+                    scrollToBottom();
+                  }
+
+                },
+                error: function (xhe) {
+                    console.log("err"+xhe);
+                  }
+                });
+              }
+
+          },3000);
+        }
+
+       });
+
+        
+    </script>
+
+
+
+
+
+    <script >
+   
+
+
+
 
      $(document).ready(function(){
         $('.media').hide();
@@ -185,8 +441,12 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown">
+
                 <a th:href="@{/feed?main=homepage&frag=post&personid=}+ ${User.id}"aria-expanded="false">Página Principal
                   <span></a>
+              </li>
+              <li>
+                <a th:href="@{/chat?main=chat&personid=you}">Chat</a>
               </li>
 
 
@@ -237,7 +497,7 @@
 
           <div th:case="homepage"><span th:include="homepage::homepage"></span></div>  
            <div th:case="perfil"><span th:include="perfil::perfil"></span></div>   
-         
+              <div th:case="chat"><span th:include="fragchat::chat"></span></div> 
 
          </th:block>
 
@@ -287,18 +547,26 @@
       </div>
     </footer>
 
-    <!--preloader-->
-    <!-- <div id="spinner-wrapper">
-      <div class="spinner"></div>
-    </div> -->
-    <!-- Scripts
-    ================================================= -->
-    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script> -->
-    <script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
+<script th:src="@{/js/jquery-3.1.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/jquery.sticky-kit.min.js}"></script>
     <script th:src="@{/js/jquery.scrollbar.min.js}"></script>
     <script th:src="@{/js/script.js}"></script>
-    <script th:src="@{/js/main.js}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+          format: 'mm/dd/yyyy',
+          container: container,
+          todayHighlight: true,
+          autoclose: true,
+        };
+        date_input.datepicker(options);
+      });
+  </script>
   </body>
 </html>   

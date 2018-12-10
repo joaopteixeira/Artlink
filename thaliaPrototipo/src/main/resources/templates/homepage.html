@@ -11,6 +11,8 @@
               <li><i class="fas fa-newspaper"></i><div><a href="/feed?main=homepage&personid=you&frag=post">Meu feed</a></div></li>
               <li><i class="fas fa-users"></i><div><a th:href="@{/feed?main=homepage&personid=you&frag=search}">Procurar Pessoas</a></div></li>
               <li><i class="fas fa-address-book"></i><div><a href="feed?main=homepage&personid=you&frag=contacts">Lista de Contactos</a></div></li>
+                <li><i class="fas fa-video"></i><div><a href="/feed?main=homepage&personid=you&frag=doevents">Fazer Eventos</a></div></li>
+              <li><i class="fas fa-video"></i><div><a href="/feed?main=homepage&personid=you&frag=frageventlist">Lista Eventos</a></div></li>
          
 
             </ul><!--news-feed links ends-->
@@ -23,11 +25,10 @@
 
           <div th:case="post"><span th:include="fragpost::post"></span></div>  
            <div th:case="search"><span th:include="fragsearch::search"></span></div>   
-
-          <div th:case="chat"><span th:include="fragchat::chat"></span></div> 
-
-
-          <div th:case="contacts"><span th:include="fragfriendlist::friendlist"></span></div>    
+   
+          <div th:case="contacts"><span th:include="fragfriendlist::friendlist"></span></div>
+             <div th:case="doevents"><span th:include="doevents::doevents"></span></div>      
+            <div th:case="frageventlist"><span th:include="frageventlist::frageventlist"></span></div>       
 
          <!--  <div th:case=""><span th:include=" :: "></span></div>     -->
           
