@@ -35,7 +35,29 @@ public class User {
 	 
 	 String description;
 	 
-	 
+		String pathimage;   
+
+		int tokkensquantity,gender;
+		
+		Boolean status, accactivated;
+		
+		String category;
+		String subcategory;
+		
+
+		ArrayList <Tag> preferences;
+		
+		ArrayList <Watch> watching,watched;
+		
+		ArrayList<String> hashes;
+
+		String username;
+		
+		int userwatched;   //Size do arraylist que está dentro dele depois, quando o gajo pedir os posts, vou fazer um set ás variaveis 
+
+
+		
+		
 	 
 	 public String getWebsite() {
 		return website;
@@ -53,7 +75,11 @@ public class User {
 
 
 
-	public String getDescricao() {
+
+
+	
+	
+	public String getDescription() {
 		return description;
 	}
 
@@ -61,36 +87,14 @@ public class User {
 
 
 
-	public void setDescricao(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 
-	String pathimage;   
-
-	int tokkensquantity,gender;
-	
-	Boolean status, accactivated;
-	
-	String category;
-	String subcategory;
-	
-
-	ArrayList <Tag> preferences;
-	
-	ArrayList <Watch> watching,watched;
-	
-	ArrayList<String> hashes;
-
-	String username;
-	
-	int userwatched;   //Size do arraylist que está dentro dele depois, quando o gajo pedir os posts, vou fazer um set ás variaveis 
 
 
-	
-	
-	
-	
+
 	public String getCategory() {
 		return category;
 	}

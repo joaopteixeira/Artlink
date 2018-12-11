@@ -3,9 +3,12 @@ package thalia.atec.thaliaPrototipo.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,6 +69,46 @@ public class RestUser {
 		
 		
 	}
+	
+	
+
+	@GetMapping("/editprofile")
+	public ResponseEntity<?> editprofile(@RequestParam("firstname") String firstname ,
+			@RequestParam("lastname") String lastname,@RequestParam("website") String website,@RequestParam("category") String category,@RequestParam("subcategory") String subcategory,@RequestParam("discription") String discription,@RequestParam("district") String district,@RequestParam("phonenumber") String phonenumber,@RequestParam("country") String country,@RequestParam("hash") String hash ) {
+	
+
+	Optional<User> u = urep.findByHashes(hash);
+	
+	if(u.isPresent()) {
+
+	
+	u.get().setFirstname(firstname);
+	u.get().setLastname(lastname);
+	u.get().setDistrict(district);
+	u.get().setCountry(country);
+	u.get().setCountry(phonenumber);
+	u.get().setCountry(website);
+	u.get().setCountry(discription);
+	u.get().setCountry(category);
+	u.get().setCountry(subcategory);
+	urep.save(u.get());
+	
+	
+	Optional<User> use = urep.findById(u.get().getId());
+	
+	use.get().getHashes().clear();
+	
+	return new ResponseEntity<>(use.get(),HttpStatus.OK);
+	}
+
+	return new ResponseEntity<>("null",HttpStatus.OK);
+	
+	
+}
+	
+	
+	
+	
 	@GetMapping("/1")
 	public void encryptpass(@RequestParam("pass") String pass) {
 		
