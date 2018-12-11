@@ -51,6 +51,7 @@ public class WebLogin {
 		}
 	
 		
+		
 		fuser.Registry(u,password);
 		session.setAttribute("User",u);
 		return UserLogin(u,page,password,session);

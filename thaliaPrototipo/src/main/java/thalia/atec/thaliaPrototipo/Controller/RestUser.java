@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import thalia.atec.thaliaPrototipo.Functions.FUser;
+import thalia.atec.thaliaPrototipo.Service.FileStorageService;
 import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
+import thalia.atec.thaliaPrototipo.UploadFile.UploadFileResponse;
 import thalia.atec.thaliaPrototipo.model.Country;
 import thalia.atec.thaliaPrototipo.model.District;
 import thalia.atec.thaliaPrototipo.model.Media;
@@ -34,6 +38,9 @@ public class RestUser {
 	
 	@Autowired
 	PostRepository prep;
+	
+	@Autowired
+	FileStorageService fileStorageService;
 	
 	@Autowired
 	FUser fuser;
@@ -56,7 +63,6 @@ public class RestUser {
 		}
 		
 		return new ResponseEntity<String>("nRegistado",HttpStatus.ACCEPTED);
-		
 		
 		
 	}
@@ -176,6 +182,38 @@ public class RestUser {
 		
 		
 		return new ResponseEntity<List<Country>>(fuser.getCountry(),HttpStatus.OK);
+	}
+	
+	@PostMapping("/upload")
+	public UploadFileResponse uploadPost(@RequestParam("file") MultipartFile file,@RequestParam("hash") String hash){
+		
+		System.out.println(hash);
+		
+		Optional<User> user = urep.findByHashes(hash);
+		
+		if(user.isPresent()) {
+			String fileName = fileStorageService.storeFile(file);
+	    	
+
+	        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+	                .path("upload/downloadFile/")
+	                .path(fileName)
+	                .toUriString();     
+	        System.out.println(fileDownloadUri);
+	        
+	        user.get().setPathimage(fileDownloadUri);
+	        
+	        urep.save(user.get());
+	        
+	        
+	        return new UploadFileResponse(fileName, fileDownloadUri,
+	                file.getContentType(), file.getSize());
+			
+		}
+		
+		
+		return null;
+
 	}
 	
 	/*

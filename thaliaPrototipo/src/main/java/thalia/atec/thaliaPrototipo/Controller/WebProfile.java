@@ -59,7 +59,7 @@ public class WebProfile {
 	
 	
 
-	return "redirect:/feed?main=perfil&frag=timeline";
+	return "redirect:/feed?main=perfil&frag=timeline&personid="+u.getId();
 	
 	
 }
