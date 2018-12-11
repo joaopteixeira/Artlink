@@ -53,6 +53,8 @@
         color: #000000;
         padding: 0px 30px;
         background-color: #f2f2f2;
+         opacity: 0.5;
+          filter: alpha(opacity=50);
         border-radius: 10px;
         border: 1px solid #000000;
         box-shadow:
@@ -859,7 +861,7 @@
                   <span></a>
               </li>
               <li>
-               <a th:href="@{/chat?main=chat&personid=you}"><i class="fal fa-comments"> </i></a>
+               <a th:href="@{/chat?main=chat&personid=you}"><i style="color:#40cc9b; " class="fal fa-comments"> </i> <span style="color:#40cc9b; "> Chat</span></a>
               </li>
 
 
