@@ -265,17 +265,21 @@ public class WebHome {
 	}
 	
 	@PostMapping("/newpost")
-  public String feed(@RequestParam("file") MultipartFile file,@RequestParam("content") String content,@RequestParam("typemedia") int typemedia,/*@RequestParam("pathfile") String pathfile,*/ HttpSession session){
+  public String feed(@RequestParam("file") MultipartFile file,@RequestParam("content") String content,@RequestParam("video") String video,  @RequestParam("typemedia") int typemedia,/*@RequestParam("pathfile") String pathfile,*/ HttpSession session){
 //		
 //		
 		String fileName = fileStorageService.storeFile(file);
-    	//String fileName = rand.replace("-", "");
+		String fileDownloadUri;
+		//String fileName = rand.replace("-", "");
 
-        
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+        if(typemedia != 1) {
+        fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("upload/downloadFile/")
                 .path(fileName)
                 .toUriString();     
+		}else {
+	    	fileDownloadUri = video;
+	    }
         System.out.println(fileDownloadUri);
 		
 		
