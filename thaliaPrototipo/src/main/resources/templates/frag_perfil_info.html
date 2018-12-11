@@ -32,23 +32,23 @@
 
         <div class="form-group col-xs-6">
           <label for="nome">Nome</label>
-          <input id="nome" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="name" th:value="${User.firstname}"  />
+          <input id="nome" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="name" th:value="${User.firstname}"  required />
         </div>
         <div class="form-group col-xs-6">
           <label for="apelido" class="">Apelido</label>
-          <input id="apelido" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="Apelido" th:value="${User.lastname}" />
+          <input id="apelido" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="Apelido" th:value="${User.lastname}" required />
         </div>
         <div class="form-group col-xs-6">
           <label for="category" class="">Categoria</label>
-          <input id="category" class="form-control input-group-lg" type="text" name="category" title="Enter last name" placeholder="Categoria" th:value="${User.category}" />
+          <input id="category" class="form-control input-group-lg" type="text" name="category" title="Enter last name" placeholder="Categoria" th:value="${User.category}"/>
         </div>
             <div class="form-group col-xs-6">
           <label for="subcategory" class="">Sub-sCategoria</label>
-          <input id="subcategory" class="form-control input-group-lg" type="text" name="subcategory" title="Enter last name" placeholder="Sub-Categoria" th:value="${User.subcategory}" />
+          <input id="subcategory" class="form-control input-group-lg" type="text" name="subcategory" title="Enter last name" placeholder="Sub-Categoria" th:value="${User.subcategory}"  />
         </div>
         <div class="form-group col-xs-6">
-          <label for="telemovel" class="">Telemóvel</label>
-          <input id="phonenumber" class="form-control input-group-lg" type="numbers" name="phonenumber" title="Enter last name" placeholder="Telemóvel" th:value="${User.phonenumber}" />
+          <label for="phonenumber" class="">Telemóvel</label>
+          <input id="phonenumber" class="form-control input-group-lg" type="number" name="phonenumber" title="Enter last name" placeholder="Telemóvel" th:value="${User.phonenumber}"  />
         </div>
                 <div class="form-group col-xs-6">
           <label for="website">WebSite Pessoal</label>
@@ -65,9 +65,10 @@
     </div>
       <div class="row">
         <div class="form-group col-xs-6">
-          <label class="sr-only">City</label>
+          <label class="sr-only" >City</label>
           <select class="form-control"  name="district"  >
-            <option value="indiferente">Indiferente</option>
+            <option value="indiferente" ><span  th:value="${User.district}"></span>
+            </option>
             <option value="Aveiro">Aveiro</option>
             <option value="Beja">Beja</option>
             <option value="Braga">Braga</option>
@@ -101,7 +102,7 @@
         </div>
         <div class="form-group col-xs-6">
           <label for="country" class="sr-only"></label>
-          <select class="form-control" name="country" id="country">
+          <select class="form-control" name="country" id="country" th:value="${User.country}">
             <option value="Portugal" disabled selected>Country</option>
             <option value="Portugal">Portugal</option>
           </select>

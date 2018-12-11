@@ -41,7 +41,7 @@ public class WebProfile {
 
 	@PostMapping("/editprofile")
 	public String editprofile(HttpSession session,@RequestParam("firstname") String firstname ,
-			@RequestParam("lastname") String lastname,@RequestParam("district") String district,@RequestParam("country") String country,Model page ) {
+			@RequestParam("lastname") String lastname,@RequestParam("website") String website,@RequestParam("district") String district,@RequestParam("phonenumber") String phonenumber,@RequestParam("country") String country,Model page ) {
 	
 
 	User u = (User)session.getAttribute("User");
@@ -52,6 +52,8 @@ public class WebProfile {
 	u.setLastname(lastname);
 	u.setDistrict(district);
 	u.setCountry(country);
+	u.setCountry(phonenumber);
+	u.setCountry(website);
 	
 	userRepo.save(u);
 	
