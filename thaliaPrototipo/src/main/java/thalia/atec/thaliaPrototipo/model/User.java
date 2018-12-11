@@ -27,7 +27,7 @@ public class User {
 
 	 String country;
 
-	 int type;     //0 Procura 1 Artistas
+	 int type;     //1 Procura 0 Artistas
 
 	 String phonenumber;
 	 
