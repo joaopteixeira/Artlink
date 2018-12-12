@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class User {
 	
 	public static final int FEMALE = 1; 
@@ -38,8 +40,8 @@ public class User {
 		String pathimage;   
 
 		int tokkensquantity,gender;
-		
-		Boolean status, accactivated;
+	
+		int status, accactivated;
 		
 		String category;
 		String subcategory;
@@ -116,8 +118,8 @@ public class User {
 
 
 	public User(String id,String firstname, String lastname, String email, String pathimage, String birthdate, int gender,
-			String district, String country, int type, String phonenumber, int tokkensquantity, Boolean status,
-			Boolean accactivated,String category,String subcategory,String description,String website) {
+			String district, String country, int type, String phonenumber, int tokkensquantity, int status,
+			int accactivated,String category,String subcategory,String description,String website) {
 		super();
 		this.id=id;
 		this.firstname = firstname;
@@ -275,14 +277,14 @@ public class User {
 
 
 
-	public Boolean getAccactivated() {
+	public int getAccactivated() {
 		return accactivated;
 	}
 
 
 
 
-	public void setAccactivated(Boolean accactivated) {
+	public void setAccactivated(int accactivated) {
 		this.accactivated = accactivated;
 	}
 
@@ -382,11 +384,11 @@ public class User {
 
 	
 
-	public Boolean getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -416,6 +418,7 @@ public class User {
 		return aux;
 		
 	}
+	
 	
 	
 

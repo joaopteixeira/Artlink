@@ -74,7 +74,7 @@ public class RestUser {
 
 	@GetMapping("/editprofile")
 	public ResponseEntity<?> editprofile(@RequestParam("firstname") String firstname ,
-			@RequestParam("lastname") String lastname,@RequestParam("website") String website,@RequestParam("category") String category,@RequestParam("subcategory") String subcategory,@RequestParam("discription") String discription,@RequestParam("district") String district,@RequestParam("phonenumber") String phonenumber,@RequestParam("country") String country,@RequestParam("hash") String hash ) {
+			@RequestParam("lastname") String lastname,@RequestParam("website") String website,@RequestParam("category") String category,@RequestParam("subcategory") String subcategory,@RequestParam("description") String description,@RequestParam("district") String district,@RequestParam("phonenumber") String phonenumber,@RequestParam("country") String country,@RequestParam("hash") String hash ) {
 	
 
 	Optional<User> u = urep.findByHashes(hash);
@@ -86,17 +86,18 @@ public class RestUser {
 	u.get().setLastname(lastname);
 	u.get().setDistrict(district);
 	u.get().setCountry(country);
-	u.get().setCountry(phonenumber);
-	u.get().setCountry(website);
-	u.get().setCountry(discription);
-	u.get().setCountry(category);
-	u.get().setCountry(subcategory);
+	u.get().setPhonenumber(phonenumber);
+	u.get().setWebsite(website);
+	u.get().setDescription(description);
+	u.get().setCategory(category);
+	u.get().setSubcategory(subcategory);
 	urep.save(u.get());
 	
 	
 	Optional<User> use = urep.findById(u.get().getId());
 	
 	use.get().getHashes().clear();
+	System.out.println(use.get().getId());
 	
 	return new ResponseEntity<>(use.get(),HttpStatus.OK);
 	}

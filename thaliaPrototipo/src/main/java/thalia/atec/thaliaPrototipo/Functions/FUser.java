@@ -79,7 +79,8 @@ public class FUser {                   //Funcoes pro USER
 			loginRep.save(new Login(u.getEmail(),password));
 			u.setTokkensquantity(10);	
 			u.setPathimage(WebServices.SERVER+"/upload/downloadFile/userdefault.png");//Quantidade Inicial de Tokkens
-			u.setAccactivated(false);
+			u.setAccactivated(0);
+			u.setDescription("");
 			
 			userRep.save(u);		
 			
@@ -271,7 +272,7 @@ public class FUser {                   //Funcoes pro USER
 			
 		try {
 				
-			String newPassword = UUID.randomUUID().toString();	
+			String newPassword = UUID.randomUUID().toString().substring(0,8).replace("-", "");	
 			
 			
 

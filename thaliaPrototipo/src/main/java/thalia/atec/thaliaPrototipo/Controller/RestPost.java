@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.annotation.MultipartConfig;
 
@@ -134,13 +135,19 @@ public class RestPost {
 	
 	
 	@GetMapping("/addcomment")
-	public ResponseEntity<?> addComment(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost,@RequestParam("content") String content){
+	public ResponseEntity<?> addComment(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost,@RequestParam("content") String content,@RequestParam(value="tag", defaultValue="null") String tag){
 		
-		Post p = ffpost.addComment(idpost, hash, content);
+		if(tag.compareTo("null")==0) {
+			
+			tag=UUID.randomUUID().toString().substring(0, 8).replace("-", "");
+		}
+		
+		Post p = ffpost.addComment(idpost, hash, content,tag);
 		
 		if(p!=null) {
 			return new ResponseEntity<>(p,HttpStatus.ACCEPTED);
-		}
+			}
+		
 		
 		return new ResponseEntity<>("null",HttpStatus.OK);
 		

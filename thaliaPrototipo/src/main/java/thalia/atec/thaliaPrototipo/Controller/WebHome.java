@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -323,7 +324,7 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 	String hash = (String)session.getAttribute("hash");
 	System.out.println("HASH:  "+hash);
 
-	Post p = fpost.addComment(idpost,hash,content);
+	Post p = fpost.addComment(idpost,hash,content,UUID.randomUUID().toString().replace("-", ""));
 
 	
 	
