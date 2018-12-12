@@ -25,11 +25,15 @@
     <link rel="stylesheet" th:href=@{/css/font-awesome.css}>
     <link rel="stylesheet" th:href=@{/css/ionicons.min.css}>
     <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
+
     <link rel="stylesheet" th:href=@{/css/font-awesome.min.css}>
-        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <link rel="stylesheet" th:href=@{/css/pro_icons.css}>
+
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
-      <link rel="stylesheet" th:href=@{/css/card.css}>
+    <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
+    <link rel="stylesheet" th:href=@{/css/card.css}>
     <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--Google Font-->
@@ -49,6 +53,8 @@
         color: #000000;
         padding: 0px 30px;
         background-color: #f2f2f2;
+         opacity: 0.5;
+          filter: alpha(opacity=50);
         border-radius: 10px;
         border: 1px solid #000000;
         box-shadow:
@@ -118,7 +124,7 @@
       }
 
       function actchat(x, y){
-          
+
           console.log('chat: '+x);
           $('#displaymsg').empty();
           $.ajax({
@@ -128,14 +134,14 @@
             type:'GET',
             success: function (data){
               var mensagem = '';
-              var output = ''; 
+              var output = '';
               var tempo = '';
 
               document.getElementById("iddchat").value = data.id;
               document.getElementById("length").value = data.mensagens.length;
 
 
-              
+
 
               for (var i = 0; i < data.mensagens.length; i++) {
 
@@ -144,7 +150,7 @@
                   data:{ 'data' : data.mensagens[i].date },
                   dataType:'text',
                   type:'GET',
-                  success: function (datah){ 
+                  success: function (datah){
                     tempo = datah;
                   },
                   async: false,
@@ -177,7 +183,7 @@
                   mensagem += '</li>';
                 }
 
-               
+
 
                 document.getElementById("displaymsg").innerHTML += mensagem;
               }
@@ -188,8 +194,8 @@
               console.log("err: "+xhe);
             }
           });
-         
-         
+
+
         }
 
         function sendMessage(){
@@ -210,16 +216,16 @@
               }
           });
           }
-          
+
 
         }
 
-     
+
      $(document).ready(function(){
 
-        
+
       setInterval(function() {
-        
+
 
           $('#chat');
           $('#lista');
@@ -231,7 +237,7 @@
             dataType: 'JSON',
             type: "GET",
             success: function (chats) {
-                
+
                 //string = JSON.stringify(savingStatu);
                 //alert((savingStatu+'').length);
                 //console.log(chats.length);
@@ -239,10 +245,10 @@
                 //len = chats.length;
 
                 var dif = JSON.stringify(chats);
-                      
+
                       if(compar != dif){
-                        
-                      
+
+
                         console.log('dif');
                         compar = dif;
 
@@ -254,7 +260,7 @@
                               //console.log(cont);
                               //console.log(chats[k].users[i].pathimage);
                               var notreaded = 0;
-                              
+
 
                               for(var j = 0; j < chats[k].mensagens.length; j++){
                                 if(chats[k].mensagens[j].estado == 1 && chats[k].mensagens[j].user.id != id)
@@ -272,9 +278,9 @@
                              // console.log(output);
                               document.getElementById("lista").innerHTML += output;
                             }
-                          } 
+                          }
                         }
-                      }         
+                      }
             },
             error: function (xhe) {
                 console.log("err"+xhe);
@@ -305,7 +311,7 @@
                         data:{ 'data' : data.mensagens[i].date },
                         dataType:'text',
                         type:'GET',
-                        success: function (datah){ 
+                        success: function (datah){
                           tempo = datah;
                         },
                         async: false,
@@ -359,7 +365,7 @@
 
        });
 
-        
+
     </script>
 
 
@@ -414,8 +420,6 @@
               var likes;
               for (var j = 0; j < data.length; j++){
                 likes=0;
-                //document.getElementById('posts').innerHTML=outpuut;
-                //$("#posts").text(outpuut);
                 for (var k = 0; k < data[j].likes.length; k++){
                   likes += 1;
                 }
@@ -448,14 +452,14 @@
                   outpuut+='   <img src="'+datah[0].pathimage+'" alt="user" class="profile-photo-md pull-left" />';
                   outpuut+='   <div class="post-detail">';
                   outpuut+='     <div class="user-info">';
-                  outpuut+='       <h5><a href="#">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
+                  outpuut+='       <h5><a href="/profile?personid='+datah[0].id+'">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
                   outpuuut='      <div class="post-container">';
                   outpuuut+='        <img src="'+datah[0].pathimage+'" alt="user" class="profile-photo-md pull-left" />';
                   outpuuut+='        <div class="post-detail">';
                   outpuuut+='          <div class="user-info">';
-                  outpuuut+='            <h5><a href="#" class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
+                  outpuuut+='            <h5><a href="/profile?personid='+datah[0].id+'" class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
                  }});
-                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  seguidores</span>';
+                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  observadores</span>';
                 outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
                 outpuut+='     </div>';
                 outpuut+='     <div class="reaction">';
@@ -543,9 +547,9 @@
                outpuut+='   <img src="'+datahh[0].pathimage+'" alt="user" class="profile-photo-md pull-left">';
                outpuut+='   <div class="post-detail">';
                outpuut+='     <div class="user-info">';
-               outpuut+='       <h5><a>'+datahh[0].firstname+' '+datahh[0].lastname+'</a></h5>';
+               outpuut+='       <h5><a href="/profile?personid='+datahh[0].id+'">'+datahh[0].firstname+' '+datahh[0].lastname+'</a></h5>';
               }});
-             outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  seguidores</span>';
+             outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  observadores</span>';
              outpuut+='                <p class="text-muted">'+data[j].date+'</p>';
              outpuut+='                </div>';
              outpuut+='                <div class="reaction">';
@@ -569,7 +573,7 @@
              async: false,
               success:function(datah){
                outpuut+='                  <img src="'+datah[0].pathimage+'" alt="" class="profile-photo-sm" />';
-               outpuut+='                  <p><a class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+' </a>';
+               outpuut+='                  <p><a href="/profile?personid='+datah[0].id+'" class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+' </a>';
               }});
                outpuut+=data[j].comments[i].content+'</p>';
                outpuut+='                </div>';
@@ -588,7 +592,7 @@
              outpuut+='          </div>';
              outpuut+='        </div>';
            }
-             $("#Mymodal").modal('show');
+             $("#Mymodal").modal("show");
              $("#postshow").html(outpuut);
          }
      });
@@ -720,14 +724,14 @@
                   outpuut+='   <img src="'+datah[0].pathimage+'" alt="user" class="profile-photo-md pull-left" />';
                   outpuut+='   <div class="post-detail">';
                   outpuut+='     <div class="user-info">';
-                  outpuut+='       <h5><a href="#">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
+                  outpuut+='       <h5><a href="/profile?personid='+datah[0].id+'">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
                   outpuuut='      <div class="post-container">';
                   outpuuut+='        <img src="'+datah[0].pathimage+'" alt="user" class="profile-photo-md pull-left" />';
                   outpuuut+='        <div class="post-detail">';
                   outpuuut+='          <div class="user-info">';
-                  outpuuut+='            <h5><a href="#" class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
+                  outpuuut+='            <h5><a href="/profile?personid='+datah[0].id+'" class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
                  }});
-                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  seguidores</span>';
+                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  observadores</span>';
                 outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
                 outpuut+='     </div>';
                 outpuut+='     <div class="reaction">';
@@ -744,15 +748,10 @@
 
                 }
                 outpuut+='<div>';
-                if(page <= 0){
-                  outpuut+='<button style="float: left;" onclick="lastposts()" disabled> « anterior </button> ';
-                }else{
+                if(page != 0){
                   outpuut+='<button style="float: left;" onclick="lastposts()"> « anterior </button> ';
                 }
-                if(range*(page+1) >= allpost){
-                  outpuut+='<button style="float: right;" onclick="nextposts()" disabled> próximo » </button>';
-                }
-                else{
+                if(!(range*(page+1) >= allpost)){
                   outpuut+='<button style="float: right;" onclick="nextposts()"> próximo » </button>';
                 }
                 outpuut+='</div>';
@@ -862,7 +861,7 @@
                   <span></a>
               </li>
               <li>
-                <a th:href="@{/chat?main=chat&personid=you}">Chat</a>
+               <a th:href="@{/chat?main=chat&personid=you}"><i style="color:#40cc9b; " class="fal fa-comments"> </i> <span style="color:#40cc9b; "> Chat</span></a>
               </li>
 
 
@@ -897,7 +896,7 @@
 
     <div id="page-contents">
 
-      
+
 
 
 
@@ -908,12 +907,12 @@
 
 
 
-  
+
           <th:block  th:switch="${main}">
 
-          <div th:case="homepage"><span th:include="homepage::homepage"></span></div>  
-           <div th:case="perfil"><span th:include="perfil::perfil"></span></div>   
-              <div th:case="chat"><span th:include="fragchat::chat"></span></div> 
+          <div th:case="homepage"><span th:include="homepage::homepage"></span></div>
+           <div th:case="perfil"><span th:include="perfil::perfil"></span></div>
+              <div th:case="chat"><span th:include="fragchat::chat"></span></div>
 
          </th:block>
 
@@ -969,7 +968,7 @@
     <script th:src="@{/js/jquery.sticky-kit.min.js}"></script>
     <script th:src="@{/js/jquery.scrollbar.min.js}"></script>
     <script th:src="@{/js/script.js}"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script>
       $(document).ready(function(){
@@ -985,4 +984,4 @@
       });
   </script>
   </body>
-</html>   
+</html>

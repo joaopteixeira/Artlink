@@ -264,6 +264,9 @@ public Comment getComment(String hash,String idcomment) {
 				 
 				 for(Comment c:p.getComments()) {
 					 if(c.getId().compareTo(idcomment)==0) {
+						 Optional<User> usercom = urep.findById(c.getIduser());
+						 c.setUsername(usercom.get().getFirstname()+" "+usercom.get().getLastname());
+						 c.setImguser(usercom.get().getPathimage());
 						 return c;
 					 }
 				 }
@@ -404,7 +407,7 @@ public List<Post> getPostSound(String hash,String iduser){
 
 	 
 	 
- public Post addComment(String idpost,String hash,String content) {
+ public Post addComment(String idpost,String hash,String content,String tag) {
 		 
 		 Optional<Post> post = prep.findById(idpost);
 		 Optional<User> user = urep.findByHashes(hash);
@@ -419,7 +422,7 @@ public List<Post> getPostSound(String hash,String iduser){
 				// representation of a date with the defined format.
 				String reportDate = df.format(today);
 				String idc = UUID.randomUUID().toString();
-			 Comment c = new Comment(idc,user.get().getId(),user.get().getFirstname()+" "+user.get().getLastname(), content, reportDate, "");
+			 Comment c = new Comment(idc,user.get().getId(),user.get().getFirstname()+" "+user.get().getLastname(), content, reportDate, "",tag);
 			 post.get().getComments().add(c);
 			 
 			 prep.save(post.get());

@@ -38,9 +38,37 @@ public class FChat {
 		Optional<User> user = userRep.findByHashes(hash);
 		
 		if(user.isPresent()) {
+			ArrayList<Chat> aux = new ArrayList<>();
+			
+			for(Chat c:chatRep.findByUsersId(user.get().getId())) {
+				
+				for(User u:c.getUsers()) {
+					Optional<User> us = userRep.findById(u.getId());
+					u.setFirstname(us.get().getFirstname());
+					u.setLastname(us.get().getLastname());
+					u.setPathimage(us.get().getPathimage());
+					
+				}
+				
+				
+				for(Mensagem m:c.getMensagens()) {
+					
+					Optional<User> us = userRep.findById(m.getUser().getId());
+					
+					User u1 = new User();
+					u1.setId(us.get().getId());
+					u1.setFirstname(us.get().getFirstname());
+					u1.setLastname(us.get().getLastname());
+					u1.setPathimage(us.get().getPathimage());
+					
+					c.getMensagens().get(c.getMensagens().indexOf(m)).setUser(u1);
+				
+			}
+				aux.add(c);
+			}
 			
 			
-			return chatRep.findByUsersId(user.get().getId());
+			return aux;
 		}
 		
 		return null;
@@ -62,6 +90,34 @@ public class FChat {
 			}
 			
 			if(check) {
+				for(User u:chat.get().getUsers()) {
+					Optional<User> us = userRep.findById(u.getId());
+					
+					User u1 = new User();
+					u1.setId(us.get().getId());
+					u1.setFirstname(us.get().getFirstname());
+					u1.setLastname(us.get().getLastname());
+					u1.setPathimage(us.get().getPathimage());
+					
+					chat.get().getUsers().set(chat.get().getUsers().indexOf(u), u1);
+				}
+				
+				for(Mensagem m:chat.get().getMensagens()) {
+					
+						Optional<User> us = userRep.findById(m.getUser().getId());
+						
+						User u1 = new User();
+						u1.setId(us.get().getId());
+						u1.setFirstname(us.get().getFirstname());
+						u1.setLastname(us.get().getLastname());
+						u1.setPathimage(us.get().getPathimage());
+						
+						chat.get().getMensagens().get(chat.get().getMensagens().indexOf(m)).setUser(u1);
+					
+				}
+				
+				
+				
 				return chat.get();
 			}
 			
@@ -175,8 +231,41 @@ public class FChat {
 			
 			for(Mensagem m:chatuser.getMensagens()) {
 				chatuser.getMensagens().get(chatuser.getMensagens().indexOf(m)).setEstado(Mensagem.VISTO);
+				
+				
+					Optional<User> us = userRep.findById(m.getUser().getId());
+					
+					User u1 = new User();
+					u1.setId(us.get().getId());
+					u1.setFirstname(us.get().getFirstname());
+					u1.setLastname(us.get().getLastname());
+					u1.setPathimage(us.get().getPathimage());
+					
+					chatuser.getMensagens().get(chatuser.getMensagens().indexOf(m)).setUser(u1);
+				
+			
+				
 			}
+			
 			chatRep.save(chatuser);
+			
+		
+			
+			for(User u:chatuser.getUsers()) {
+				Optional<User> us = userRep.findById(u.getId());
+				
+				User u1 = new User();
+				u1.setId(us.get().getId());
+				u1.setFirstname(us.get().getFirstname());
+				u1.setLastname(us.get().getLastname());
+				u1.setPathimage(us.get().getPathimage());
+				
+				chatuser.getUsers().set(chatuser.getUsers().indexOf(u), u1);
+			}
+			
+		
+			
+			
 			return chatuser;
 		}
 		return null;

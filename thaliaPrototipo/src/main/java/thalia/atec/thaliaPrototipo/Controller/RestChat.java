@@ -36,7 +36,7 @@ public class RestChat {
 		
 		List<Chat> chats = fchat.getChatsById(hash);
 		
-		if(!chats.isEmpty()) {
+		if(chats!=null) {
 			return new ResponseEntity<List<Chat>>(chats,HttpStatus.OK);
 		}
 		

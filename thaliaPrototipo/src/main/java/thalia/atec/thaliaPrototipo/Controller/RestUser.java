@@ -3,9 +3,12 @@ package thalia.atec.thaliaPrototipo.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,10 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import thalia.atec.thaliaPrototipo.Functions.FUser;
+import thalia.atec.thaliaPrototipo.Service.FileStorageService;
 import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
+import thalia.atec.thaliaPrototipo.UploadFile.UploadFileResponse;
 import thalia.atec.thaliaPrototipo.model.Country;
 import thalia.atec.thaliaPrototipo.model.District;
 import thalia.atec.thaliaPrototipo.model.Media;
@@ -34,6 +41,9 @@ public class RestUser {
 	
 	@Autowired
 	PostRepository prep;
+	
+	@Autowired
+	FileStorageService fileStorageService;
 	
 	@Autowired
 	FUser fuser;
@@ -58,8 +68,48 @@ public class RestUser {
 		return new ResponseEntity<String>("nRegistado",HttpStatus.ACCEPTED);
 		
 		
-		
 	}
+	
+	
+
+	@GetMapping("/editprofile")
+	public ResponseEntity<?> editprofile(@RequestParam("firstname") String firstname ,
+			@RequestParam("lastname") String lastname,@RequestParam("website") String website,@RequestParam("category") String category,@RequestParam("subcategory") String subcategory,@RequestParam("description") String description,@RequestParam("district") String district,@RequestParam("phonenumber") String phonenumber,@RequestParam("country") String country,@RequestParam("hash") String hash ) {
+	
+
+	Optional<User> u = urep.findByHashes(hash);
+	
+	if(u.isPresent()) {
+
+	
+	u.get().setFirstname(firstname);
+	u.get().setLastname(lastname);
+	u.get().setDistrict(district);
+	u.get().setCountry(country);
+	u.get().setPhonenumber(phonenumber);
+	u.get().setWebsite(website);
+	u.get().setDescription(description);
+	u.get().setCategory(category);
+	u.get().setSubcategory(subcategory);
+	urep.save(u.get());
+	
+	
+	Optional<User> use = urep.findById(u.get().getId());
+	
+	use.get().getHashes().clear();
+	System.out.println(use.get().getId());
+	
+	return new ResponseEntity<>(use.get(),HttpStatus.OK);
+	}
+
+	return new ResponseEntity<>("null",HttpStatus.OK);
+	
+	
+}
+	
+	
+	
+	
 	@GetMapping("/1")
 	public void encryptpass(@RequestParam("pass") String pass) {
 		
@@ -176,6 +226,38 @@ public class RestUser {
 		
 		
 		return new ResponseEntity<List<Country>>(fuser.getCountry(),HttpStatus.OK);
+	}
+	
+	@PostMapping("/upload")
+	public UploadFileResponse uploadPost(@RequestParam("file") MultipartFile file,@RequestParam("hash") String hash){
+		
+		System.out.println(hash);
+		
+		Optional<User> user = urep.findByHashes(hash);
+		
+		if(user.isPresent()) {
+			String fileName = fileStorageService.storeFile(file);
+	    	
+
+	        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+	                .path("upload/downloadFile/")
+	                .path(fileName)
+	                .toUriString();     
+	        System.out.println(fileDownloadUri);
+	        
+	        user.get().setPathimage(fileDownloadUri);
+	        
+	        urep.save(user.get());
+	        
+	        
+	        return new UploadFileResponse(fileName, fileDownloadUri,
+	                file.getContentType(), file.getSize());
+			
+		}
+		
+		
+		return null;
+
 	}
 	
 	/*

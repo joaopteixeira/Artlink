@@ -53,6 +53,16 @@ public class Notify {
 	
 	
 	
+	
+	public Notify() {
+		super();
+	}
+
+
+
+
+
+
 	public String getIdevent() {
 		return idevent;
 	}

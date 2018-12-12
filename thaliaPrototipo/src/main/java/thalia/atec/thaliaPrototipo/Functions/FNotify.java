@@ -35,6 +35,12 @@ public class FNotify {
 				
 				for(Notify n:aux) {
 					n.setEstado(Notify.VISTO);
+					Optional<User> u = urep.findById(n.getUserdo());
+					
+					
+					aux.get(aux.indexOf(n)).setUsername(u.get().getFirstname()+" "+u.get().getLastname());
+					aux.get(aux.indexOf(n)).setUserimage(u.get().getPathimage());
+					
 					nrep.save(n);
 				}
 				
@@ -52,10 +58,17 @@ public class FNotify {
 		
 		
 		if(user.isPresent()) {
-			List<Notify> aux = nrep.findByUseridAndTypeNot(user.get().getId(),Notify.TMSG);
+			List<Notify> aux = nrep.findByUseridAndTypeNotAndUserdoNot(user.get().getId(),Notify.TMSG,user.get().getId());
 			
 			if(!aux.isEmpty()) {
-				
+				for(Notify n:aux) {
+					n.setEstado(Notify.VISTO);
+					Optional<User> u = urep.findById(n.getUserdo());
+					
+					aux.get(aux.indexOf(n)).setUsername(u.get().getFirstname()+" "+u.get().getLastname());
+					aux.get(aux.indexOf(n)).setUserimage(u.get().getPathimage());
+					
+				}
 				return aux;
 			}
 		}

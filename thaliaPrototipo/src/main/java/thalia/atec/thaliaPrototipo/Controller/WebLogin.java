@@ -50,6 +50,9 @@ public class WebLogin {
 			
 		}
 	
+		u.setDescription("");
+		u.setPhonenumber("");
+		
 		
 		fuser.Registry(u,password);
 		session.setAttribute("User",u);

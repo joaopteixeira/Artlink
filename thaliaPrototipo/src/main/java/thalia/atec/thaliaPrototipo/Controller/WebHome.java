@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -265,17 +266,21 @@ public class WebHome {
 	}
 	
 	@PostMapping("/newpost")
-  public String feed(@RequestParam("file") MultipartFile file,@RequestParam("content") String content,@RequestParam("typemedia") int typemedia,/*@RequestParam("pathfile") String pathfile,*/ HttpSession session){
+  public String feed(@RequestParam("file") MultipartFile file,@RequestParam("content") String content,@RequestParam("video") String video,  @RequestParam("typemedia") int typemedia,/*@RequestParam("pathfile") String pathfile,*/ HttpSession session){
 //		
 //		
 		String fileName = fileStorageService.storeFile(file);
-    	//String fileName = rand.replace("-", "");
+		String fileDownloadUri;
+		//String fileName = rand.replace("-", "");
 
-        
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+        if(typemedia != 1) {
+        fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("upload/downloadFile/")
                 .path(fileName)
                 .toUriString();     
+		}else {
+	    	fileDownloadUri = video;
+	    }
         System.out.println(fileDownloadUri);
 		
 		
@@ -319,7 +324,7 @@ public String newComment(@RequestParam("content") String content,@RequestParam("
 	String hash = (String)session.getAttribute("hash");
 	System.out.println("HASH:  "+hash);
 
-	Post p = fpost.addComment(idpost,hash,content);
+	Post p = fpost.addComment(idpost,hash,content,UUID.randomUUID().toString().replace("-", ""));
 
 	
 	

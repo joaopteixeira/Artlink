@@ -10,6 +10,6 @@ public interface NotifyRepository extends MongoRepository<Notify, String> {
 	
 	List<Notify> findByUseridAndEstado(String userid,int estado);
 
-	List<Notify> findByUseridAndTypeNot(String userid,int type);
+	List<Notify> findByUseridAndTypeNotAndUserdoNot(String userid,int type,String userdo);
 	
 }
