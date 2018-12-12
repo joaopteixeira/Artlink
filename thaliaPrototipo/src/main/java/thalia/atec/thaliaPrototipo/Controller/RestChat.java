@@ -2,6 +2,7 @@ package thalia.atec.thaliaPrototipo.Controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -36,8 +37,17 @@ public class RestChat {
 		
 		List<Chat> chats = fchat.getChatsById(hash);
 		
+		
 		if(chats!=null) {
-			return new ResponseEntity<List<Chat>>(chats,HttpStatus.OK);
+		ArrayList<Chat> aux = new ArrayList<>();
+		for(Chat c:chats) {
+			if(c.getMensagens().size()>0) {
+				aux.add(c);
+			}
+		}
+		
+		
+			return new ResponseEntity<List<Chat>>(aux,HttpStatus.OK);
 		}
 		
 		
