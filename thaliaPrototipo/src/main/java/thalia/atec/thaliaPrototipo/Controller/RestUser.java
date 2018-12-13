@@ -26,6 +26,7 @@ import thalia.atec.thaliaPrototipo.model.District;
 import thalia.atec.thaliaPrototipo.model.Media;
 import thalia.atec.thaliaPrototipo.model.Post;
 import thalia.atec.thaliaPrototipo.model.User;
+import thalia.atec.thaliaPrototipo.model.Watch;
 
 @RestController
 @RequestMapping("muser")
@@ -251,4 +252,34 @@ public class RestUser {
         
         
 	} */
+	
+	
+  @GetMapping("/comparObser")
+	public ResponseEntity<String> getObserv(@RequestParam("iduser") String iduser, @RequestParam("idsession") String idsession){
+		String check = "false";
+		for(User u:urep.findAll()){
+			if(u.getId().compareTo(iduser)==0) {
+				for(Watch str:u.getWatched()) {
+						System.out.println(str.getIduser());
+						if(str.getIduser().compareTo(idsession)==0) {
+							check = "true";
+						}
+					}
+				}
+			}
+		System.out.println(check);
+		
+			return new ResponseEntity<String>(""+check,HttpStatus.OK);
+		}
+  
+  @GetMapping("/sizeObser")
+	public ResponseEntity<String> getsizeObserv(@RequestParam("iduser") String iduser){
+		int size = 0;
+		for(User u:urep.findAll()){
+			if(u.getId().compareTo(iduser)==0) {
+					size = u.getWatched().size();
+				}
+			}		
+			return new ResponseEntity<String>(""+size,HttpStatus.OK);
+		}
 }

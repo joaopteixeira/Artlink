@@ -398,12 +398,13 @@
       function getpost(){
         var tiipo = 0;
         var iiduser= '';
+        var idpost= '';
         var outpuut = '';
         var outpuuut = '';
           $.ajax({
             url:'mposts/allposts',
             method:'GET',
-            data: {'iduser': iiduser, tipo: tiipo, sizepost: allpost, page:page, range: range},
+            data: {iduser: iiduser, idpost: idpost, tipo: tiipo, sizepost: allpost, page:page, range: range},
             datatype:JSON,
             cache:false,
             success:function(data){
@@ -453,7 +454,12 @@
                   outpuuut+='          <div class="user-info">';
                   outpuuut+='            <h5><a href="/profile?personid='+datah[0].id+'" class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
                  }});
-                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  observadores</span>';
+                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>';
+                if(data[j].userwatched == 1){
+                  outpuut+=' observador</span>';
+                }else {
+                  outpuut+=' observadores</span>';
+                }
                 outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
                 outpuut+='     </div>';
                 outpuut+='     <div class="reaction">';
@@ -470,15 +476,10 @@
 
                 }
                 outpuut+='<div>';
-                if(page <= 0){
-                  outpuut+='<button style="float: left;" onclick="lastposts()" disabled> « anterior </button> ';
-                }else{
+                if(page != 0){
                   outpuut+='<button style="float: left;" onclick="lastposts()"> « anterior </button> ';
                 }
-                if(range*(page+1) >= allpost){
-                  outpuut+='<button style="float: right;" onclick="nextposts()" disabled> próximo » </button>';
-                }
-                else{
+                if(!(range*(page+1) >= allpost)){
                   outpuut+='<button style="float: right;" onclick="nextposts()"> próximo » </button>';
                 }
                 outpuut+='</div>';
@@ -501,7 +502,7 @@
          $.ajax({
           url:'mposts/allposts',
           method:'GET',
-          data: {'iduser': idposty, tipo: tiipo, sizepost: allpost, page:page, range: range},
+          data: {iduser: iiduser, idpost: idposty, tipo: tiipo, sizepost: allpost, page:page, range: range},
           datatype:JSON,
           cache:false,
           success:function(data){
@@ -543,7 +544,12 @@
                outpuut+='     <div class="user-info">';
                outpuut+='       <h5><a href="/profile?personid='+datahh[0].id+'">'+datahh[0].firstname+' '+datahh[0].lastname+'</a></h5>';
               }});
-             outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  observadores</span>';
+              outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>';
+             if(data[j].userwatched == 1){
+               outpuut+=' observador</span>';
+             }else {
+               outpuut+=' observadores</span>';
+             }
              outpuut+='                <p class="text-muted">'+data[j].date+'</p>';
              outpuut+='                </div>';
              outpuut+='                <div class="reaction">';
@@ -660,22 +666,54 @@
      page -= 1;
      getpost();
    }
+
+  function watching(){
+     var url =window.location;
+     let params = new URL(url).searchParams;
+     var iiidusers= params.get('personid');
+     $.ajax({
+       url:'muser/addwatching',
+       method:'GET',
+       data: {hash: hash, iduser: iiidusers},
+       cache:false,
+       success:function(data){
+         var cds = $(".watcheds").text();
+         if(data == "aceite"){
+           $("#btnObserv").text("Parar de Observar");
+         }else{
+           $("#btnObserv").text("Começar a Observar");
+         }
+         $.ajax({
+           url:'muser/sizeObser',
+           method:'GET',
+           data: {iduser: iiidusers},
+           cache:false,
+           success:function(data){
+             $(".watcheds").empty();
+             $(".watcheds").html("Observadores: <span>"+data+"</span>");
+             }
+           });
+       }});
+   }
 </script>
 <script>
      $(document).ready(function(){
        $(".media-preview").hide();
         $("#preview-post").hide();
+        $("#perfil_statu").hide();
+        $("#btnObserv").hide();
         $("#natzc4").hide();
         var numer = 3;
         var tiipo = 0;
         var iiduser= '';
+        var idpost= '';
         var outpuut = '';
         var outpuuut = '';
         SizePost();
           $.ajax({
             url:'mposts/allposts',
             method:'GET',
-            data: {'iduser': iiduser, tipo: tiipo, sizepost: allpost, page:page, range: range},
+            data: {iduser: iiduser, idpost:  idpost, tipo: tiipo, sizepost: allpost, page:page, range: range},
             datatype:JSON,
             cache:false,
             success:function(data){
@@ -725,7 +763,12 @@
                   outpuuut+='          <div class="user-info">';
                   outpuuut+='            <h5><a href="/profile?personid='+datah[0].id+'" class="profile-link">'+datah[0].firstname+' '+datah[0].lastname+'</a></h5>';
                  }});
-                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>  observadores</span>';
+                outpuut+=          '<span style="color:#40CC9B;"> <span class="following">'+data[j].userwatched+'</span>';
+                if(data[j].userwatched == 1){
+                  outpuut+=' observador</span>';
+                }else {
+                  outpuut+=' observadores</span>';
+                }
                 outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
                 outpuut+='     </div>';
                 outpuut+='     <div class="reaction">';
@@ -831,6 +874,26 @@
               $("#url-input").val(textarea);
               $('#output2').attr('src',textarea);
           });
+            var url = window.location;
+            let params = new URL(url).searchParams;
+            var iiduser= params.get('personid');
+            if(id == iiduser){
+              $("#perfil_statu").show();
+            }else{
+              $("#btnObserv").show();
+            }
+            $.ajax({
+              url:'muser/comparObser',
+              method:'GET',
+              data: {iduser: iiduser, idsession: id},
+              cache:false,
+              success:function(data){
+                if(data == "true"){
+                  $("#btnObserv").text("Parar de Observar");
+                }else{
+                  $("#btnObserv").text("Começar a Observar");
+                }
+              }});
        });
     </script>
 
@@ -962,7 +1025,7 @@
     <script th:src="@{/js/jquery.sticky-kit.min.js}"></script>
     <script th:src="@{/js/jquery.scrollbar.min.js}"></script>
     <script th:src="@{/js/script.js}"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script>
       $(document).ready(function(){

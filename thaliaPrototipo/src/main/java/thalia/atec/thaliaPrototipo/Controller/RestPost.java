@@ -241,11 +241,11 @@ public class RestPost {
 	
 	
 	@GetMapping("/allposts")
-	public ResponseEntity<?> getPosts(@RequestParam("iduser") String idpost,@RequestParam("tipo") int tipo,@RequestParam("sizepost") int sizepost,@RequestParam("page") int page,@RequestParam("range") int range) {
+	public ResponseEntity<?> getPosts(@RequestParam("iduser") String iduser, @RequestParam("idpost") String idpost,@RequestParam("tipo") int tipo,@RequestParam("sizepost") int sizepost,@RequestParam("page") int page,@RequestParam("range") int range) {
 		String dateStart;
 		String dateStop;
 		String ano, mes, dia, hora, minuto, segundo;
-		int sizeposts, q, size, temp=0;
+		int sizeposts = 0, q = 0, size, temp=0;
 		int userwatching = 0;
 		
 		ArrayList<Post> tpost = (ArrayList<Post>) ffpost.findAllposts();
@@ -362,21 +362,28 @@ public class RestPost {
 
 			  }
 		
-		 
-		 sizeposts = tpost.size();
+		 if(tipo != 2) {
+			 sizeposts = tpost.size();
+		 }else {
+			 for(Post p : ffpost.findAllposts()) {
+				 if(p.getIduser().compareTo(iduser)==0) {
+					 sizeposts +=1;
+				 }
+			 }
+		 }
 		 q = sizeposts - sizepost;
+		 size = (q + (range*page));
 		 if(sizeposts <= sizepost) {
 			 q = 0;
 		 }
 		 
-		 size = (q + (range*page));
 		 
 		if(tipo == 0) {
 			for(Post p:tpost) {
 				if(temp >= size && temp < size+range) {
 					for(User u: urep.findAll()) {
 						if(u.getId().compareTo(p.getIduser())==0) {
-							userwatching =u.getWatching().size();	
+							userwatching =u.getWatched().size();	
 						}
 					}
 					p.setUserwatched(userwatching);
@@ -389,15 +396,28 @@ public class RestPost {
 				if(p.getId().equals(idpost)) {
 					for(User u: urep.findAll()) {
 						if(u.getId().compareTo(p.getIduser())==0) {
-							userwatching =u.getWatching().size();	
+							userwatching =u.getWatched().size();	
 						}
 					}
 					p.setUserwatched(userwatching);
 					posts.add(p);
 				}
 			}
-		}
-		
+		}else if(tipo == 2) {
+			for(Post p:tpost) {
+				if(p.getIduser().equals(iduser)) {
+					if(temp >= size && temp < size+range) {
+						for(User u: urep.findAll()) {
+							if(u.getId().compareTo(p.getIduser())==0) {
+									userwatching =u.getWatched().size();	
+								}
+							}
+							p.setUserwatched(userwatching);
+							posts.add(p);
+						}
+					}
+				}
+			}
 		return new ResponseEntity<>(posts,HttpStatus.OK);
 	}
 	
@@ -418,25 +438,37 @@ public class RestPost {
 	}
 
 
-@GetMapping("/getlikes")
-public ResponseEntity<?> getlikes(@RequestParam("id_post") String id_post) {
-	ArrayList<Post> posts = new ArrayList<>();
-		for(Post p:ffpost.findAllposts()) {
-			if(p.getId().equals(id_post)) {
-				posts.add(p);
+	@GetMapping("/getlikes")
+	public ResponseEntity<?> getlikes(@RequestParam("id_post") String id_post) {
+		ArrayList<Post> posts = new ArrayList<>();
+			for(Post p:ffpost.findAllposts()) {
+				if(p.getId().equals(id_post)) {
+					posts.add(p);
+				}
+			}
+		return new ResponseEntity<>(posts,HttpStatus.OK);
+	}
+
+	@GetMapping("/sizeposts")
+	public ResponseEntity<String> getSize(){
+		int size=0;
+		size = ffpost.findAllposts().size();
+	
+		return new ResponseEntity<String>(""+size,HttpStatus.OK);
+	}
+	
+	@GetMapping("/sizeidposts")
+	public ResponseEntity<String> getSizePost(@RequestParam("iduser") String iduser){
+		int size=0;
+		
+		for(Post p : ffpost.findAllposts()) {
+			if(p.getIduser().compareTo(iduser)==0) {
+				size +=1;
 			}
 		}
-	return new ResponseEntity<>(posts,HttpStatus.OK);
-}
-
-@GetMapping("/sizeposts")
-public ResponseEntity<String> getSize(){
-	int size=0;
-	size = ffpost.findAllposts().size();
-
-	return new ResponseEntity<String>(""+size,HttpStatus.OK);
-}
 	
+		return new ResponseEntity<String>(""+size,HttpStatus.OK);
+	}	
 	
 	
 }

@@ -4,20 +4,24 @@
 <div class="row">
   <div class="col-md-3 static">
     <div id="sticky-sidebar">
-      <h3><span th:utext="${User.firstname}"></span> <span th:utext="${User.lastname}"></span></h3>
-      <p class="text-muted"><span th:src="${User.category}"> </span></p>
+      <h3><span th:utext="${Person.firstname}"></span> <span th:utext="${Person.lastname}"></span></h3>
+      <p class="text-muted"><span th:src="${Person.category}"></span></p>
       <div class="feed-item">
         <div class="live-activity">
-          <p class="profile-link"><span th:src="${User.subcategory}"></span></p>
-          <p class="text-muted">Género: <span><div th:if="${User.gender.equals(2)}"> <span>Masculino</span> </div><div th:if="${User.gender.equals(1)}"> <span>Feminino</span> </div></span></p>
-          <p class="text-muted"><span><span th:utext="${User.district}"></span></span>, <span><span th:utext="${User.country}"></span></span></p>
-          <p class="text-muted">Email: <span><span th:utext="${User.email}"></span></span></p>
-          <p class="text-muted">Data de Nascimento: <span<span th:utext="${User.birthdate}"></span></span></p>
+          <p class="profile-link">Sobre</p>
+          <p>Observa: <span class="watchings" th:text="${#lists.size(Person.watching)}"></span></p>
+          <p class="watcheds">observadores: <span th:text="${#lists.size(Person.watched)}"></span></p>
+          <p class="text-muted">Género: <span th:if="${Person.gender.equals(2)}"> <span>Masculino</span> </span><span th:if="${Person.gender.equals(1)}"> <span>Feminino</span> </span></p>
+          <p class="text-muted">Pais: <span th:utext="${Person.country}"></span></p>
+          <p class="text-muted">Districto: <span th:utext="${Person.district}"></span></p>
+          <p class="text-muted">Email: <span th:utext="${Person.email}"></span></p>
+          <p class="text-muted">Telemóvel: <span th:utext="${Person.phonenumber}"></span></p>
+          <p class="text-muted">Data de Nascimento: <span th:utext="${Person.birthdate}"></span></p>
         </div>
       </div>
       <div class="feed-item">
         <div class="live-activity">
-          <p><p class="profile-link"> <div th:if="${User.type.equals(0)}"><span> Artista </span></div> <div th:if="${User.type.equals(1)}"><span> Observador </span></div></p></p>
+          <p class="profile-link"> <span th:if="${Person.type.equals(0)}"><span> Artista </span></span> <span th:if="${Person.type.equals(1)}"><span> Observador </span></span></p>
         </div>
       </div>
     </div>
@@ -28,57 +32,10 @@
     ================================================= -->
     <div class="about-profile">
       <div class="about-content-block">
-        <h4 class="grey"><i class="ion-ios-information-outline icon-in-title"></i>Personal Information</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur</p>
+        <h4 class="grey">Descrição</h4>
+        <p th:utext="${Person.description}"></p>
       </div>
-      <div class="about-content-block">
-        <h4 class="grey"><i class="ion-ios-briefcase-outline icon-in-title"></i>Work Experiences</h4>
-        <div class="organization">
-          <img src="images/envato.png" alt="" class="pull-left img-org" />
-          <div class="work-info">
-            <h5>Envato</h5>
-            <p>Seller - <span class="text-grey">1 February 2013 to present</span></p>
-          </div>
-        </div>
-        <div class="organization">
-          <img src="images/envato.png" alt="" class="pull-left img-org" />
-          <div class="work-info">
-            <h5>Envato</h5>
-            <p>Seller - <span class="text-grey">1 February 2013 to present</span></p>
-          </div>
-        </div>
-        <div class="organization">
-          <img src="images/envato.png" alt="" class="pull-left img-org" />
-          <div class="work-info">
-            <h5>Envato</h5>
-            <p>Seller - <span class="text-grey">1 February 2013 to present</span></p>
-          </div>
-        </div>
-      </div>
-      <div class="about-content-block">
-        <h4 class="grey"><i class="ion-ios-location-outline icon-in-title"></i>Location</h4>
-        <p>228 Park Eve, New York</p>
-        <div class="google-maps">
-          <div id="map" class="map"></div>
-        </div>
-      </div>
-      <div class="about-content-block">
-        <h4 class="grey"><i class="ion-ios-heart-outline icon-in-title"></i>Interests</h4>
-        <ul class="interests list-inline">
-          <li><span class="int-icons" title="Bycycle riding"><i class="icon ion-android-bicycle"></i></span></li>
-          <li><span class="int-icons" title="Photography"><i class="icon ion-ios-camera"></i></span></li>
-          <li><span class="int-icons" title="Shopping"><i class="icon ion-android-cart"></i></span></li>
-          <li><span class="int-icons" title="Traveling"><i class="icon ion-android-plane"></i></span></li>
-          <li><span class="int-icons" title="Eating"><i class="icon ion-android-restaurant"></i></span></li>
-        </ul>
-      </div>
-      <div class="about-content-block">
-        <h4 class="grey"><i class="ion-ios-chatbubble-outline icon-in-title"></i>Language</h4>
-          <ul>
-            <li><a href="">Russian</a></li>
-            <li><a href="">English</a></li>
-          </ul>
-      </div>
+
     </div>
   </div>
   <div class="col-md-2 static">
