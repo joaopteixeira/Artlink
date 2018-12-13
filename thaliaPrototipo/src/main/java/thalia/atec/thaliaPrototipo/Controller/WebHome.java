@@ -245,6 +245,7 @@ public class WebHome {
 				else if(frag.compareTo("doevents") == 0) {
 					  page.addAttribute("User", (User)session.getAttribute("User"));
 						page.addAttribute("personid","you");
+						page.addAttribute("Category", catrep.findAll());
 				  }
 				
 				else if(frag.compareTo("frageventlist") == 0) {

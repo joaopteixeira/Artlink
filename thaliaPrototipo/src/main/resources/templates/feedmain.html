@@ -220,9 +220,131 @@
 
         }
 
+        function getEvents(ha,dis){
+          $("#listevents").empty();
+         console.log(ha + ' | ' + dis);
+          $.ajax({
+          url: '/mevent/getbydistrict', 
+          data: { 'hash' : ha, 'district' : dis},
+          dataType: 'JSON',
+          type: "GET",
+          success: function (events){
+            console.log("Sucesso: "+JSON.stringify(events));
+              var cardevent='';
 
+            for(var i =0; i<events.length;i++){
+              var title = events[i].title;
+              
+              var description = '';
+              if(events[i].description != null){
+                description = events[i].description;
+              }
+              var address = events[i].address;
+              var destr = events[i].district.name;
+              var category = events[i].category.description;
+              var imgthumb = '';
+              if(category=="Cinema"){
+                imgthumb='cinema.png';
+              }else if(category == "Teatro"){
+                imgthumb='mask.png';
+              }else if(category == "Arte"){
+                imgthumb='paint.png';
+              }else if(category == "Musica"){
+                imgthumb='music.png';
+              }
+
+              var pathimg = events[i].pathimage;
+              var subcategory = '';
+              console.log(title);
+              if(events[i].category.subCategory[0].description != null){
+                var subcategory = events[i].category.subCategory[0].description;
+              }
+
+              var date = events[i].date;
+              console.log(description);
+              cardevent = '<div class="index-content">';           
+              cardevent += '    <div class="card">';
+              cardevent += '      <div class="thumb-cont">'; 
+              cardevent += '        <img src="http://artlink.pt/upload/downloadFile/'+imgthumb+'">';
+              cardevent += '        <div class="ismine"> <img class="elicon" src="'+pathimage+'"></div>';
+              cardevent += '      </div>';
+              cardevent += '        ';
+              cardevent += '        <h4>'+title+'</h4>';
+              cardevent += '        ';
+              cardevent += '        <p>'+description+'</p>';
+              cardevent += '        <p>'+address+'</p>';
+              cardevent += '        <p>'+category+' | '+subcategory+'</p>';
+              cardevent += '        <p style="text-align: right;">Disponível até: '+date+'</p>';
+              cardevent += '        <a class="btn btn-primary btn-block">Candidatar-me</a>';
+              cardevent += '    </div>';
+              cardevent += '</div>';
+
+              document.getElementById("listevents").innerHTML+= cardevent;
+
+            }
+
+            
+
+          }
+
+          });
+        }
+
+        function getSubCategorias(ha, cat){
+        $.ajax({
+          url:"/mcategory/getcategorybyname",
+          data: {'hash':ha, 'description':cat},
+          dataType: 'JSON',
+          type: 'GET',
+          success: function (subcategory){
+            $("#subcategoryevent").empty();
+            var option = '';
+            for(var i = 0; i < subcategory.length; i++){
+              option += '<option value="'+subcategory[i].description+'">'+subcategory[i].description+'</option>';
+            }
+            alert("CHECKADO");
+            document.getElementById("subcategoryevent").innerHTML += option;
+          }
+
+        });
+      }
+
+      function clickSearchEvent(){
+        dis = $("#districtoptions").val();
+        getEvents(hash,dis);
+
+      }
+
+      function getDistricts(dis){
+        var country = 'Portugal';
+        $.ajax({
+          url:'/mcountry/getdistrictbycountryname',
+          data: {'name' : country},
+          dataType: 'JSON',
+          type: "GET",
+          success: function(district){
+            $("#districtoptions").empty();
+            
+            var option = '';
+            for(var i = 0; i < district.length; i++){
+              option += '<option value="'+district[i].name+'">'+district[i].name+'</option>';
+            }
+            document.getElementById("districtoptions").innerHTML += option;
+          }
+        });
+      }
      $(document).ready(function(){
+     getEvents(hash, 'Setúbal');
 
+          getSubCategorias(hash,$('#categoryevent').val());
+
+          getDistricts($('#districtoptions').val());
+
+          $('#categoryevent').change(function(){ 
+              var cat = $('#categoryevent').val();
+              getSubCategorias(hash,cat);
+              alert("Sub Cat:"+cat);
+          });
 
       setInterval(function() {
 
@@ -941,10 +1063,10 @@
             <div class="col-md-3 col-sm-3">
               <h5>Segue os Programadores</h5>
               <ul class="list-inline social-icons">
-                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-teixeira-vilares-1886a8167/"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/jo%C3%A3o-mirante-ba6334168/"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/nilton-fontes-868974162/"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/gon%C3%A7alo-lavrador-703256175/"><i class="icon ion-social-linkedin"></i></a></li>
               </ul>
             </div>
             <div class="col-md-3 col-sm-3" style="float: right;">
@@ -972,7 +1094,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script>
       $(document).ready(function(){
-        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var date_input=$('#datepicker'); //our date input has the name "date"
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
         var options={
           format: 'mm/dd/yyyy',

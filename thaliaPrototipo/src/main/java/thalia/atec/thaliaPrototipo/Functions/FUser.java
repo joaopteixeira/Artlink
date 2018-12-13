@@ -51,8 +51,10 @@ public class FUser {                   //Funcoes pro USER
 	public String login(String email,String password) {
 		
 		String hash = UUID.randomUUID().toString();
-		Optional<Login> login = loginRep.findByEmailAndPassword(email, password);
-		if(login.isPresent()) {
+		//Optional<Login> login = loginRep.findByEmailAndPassword(email, password);
+		Optional<Login> login = loginRep.findByEmail(email);
+		
+		if(login.isPresent() && dsycryption(login.get().getPassword()).compareTo(password)==0) {
 			Optional<User> u = userRep.findByEmail(login.get().getEmail());
 			
 			//u.get().setHashes();
@@ -76,7 +78,7 @@ public class FUser {                   //Funcoes pro USER
 			return "ja existe o email";
 		}else {
 			
-			loginRep.save(new Login(u.getEmail(),password));
+			loginRep.save(new Login(u.getEmail(),encryptpass(password)));
 			u.setTokkensquantity(10);	
 			u.setPathimage(WebServices.SERVER+"/upload/downloadFile/userdefault.png");//Quantidade Inicial de Tokkens
 			u.setAccactivated(0);
@@ -91,7 +93,7 @@ public class FUser {                   //Funcoes pro USER
 		
 	}
 	
-	public void encryptpass(String pass) {
+	public String encryptpass(String pass) {
 		
 		int size = pass.length();
 		
@@ -112,7 +114,9 @@ public class FUser {                   //Funcoes pro USER
 		}
 		
 		
-		System.out.println(p);
+		//System.out.println(p);
+		
+		return p;
 		
 		//dsycryption(p);
 		
@@ -122,7 +126,7 @@ public class FUser {                   //Funcoes pro USER
 		
 	}
 	
-	public void dsycryption(String pass) {
+	public String dsycryption(String pass) {
 		
 		int size = pass.length();
 		
@@ -156,6 +160,7 @@ public class FUser {                   //Funcoes pro USER
 		}
 		
 		System.out.println(p);
+		return p;
 		
 		
 	}
@@ -167,11 +172,13 @@ public class FUser {                   //Funcoes pro USER
 		
 		if(user.isPresent()) {
 			
-			Optional<Login> login = loginRep.findByEmailAndPassword(user.get().getEmail(), holder);
+			//Optional<Login> login = loginRep.findByEmailAndPassword(user.get().getEmail(), holder);
 			
-			if(login.isPresent()) {
+			Optional<Login> login = loginRep.findByEmail(user.get().getEmail());
+			
+			if(login.isPresent() && dsycryption(login.get().getPassword()).compareTo(holder)==0) {
 				
-				login.get().setPassword(nova);
+				login.get().setPassword(encryptpass(nova));
 				
 				loginRep.save(login.get());
 				return "aceite";
@@ -286,7 +293,7 @@ public class FUser {                   //Funcoes pro USER
 				
 				
 				
-				userOp.get().setPassword(newPassword);
+				userOp.get().setPassword(encryptpass(newPassword));
 				loginRep.save(userOp.get());
 				
 						
@@ -462,6 +469,73 @@ public String sendEmailNovaPassword(String usermail,String newpass) {
 		
 	}
 	
+
+public String applyEventEmail(String usermail,String artista) {
+		
+	
+		
+		Optional<Login> userOp = loginRep.findByEmail(usermail);
+
+	
+		System.out.println("User id: "+userOp.get().getId() + " reseted pass ");
+		
+		
+		
+		if(userOp.isPresent()) {
+
+			
+			Email email = new SimpleEmail();
+			email.setHostName("smtp.googlemail.com");
+			email.setSmtpPort(465);
+			email.setAuthentication("artlinkrecovery@gmail.com", "thalia2018");
+			//email.setAuthentication("admin@artlink.pt","thaliapt18");
+			//email.setHostName("webdomain02.dnscpanel.com");
+			//email.setHostName("pop.sapo.pt ");
+			//email.setSmtpPort(110);
+			//email.setAuthentication("apoio.artlink@sapo.pt", "Thalia2018");
+			email.setSSL(true);
+		
+			
+			
+		try {
+				
+		
+			
+
+			
+				email.setFrom("artlinkrecovery@gmail.com");
+				email.setSubject("Recuperação de Password da sua conta Artlink");
+				email.setMsg("O Artista " +artista+
+						   " Encontra-se interessado no Seu evento");
+				email.addTo(usermail);
+				email.send();
+				
+				
+				
+			
+				loginRep.save(userOp.get());
+				
+						
+				System.out.println("email enviado para: "+ usermail +"");
+			
+				
+			
+		
+			}catch(EmailException e) {
+				e.printStackTrace();
+			 }
+			
+
+		
+		
+			
+		}else {
+			
+			return "Conta nao existe o email";		
+				}
+		
+	return "enviado pedido";
+	}
 	
 	
 }
