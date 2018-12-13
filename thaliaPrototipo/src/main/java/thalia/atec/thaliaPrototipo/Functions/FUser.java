@@ -470,19 +470,14 @@ public String sendEmailNovaPassword(String usermail,String newpass) {
 	}
 	
 
-public String applyEventEmail(String usermail,String artista) {
+public String applyEventEmail(String receptor,String artista) {
 		
 	
 		
-		Optional<Login> userOp = loginRep.findByEmail(usermail);
-
 	
-		System.out.println("User id: "+userOp.get().getId() + " reseted pass ");
-		
-		
-		
-		if(userOp.isPresent()) {
 
+		
+	
 			
 			Email email = new SimpleEmail();
 			email.setHostName("smtp.googlemail.com");
@@ -499,24 +494,15 @@ public String applyEventEmail(String usermail,String artista) {
 			
 		try {
 				
-		
-			
-
-			
+	
 				email.setFrom("artlinkrecovery@gmail.com");
-				email.setSubject("Recuperação de Password da sua conta Artlink");
+				email.setSubject("Tem um artista interessado no seu Evento!");
 				email.setMsg("O Artista " +artista+
 						   " Encontra-se interessado no Seu evento");
-				email.addTo(usermail);
+				email.addTo(receptor);
 				email.send();
-				
-				
-				
-			
-				loginRep.save(userOp.get());
-				
-						
-				System.out.println("email enviado para: "+ usermail +"");
+							
+				System.out.println("email enviado para: "+ receptor +"");
 			
 				
 			
@@ -525,16 +511,10 @@ public String applyEventEmail(String usermail,String artista) {
 				e.printStackTrace();
 			 }
 			
-
-		
-		
-			
-		}else {
+ 
 			
 			return "Conta nao existe o email";		
-				}
-		
-	return "enviado pedido";
+
 	}
 	
 	

@@ -310,9 +310,15 @@
           }
         });
       }
-
+		function detectmob() { 
+		 if(typeof window.orientation !== 'undefined'){
+		    window.location.replace("http://m.artlink.pt");
+		  }
+		}
     $(document).ready(function(){
 
+
+    	detectmob();
     	getDistricts($('#districtoptions').val());
 
       var date_input=$('input[name="date"]'); //our date input has the name "date"
@@ -328,6 +334,7 @@
      $("#forget_pass").click(function(){
      	$("#forget_mail").val("");
      });
+
     });
 </script>
 

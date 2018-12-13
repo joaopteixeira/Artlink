@@ -102,6 +102,7 @@
         var id = /*[[${User.id}]]*/ '';
         var firstname = /*[[${User.firstname}]]*/ '';
         var lastname = /*[[${User.lastname}]]*/ '';
+        var email = /*[[${User.email}]]*/ '';
         var hash = /*[[${session.hash}]]*/ '';
         var compar = '';
         var fullname = firstname+' '+lastname;
@@ -242,6 +243,7 @@
               var address = events[i].address;
               var destr = events[i].district.name;
               var category = events[i].category.description;
+              var iduser = events[i].iduser;
               var imgthumb = '';
               if(category=="Cinema"){
                 imgthumb='cinema.png';
@@ -266,7 +268,7 @@
               cardevent += '    <div class="card">';
               cardevent += '      <div class="thumb-cont">'; 
               cardevent += '        <img src="http://artlink.pt/upload/downloadFile/'+imgthumb+'">';
-              cardevent += '        <div class="ismine"> <img class="elicon" src="'+pathimage+'"></div>';
+              cardevent += '        <div class="ismine"> <img class="elicon" src="'+pathimg+'"></div>';
               cardevent += '      </div>';
               cardevent += '        ';
               cardevent += '        <h4>'+title+'</h4>';
@@ -275,7 +277,7 @@
               cardevent += '        <p>'+address+'</p>';
               cardevent += '        <p>'+category+' | '+subcategory+'</p>';
               cardevent += '        <p style="text-align: right;">Disponível até: '+date+'</p>';
-              cardevent += '        <a class="btn btn-primary btn-block">Candidatar-me</a>';
+             
               cardevent += '    </div>';
               cardevent += '</div>';
 
