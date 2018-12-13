@@ -33,13 +33,15 @@
         </div>
         <div class="form-group col-xs-6">
           <label for="category" class="">Categoria</label>
-          <!-- <input id="category" class="form-control input-group-lg" type="text" name="category" title="Enter last name" placeholder="Categoria" th:value="${Person.category}" /> -->
-          <select id="categoryevent" class="form-control input-group-lg" name="category">
-
-          </select>
+          <!-- <input id="category" class="form-control input-group-lg" type="text" name="category" title="Enter last name" placeholder="Categoria" th:value="${Person.category}" /> -->   
+          <select class="form-control thatwidth" id="categoryevent" name="category" required>
+              <div id="getcategories" th:each="Category: ${Category}">
+              <option th:value="${Category.description}" th:text="${Category.description}" th:id="${Category.description}"></option>
+            </div>
+            </select>
         </div>
             <div class="form-group col-xs-6">
-          <label for="subcategory" class="">Sub-sCategoria</label>
+          <label for="subcategory" class="">Sub-Categoria</label>
           <!-- <input id="subcategory" class="form-control input-group-lg" type="text" name="subcategory" title="Enter last name" placeholder="Sub-Categoria" th:value="${Person.subcategory}" /> -->
           <select id="subcategoryevent" class="form-control input-group-lg" name="subcategory">
 

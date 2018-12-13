@@ -4,8 +4,8 @@
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="This is social network html5 template available in themeforest......" />
-    <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
+    <meta name="description" content="Rede Social" />
+    <meta name="keywords" content="Social Network" />
     <meta name="robots" content="index, follow" />
     <title>Feed Recente | Artlink</title>
 
@@ -40,7 +40,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
     <!--Font Awsome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
+    
+    <link rel="shortcut icon" type="image/png" href="http://artlink.pt/upload/downloadFile/artlink.png"/>
     <style type="text/css">
       .thatwidth{
         width: 100% !important;
@@ -304,7 +305,7 @@
             for(var i = 0; i < subcategory.length; i++){
               option += '<option value="'+subcategory[i].description+'">'+subcategory[i].description+'</option>';
             }
-            alert("CHECKADO");
+            
             document.getElementById("subcategoryevent").innerHTML += option;
           }
 
@@ -345,7 +346,7 @@
           $('#categoryevent').change(function(){ 
               var cat = $('#categoryevent').val();
               getSubCategorias(hash,cat);
-              alert("Sub Cat:"+cat);
+             
           });
 
       setInterval(function() {
