@@ -15,9 +15,10 @@ public class Comment {
 	String content;
 	String date;
 
+	String tag;
 	
 	
-	public Comment(String id,String iduser,String username, String content, String date,String imguser) {
+	public Comment(String id,String iduser,String username, String content, String date,String imguser,String tag) {
 		super();
 		this.id=id;
 		this.iduser = iduser;
@@ -26,12 +27,26 @@ public class Comment {
 		this.content = content;
 		this.date = date;
 		this.username = username;
+		this.tag = tag;
 	}
 	
 	
 	
 	public String getId() {
 		return id;
+	}
+
+	
+
+
+	public String getTag() {
+		return tag;
+	}
+
+
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 

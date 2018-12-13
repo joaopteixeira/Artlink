@@ -1,6 +1,8 @@
 package thalia.atec.thaliaPrototipo.Functions;
 
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +35,17 @@ public class FEvent {
 		Optional<User> user = urep.findByHashes(hash);
 		
 		if(user.isPresent()) {
+			ArrayList<Event> aux = new ArrayList<>();
+			for(Event e:eventRepository.findByDistrictName(district)) {
+				Optional<User> u = urep.findById(e.getIduser());
+				e.setPathimage(u.get().getPathimage());
+				e.setUsername(u.get().getFirstname()+" "+u.get().getLastname());
+				aux.add(e);
+				
+			}
 			
-			return eventRepository.findByDistrictName(district);
+			return aux;
+			
 			
 		}
 		
@@ -48,8 +59,16 @@ public List<Event> getEventById(String hash){
 		Optional<User> user = urep.findByHashes(hash);
 		
 		if(user.isPresent()) {
+			ArrayList<Event> aux = new ArrayList<>();
+			for(Event e:eventRepository.findByIduser(user.get().getId())) {
+				Optional<User> u = urep.findById(e.getIduser());
+				e.setPathimage(u.get().getPathimage());
+				e.setUsername(u.get().getFirstname()+" "+u.get().getLastname());
+				aux.add(e);
+				
+			}
 			
-			return eventRepository.findByIduser(user.get().getId());
+			return aux;
 			
 		}
 		

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class User {
 	
 	public static final int FEMALE = 1; 
@@ -35,7 +37,29 @@ public class User {
 	 
 	 String description;
 	 
-	 
+		String pathimage;   
+
+		int tokkensquantity,gender;
+	
+		int status, accactivated;
+		
+		String category;
+		String subcategory;
+		
+
+		ArrayList <Tag> preferences;
+		
+		ArrayList <Watch> watching,watched;
+		
+		ArrayList<String> hashes;
+
+		String username;
+		
+		int userwatched;   //Size do arraylist que está dentro dele depois, quando o gajo pedir os posts, vou fazer um set ás variaveis 
+
+
+		
+		
 	 
 	 public String getWebsite() {
 		return website;
@@ -53,7 +77,11 @@ public class User {
 
 
 
-	public String getDescricao() {
+
+
+	
+	
+	public String getDescription() {
 		return description;
 	}
 
@@ -61,36 +89,14 @@ public class User {
 
 
 
-	public void setDescricao(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
 
-	String pathimage;   
-
-	int tokkensquantity,gender;
-	
-	Boolean status, accactivated;
-	
-	String category;
-	String subcategory;
-	
-
-	ArrayList <Tag> preferences;
-	
-	ArrayList <Watch> watching,watched;
-	
-	ArrayList<String> hashes;
-
-	String username;
-	
-	int userwatched;   //Size do arraylist que está dentro dele depois, quando o gajo pedir os posts, vou fazer um set ás variaveis 
 
 
-	
-	
-	
-	
+
 	public String getCategory() {
 		return category;
 	}
@@ -112,8 +118,8 @@ public class User {
 
 
 	public User(String id,String firstname, String lastname, String email, String pathimage, String birthdate, int gender,
-			String district, String country, int type, String phonenumber, int tokkensquantity, Boolean status,
-			Boolean accactivated,String category,String subcategory,String description,String website) {
+			String district, String country, int type, String phonenumber, int tokkensquantity, int status,
+			int accactivated,String category,String subcategory,String description,String website) {
 		super();
 		this.id=id;
 		this.firstname = firstname;
@@ -271,14 +277,14 @@ public class User {
 
 
 
-	public Boolean getAccactivated() {
+	public int getAccactivated() {
 		return accactivated;
 	}
 
 
 
 
-	public void setAccactivated(Boolean accactivated) {
+	public void setAccactivated(int accactivated) {
 		this.accactivated = accactivated;
 	}
 
@@ -378,11 +384,11 @@ public class User {
 
 	
 
-	public Boolean getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -412,6 +418,7 @@ public class User {
 		return aux;
 		
 	}
+	
 	
 	
 
