@@ -80,8 +80,9 @@
       background-color: #40CC9B;
       color: white;
       cursor: pointer;
-      padding: 15px;
-      border-radius: 4px;
+      padding: 2px 4px;
+      border-radius: 50px;
+}
     }
     .BtnScrollUp{
       position: fixed;
@@ -226,7 +227,7 @@
           $("#listevents").empty();
          console.log(ha + ' | ' + dis);
           $.ajax({
-          url: '/mevent/getbydistrict', 
+          url: '/mevent/getbydistrict',
           data: { 'hash' : ha, 'district' : dis},
           dataType: 'JSON',
           type: "GET",
@@ -236,7 +237,7 @@
 
             for(var i =0; i<events.length;i++){
               var title = events[i].title;
-              
+
               var description = '';
               if(events[i].description != null){
                 description = events[i].description;
@@ -265,9 +266,9 @@
 
               var date = events[i].date;
               console.log(description);
-              cardevent = '<div class="index-content">';           
+              cardevent = '<div class="index-content">';
               cardevent += '    <div class="card">';
-              cardevent += '      <div class="thumb-cont">'; 
+              cardevent += '      <div class="thumb-cont">';
               cardevent += '        <img src="http://artlink.pt/upload/downloadFile/'+imgthumb+'">';
               cardevent += '        <div class="ismine"> <img class="elicon" src="'+pathimg+'"></div>';
               cardevent += '      </div>';
@@ -286,7 +287,7 @@
 
             }
 
-            
+
 
           }
 
@@ -327,7 +328,7 @@
           type: "GET",
           success: function(district){
             $("#districtoptions").empty();
-            
+
             var option = '';
             for(var i = 0; i < district.length; i++){
               option += '<option value="'+district[i].name+'">'+district[i].name+'</option>';
@@ -343,7 +344,7 @@
 
           getDistricts($('#districtoptions').val());
 
-          $('#categoryevent').change(function(){ 
+          $('#categoryevent').change(function(){
               var cat = $('#categoryevent').val();
               getSubCategorias(hash,cat);
              
@@ -808,7 +809,6 @@
        data: {hash: hash, iduser: iiidusers},
        cache:false,
        success:function(data){
-         var cds = $(".watcheds").text();
          if(data == "aceite"){
            $("#btnObserv").text("Parar de Observar");
          }else{
@@ -822,9 +822,42 @@
            success:function(data){
              $(".watcheds").empty();
              $(".watcheds").html("Observadores: <span>"+data+"</span>");
+             getwatching();
              }
            });
-       }});
+       }
+     });
+   }
+   function getwatching(){
+     var url =window.location;
+     let params = new URL(url).searchParams;
+     var idusers= params.get('personid');
+     var watcheds='';
+     $.ajax({
+       url:'muser/getwatchedsById',
+       method:'GET',
+       data: {id_user: idusers},
+       cache:false,
+       success:function(data){
+          for (var j = 0; j < data.length; j++){
+              watcheds+='  <div class="col-md-6 col-sm-6">';
+              watcheds+='    <div class="friend-card">';
+              watcheds+='      <div class="img-responsive cover" style="height: 90px; background-color: #e6e6e6;"></div>';
+              watcheds+='      <div class="card-info" >';
+              watcheds+='        <img src="'+data[j].pathimage+'" alt="user" class="profile-photo-lg" style="background-color: white;"/>';
+              watcheds+='        <div class="friend-info">';
+              watcheds+='          <h5><a th:href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
+              if(data[j].subcategory != null){
+               watcheds+='          <p> '+data[j].subcategory+' </p>';
+              }
+              watcheds+='        </div>';
+              watcheds+='      </div>';
+              watcheds+='    </div>';
+              watcheds+='  </div>';
+            }
+          $("#Watcheds").html(watcheds);
+         }
+       });
    }
 </script>
 <script>
@@ -1025,6 +1058,33 @@
                   $("#btnObserv").text("Começar a Observar");
                 }
               }});
+
+              var watcheds='';
+              $.ajax({
+                url:'muser/getwatchedsById',
+                method:'GET',
+                data: {id_user: iiduser},
+                cache:false,
+                success:function(data){
+                   for (var j = 0; j < data.length; j++){
+                       watcheds+='  <div class="col-md-6 col-sm-6">';
+                       watcheds+='    <div class="friend-card">';
+                       watcheds+='      <div class="img-responsive cover" style="height: 90px; background-color: #e6e6e6;"></div>';
+                       watcheds+='      <div class="card-info">';
+                       watcheds+='        <img src="'+data[j].pathimage+'" alt="user" class="profile-photo-lg" style="background-color: white;"/>';
+                       watcheds+='        <div class="friend-info">';
+                       watcheds+='          <h5><a th:href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
+                       if(data[j].subcategory != null){
+                        watcheds+='          <p> '+data[j].subcategory+' </p>';
+                       }
+                       watcheds+='        </div>';
+                       watcheds+='      </div>';
+                       watcheds+='    </div>';
+                       watcheds+='  </div>';
+                     }
+                   $("#Watcheds").html(watcheds);
+                  }
+                });
        });
     </script>
 
@@ -1092,34 +1152,14 @@
 
     <!-- INICIO da pagina
     ================================================= -->
-
-
-
-
           <th:block  th:switch="${main}">
-
-          <div th:case="homepage"><span th:include="homepage::homepage"></span></div>
-           <div th:case="perfil"><span th:include="perfil::perfil"></span></div>
-              <div th:case="chat"><span th:include="fragchat::chat"></span></div>
-
+            <div th:case="homepage"><span th:include="homepage::homepage"></span></div>
+            <div th:case="perfil"><span th:include="perfil::perfil"></span></div>
+            <div th:case="chat"><span th:include="fragchat::chat"></span></div>
          </th:block>
-
-
-
-
    </div>
     <!-- FIM DA PGINA
     ================================================= -->
-
-
-
-
-
-
-
-
-
-
     <!-- Footer
     ================================================= -->
     <footer id="footer">

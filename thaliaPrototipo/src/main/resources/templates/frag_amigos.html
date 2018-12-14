@@ -27,31 +27,11 @@
     </div>
   </div>
   <div class="col-md-7">
-
-
-    <!-- Friend List
-    ================================================= -->
     <div class="friend-list">
-      <div class="row">
-
-
-<th:block th:each="friend : ${friends}">
-
-        <div class="col-md-6 col-sm-6">
-          <div class="friend-card">
-            <img th:src="${friend.pathimage}" alt="profile-cover" class="img-responsive cover" />
-            <div class="card-info">
-              <img th:src="${friend.pathimage}" alt="user" class="profile-photo-lg" />
-              <div class="friend-info">
-                <a  class="pull-right text-green"><span th:text="${friend.category}"></span></a>
-                <h5><a th:href="@{/profile?personid=} + ${friend.id}" class="profile-link"><span th:text="${friend.firstname}"><span th:text="${friend.lastname}"></span></span></a></h5>
-                <p><span th:text="${friend.subcategory}"></span></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-  </th:block>
+      <div id="Watcheds" class="row js-masonry" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": true }'>
+        
+      </div>
+    </div>
 
       </div>
     </div>
