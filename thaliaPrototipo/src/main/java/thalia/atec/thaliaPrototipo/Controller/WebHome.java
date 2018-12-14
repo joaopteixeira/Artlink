@@ -175,6 +175,7 @@ public class WebHome {
 
 			
 					page.addAttribute("frag", "profile");
+					page.addAttribute("Category", catrep.findAll());
 
 					return "feedmain.html";
 

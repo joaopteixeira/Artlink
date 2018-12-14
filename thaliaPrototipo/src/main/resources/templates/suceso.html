@@ -13,13 +13,13 @@
     	<link rel="stylesheet" href="css/font-awesome.min.css" />
 		<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
 
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
 
     <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
+    <link rel="shortcut icon" type="image/png" href="http://artlink.pt/upload/downloadFile/artlink.png"/>
 	</head>
 	<body>
 
@@ -56,8 +56,8 @@
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="intro-texts">
-						<h1 class="text-white"> Explora a Arte !</h1>
-						<p><h3 > Password Alterada </h3><br /> <br />Faça Login com a sua nova password.</p>
+						<h1 class="text-white"> Password Alterada !</h1>
+						<p> Volte a fazer login.</p>
 					</div>
 				</div>
 				<div class="col-sm-6 col-sm-offset-1">
@@ -99,7 +99,7 @@
 									<div class="row">
 										<div class="form-group col-xs-12">
 											<label class="sr-only">Email</label>
-											<input id="email" class="form-control input-group-lg" type="email" name="Email" title="Enter Email" placeholder="Your Email" required/>
+											<input id="email" class="form-control input-group-lg" type="email" name="email" title="Enter Email" placeholder="Your Email" required/>
 										</div>
 									</div>
 									<br>
@@ -113,17 +113,17 @@
 										<div class="row">
 											<div class="form-group"> <!-- Date input -->
 												<label class="control-label" for="date">Data de Nascimento</label>
-												<input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" required/>
+												<input class="form-control" id="date" name="birthdate" placeholder="MM/DD/YYYY" type="text" required/>
 											</div>
 							    </div>
 									<br>
 									<div class="row">
 										<div class="form-group">
 											<label class="radio-inline">
-												<input type="radio" name="optradio" value="2" checked>Male
+												<input type="radio" name="gender" value="2" checked>Male
 											</label>
 											<label class="radio-inline">
-												<input type="radio" name="optradio" value="1">Female
+												<input type="radio" name="gender" value="1">Female
 											</label>
 										</div>
 									</div>
@@ -132,44 +132,15 @@
 										<div class="row">
 											<div class="form-group col-xs-6">
 												<label class="sr-only">Distrito</label>
-												<select class="form-control" name="city">
-													<option value="indiferente">Indiferente</option>
-													<option value="aveiro">Aveiro</option>
-													<option value="beja">Beja</option>
-													<option value="braga">Braga</option>
-													<option value="braganca">Bragança</option>
-													<option value="castelo_branco">Castelo Branco</option>
-													<option value="coimbra">Coimbra</option>
-													<option value="evora">Évora</option>
-													<option value="faro">Faro</option>
-													<option value="guarda">Guarda</option>
-													<option value="ilha_da_madeira">Ilha da Madeira</option>
-													<option value="ilha_das_flores">Ilha das Flores</option>
-													<option value="ilha_porto_santo">Ilha de Porto Santo</option>
-													<option value="ilha_santa_maria">Ilha de Santa Maria</option>
-													<option value="ilha_sao_jorge">Ilha de São Jorge</option>
-													<option value="ilha_sao_miguel">Ilha de São Miguel</option>
-													<option value="ilha_do_corvo">Ilha do Corvo</option>
-													<option value="ilha_do_faial">Ilha do Faial</option>
-													<option value="ilha_do_pico">Ilha do Pico</option>
-													<option value="ilha_graciosa">Ilha Graciosa</option>
-													<option value="ilha_terceira">Ilha Terceira</option>
-													<option value="leiria">Leiria</option>
-													<option value="lisboa">Lisboa</option>
-													<option value="portalegre">Portalegre</option>
-													<option value="porto">Porto</option>
-													<option value="santarem">Santarém</option>
-													<option value="setubal">Setúbal</option>
-													<option value="viana_do_castelo">Viana do Castelo</option>
-													<option value="vila_real">Vila Real</option>
-													<option value="viseu">Viseu</option>
+												<select class="form-control" name="district" id="districtoptions">
+													
 													</select>
 											</div>
 											<div class="form-group col-xs-6">
 												<label for="country" class="sr-only"></label>
-												<select class="form-control" id="country">
-													<option value="country" disabled selected>Country</option>
-													<option value="0">Portugal</option>
+												<select class="form-control" name="country" id="country">
+													<option value="country" >Country</option>
+													<option value="Portugal" selected>Portugal</option>
 												</select>
 											</div>
 										</div>
@@ -177,10 +148,10 @@
 									<br>
 									<div class="row">
 										<div class="col-sm-6" id="procurado">
-											<button class="btn btn-primary btn-large" name="type" value="1">Quero ser encontrado</button>
+											<button class="btn btn-primary btn-large" name="type" value="0">Sou Artista</button>
 										</div>
 										<div class="col-sm-6" id="procurador">
-											<button class="btn btn-primary btn-large" name="type" value="0">Quero encontrar Artistas</button>
+											<button class="btn btn-primary btn-large" name="type" value="1">Quero encontrar Artistas</button>
 										</div>
 									</div>
 
@@ -320,7 +291,36 @@
 
 
 	<script>
+
+		function getDistricts(dis){
+        var country = 'Portugal';
+        $.ajax({
+          url:'/mcountry/getdistrictbycountryname',
+          data: {'name' : country},
+          dataType: 'JSON',
+          type: "GET",
+          success: function(district){
+            $("#districtoptions").empty();
+            
+            var option = '';
+            for(var i = 0; i < district.length; i++){
+              option += '<option value="'+district[i].name+'">'+district[i].name+'</option>';
+            }
+            document.getElementById("districtoptions").innerHTML += option;
+          }
+        });
+      }
+		function detectmob() { 
+		 if(typeof window.orientation !== 'undefined'){
+		    window.location.replace("http://m.artlink.pt");
+		  }
+		}
     $(document).ready(function(){
+
+
+    	detectmob();
+    	getDistricts($('#districtoptions').val());
+
       var date_input=$('input[name="date"]'); //our date input has the name "date"
       var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
       var options={
@@ -334,6 +334,7 @@
      $("#forget_pass").click(function(){
      	$("#forget_mail").val("");
      });
+
     });
 </script>
 

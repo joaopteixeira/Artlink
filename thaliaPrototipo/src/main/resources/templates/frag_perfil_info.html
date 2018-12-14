@@ -49,13 +49,15 @@
         </div>
         <div class="form-group col-xs-6">
           <label for="category" class="">Categoria</label>
-          <!-- <input id="category" class="form-control input-group-lg" type="text" name="category" title="Enter last name" placeholder="Categoria" th:value="${Person.category}" /> -->
-          <select id="categoryevent" class="form-control input-group-lg" name="category">
-
-          </select>
+          <!-- <input id="category" class="form-control input-group-lg" type="text" name="category" title="Enter last name" placeholder="Categoria" th:value="${Person.category}" /> -->   
+          <select class="form-control thatwidth" id="categoryevent" name="category" required>
+              <div id="getcategories" th:each="Category: ${Category}">
+              <option th:value="${Category.description}" th:text="${Category.description}" th:id="${Category.description}"></option>
+            </div>
+            </select>
         </div>
             <div class="form-group col-xs-6">
-          <label for="subcategory" class="">Sub-sCategoria</label>
+          <label for="subcategory" class="">Sub-Categoria</label>
           <!-- <input id="subcategory" class="form-control input-group-lg" type="text" name="subcategory" title="Enter last name" placeholder="Sub-Categoria" th:value="${Person.subcategory}" /> -->
           <select id="subcategoryevent" class="form-control input-group-lg" name="subcategory">
 
@@ -86,37 +88,8 @@
       <div class="row">
         <div class="form-group col-xs-6">
           <label class="sr-only" >City</label>
-<select class="form-control" name="district">
-                          <option value="indefinido">Indefinido</option>
-                          <option value="Aveiro">Aveiro</option>
-                          <option value="Beja">Beja</option>
-                          <option value="Braga">Braga</option>
-                          <option value="Braganca">Bragança</option>
-                          <option value="Castelo branco">Castelo Branco</option>
-                          <option value="Coimbra">Coimbra</option>
-                          <option value="Evora">Évora</option>
-                          <option value="Faro">Faro</option>
-                          <option value="Guarda">Guarda</option>
-                          <option value="Ilha da madeira">Ilha da Madeira</option>
-                          <option value="Ilha das flores">Ilha das Flores</option>
-                          <option value="Ilha porto santo">Ilha de Porto Santo</option>
-                          <option value="Ilha santa maria">Ilha de Santa Maria</option>
-                          <option value="Ilha sao jorge">Ilha de São Jorge</option>
-                          <option value="Ilha sao miguel">Ilha de São Miguel</option>
-                          <option value="Ilha do corvo">Ilha do Corvo</option>
-                          <option value="Ilha do faial">Ilha do Faial</option>
-                          <option value="Ilha do pico">Ilha do Pico</option>
-                          <option value="Ilha graciosa">Ilha Graciosa</option>
-                          <option value="Ilha terceira">Ilha Terceira</option>
-                          <option value="Leiria">Leiria</option>
-                          <option value="Lisboa">Lisboa</option>
-                          <option value="Portalegre">Portalegre</option>
-                          <option value="Porto">Porto</option>
-                          <option value="Santarem">Santarém</option>
-                          <option value="Setubal">Setúbal</option>
-                          <option value="Viana do castelo">Viana do Castelo</option>
-                          <option value="Vila real">Vila Real</option>
-                          <option value="Viseu">Viseu</option>
+<select class="form-control" name="district" id="districtoptions">
+                          
                           </select>
         </div>
         <div class="form-group col-xs-6">

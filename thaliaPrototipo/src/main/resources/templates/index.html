@@ -13,13 +13,13 @@
     	<link rel="stylesheet" href="css/font-awesome.min.css" />
 		<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
 
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
 
     <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
+    <link rel="shortcut icon" type="image/png" href="http://artlink.pt/upload/downloadFile/artlink.png"/>
 	</head>
 	<body>
 
@@ -315,9 +315,15 @@
           }
         });
       }
-
+		function detectmob() { 
+		 if(typeof window.orientation !== 'undefined'){
+		    window.location.replace("http://m.artlink.pt");
+		  }
+		}
     $(document).ready(function(){
 
+
+    	detectmob();
     	getDistricts($('#districtoptions').val());
 
       var date_input=$('input[name="date"]'); //our date input has the name "date"
@@ -333,6 +339,7 @@
      $("#forget_pass").click(function(){
      	$("#forget_mail").val("");
      });
+
     });
 </script>
 

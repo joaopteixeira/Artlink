@@ -53,6 +53,21 @@ public class RestEvent {
 		
 	}
 	
+	@GetMapping("/getbyidevent")
+	public ResponseEntity<?> getByIdevent(@RequestParam("hash") String hash,@RequestParam("idevent") String idevent){
+		
+		
+		Event ev = fevent.getEvent(hash, idevent);
+		
+		if(ev!=null) {
+			return new ResponseEntity<>(ev,HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+		
+		
+	}
+	
 	@PostMapping("/addevent")
 	public ResponseEntity<?> addEvent(@RequestBody Event event){
 		return new ResponseEntity<>(fevent.addEvent(event.getIduser(), event),HttpStatus.OK);

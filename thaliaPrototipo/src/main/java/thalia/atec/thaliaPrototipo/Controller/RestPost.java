@@ -55,6 +55,9 @@ public class RestPost {
 	@Autowired
     private FileStorageService fileStorageService;
 	
+	
+	@Autowired
+	PostRepository postrepo;
 
 	
 	@Autowired
@@ -100,6 +103,40 @@ public class RestPost {
 		
 		
 	}
+	
+	@GetMapping("/getpostbyid")
+	public ResponseEntity<?> getpostbyid(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost){
+	
+		Optional <Post> post = postrepo.findById(idpost);
+		
+		Post p1 =  post.get();
+		
+		if(post.isPresent()) {
+			Optional<User> u1 = urep.findById(p1.getIduser());
+			 p1.setUserwatched(u1.get().getWatched().size());
+			 p1.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
+			 p1.setUserimage(u1.get().getPathimage());
+			 ArrayList<Comment> comments = new ArrayList<>();
+			 for(Comment c:p1.getComments()) {
+				 Optional<User> usercom = urep.findById(c.getIduser());
+				 c.setUsername(usercom.get().getFirstname()+" "+usercom.get().getLastname());
+				 c.setImguser(usercom.get().getPathimage());
+				 comments.add(c);
+				 
+				 p1.getComments().set(p1.getComments().indexOf(c), c);
+			 }
+			 
+			 
+			 
+			return new ResponseEntity<>(p1,HttpStatus.ACCEPTED);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+	
+	}
+	
+	
+	
 	@GetMapping("/getpostbyiduser")
 	public ResponseEntity<?> getPostByIdUser(@RequestParam("hash") String hash,@RequestParam("iduser") String iduser){
 		
