@@ -88,15 +88,19 @@ public String newpassword(@RequestParam("password") String password ,@RequestPar
 	page.addAttribute("frag", "password");
 
 	User u = (User)session.getAttribute("User");
+	String hash = (String)session.getAttribute("hash");
 	
+	System.out.println(password);
+	System.out.println(newpassword);
 
+		String status = fuser.changePassword(hash, password, newpassword);
 		
-		if(fuser.login(u.getEmail(),password)!=null){
+		if(status.compareTo("aceite")==0){
 						
 			
 			fuser.sendEmailNovaPassword(u.getEmail(),newpassword);
 			
-			System.out.println("Mudou pass"+newpassword);
+			System.out.println("Mudou pass: "+newpassword);
 			return "suceso.html";
 			
 		

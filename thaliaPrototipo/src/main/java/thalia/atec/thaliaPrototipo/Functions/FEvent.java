@@ -77,6 +77,25 @@ public List<Event> getEventById(String hash){
 		
 		
 	}
+
+
+		public Event getEvent(String hash,String idevent) {
+			Optional<User> user = urep.findByHashes(hash);
+			System.out.println(user.get().getFirstname());
+			Optional<Event> event = eventRepository.findById(idevent);
+			
+			Event e = event.get();
+			
+			if(user.isPresent() && event.isPresent()) {
+				
+				Optional<User> u = urep.findById(e.getIduser());
+				e.setPathimage(u.get().getPathimage());
+				e.setUsername(u.get().getFirstname()+" "+u.get().getLastname());
+				
+				return e;
+			}
+			return null;
+		}
 	
 	public String addEvent(String Id,Event e) {
 		

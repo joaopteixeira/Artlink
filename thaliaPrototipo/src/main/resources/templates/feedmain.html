@@ -40,7 +40,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
     <!--Font Awsome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    
+
     <link rel="shortcut icon" type="image/png" href="http://artlink.pt/upload/downloadFile/artlink.png"/>
     <style type="text/css">
       .thatwidth{
@@ -608,10 +608,10 @@
                 }
                 outpuut+='<div>';
                 if(page != 0){
-                  outpuut+='<button style="float: left;" onclick="lastposts()"> « anterior </button> ';
+                  outpuut+='<button style="float: left;" onclick="lastposts()"> <i class="fas fa-arrow-circle-left"></i> </button> ';
                 }
                 if(!(range*(page+1) >= allpost)){
-                  outpuut+='<button style="float: right;" onclick="nextposts()"> próximo » </button>';
+                  outpuut+='<button style="float: right;" onclick="nextposts()"> <i class="fas fa-arrow-circle-right"></i>  </button>';
                 }
                 outpuut+='</div>';
                 $("#posts").html(outpuut);

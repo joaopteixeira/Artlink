@@ -58,7 +58,12 @@ public class FUser {                   //Funcoes pro USER
 			Optional<User> u = userRep.findByEmail(login.get().getEmail());
 			
 			//u.get().setHashes();
-			u.get().getHashes().add(hash);
+			if(u.get().getHashes().size()>=5) {
+				u.get().getHashes().set(0, hash);
+			}else {
+				u.get().getHashes().add(hash);
+			}
+			
 			userRep.save(u.get());
 			return hash;
 		}
@@ -362,13 +367,6 @@ public String sendEmailNovaPassword(String usermail,String newpass) {
 				email.send();
 				
 				
-				
-				userOp.get().setPassword(newPassword);
-				loginRep.save(userOp.get());
-				
-						
-				System.out.println("email enviado para: "+ usermail +"");
-			
 				
 			
 		
