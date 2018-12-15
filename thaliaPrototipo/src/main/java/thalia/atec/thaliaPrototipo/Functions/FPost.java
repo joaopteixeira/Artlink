@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import thalia.atec.thaliaPrototipo.Service.PostRepository;
 import thalia.atec.thaliaPrototipo.Service.UserRepository;
+import thalia.atec.thaliaPrototipo.Util.WebServices;
 import thalia.atec.thaliaPrototipo.model.Comment;
 import thalia.atec.thaliaPrototipo.model.Media;
 import thalia.atec.thaliaPrototipo.model.Notify;
@@ -64,6 +65,17 @@ public class FPost {
 				String reportDate = df.format(today);
 
 				post.setDate(reportDate);
+				String filename = "";
+				
+				if(post.getMedia().getPathfile().contains("File/")) {
+					filename = post.getMedia().getPathfile();
+					
+				}else {
+					filename = WebServices.SERVER+"/upload/downloadFile/"+post.getMedia().getPathfile();
+				}
+				
+				post.getMedia().setPathfile(filename);
+				
 				
 				prep.save(post);
 				

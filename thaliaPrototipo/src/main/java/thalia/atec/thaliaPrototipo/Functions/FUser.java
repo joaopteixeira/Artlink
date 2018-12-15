@@ -1,5 +1,14 @@
 package thalia.atec.thaliaPrototipo.Functions;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -10,8 +19,16 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.imageio.IIOImage;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
+import javax.imageio.stream.ImageOutputStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.mvc.HeaderLinksResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.apache.commons.mail.*;
 
 import thalia.atec.thaliaPrototipo.Service.CountryRepository;
@@ -72,6 +89,89 @@ public class FUser {                   //Funcoes pro USER
 		
 		return null;	
 	}
+	
+	
+
+    public BufferedImage resizeImage(BufferedImage originalImage, int type){
+    	
+    int heigth = originalImage.getHeight();
+    int width = originalImage.getWidth();
+    int maior = 0;
+    int menor = 0;
+    int qual = -1;
+    int cont=0;;
+    
+    if(heigth>width) {
+    	maior = heigth;
+    	menor = width;
+    	qual=0;
+    }else {
+    	qual=1;
+    	maior = width;
+    	menor = heigth;
+    }
+    
+    if(maior>300) {
+		do {
+			maior=maior/2;
+			cont++;
+		}while(maior>300);
+	}
+    
+    for(int i=0;i<cont;i++) {
+    	menor=menor/2;
+    }
+    
+    if(qual==0) {
+    	heigth = maior;
+    	width = menor;
+    }else {
+    	heigth = menor;
+    	width = maior;
+    }
+    	
+	BufferedImage resizedImage = new BufferedImage(width, heigth, originalImage.getType());
+	Graphics2D g = resizedImage.createGraphics();
+	g.setRenderingHint(RenderingHints.KEY_RENDERING,
+			RenderingHints.VALUE_RENDER_QUALITY);
+	g.drawImage(originalImage, 0, 0, width, heigth, null);
+	g.dispose();
+	
+			
+		
+	return resizedImage;
+    }
+	
+	
+	public BufferedImage cropImageSquare(byte[] image) throws IOException {
+		  // Get a BufferedImage object from a byte array
+		  InputStream in = new ByteArrayInputStream(image);
+		  BufferedImage originalImage = ImageIO.read(in);
+		  
+		  // Get image dimensions
+		  int height = originalImage.getHeight();
+		  int width = originalImage.getWidth();
+		  
+		  // The image is already a square
+		  
+		  
+		  // Compute the size of the square
+		  int squareSize = (height > width ? width : height);
+		  
+		  // Coordinates of the image's middle
+		  int xc = width / 2;
+		  int yc = height / 2;
+		  
+		  // Crop
+		  BufferedImage croppedImage = originalImage.getSubimage(
+		      xc - (150 / 2), // x coordinate of the upper-left corner
+		      yc - (150 / 2), // y coordinate of the upper-left corner
+		      150,            // widht
+		      150             // height
+		  );
+		  
+		  return croppedImage;
+		}
 
 	public String Registry(User u,String password) {
 		

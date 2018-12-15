@@ -15,6 +15,7 @@ import java.util.UUID;
 
 import javax.servlet.annotation.MultipartConfig;
 
+import org.apache.commons.io.FilenameUtils;
 import org.bson.BsonDocument;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -242,7 +243,7 @@ public class RestPost {
 	@PostMapping("/addpost")
 	public ResponseEntity<String> addPost(@RequestBody Post post){
 		
-		return new ResponseEntity<>(ffpost.newPost(post),HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(ffpost.newPost(post),HttpStatus.OK);
 		
 	}
 	
@@ -250,6 +251,20 @@ public class RestPost {
 	public ResponseEntity<String> like(@RequestParam("id_post") String id_post, @RequestParam("id_user") String id_user){
 		
 		ffpost.like(id_user, id_post);
+		
+		return new ResponseEntity<String>("",HttpStatus.OK);
+	}
+	
+	@GetMapping("/removefile")
+	public ResponseEntity<String> removefile(@RequestParam("hash") String hash, @RequestParam("path") String path){
+		
+		Optional<User> user = urep.findByHashes(hash);
+		
+		if(user.isPresent()) {
+			
+			fileStorageService.removeFile(path);
+			
+		}
 		
 		return new ResponseEntity<String>("",HttpStatus.OK);
 	}
@@ -263,7 +278,9 @@ public class RestPost {
 		Optional<User> user = urep.findByHashes(hash);
 		
 		if(user.isPresent()) {
-			String fileName = fileStorageService.storeFile(file);
+			String fileName = fileStorageService.storeFile(file,FilenameUtils.getExtension(file.getOriginalFilename()));
+			
+			System.out.println(file.getOriginalFilename());
 	    	
 
 	        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -282,6 +299,8 @@ public class RestPost {
 		return null;
 
 	}
+	
+	
 	
 	
 	@GetMapping("/allposts")
