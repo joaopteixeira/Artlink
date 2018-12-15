@@ -1,5 +1,6 @@
 package thalia.atec.thaliaPrototipo.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -316,6 +317,7 @@ public class RestUser {
 			return new ResponseEntity<String>(""+check,HttpStatus.OK);
 		}
   
+  
   @GetMapping("/sizeObser")
 	public ResponseEntity<String> getsizeObserv(@RequestParam("iduser") String iduser){
 		int size = 0;
@@ -326,4 +328,25 @@ public class RestUser {
 			}		
 			return new ResponseEntity<String>(""+size,HttpStatus.OK);
 		}
+  
+  @GetMapping("/getwatchedsById")
+	public ResponseEntity<?> getWatcheds (@RequestParam("id_user") String id_user) {
+		ArrayList<User> users = new ArrayList<>();
+		for(User u : urep.findAll()) {
+			if(u.getId().compareTo(id_user)==0) {
+				for(Watch w:u.getWatched()) {
+					for(User us:urep.findAll()) {
+						if(w.getIduser().compareTo(us.getId())==0) {
+							users.add(us);
+						}
+					}
+				}
+			}
+		}
+			
+			
+		return new ResponseEntity<>(users,HttpStatus.OK);
+	}
+  
+  
 }
