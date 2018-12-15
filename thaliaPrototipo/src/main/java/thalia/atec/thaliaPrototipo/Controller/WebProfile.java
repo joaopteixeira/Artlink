@@ -1,11 +1,19 @@
 package thalia.atec.thaliaPrototipo.Controller;
 
 import java.awt.List;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 
 import thalia.atec.thaliaPrototipo.Functions.FPost;
 import thalia.atec.thaliaPrototipo.Functions.FUser;
@@ -88,15 +97,19 @@ public String newpassword(@RequestParam("password") String password ,@RequestPar
 	page.addAttribute("frag", "password");
 
 	User u = (User)session.getAttribute("User");
+	String hash = (String)session.getAttribute("hash");
 	
+	System.out.println(password);
+	System.out.println(newpassword);
 
+		String status = fuser.changePassword(hash, password, newpassword);
 		
-		if(fuser.login(u.getEmail(),password)!=null){
+		if(status.compareTo("aceite")==0){
 						
 			
 			fuser.sendEmailNovaPassword(u.getEmail(),newpassword);
 			
-			System.out.println("Mudou pass"+newpassword);
+			System.out.println("Mudou pass: "+newpassword);
 			return "suceso.html";
 			
 		
@@ -115,7 +128,30 @@ public String uploadPost(@RequestParam("file") MultipartFile file,@RequestParam(
 	Optional<User> user = userRepo.findByHashes(hash);
 	
 	if(user.isPresent()) {
-		String fileName = filestorageservice.storeFile(file);
+		String fileName="";
+		try {
+			
+			InputStream in = new ByteArrayInputStream(file.getBytes());
+			BufferedImage image1 = ImageIO.read(in);
+			//BufferedImage image = fuser.re();
+			BufferedImage image = fuser.resizeImage(image1, 0);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(image, FilenameUtils.getExtension(file.getOriginalFilename()), baos );
+			baos.flush();
+			byte[] imageInByte = baos.toByteArray();
+			baos.close();
+			
+			//MockMultipartFile mockMultipartFile = 
+			
+			MultipartFile multipartFile = new MockMultipartFile(file.getOriginalFilename(), imageInByte);
+			
+			
+			
+			fileName = filestorageservice.storeFile(multipartFile,FilenameUtils.getExtension(file.getOriginalFilename()));
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -140,6 +176,9 @@ public String uploadPost(@RequestParam("file") MultipartFile file,@RequestParam(
 	return "redirect:/feed?main=perfil&&frag=profile&personid="+user.get().getId();
 
 }
+
+
+
 
 
 }

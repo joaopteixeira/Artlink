@@ -3,6 +3,7 @@ import thalia.atec.thaliaPrototipo.Service.FileStorageService;
 import thalia.atec.thaliaPrototipo.UploadFile.*;
 import thalia.atec.thaliaPrototipo.model.Post;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class FileController {
     	System.out.println();
     	
     	
-        String fileName = fileStorageService.storeFile(file);
+        String fileName = fileStorageService.storeFile(file,FilenameUtils.getExtension(file.getOriginalFilename()));
     	//String fileName = rand.replace("-", "");
 
         

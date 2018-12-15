@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -175,6 +176,7 @@ public class WebHome {
 
 			
 					page.addAttribute("frag", "profile");
+					page.addAttribute("Category", catrep.findAll());
 
 					return "feedmain.html";
 
@@ -270,7 +272,7 @@ public class WebHome {
   public String feed(@RequestParam("file") MultipartFile file,@RequestParam("content") String content,@RequestParam("video") String video,  @RequestParam("typemedia") int typemedia,/*@RequestParam("pathfile") String pathfile,*/ HttpSession session){
 //		
 //		
-		String fileName = fileStorageService.storeFile(file);
+		String fileName = fileStorageService.storeFile(file,FilenameUtils.getExtension(file.getOriginalFilename()));
 		String fileDownloadUri;
 		//String fileName = rand.replace("-", "");
 

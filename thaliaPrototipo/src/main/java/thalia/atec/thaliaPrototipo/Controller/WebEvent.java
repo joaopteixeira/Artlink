@@ -1,6 +1,7 @@
 package thalia.atec.thaliaPrototipo.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import thalia.atec.thaliaPrototipo.Functions.FCategory;
 import thalia.atec.thaliaPrototipo.Functions.FEvent;
+import thalia.atec.thaliaPrototipo.Functions.FUser;
+import thalia.atec.thaliaPrototipo.Service.UserRepository;
 import thalia.atec.thaliaPrototipo.model.Category;
 import thalia.atec.thaliaPrototipo.model.District;
 import thalia.atec.thaliaPrototipo.model.Event;
@@ -26,6 +30,12 @@ public class WebEvent {
 
 	@Autowired
 	FEvent fevent;
+	
+	@Autowired
+	FUser fuser;
+	
+	@Autowired
+	UserRepository userrep;
 	
 	@Autowired
 	FCategory fcategory;
@@ -73,24 +83,30 @@ public class WebEvent {
 	}
 	
 	
-/*	
+/*
 	@RequestMapping(value="/applyEvent", method=RequestMethod.POST)
-	public String resetPassword(){
+	public String getEventbyDistrict(@ModelAttribute("User") User u,@RequestParam("iduser") String iduser) {
 		
 		try {
 			
+			String artista = u.getFirstname()+" "+u.getLastname();
+			
+			Optional<User> us = userrep.findById(iduser);
 			
 			
-			fuser.apllyEventEmail(usermail);	
+			
+			String receptor = us.get().getEmail();
+			
+			
+			fuser.applyEventEmail(receptor,artista);	
 			
 		    }catch(Exception e) {			
 		    		
-		    	return "redirect:/index";   //Caso não meta nenhum que exista!
+		    	return "redirect:/feed?main=homepage&frag=frageventlist";
 	     	}
 		
-				
-	return "redirect:/index";      // Deu, enviou volta para o home
+		return "redirect:/feed?main=homepage&frag=frageventlist";
 	}
-	
 	*/
+	
 }
