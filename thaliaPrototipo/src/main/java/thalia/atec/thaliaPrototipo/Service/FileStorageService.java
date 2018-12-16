@@ -35,12 +35,13 @@ public class FileStorageService {
         }
     }
 
-    public String storeFile(MultipartFile file) {
+    public String storeFile(MultipartFile file,String ext) {
         // Normalize file name
     	String rand = UUID.randomUUID().toString();
     	
     	//String extensao = file.getOriginalFilename().toString(); //Apanhar o nome original e á frente meter lo no fim
-    	String ext = FilenameUtils.getExtension(file.getOriginalFilename());
+    	//String ext = FilenameUtils.getExtension(file.getOriginalFilename());
+    	//System.out.println("FICHEIRO NAME:   "+file.getOriginalFilename());
     	
         String fileName = StringUtils.cleanPath(rand.replace("-", "")) +"."+ ext;   //Para ter-mos a extensao do ficheiro (.png.jpec etc)
 
@@ -53,11 +54,26 @@ public class FileStorageService {
             // Copy file to the target location (Replacing existing file with the same name)
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            
+            
 
             return fileName;
         } catch (IOException ex) {
             throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
         }
+    }
+    
+    public String removeFile(String filename) {
+    	Path targetLocation = this.fileStorageLocation.resolve(filename);
+    	
+    	try {
+			Files.delete(targetLocation);
+			return "aceite";
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "naceite";
+		}
     }
 
     public Resource loadFileAsResource(String fileName) {

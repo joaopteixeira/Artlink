@@ -15,6 +15,7 @@ import java.util.UUID;
 
 import javax.servlet.annotation.MultipartConfig;
 
+import org.apache.commons.io.FilenameUtils;
 import org.bson.BsonDocument;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -55,6 +56,9 @@ public class RestPost {
 	@Autowired
     private FileStorageService fileStorageService;
 	
+	
+	@Autowired
+	PostRepository postrepo;
 
 	
 	@Autowired
@@ -100,6 +104,40 @@ public class RestPost {
 		
 		
 	}
+	
+	@GetMapping("/getpostbyid")
+	public ResponseEntity<?> getpostbyid(@RequestParam("hash") String hash,@RequestParam("idpost") String idpost){
+	
+		Optional <Post> post = postrepo.findById(idpost);
+		
+		Post p1 =  post.get();
+		
+		if(post.isPresent()) {
+			Optional<User> u1 = urep.findById(p1.getIduser());
+			 p1.setUserwatched(u1.get().getWatched().size());
+			 p1.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
+			 p1.setUserimage(u1.get().getPathimage());
+			 ArrayList<Comment> comments = new ArrayList<>();
+			 for(Comment c:p1.getComments()) {
+				 Optional<User> usercom = urep.findById(c.getIduser());
+				 c.setUsername(usercom.get().getFirstname()+" "+usercom.get().getLastname());
+				 c.setImguser(usercom.get().getPathimage());
+				 comments.add(c);
+				 
+				 p1.getComments().set(p1.getComments().indexOf(c), c);
+			 }
+			 
+			 
+			 
+			return new ResponseEntity<>(p1,HttpStatus.ACCEPTED);
+		}
+		
+		return new ResponseEntity<>("null",HttpStatus.OK);
+	
+	}
+	
+	
+	
 	@GetMapping("/getpostbyiduser")
 	public ResponseEntity<?> getPostByIdUser(@RequestParam("hash") String hash,@RequestParam("iduser") String iduser){
 		
@@ -205,7 +243,7 @@ public class RestPost {
 	@PostMapping("/addpost")
 	public ResponseEntity<String> addPost(@RequestBody Post post){
 		
-		return new ResponseEntity<>(ffpost.newPost(post),HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(ffpost.newPost(post),HttpStatus.OK);
 		
 	}
 	
@@ -213,6 +251,20 @@ public class RestPost {
 	public ResponseEntity<String> like(@RequestParam("id_post") String id_post, @RequestParam("id_user") String id_user){
 		
 		ffpost.like(id_user, id_post);
+		
+		return new ResponseEntity<String>("",HttpStatus.OK);
+	}
+	
+	@GetMapping("/removefile")
+	public ResponseEntity<String> removefile(@RequestParam("hash") String hash, @RequestParam("path") String path){
+		
+		Optional<User> user = urep.findByHashes(hash);
+		
+		if(user.isPresent()) {
+			
+			fileStorageService.removeFile(path);
+			
+		}
 		
 		return new ResponseEntity<String>("",HttpStatus.OK);
 	}
@@ -226,7 +278,9 @@ public class RestPost {
 		Optional<User> user = urep.findByHashes(hash);
 		
 		if(user.isPresent()) {
-			String fileName = fileStorageService.storeFile(file);
+			String fileName = fileStorageService.storeFile(file,FilenameUtils.getExtension(file.getOriginalFilename()));
+			
+			System.out.println(file.getOriginalFilename());
 	    	
 
 	        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -245,6 +299,8 @@ public class RestPost {
 		return null;
 
 	}
+	
+	
 	
 	
 	@GetMapping("/allposts")

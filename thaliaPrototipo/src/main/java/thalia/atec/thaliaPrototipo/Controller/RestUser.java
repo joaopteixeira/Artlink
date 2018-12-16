@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -238,7 +239,7 @@ public class RestUser {
 		Optional<User> user = urep.findByHashes(hash);
 		
 		if(user.isPresent()) {
-			String fileName = fileStorageService.storeFile(file);
+			String fileName = fileStorageService.storeFile(file,FilenameUtils.getExtension(file.getOriginalFilename()));
 	    	
 
 	        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()

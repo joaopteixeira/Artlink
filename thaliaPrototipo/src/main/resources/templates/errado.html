@@ -30,14 +30,14 @@
         <div class="container">
 					<div class="row">
 						<div class="navbar-header col-sm-6">
-
+							
 							<a class="navbar-brand" href="#" style=" color:white; font-size: 38px;font-family: 'Megrim', cursive;">artlink<span style="color:#40CC9B;">.pt</span></a>
 						</div>
 
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="navbar-header col-sm-6 text-center mx-auto" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right main-menu">
-
+								
 							</ul>
 						</div>
 					</div>
@@ -56,8 +56,8 @@
 			<div class="row">
 				<div class="col-sm-5">
 					<div class="intro-texts">
-						<h1 class="text-white"> Explora a Arte !</h1>
-						<p> Artlink é uma rede social 100% portuguesa, com o objetivo de proporcionar uma plataforma própria e desenhada para o mundo da arte <br /> <br />Do que estás à espera? Regista-te agora e descobre um novo mundo.</p>
+						<h1 class="text-white"> Erro na Lógica dos dados !</h1>
+						<p style="color: red;"> Por favor verifique que segue as direções na nossa página e evite qualquer método não autorizado de inserção de dados.</p>
 					</div>
 				</div>
 				<div class="col-sm-6 col-sm-offset-1">
@@ -113,12 +113,7 @@
 										<div class="row">
 											<div class="form-group"> <!-- Date input -->
 												<label class="control-label" for="date">Data de Nascimento</label>
-												<div class='input-group date' id='datepicker'>
-                          <input type='text' class="form-control" name="date" placeholder="MM/DD/YYYY" readonly="readonly" required/>
-                          <!--<span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                          </span>-->
-                      	</div>
+												<input class="form-control" id="date" name="birthdate" placeholder="MM/DD/YYYY" type="text" required/>
 											</div>
 							    </div>
 									<br>
@@ -138,7 +133,7 @@
 											<div class="form-group col-xs-6">
 												<label class="sr-only">Distrito</label>
 												<select class="form-control" name="district" id="districtoptions">
-
+													
 													</select>
 											</div>
 											<div class="form-group col-xs-6">
@@ -197,7 +192,7 @@
 													<h4 class="modal-title">Esqueceu Password</h4>
 												</div>
 												<div class="modal-body">
-
+	
 													<p>Intruduza o seu email.</p>
 													<!-- <p>Esqueceu a sua palavra pass?</p>
 													<p>Insira o seu email.</p> -->
@@ -207,7 +202,7 @@
 												<input class="form-control input-group newborder" type="mail" name="usermail" title="Enter Mail" placeholder="Mail"/>
 											</div>
 											</div>
-
+								
 												</div>
 												<div class="modal-footer">
 													<button type="submit" class="btn btn-primary">Recuperar</button>
@@ -229,9 +224,9 @@
 	<div class="col-sm-12 mx-auto">
 		<div class="col-md-3">
 			<div class="card col-md-offset-3" style="width: 20rem;">
-			  
+			  <img class="card-img-top" src="..." alt="Card image cap">
 			  <div class="card-block">
-			    <h4 class="card-title">João Vilares</h4>
+			    <h4 class="card-title">João Vilares</h4>   
                 <p class="card-text"></p>
                 <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-teixeira-vilares-1886a8167/" class="btn btn-primary">Ler mais</a>
 			  </div>
@@ -239,7 +234,7 @@
 		</div>
 		<div class="col-md-3">
 			<div class="card col-md-offset-3" style="width: 20rem;">
-			  
+			  <img class="card-img-top" src="..." alt="Card image cap">
 			  <div class="card-block">
 			    <h4 class="card-title">João Mirante</h4>
       <p class="card-text"></p>
@@ -249,7 +244,7 @@
 		</div>
 		<div class="col-md-3">
 			<div class="card col-md-offset-3" style="width: 20rem;">
-			  
+			  <img class="card-img-top" src="..." alt="Card image cap">
 			  <div class="card-block">
                 <h4 class="card-title">Nilton Fontes</h4>
                 <p class="card-text"></p>
@@ -259,7 +254,7 @@
 		</div>
 		<div class="col-md-3">
           <div class="card-block">
-         
+          	<img class="card-img-top" src="..." alt="Card image cap">
                 <h4 class="card-title">Gonçalo Lavrador</h4>  
                  <div class="card-block">
                 <p class="card-text"></p>
@@ -306,7 +301,7 @@
           type: "GET",
           success: function(district){
             $("#districtoptions").empty();
-
+            
             var option = '';
             for(var i = 0; i < district.length; i++){
               option += '<option value="'+district[i].name+'">'+district[i].name+'</option>';
@@ -345,3 +340,6 @@
 
 	</body>
 </html>
+
+
+
