@@ -68,9 +68,9 @@ public class WebProfile {
 	u.setLastname(lastname);
 	u.setDistrict(district);
 	u.setCountry(country);
-	u.setCountry(phonenumber);
-	u.setCountry(website);
-	u.setCountry(description);
+	u.setPhonenumber(phonenumber);
+	u.setWebsite(website);
+	u.setDescription(description);
 	userRepo.save(u);
 	
 	
