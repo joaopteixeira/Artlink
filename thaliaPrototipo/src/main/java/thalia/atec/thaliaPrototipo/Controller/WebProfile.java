@@ -57,8 +57,8 @@ public class WebProfile {
 	
 
 	@PostMapping("/editprofile")
-	public String editprofile(HttpSession session,@RequestParam("firstname") String firstname ,
-			@RequestParam("lastname") String lastname,@RequestParam("website") String website,@RequestParam("description") String description,@RequestParam("district") String district,@RequestParam("phonenumber") String phonenumber,@RequestParam("country") String country,Model page ) {
+	public String editprofile(HttpSession session,@RequestParam(value="firstname",defaultValue="") String firstname ,
+			@RequestParam(value="lastname",defaultValue="") String lastname,@RequestParam(value="website",defaultValue="") String website,@RequestParam(value="description",defaultValue="") String description,@RequestParam(value="district", defaultValue="") String district,@RequestParam(value="phonenumber",defaultValue="") String phonenumber,@RequestParam(value="country",defaultValue="Portugal") String country,Model page ) {
 	
 
 	User u = (User)session.getAttribute("User");
