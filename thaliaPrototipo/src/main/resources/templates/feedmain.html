@@ -53,8 +53,6 @@
         color: #000000;
         padding: 0px 30px;
         background-color: #f2f2f2;
-         opacity: 0.5;
-          filter: alpha(opacity=50);
         border-radius: 10px;
         border: 1px solid #000000;
         box-shadow:
@@ -79,8 +77,9 @@
       background-color: #40CC9B;
       color: white;
       cursor: pointer;
-      padding: 15px;
-      border-radius: 4px;
+      padding: 2px 4px;
+      border-radius: 50px;
+}
     }
     .BtnScrollUp{
       position: fixed;
@@ -113,19 +112,16 @@
       console.log(hash);
 
       var date = new Date();
-      console.log(date);
-
-
       const messages = document.getElementById('chat');
-
-
       function scrollToBottom() {
         document.getElementById('scrollbar').scrollTop=(document.getElementById('scrollbar').scrollHeight)
       }
 
       function actchat(x, y){
-
+        eraseCookie('id_chat');
+        eraseCookie('img_chat');
           console.log('chat: '+x);
+          console.log('img: '+y);
           $('#displaymsg').empty();
           $.ajax({
             url:'/mchat/getchatbyid',
@@ -136,12 +132,8 @@
               var mensagem = '';
               var output = '';
               var tempo = '';
-
               document.getElementById("iddchat").value = data.id;
               document.getElementById("length").value = data.mensagens.length;
-
-
-
 
               for (var i = 0; i < data.mensagens.length; i++) {
 
@@ -160,7 +152,7 @@
                 });
 
                 if(data.mensagens[i].user.id == id){
-                  mensagem = '<li class="remetente msn">';
+                  mensagem += '<li class="remetente msn">';
                   mensagem += '<div class="chat-item">';
                   mensagem += '   <div class="chat-item-header">';
                   mensagem += '      <h5>Eu</h5>';
@@ -171,7 +163,7 @@
                   mensagem += '</li>';
                 }
                 else{
-                  mensagem = '<li class="destinatario msn">';
+                  mensagem += '<li class="destinatario msn">';
                   mensagem += '<img src="'+y+'" alt="" class="profile-photo-sm pull-left" />';
                   mensagem += '<div class="chat-item">';
                   mensagem += '  <div class="chat-item-header">';
@@ -183,11 +175,8 @@
                   mensagem += '</li>';
                 }
 
-
-
-                document.getElementById("displaymsg").innerHTML += mensagem;
               }
-
+                document.getElementById("displaymsg").innerHTML = mensagem;
               scrollToBottom();
             },
             error: function (xhe) {
@@ -222,19 +211,17 @@
 
         function getEvents(ha,dis){
           $("#listevents").empty();
-         console.log(ha + ' | ' + dis);
           $.ajax({
-          url: '/mevent/getbydistrict', 
+          url: '/mevent/getbydistrict',
           data: { 'hash' : ha, 'district' : dis},
           dataType: 'JSON',
           type: "GET",
           success: function (events){
-            console.log("Sucesso: "+JSON.stringify(events));
               var cardevent='';
 
             for(var i =0; i<events.length;i++){
               var title = events[i].title;
-              
+
               var description = '';
               if(events[i].description != null){
                 description = events[i].description;
@@ -255,18 +242,16 @@
 
               var pathimg = events[i].pathimage;
               var subcategory = '';
-              console.log(title);
               if(events[i].category.subCategory[0].description != null){
                 var subcategory = events[i].category.subCategory[0].description;
               }
 
               var date = events[i].date;
-              console.log(description);
-              cardevent = '<div class="index-content">';           
+              cardevent = '<div class="index-content">';
               cardevent += '    <div class="card">';
-              cardevent += '      <div class="thumb-cont">'; 
+              cardevent += '      <div class="thumb-cont">';
               cardevent += '        <img src="http://artlink.pt/upload/downloadFile/'+imgthumb+'">';
-              cardevent += '        <div class="ismine"> <img class="elicon" src="'+pathimage+'"></div>';
+              cardevent += '        <div class="ismine"> <img class="elicon" src="'+pathimg+'"></div>';
               cardevent += '      </div>';
               cardevent += '        ';
               cardevent += '        <h4>'+title+'</h4>';
@@ -283,7 +268,7 @@
 
             }
 
-            
+
 
           }
 
@@ -324,7 +309,7 @@
           type: "GET",
           success: function(district){
             $("#districtoptions").empty();
-            
+
             var option = '';
             for(var i = 0; i < district.length; i++){
               option += '<option value="'+district[i].name+'">'+district[i].name+'</option>';
@@ -340,7 +325,7 @@
 
           getDistricts($('#districtoptions').val());
 
-          $('#categoryevent').change(function(){ 
+          $('#categoryevent').change(function(){
               var cat = $('#categoryevent').val();
               getSubCategorias(hash,cat);
               alert("Sub Cat:"+cat);
@@ -369,9 +354,6 @@
                 var dif = JSON.stringify(chats);
 
                       if(compar != dif){
-
-
-                        console.log('dif');
                         compar = dif;
 
                         $('#lista').empty();
@@ -468,8 +450,6 @@
                     $("#displaymsg").append(mensagem);
                     document.getElementById("iddchat").value = data.id;
                     document.getElementById("length").value = data.mensagens.length;
-                    console.log($('#displaymsg').innerHeight())
-                    console.log($('.chat-mens')[0].scrollHeight);
                     $('#displaymsg').scrollTop($('#displaymsg').scrollHeight)
                     }
                     scrollToBottom();
@@ -529,6 +509,7 @@
         var idpost= '';
         var outpuut = '';
         var outpuuut = '';
+        var idlike = 0;
           $.ajax({
             url:'mposts/allposts',
             method:'GET',
@@ -543,8 +524,12 @@
               var likes;
               for (var j = 0; j < data.length; j++){
                 likes=0;
+                idlike = 0;
                 for (var k = 0; k < data[j].likes.length; k++){
                   likes += 1;
+                  if(data[j].likes[k] == id){
+                    idlike = 1;
+                  }
                 }
                 outpuut+='<div class="post-content">';
                 outpuut+='<div class="media" data-toggle="modal" data-target=".modal-'+data[j].iduser+'">';
@@ -591,7 +576,12 @@
                 outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
                 outpuut+='     </div>';
                 outpuut+='     <div class="reaction">';
-                outpuut+='       <a class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i class="icon ion-thumbsup"></i>'+likes+'</a>';
+                if(idlike == 1){
+                    outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #8dc63f;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+                }
+                else {
+                  outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #d0e7b1;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+                }
                 outpuut+='     </div>';
                 outpuut+='     <div class="line-divider"></div>';
                 outpuut+='     <div class="post-text">';
@@ -635,10 +625,15 @@
           cache:false,
           success:function(data){
            var likes;
+           var idlike = 0;
            for (var j = 0; j < data.length; j++){
              likes=0;
+             idlike = 0;
              for (var k = 0; k < data[j].likes.length; k++){
                likes += 1;
+               if(data[j].likes[k] == id){
+                 idlike = 1;
+               }
              }
              outpuut+='        <div class="modal-content">';
              outpuut+='          <div class="post-content">';
@@ -681,7 +676,12 @@
              outpuut+='                <p class="text-muted">'+data[j].date+'</p>';
              outpuut+='                </div>';
              outpuut+='                <div class="reaction">';
-             outpuut+='                  <a class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i class="icon ion-thumbsup"></i> '+likes+'</a>';
+             if(idlike == 1){
+                 outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #8dc63f;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+             }
+             else {
+               outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #d0e7b1;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+             }
              outpuut+='                </div>';
              outpuut+='                <div class="line-divider"></div>';
              outpuut+='                <div class="post-text">';
@@ -743,15 +743,23 @@
          async: false,
          success:function(data){
            var likes;
+           var idlike = 0;
            for (var j = 0; j < data.length; j++){
              likes=0;
+             idlike = 0;
              for (var k = 0; k < data[j].likes.length; k++){
                likes += 1;
+               if(data[j].likes[k] == id){
+                 idlike = 1;
+               }
              }
            }
-           content ="<i class='icon ion-thumbsup'></i> "+likes;
+           if(idlike == 1){
+             content ="<i style='color: #8dc63f;' class='icon ion-thumbsup'></i> "+likes;
+           }else {
+            content ="<i style='color: #d0e7b1;' class='icon ion-thumbsup'></i> "+likes;
+           }
            $(classlike).html(content);
-           console.log(data);
         }});
       }});
    }
@@ -805,7 +813,6 @@
        data: {hash: hash, iduser: iiidusers},
        cache:false,
        success:function(data){
-         var cds = $(".watcheds").text();
          if(data == "aceite"){
            $("#btnObserv").text("Parar de Observar");
          }else{
@@ -819,16 +826,113 @@
            success:function(data){
              $(".watcheds").empty();
              $(".watcheds").html("Observadores: <span>"+data+"</span>");
+             getwatching();
              }
            });
-       }});
+       }
+     });
    }
+   function getwatching(){
+     var url =window.location;
+     let params = new URL(url).searchParams;
+     var idusers= params.get('personid');
+     var watcheds='';
+     $.ajax({
+       url:'muser/getwatchedsById',
+       method:'GET',
+       data: {id_user: idusers},
+       cache:false,
+       success:function(data){
+          for (var j = 0; j < data.length; j++){
+              watcheds+='  <div class="col-md-6 col-sm-6">';
+              watcheds+='    <div class="friend-card">';
+              watcheds+='      <div class="img-responsive cover" style="height: 90px; background-color: #e6e6e6;"></div>';
+              watcheds+='      <div class="card-info" >';
+              watcheds+='        <img src="'+data[j].pathimage+'" alt="user" class="profile-photo-lg" style="background-color: white;"/>';
+              watcheds+='        <div class="friend-info">';
+              watcheds+='          <h5><a th:href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
+              if(data[j].subcategory != null){
+               watcheds+='          <p> '+data[j].subcategory+' </p>';
+              }
+              watcheds+='        </div>';
+              watcheds+='      </div>';
+              watcheds+='    </div>';
+              watcheds+='  </div>';
+            }
+          $("#Watcheds").html(watcheds);
+         }
+       });
+   }
+
+   function startChatting(){
+     var url =window.location;
+     let params = new URL(url).searchParams;
+     var idusers= params.get('personid');
+     var id_chat;
+     var img;
+     $.ajax({
+       url:'mchat/createchat',
+       method:'GET',
+       data: {hash: hash, iduser: idusers},
+       cache:false,
+       success:function(data){
+         for (var i = 0; i < data.users.length; i++) {
+           if(data.users[i].id == idusers){
+             img = data.users[i].pathimage;
+             createCookie('img_chat',img,'1');
+           }
+         }
+         id_chat = data.id;
+         createCookie('id_chat',id_chat,'1');
+         window.location.href = "/chat?main=chat&personid=you";
+       }
+     });
+   }
+
+
+   function eraseCookie(name) {
+     createCookie(name,"",-1);
+   }
+
+   function createCookie(name,value,days) {
+     if (days) {
+       var date = new Date();
+       date.setTime(date.getTime()+(days*24*60*60*1000));
+       var expires = "; expires="+date.toGMTString();
+     }
+     else var expires = "";
+     document.cookie = name+"="+value+expires+"; path=/";
+   }
+
+   function getCookie(name) {
+      var dc = document.cookie;
+      var prefix = name + "=";
+      var begin = dc.indexOf("; " + prefix);
+      if (begin == -1) {
+          begin = dc.indexOf(prefix);
+          if (begin != 0) return null;
+      }
+      else
+      {
+        begin += 2;
+        var end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+        end = dc.length;
+        }
+    }
+    return decodeURI(dc.substring(begin + prefix.length, end));
+}
 </script>
-<script>
+
+<script th:inline="javascript">
      $(document).ready(function(){
+       /*<![CDATA[*/
+       var id = /*[[${session.User.id}]]*/ '';
+      /*]]>*/
        $(".media-preview").hide();
         $("#preview-post").hide();
         $("#perfil_statu").hide();
+        $(".chatstatu").hide();
         $("#btnObserv").hide();
         $("#natzc4").hide();
         var numer = 3;
@@ -837,6 +941,7 @@
         var idpost= '';
         var outpuut = '';
         var outpuuut = '';
+        var idlike = 0;
         SizePost();
           $.ajax({
             url:'mposts/allposts',
@@ -852,7 +957,11 @@
               var likes;
               for (var j = 0; j < data.length; j++){
                 likes=0;
+                idlike = 0;
                 for (var k = 0; k < data[j].likes.length; k++){
+                  if(data[j].likes[k] == id){
+                    idlike = 1;
+                  }
                   likes += 1;
                 }
                 outpuut+='<div class="post-content">';
@@ -900,7 +1009,12 @@
                 outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
                 outpuut+='     </div>';
                 outpuut+='     <div class="reaction">';
-                outpuut+='       <a class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i class="icon ion-thumbsup"></i>'+likes+'</a>';
+                if(idlike == 1){
+                    outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #8dc63f;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+                }
+                else {
+                  outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #d0e7b1;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+                }
                 outpuut+='     </div>';
                 outpuut+='     <div class="line-divider"></div>';
                 outpuut+='     <div class="post-text">';
@@ -1009,6 +1123,7 @@
               $("#perfil_statu").show();
             }else{
               $("#btnObserv").show();
+              $(".chatstatu").show();
             }
             $.ajax({
               url:'muser/comparObser',
@@ -1022,6 +1137,43 @@
                   $("#btnObserv").text("Começar a Observar");
                 }
               }});
+
+              var watcheds='';
+              $.ajax({
+                url:'muser/getwatchedsById',
+                method:'GET',
+                data: {id_user: iiduser},
+                cache:false,
+                success:function(data){
+                   for (var j = 0; j < data.length; j++){
+                       watcheds+='  <div class="col-md-6 col-sm-6">';
+                       watcheds+='    <div class="friend-card">';
+                       watcheds+='      <div class="img-responsive cover" style="height: 90px; background-color: #e6e6e6;"></div>';
+                       watcheds+='      <div class="card-info">';
+                       watcheds+='        <img src="'+data[j].pathimage+'" alt="user" class="profile-photo-lg" style="background-color: white;"/>';
+                       watcheds+='        <div class="friend-info">';
+                       watcheds+='          <h5><a th:href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
+                       if(data[j].subcategory != null){
+                        watcheds+='          <p> '+data[j].subcategory+' </p>';
+                       }
+                       watcheds+='        </div>';
+                       watcheds+='      </div>';
+                       watcheds+='    </div>';
+                       watcheds+='  </div>';
+                     }
+                   $("#Watcheds").html(watcheds);
+                  }
+                });
+
+                var myCookie = getCookie("id_chat");
+                   if (myCookie == null) {
+                     console.log("Não existe cookie");
+                   }
+                   else {
+                       var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)id_chat\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+                       var cookieValue2 = document.cookie.replace(/(?:(?:^|.*;\s*)img_chat\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+                       actchat(cookieValue,cookieValue2);
+                   }
        });
     </script>
 
@@ -1089,34 +1241,14 @@
 
     <!-- INICIO da pagina
     ================================================= -->
-
-
-
-
           <th:block  th:switch="${main}">
-
-          <div th:case="homepage"><span th:include="homepage::homepage"></span></div>
-           <div th:case="perfil"><span th:include="perfil::perfil"></span></div>
-              <div th:case="chat"><span th:include="fragchat::chat"></span></div>
-
+            <div th:case="homepage"><span th:include="homepage::homepage"></span></div>
+            <div th:case="perfil"><span th:include="perfil::perfil"></span></div>
+            <div th:case="chat"><span th:include="fragchat::chat"></span></div>
          </th:block>
-
-
-
-
    </div>
     <!-- FIM DA PGINA
     ================================================= -->
-
-
-
-
-
-
-
-
-
-
     <!-- Footer
     ================================================= -->
     <footer id="footer">

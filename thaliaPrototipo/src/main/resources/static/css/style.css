@@ -95,13 +95,17 @@ h1.grey, h2.grey, h3.grey, h4.grey, h5.grey, h6.grey{
 
 .text-green:hover{color: #39b54a;}
 
+.text-lightgreen{color: #d0e7b1;}
+
+.text-lightgreen:hover{color: #39b54a;}
+
 .text-red{color: #ef4136;}
 
 .text-red:hover{color: #d6100b;}
 
 .profile-link{font-weight: 600;}
 
-.text-muted{color: black;}
+
 
 a{color: #40CC9B;}
 
@@ -1502,7 +1506,7 @@ ul.online-users li span.online-dot{
 }
 
 .timeline-cover .timeline-nav-bar .profile-info img.profile-photo{
-  height: 200px;
+  height: 150px;
   width: 200px;
   border-radius: 50%;
   border: 10px solid #fff;
@@ -2467,5 +2471,3 @@ div.scrollmenu  .iconmessages:hover {
   background-color: rgba(66, 244, 164,0.1);
   padding: 2px;
 }
-
- 

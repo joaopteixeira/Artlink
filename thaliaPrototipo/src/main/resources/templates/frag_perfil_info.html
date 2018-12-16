@@ -3,8 +3,24 @@
 
 <div class="row">
   <div class="col-md-3" >
-
-
+    <script>
+      var loadFile = function(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+          var output = document.getElementById("output");
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      };
+    </script>
+    <label for="file">
+      <i style="font-size:20px; color:#40CC9B; position:relative; top:-20px; left:120px;" class="fal fa-images"></i>
+    </label>
+    <form th:action="@{/newphoto}" method="Post" enctype="multipart/form-data">
+      <input type="hidden" name="hash" th:value="${session.hash}">
+      <input id="file" type="file" name="file" accept="image/*" onchange="loadFile(event)" style="visibility: hidden;">
+      <button type="submit" class="btn btn-primary" name="button" style="position: relative; top:-58px; left: 70px; padding:1px 15px;">Mudar a foto</button>
+    </form>
   </div>
   <div class="col-md-7">
 

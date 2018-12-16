@@ -36,10 +36,15 @@
               outpuut+='  </div>';
               outpuut+='</div> ';
               var likes;
+              var idlike = 0;
               for (var j = 0; j < data.length; j++){
                 likes=0;
+                idlike = 0;
                 for (var k = 0; k < data[j].likes.length; k++){
                   likes += 1;
+                  if(data[j].likes[k] == id){
+                    idlike = 1;
+                  }
                 }
                 outpuut+='<div class="post-content">';
                 outpuut+='<div class="media" data-toggle="modal" data-target=".modal-'+data[j].iduser+'">';
@@ -86,7 +91,12 @@
                 outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
                 outpuut+='     </div>';
                 outpuut+='     <div class="reaction">';
-                outpuut+='       <a class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i class="icon ion-thumbsup"></i>'+likes+'</a>';
+                  if(idlike == 1){
+                      outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #8dc63f;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+                  }
+                  else {
+                    outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #d0e7b1;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+                  }
                 outpuut+='     </div>';
                 outpuut+='     <div class="line-divider"></div>';
                 outpuut+='     <div class="post-text">';
@@ -129,10 +139,15 @@
           cache:false,
           success:function(data){
            var likes;
+           var idlike = 0;
            for (var j = 0; j < data.length; j++){
              likes=0;
+             idlike = 0;
              for (var k = 0; k < data[j].likes.length; k++){
                likes += 1;
+               if(data[j].likes[k] == id){
+                 idlike = 1;
+               }
              }
              outpuut+='        <div class="modal-content">';
              outpuut+='          <div class="post-content">';
@@ -175,7 +190,12 @@
              outpuut+='                <p class="text-muted">'+data[j].date+'</p>';
              outpuut+='                </div>';
              outpuut+='                <div class="reaction">';
-             outpuut+='                  <a class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i class="icon ion-thumbsup"></i> '+likes+'</a>';
+               if(idlike == 1){
+                   outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #8dc63f;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+               }
+               else {
+                 outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #d0e7b1;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+               }
              outpuut+='                </div>';
              outpuut+='                <div class="line-divider"></div>';
              outpuut+='                <div class="post-text">';
@@ -237,15 +257,23 @@
          async: false,
          success:function(data){
            var likes;
+           var idlike = 0;
            for (var j = 0; j < data.length; j++){
              likes=0;
+             idlike = 0;
              for (var k = 0; k < data[j].likes.length; k++){
                likes += 1;
+               if(data[j].likes[k] == id){
+                 idlike = 1;
+               }
              }
            }
-           content ="<i class='icon ion-thumbsup'></i> "+likes;
+           if(idlike == 1){
+             content ="<i style='color: #8dc63f;' class='icon ion-thumbsup'></i> "+likes;
+           }else {
+            content ="<i style='color: #d0e7b1;' class='icon ion-thumbsup'></i> "+likes;
+           }
            $(classlike).html(content);
-           console.log(data);
         }});
       }});
    }
@@ -288,6 +316,7 @@
           var outpuut = '';
           var outpuuut = '';
           var iidpost = '';
+          var idlike = 0;
           $.ajax({
             url:'mposts/sizeidposts',
             method:'GET',
@@ -296,7 +325,6 @@
             async: false,
             success:function(data){
               allpost = data;
-              console.log(allpost);
             }});
             $.ajax({
               url:'mposts/allposts',
@@ -312,8 +340,12 @@
                 var likes;
                 for (var j = 0; j < data.length; j++){
                   likes=0;
+                  idlike = 1;
                   for (var k = 0; k < data[j].likes.length; k++){
                     likes += 1;
+                    if(data[j].likes[k] == id){
+                      idlike = 1;
+                    }
                   }
                   outpuut+='<div class="post-content">';
                   outpuut+='<div class="media" data-toggle="modal" data-target=".modal-'+data[j].iduser+'">';
@@ -359,7 +391,12 @@
                   outpuut+='       <p class="text-muted">'+data[j].date+'</p>';
                   outpuut+='     </div>';
                   outpuut+='     <div class="reaction">';
-                  outpuut+='       <a class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i class="icon ion-thumbsup"></i>'+likes+'</a>';
+                    if(idlike == 1){
+                        outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #8dc63f;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+                    }
+                    else {
+                      outpuut+='       <a  class="btn text-green '+data[j].id+'" onclick="like(\''+data[j].id+'\')"><i style="color: #d0e7b1;" class="icon ion-thumbsup"></i>'+likes+'</a>';
+                    }
                   outpuut+='     </div>';
                   outpuut+='     <div class="line-divider"></div>';
                   outpuut+='     <div class="post-text">';
@@ -408,6 +445,7 @@
             <p class="profile-link"> <span th:if="${Person.type.equals(0)}"><span> Artista </span></span> <span th:if="${Person.type.equals(1)}"><span> Observador </span></span></p>
           </div>
         </div>
+        <button type="button" onclick="startChatting()" class="chatstatu btn btn-primary" style="padding:1px 15px;">Chat</button>
       </div>
     </div>
     <div class="col-md-7"><!-- Fragmento -->

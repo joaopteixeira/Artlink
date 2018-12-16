@@ -108,7 +108,7 @@ public String newpassword(@RequestParam("password") String password ,@RequestPar
 }
 
 @PostMapping("/newphoto")
-public String uploadPost(@RequestParam("file") MultipartFile file,@RequestParam("hash") String hash,Model page,HttpSession session){
+public String uploadPost(@RequestParam("file") MultipartFile file,@RequestParam("hash") String hash, Model page,HttpSession session){
 	
 	System.out.println(hash);
 	

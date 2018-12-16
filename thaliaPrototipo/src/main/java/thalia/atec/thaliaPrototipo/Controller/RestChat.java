@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import thalia.atec.thaliaPrototipo.Functions.FChat;
+import thalia.atec.thaliaPrototipo.Service.ChatRepository;
 import thalia.atec.thaliaPrototipo.model.Chat;
 import thalia.atec.thaliaPrototipo.model.Mensagem;
 
@@ -31,6 +32,9 @@ public class RestChat {
 	
 	@Autowired
 	FChat fchat;
+	
+	@Autowired
+	ChatRepository chatRep;
 	
 	@GetMapping("/get")
 	public ResponseEntity<?> getChat(@RequestParam(name="hash",defaultValue="") String hash){
@@ -146,7 +150,6 @@ public class RestChat {
 		
 		
 		return new ResponseEntity<>("null",HttpStatus.OK);
-	}
-	
+	}	
 	
 }
