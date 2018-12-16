@@ -150,6 +150,6 @@ public class RestChat {
 
 
 		return new ResponseEntity<>("null",HttpStatus.OK);
-	}	
-	
+	}
+
 }
