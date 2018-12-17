@@ -11,8 +11,8 @@
               <li><i class="fas fa-newspaper"></i><div><a href="/feed?main=homepage&personid=you&frag=post">Meu feed</a></div></li>
               <li><i class="fas fa-users"></i><div><a th:href="@{/feed?main=homepage&personid=you&frag=search}">Procurar Pessoas</a></div></li>
               <li><i class="fas fa-address-book"></i><div><a href="feed?main=homepage&personid=you&frag=contacts">Segue</a></div></li>
-                <li><i class="fas fa-video"></i><div><a href="/feed?main=homepage&personid=you&frag=doevents">Novo Evento</a></div></li>
-              <li><i class="fas fa-video"></i><div><a href="/feed?main=homepage&personid=you&frag=frageventlist">Listar Eventos</a></div></li>
+                <li><i class="fas fa-plus"></i><div><a href="/feed?main=homepage&personid=you&frag=doevents">Novo Evento</a></div></li>
+              <li><i class="fas fa-calendar-alt"></i><div><a href="/feed?main=homepage&personid=you&frag=frageventlist">Listar Eventos</a></div></li>
 
 
             </ul><!--news-feed links ends-->
@@ -44,9 +44,8 @@
 
 
           <div class="col-md-2 static">
-            <h4 class="grey">Segue</h4>
             <div class="suggestions" id="sticky-sidebar">
-
+              <h4 class="grey">Segue</h4>
 
               <!-- MODEL CONTACT ONLINE -->
                 <th:block th:each="friend: ${friends}">

@@ -64,6 +64,21 @@
       0px 1px 0px rgba(255,255,255,0.3);
     }
 
+    button.css3button2 {
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      color: #40cc9b;
+      padding: 0px 10px;
+      background-color: #f2f2f2;
+      border-radius: 10px;
+      box-shadow:
+    0px 1px 3px rgba(000,000,000,0.5),
+    inset 1px 0px 5px rgba(30,46,11,0);
+  text-shadow:
+    0px -1px 3px rgba(255,255,255,0.8),
+    0px 1px 0px rgba(255,255,255,0.3);
+  }
+
     .css3button:active{
       position:relative;
       top:1px;
@@ -80,12 +95,15 @@
       cursor: pointer;
       padding: 2px 4px;
       border-radius: 50px;
-}
     }
     .BtnScrollUp{
       position: fixed;
       bottom: 45px;
       right: 30px;
+    }
+
+    #page-contents{
+      min-height: 630px;
     }
     </style>
 
@@ -263,7 +281,7 @@
               cardevent += '        <p>'+address+'</p>';
               cardevent += '        <p>'+category+' | '+subcategory+'</p>';
               cardevent += '        <p style="text-align: right;">Disponível até: '+date+'</p>';
-             
+
               cardevent += '    </div>';
               cardevent += '</div>';
 
@@ -290,7 +308,7 @@
             for(var i = 0; i < subcategory.length; i++){
               option += '<option value="'+subcategory[i].description+'">'+subcategory[i].description+'</option>';
             }
-            
+
             document.getElementById("subcategoryevent").innerHTML += option;
           }
 
@@ -331,7 +349,7 @@
           $('#categoryevent').change(function(){
               var cat = $('#categoryevent').val();
               getSubCategorias(hash,cat);
-             
+
           });
 
       setInterval(function() {
@@ -394,7 +412,7 @@
               }
             });
 
-          }, 3000);
+          }, 1000);
 
         if(document.getElementById("iddchat").value){
           setInterval(function() {
@@ -465,7 +483,7 @@
                 });
               }
 
-          },3000);
+          },1000);
         }
 
        });
@@ -598,10 +616,10 @@
                 }
                 outpuut+='<div>';
                 if(page != 0){
-                  outpuut+='<button style="float: left;" onclick="lastposts()"> <i class="fas fa-arrow-circle-left"></i> </button> ';
+                  outpuut+='<button class="css3button2" style="float: left;" onclick="lastposts()"> <i class="fal fa-chevron-circle-left"></i> </button> ';
                 }
                 if(!(range*(page+1) >= allpost)){
-                  outpuut+='<button style="float: right;" onclick="nextposts()"> <i class="fas fa-arrow-circle-right"></i>  </button>';
+                  outpuut+='<button class="css3button2" style="float: right;" onclick="nextposts()"> <i class="fal fa-chevron-circle-right"></i></button>';
                 }
                 outpuut+='</div>';
                 $("#posts").html(outpuut);
@@ -853,7 +871,7 @@
               watcheds+='      <div class="card-info" >';
               watcheds+='        <img src="'+data[j].pathimage+'" alt="user" class="profile-photo-lg" style="background-color: white;"/>';
               watcheds+='        <div class="friend-info">';
-              watcheds+='          <h5><a th:href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
+              watcheds+='          <h5><a href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
               if(data[j].subcategory != null){
                watcheds+='          <p> '+data[j].subcategory+' </p>';
               }
@@ -1031,10 +1049,10 @@
                 }
                 outpuut+='<div>';
                 if(page != 0){
-                  outpuut+='<button style="float: left;" onclick="lastposts()"> « anterior </button> ';
+                  outpuut+='<button class="css3button2" style="float: left;" onclick="lastposts()"> <i class="fal fa-chevron-circle-left"></i> </button> ';
                 }
                 if(!(range*(page+1) >= allpost)){
-                  outpuut+='<button style="float: right;" onclick="nextposts()"> próximo » </button>';
+                  outpuut+='<button class="css3button2" style="float: right;" onclick="nextposts()"> <i class="fal fa-chevron-circle-right"></i> </button>';
                 }
                 outpuut+='</div>';
                 $("#posts").html(outpuut);
@@ -1155,7 +1173,7 @@
                        watcheds+='      <div class="card-info">';
                        watcheds+='        <img src="'+data[j].pathimage+'" alt="user" class="profile-photo-lg" style="background-color: white;"/>';
                        watcheds+='        <div class="friend-info">';
-                       watcheds+='          <h5><a th:href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
+                       watcheds+='          <h5><a href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
                        if(data[j].subcategory != null){
                         watcheds+='          <p> '+data[j].subcategory+' </p>';
                        }
