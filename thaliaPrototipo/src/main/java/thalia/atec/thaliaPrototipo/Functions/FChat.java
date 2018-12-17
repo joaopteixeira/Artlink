@@ -112,7 +112,11 @@ public class FChat {
 						u1.setLastname(us.get().getLastname());
 						u1.setPathimage(us.get().getPathimage());
 						
-						chat.get().getMensagens().get(chat.get().getMensagens().indexOf(m)).setUser(u1);
+						m.setEstado(Mensagem.VISTO);
+						m.setUser(u1);
+						
+						chat.get().getMensagens().set(chat.get().getMensagens().indexOf(m), m);
+						//chat.get().getMensagens().get(chat.get().getMensagens().indexOf(m)).setUser(u1);
 					
 				}
 				

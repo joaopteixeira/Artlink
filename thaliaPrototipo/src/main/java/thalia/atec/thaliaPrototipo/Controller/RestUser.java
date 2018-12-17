@@ -181,11 +181,26 @@ public class RestUser {
 		
 		if(user.isPresent()) {
 			
-			return new ResponseEntity<User>(user.get(),HttpStatus.ACCEPTED);
+			for(Watch w:user.get().getWatching()) {
+				Optional<User> u1 = urep.findById(w.getIduser());
+				w.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
+				w.setImguser(u1.get().getPathimage());
+				
+				user.get().getWatching().set(user.get().getWatching().indexOf(w), w);
+			}
+			for(Watch w:user.get().getWatched()) {
+				Optional<User> u1 = urep.findById(w.getIduser());
+				w.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
+				w.setImguser(u1.get().getPathimage());
+				
+				user.get().getWatched().set(user.get().getWatched().indexOf(w), w);
+			}
+			user.get().getHashes().clear();
+			return new ResponseEntity<User>(user.get(),HttpStatus.OK);
 		}
 		
 		
-		return new ResponseEntity<String>("null",HttpStatus.ACCEPTED);
+		return new ResponseEntity<String>("null",HttpStatus.OK);
 		
 		
 		
@@ -214,11 +229,29 @@ public class RestUser {
 		
 		if(user.isPresent() && u.isPresent()) {
 			
-			return new ResponseEntity<User>(u.get(),HttpStatus.ACCEPTED);
+			for(Watch w:u.get().getWatching()) {
+				Optional<User> u1 = urep.findById(w.getIduser());
+				w.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
+				w.setImguser(u1.get().getPathimage());
+				
+				u.get().getWatching().set(u.get().getWatching().indexOf(w), w);
+			}
+			for(Watch w:u.get().getWatched()) {
+				Optional<User> u1 = urep.findById(w.getIduser());
+				w.setUsername(u1.get().getFirstname()+" "+u1.get().getLastname());
+				w.setImguser(u1.get().getPathimage());
+				
+				u.get().getWatched().set(u.get().getWatched().indexOf(w), w);
+			}
+			
+			u.get().getHashes().clear();
+			
+			
+			return new ResponseEntity<User>(u.get(),HttpStatus.OK);
 		}
 		
 		
-		return new ResponseEntity<String>("null",HttpStatus.ACCEPTED);
+		return new ResponseEntity<String>("null",HttpStatus.OK);
 		
 		
 		
