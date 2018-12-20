@@ -3,13 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>thalia.atec</groupId>
-	<artifactId>thaliaPrototipo</artifactId>
-	<version>0.0.3-beta</version>
+	<groupId>Artlink</groupId>
+	<artifactId>Artlink</artifactId>
+	<version>V1</version>
 	<packaging>jar</packaging>
 
-	<name>thaliaPrototipo</name>
-	<description>Social Network for Artists</description>
+	<name>Artlink</name>
+	<description>A Social Network for Artists</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
