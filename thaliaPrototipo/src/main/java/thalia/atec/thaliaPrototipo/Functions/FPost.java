@@ -67,10 +67,11 @@ public class FPost {
 				post.setDate(reportDate);
 				String filename = "";
 				
-				if(post.getMedia().getPathfile().contains("File/")) {
+				
+				if(post.getMedia().getPathfile().contains("File/") || post.getMedia().getTypemedia()==Media.VIDEO) {
 					filename = post.getMedia().getPathfile();
 					
-				}else {
+				}else if(post.getMedia().getTypemedia()==Media.IMAGE || post.getMedia().getTypemedia()==Media.SOUND) {
 					filename = WebServices.SERVER+"/upload/downloadFile/"+post.getMedia().getPathfile();
 				}
 				

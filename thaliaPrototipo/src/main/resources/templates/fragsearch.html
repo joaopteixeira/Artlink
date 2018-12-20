@@ -12,25 +12,6 @@
           <input class="form-control" type="text" name="keyword" value="" placeholder="Procurar"><input type="hidden" name="personid" value="you">
         </div>
         <br>
-
-        <div class="form-group col-md-12 col-sm-12">
-          <div class="form-group" style="margin-right:2%;">
-
-            <select class="form-control" name="categoria">
-            <th:block th:each="category : ${categories}">
-
-                 <option th:value="${category.description}" ><span th:text="${category.description}"></span></option>        
-
-             </th:block>    
-            </select>
-
-       
-           <!-- OPTIONS CATEGORIAS -->
-          </div>
-      
-  
-        </div>
-
         <div class="col-md-3 col-sm-3">
           <div class="tools">
             <button class="btn btn-primary pull-right btn-block">Pesquisar</button>

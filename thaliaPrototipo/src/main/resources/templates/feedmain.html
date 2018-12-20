@@ -272,7 +272,7 @@
               cardevent += '    <div class="card">';
               cardevent += '      <div class="thumb-cont">';
               cardevent += '        <img src="http://artlink.pt/upload/downloadFile/'+imgthumb+'">';
-              cardevent += '        <div class="ismine"> <img class="elicon" src="'+pathimg+'"></div>';
+              cardevent += '        <div class="ismine"> <img class="elicon icon-card" src="'+pathimg+'"></div>';
               cardevent += '      </div>';
               cardevent += '        ';
               cardevent += '        <h4>'+title+'</h4>';
@@ -864,21 +864,25 @@
        data: {id_user: idusers},
        cache:false,
        success:function(data){
-          for (var j = 0; j < data.length; j++){
-              watcheds+='  <div class="col-md-6 col-sm-6">';
-              watcheds+='    <div class="friend-card">';
-              watcheds+='      <div class="img-responsive cover" style="height: 90px; background-color: #e6e6e6;"></div>';
-              watcheds+='      <div class="card-info" >';
-              watcheds+='        <img src="'+data[j].pathimage+'" alt="user" class="profile-photo-lg" style="background-color: white;"/>';
-              watcheds+='        <div class="friend-info">';
-              watcheds+='          <h5><a href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
-              if(data[j].subcategory != null){
-               watcheds+='          <p> '+data[j].subcategory+' </p>';
+        if(data.length != 0){
+            for (var j = 0; j < data.length; j++){
+                watcheds+='  <div class="col-md-6 col-sm-6">';
+                watcheds+='    <div class="friend-card">';
+                watcheds+='      <div class="img-responsive cover" style="height: 90px; background-color: #e6e6e6;"></div>';
+                watcheds+='      <div class="card-info" >';
+                watcheds+='        <img src="'+data[j].pathimage+'" alt="user" class="profile-photo-lg" style="background-color: white;"/>';
+                watcheds+='        <div class="friend-info">';
+                watcheds+='          <h5><a href="/profile?personid='+data[j].id+'" class="profile-link">'+data[j].firstname+' '+data[j].lastname+'</a></h5>';
+                if(data[j].subcategory != null){
+                 watcheds+='          <p> '+data[j].subcategory+' </p>';
+                }
+                watcheds+='        </div>';
+                watcheds+='      </div>';
+                watcheds+='    </div>';
+                watcheds+='  </div>';
               }
-              watcheds+='        </div>';
-              watcheds+='      </div>';
-              watcheds+='    </div>';
-              watcheds+='  </div>';
+            }else{
+              watcheds+='<p> Não tem Watchers </p>';
             }
           $("#Watcheds").html(watcheds);
          }
@@ -1166,7 +1170,8 @@
                 data: {id_user: iiduser},
                 cache:false,
                 success:function(data){
-                   for (var j = 0; j < data.length; j++){
+                    if(data.length != 0){
+                      for (var j = 0; j < data.length; j++){
                        watcheds+='  <div class="col-md-6 col-sm-6">';
                        watcheds+='    <div class="friend-card">';
                        watcheds+='      <div class="img-responsive cover" style="height: 90px; background-color: #e6e6e6;"></div>';
@@ -1182,7 +1187,10 @@
                        watcheds+='    </div>';
                        watcheds+='  </div>';
                      }
-                   $("#Watcheds").html(watcheds);
+                    }else{
+                      watcheds+='<p> Não tem Watchers </p>';
+                    }
+                    $("#Watcheds").html(watcheds);
                   }
                 });
 
@@ -1207,7 +1215,7 @@
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
 
-            <a class="navbar-brand" href="#" style=" color:white; font-size: 38px;font-family: 'Megrim', cursive;">artlink<span style="color:#40CC9B;">.pt</span></a>
+            <a class="navbar-brand" th:href="@{/feed?main=homepage&frag=post&personid=}+ ${User.id}" style=" color:white; font-size: 38px;font-family: 'Megrim', cursive;">artlink<span style="color:#40CC9B;">.pt</span></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -1279,10 +1287,10 @@
             <div class="col-md-3 col-sm-3">
               <h5>Segue os Programadores</h5>
               <ul class="list-inline social-icons">
-                <li><a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-teixeira-vilares-1886a8167/"><i class="icon ion-social-linkedin"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/jo%C3%A3o-mirante-ba6334168/"><i class="icon ion-social-linkedin"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/nilton-fontes-868974162/"><i class="icon ion-social-linkedin"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/gon%C3%A7alo-lavrador-703256175/"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-teixeira-vilares-1886a8167/" target="_blank"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/jo%C3%A3o-mirante-ba6334168/" target="_blank"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/nilton-fontes-868974162/" target="_blank"><i class="icon ion-social-linkedin"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/gon%C3%A7alo-lavrador-703256175/" target="_blank"><i class="icon ion-social-linkedin"></i></a></li>
               </ul>
             </div>
             <div class="col-md-3 col-sm-3" style="float: right;">

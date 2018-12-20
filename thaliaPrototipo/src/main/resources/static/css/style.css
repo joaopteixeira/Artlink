@@ -60,6 +60,14 @@ body{
   margin: 0 !important;
 }
 
+.icon-card{
+  object-fit: cover !important;
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 50% !important;
+  background: white !important;
+}
+
 
 
 

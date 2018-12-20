@@ -326,6 +326,11 @@
             success:function(data){
               allpost = data;
             }});
+          if(allpost == 0){
+                console.log("empty");
+                outpuut='<p> EMPTY </p>';
+                $("#timeline_post").html(outpuut);
+              }else{
             $.ajax({
               url:'mposts/allposts',
               method:'GET',
@@ -418,7 +423,7 @@
                   outpuut+='</div>';
                   $("#timeline_post").html(outpuut);
               }
-            });
+            });}
           });
       </script>
   <div class="row">

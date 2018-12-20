@@ -31,8 +31,11 @@
     <div class="col-md-7"><!-- Fragmento -->
       <!-- Lista de todos os Posts
       ================================================= -->
-
-     <th:block th:each="post : ${posts}">
+      <div class="" th:if="${#lists.isEmpty(posts)}"> 
+            Não tem audio.
+      </div>
+      <div class="" th:if="${!#lists.isEmpty(posts)}"> 
+        <th:block th:each="post : ${posts}">
               <div th:if="${post.media.typemedia.equals(2)}"> <!--Divs son _-->
                 <div class="post-content">
                  <audio controls>
@@ -42,7 +45,7 @@
                 </div>
               </div>
         </th:block>
-
+      </div>
     </div>
     <div class="col-md-2 static"></div>
   </div>
