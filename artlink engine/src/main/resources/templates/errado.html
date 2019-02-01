@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Artlink</title>
+
+    <!-- Stylesheets
+    ================================================= -->
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/ionicons.min.css" />
+    	<link rel="stylesheet" href="css/font-awesome.min.css" />
+		<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="http://artlink.pt/upload/downloadFile/artlink.png"/>
+	</head>
+	<body>
+
+    <!-- Header
+    ================================================= -->
+		<header id="header-inverse">
+      <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+					<div class="row">
+						<div class="navbar-header col-sm-6">
+							
+							<a class="navbar-brand" href="#" style=" color:white; font-size: 38px;font-family: 'Megrim', cursive;">artlink<span style="color:#40CC9B;">.pt</span></a>
+						</div>
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="navbar-header col-sm-6 text-center mx-auto" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-right main-menu">
+								
+							</ul>
+						</div>
+					</div>
+        </div><!-- /.container -->
+      </nav>
+    </header>
+    <!--Header End-->
+
+    <!-- Landing Page Contents
+    ================================================= -->
+
+
+<div class="row no-margin">
+	<div id="lp-register">
+		<div class="container wrapper">
+			<div class="row">
+				<div class="col-sm-5">
+					<div class="intro-texts">
+						<h1 class="text-white"> Erro na Lógica dos dados !</h1>
+						<p style="color: red;"> Por favor verifique que segue as direções na nossa página e evite qualquer método não autorizado de inserção de dados.</p>
+					</div>
+				</div>
+				<div class="col-sm-6 col-sm-offset-1">
+					<div class="reg-form-container">
+
+						<div class="row">
+							<div class="col-sm-12">
+								<!-- Register/Login Tabs-->
+								<div class="reg-options">
+									<ul class="nav nav-tabs">
+										<li class="active col-sm-6 tabview"><a href="#register" class="tabview" data-toggle="tab">Registar</a></li>
+										<li class=" col-sm-6 tabview"><a href="#login" class="" data-toggle="tab">Login</a></li>
+									</ul><!--Tabs End-->
+								</div>
+							</div>
+						</div>
+
+
+
+						<!--Registration Form Contents-->
+						<div class="tab-content">
+							<div class="tab-pane active" id="register">
+								<h3>Registar!!!</h3>
+								<p class="text-muted">Cria o teu perfil </p>
+
+								<!--Register Form-->
+								<form name="registration_form" class="form-inline" th:action="@{/registry}" method="POST">
+									<div class="row">
+										<div class="form-group col-xs-6">
+											<label class="sr-only">Nome</label>
+											<input id="firstname" class="form-control input-group newborder" type="text" name="firstname" title="Enter first name" placeholder="First name" required/>
+										</div>
+										<div class="form-group col-xs-6">
+											<label class="sr-only">Apelido</label>
+											<input id="lastname" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="Last name" required/>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="form-group col-xs-12">
+											<label class="sr-only">Email</label>
+											<input id="email" class="form-control input-group-lg" type="email" name="email" title="Enter Email" placeholder="Your Email" required/>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="form-group col-xs-12">
+											<label class="sr-only">Password</label>
+											<input id="password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Password" required/>
+										</div>
+									</div>
+									<br>
+										<div class="row">
+											<div class="form-group"> <!-- Date input -->
+												<label class="control-label" for="date">Data de Nascimento</label>
+												<input class="form-control" id="date" name="birthdate" placeholder="MM/DD/YYYY" type="text" required/>
+											</div>
+							    </div>
+									<br>
+									<div class="row">
+										<div class="form-group">
+											<label class="radio-inline">
+												<input type="radio" name="gender" value="2" checked>Male
+											</label>
+											<label class="radio-inline">
+												<input type="radio" name="gender" value="1">Female
+											</label>
+										</div>
+									</div>
+
+									<br>
+										<div class="row">
+											<div class="form-group col-xs-6">
+												<label class="sr-only">Distrito</label>
+												<select class="form-control" name="district" id="districtoptions">
+													
+													</select>
+											</div>
+											<div class="form-group col-xs-6">
+												<label for="country" class="sr-only"></label>
+												<select class="form-control" name="country" id="country">
+													<option value="country" >Country</option>
+													<option value="Portugal" selected>Portugal</option>
+												</select>
+											</div>
+										</div>
+									<!-- <p><a href="#">Already have an account?</a></p> -->
+									<br>
+									<div class="row">
+										<div class="col-sm-6" id="procurado">
+											<button class="btn btn-primary btn-large" name="type" value="0">Sou Artista</button>
+										</div>
+										<div class="col-sm-6" id="procurador">
+											<button class="btn btn-primary btn-large" name="type" value="1">Quero encontrar Artistas</button>
+										</div>
+									</div>
+
+								</form><!--Register Now Form Ends-->
+
+							</div><!--Registration Form Contents Ends-->
+
+							<!--Login-->
+							<div class="tab-pane" id="login">
+								<h3>Login</h3>
+								<p class="text-muted">Entra no teu perfil</p>
+
+								<!--Login Form-->
+								<form th:action="@{/login}" method="POST">
+									 <div class="row">
+										<div class="form-group col-xs-12">
+											<label for="my-email" class="sr-only">Email</label>
+											<input id="my-email" class="form-control input-group-lg" type="email" name="email" title="Enter Email" placeholder="Your Email"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-xs-12">
+											<label for="my-password" class="sr-only">Password</label>
+											<input id="my-password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Password"/>
+										</div>
+									</div>
+
+								<p><a id="forget_pass" href="#" data-toggle="modal" data-target="#myModal">Esqueceu Password?</a></p>
+								<button class="btn btn-primary" type="submit">Login Agora</button>
+								</form><!--Login Form Ends-->
+								<form th:action="@{/resetPassword}" method="post">
+									<div class="modal fade" id="myModal" role="dialog" style="background-color: rgba(0, 0, 0, 0.3);">
+										<div class="modal-dialog">
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">Esqueceu Password</h4>
+												</div>
+												<div class="modal-body">
+	
+													<p>Intruduza o seu email.</p>
+													<!-- <p>Esqueceu a sua palavra pass?</p>
+													<p>Insira o seu email.</p> -->
+													<div class="row">
+											<div class="form-group col-xs-8">
+												<label class="sr-only">Mail</label>
+												<input class="form-control input-group newborder" type="mail" name="usermail" title="Enter Mail" placeholder="Mail"/>
+											</div>
+											</div>
+								
+												</div>
+												<div class="modal-footer">
+													<button type="submit" class="btn btn-primary">Recuperar</button>
+													<button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row no-margin" style="margin-top:5%!important;margin-bottom:5%!important;">
+	<div class="col-sm-12 mx-auto">
+		<div class="col-md-3">
+			<div class="card col-md-offset-3" style="width: 20rem;">
+			  <img class="card-img-top" src="..." alt="Card image cap">
+			  <div class="card-block">
+			    <h4 class="card-title">João Vilares</h4>   
+                <p class="card-text"></p>
+                <a href="https://www.linkedin.com/in/jo%C3%A3o-pedro-teixeira-vilares-1886a8167/" class="btn btn-primary">Ler mais</a>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card col-md-offset-3" style="width: 20rem;">
+			  <img class="card-img-top" src="..." alt="Card image cap">
+			  <div class="card-block">
+			    <h4 class="card-title">João Mirante</h4>
+      <p class="card-text"></p>
+                <a href="https://www.linkedin.com/in/jo%C3%A3o-mirante-ba6334168/" class="btn btn-primary">Ler mais</a>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card col-md-offset-3" style="width: 20rem;">
+			  <img class="card-img-top" src="..." alt="Card image cap">
+			  <div class="card-block">
+                <h4 class="card-title">Nilton Fontes</h4>
+                <p class="card-text"></p>
+                <a href="https://www.linkedin.com/in/nilton-fontes-868974162/" class="btn btn-primary">Ler mais</a>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-3">
+          <div class="card-block">
+          	<img class="card-img-top" src="..." alt="Card image cap">
+                <h4 class="card-title">Gonçalo Lavrador</h4>  
+                 <div class="card-block">
+                <p class="card-text"></p>
+                <a href="https://www.linkedin.com/in/gon%C3%A7alo-lavrador-703256175/" class="btn btn-primary">Ler mais</a>
+              </div>
+            </div>
+
+        </div>
+	</div>
+
+</div>
+
+
+
+    <!--preloader-->
+    <!-- <div id="spinner-wrapper">
+      <div class="spinner"></div>
+    </div> -->
+
+    <!-- Scripts
+    ================================================= -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+		<script src="js/jquery.incremental-counter.js"></script>
+    <script src="js/script.js"></script>
+
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+
+	<!-- Bootstrap Date-Picker Plugin -->
+
+
+
+	<script>
+
+		function getDistricts(dis){
+        var country = 'Portugal';
+        $.ajax({
+          url:'/mcountry/getdistrictbycountryname',
+          data: {'name' : country},
+          dataType: 'JSON',
+          type: "GET",
+          success: function(district){
+            $("#districtoptions").empty();
+            
+            var option = '';
+            for(var i = 0; i < district.length; i++){
+              option += '<option value="'+district[i].name+'">'+district[i].name+'</option>';
+            }
+            document.getElementById("districtoptions").innerHTML += option;
+          }
+        });
+      }
+		function detectmob() { 
+		 if(typeof window.orientation !== 'undefined'){
+		    window.location.replace("http://m.artlink.pt");
+		  }
+		}
+    $(document).ready(function(){
+
+
+    	detectmob();
+    	getDistricts($('#districtoptions').val());
+
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+
+     $("#forget_pass").click(function(){
+     	$("#forget_mail").val("");
+     });
+
+    });
+</script>
+
+	</body>
+</html>
+
+
+
